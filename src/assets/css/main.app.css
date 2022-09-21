@@ -1,0 +1,72 @@
+.row.spazio {
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-block-end: 30px;
+}
+
+
+.row.heather {
+    display: block;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.giallo {
+    background: #fcd12a;
+}
+
+.rosso {
+    background: red;
+}
+
+input.aggiungi_utente {
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 5px !important;
+}
+
+a.btn-fab.btn-fab-md.fab-right.fab-right-bottom-fixed.shadow.btn-primary.chiudiruota {
+    transform: rotate(45deg) !important;
+    background: red;
+}
+
+.paginate_button.current {
+    background: #18448f;
+    padding: 10px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+p.errore {	
+	font-size: 17px;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+ul li i.icon{
+    padding-right:0px
+}
+
+.briciole {
+    background-color: white;
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.spazio {
+    margin-top: 20px;
+}
+
+.tabella {
+    background-color: #F08080!important;
+}
+
+.cursor{
+    cursor:pointer;
+  }

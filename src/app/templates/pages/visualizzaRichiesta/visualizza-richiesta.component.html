@@ -1,0 +1,95 @@
+<div class="card-body spazio">
+  <span *ngIf="statoPagina == 0" class="briciole">
+		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
+	</span>
+	<span *ngIf="statoPagina == 1" class="briciole">
+		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
+	</span>
+	
+</div>
+<div class="card-body">
+	<div class="page">
+		<div class="col-md-12">
+			<div class="card no-b shadow no-r">
+			<!-- 
+			RICHIESTA 1 DATA
+			RICHIESTA 2 CLIENTE
+			RICHIESTA 3 CITTA'
+			RICHIESTA 4 COSTO
+			RICHIESTA 5 NOTE/TESTO
+			RICHIESTA 6 SKILL/LINGUAGGI
+			RICHIESTA 7 RUOLO/PROFILO
+			RICHIESTA 8 SENIORITY
+			RICHIESTA 9 STATO RICHIESTA
+			 -->
+			<form #updateForm="ngForm" (ngSubmit)="updateRichiesta(updateForm)">
+				<div class="row no-gutters">
+					<!-- PRIMA RIGA -->
+					<div *ngIf="richiesta" class="col-md-4 p-4">
+						<h5 class="text-black">Data</h5>
+						<h5 class="p-t-10">{{richiesta[1].toString().replace("T", " ")}}</h5>
+					</div>
+					
+					<div class="col-md-4  p-4">
+						<h5 class="text-black">Stato Richiesta</h5>
+						<select ngModel name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
+							<option value="" selected disabled>{{statoRichiesta}}</option>
+    					<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
+    				</select>
+					</div>
+					
+					<div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Ruolo</h5>
+						<h5 class="p-t-10">{{richiesta[7]}}</h5>
+					</div>
+					<!-- SECONDA RIGA -->
+          <div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Seniority</h5>
+						<h5 class="p-t-10">{{richiesta[8]}}</h5>
+					</div>
+					
+					<div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Citt&agrave;</h5>
+						<h5 class="p-t-10">{{richiesta[3]}}</h5>
+					</div>
+					
+					<div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Skill/Linguaggio</h5>
+						<h5 class="p-t-10">{{richiesta[6]}}</h5>
+					</div>
+					<!-- TERZA RIGA -->
+          <div *ngIf="richiesta" class="col-sm-4  p-4">
+						<h5 class="text-black">Cliente</h5>
+						<h5 class="p-t-10">{{richiesta[2]}}</h5>
+					</div>
+					
+					<div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Costo</h5>
+						<h5 class="p-t-10">{{richiesta[4]}}</h5>
+					</div>
+					
+					<div *ngIf="richiesta" class="col-md-4  p-4">
+						<h5 class="text-black">Note Aggiuntive</h5>
+						<h5 class="p-t-10">{{richiesta[5]}}</h5>
+					</div>
+        </div>
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="form-group col-10 m-0">
+            <h5 class="text-black">Commento</h5>
+            <textarea ngModel class="note" name="commento"
+              placeholder="Insersci Commento" type="text"></textarea>
+          </div>
+				</div>
+				<div class="card-body">
+					<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
+				</div>
+	      <div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
+	       	<span class="titolo_data">{{commento[0].toString().replace("T", " ")}}</span>
+					<span class="titolo_data"> {{commento[1]}}</span>
+					<p class="testo_richieste">{{commento[2]}}</p>
+				</div>
+			</form>
+    </div>
+	</div>
+</div>

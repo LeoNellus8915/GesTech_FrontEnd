@@ -1,0 +1,89 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Nuovo Bene</span>
+</div>
+<div class="card-body">
+	<form #addForm="ngForm" (ngSubmit)="salvaBene(addForm)">
+		<div class="card no-b  no-r">
+			<div class="card-body">
+				<h5 class="card-title">Informazioni</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-6 m-0">
+								<label for="dispositivo" class="col-form-label s-12">DISPOSITIVO</label> 
+                <input ngModel name="dispositivo" placeholder="Inserisci Dispositivo"
+									class="form-control r-0 light s-12 " type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="marca" class="col-form-label s-12">MARCA</label>
+								<input ngModel name="marca" placeholder="Inserisci Marca"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-6 m-0">
+								<label for="modello" class="col-form-label s-12">MODELLO</label>
+								<input ngModel name="modello" placeholder="Inserisci Modello"
+ 									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="numeroSeriale" class="col-form-label s-12">NUMERO SERIALE</label>
+								<input ngModel name="numeroSeriale" placeholder="Linkedin Numero Seriale"
+									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="password" class="col-form-label s-12">PASSWORD</label> 
+                <input ngModel name="password" placeholder="Inserisci Password"
+									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine row -->
+			</div>
+			<!-- Fine Card -->
+			<hr>
+      <div class="card-body">
+				<h5 class="card-title">Extra</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-4 m-0">
+								<label for="note" class="col-form-label s-12">NOTE</label> 
+                <input ngModel name="note" placeholder="Insersci Note"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
+								<select ngModel name="dipendente" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let dipendente of listaDipendenti" value={{dipendente}}>{{dipendente}}</option>
+    						</select>
+							</div>
+              <div class="form-group col-4 m-0">
+								<label for="societa" class="col-form-label s-12">SOCIET&Agrave;</label>
+								<input ngModel name="societa" placeholder="Insersci Societ&agrave;"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+              <div class="form-group col-6 m-0">
+								<label for="dataConsegna" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA CONSEGNA</label>
+								<input ngModel name="dataConsegna" placeholder="Insersci Data Consegna"
+									class="form-control r-0 light s-12 date-picker" type="date">
+							</div>
+              <div class="form-group col-6 m-0">
+								<label for="dataRestituzione" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA RESTITUZIONE</label>
+								<input ngModel name="dataRestituzione" placeholder="Insersci Data Restituzione"
+									class="form-control r-0 light s-12 date-picker" type="date">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+      <div class="card-body">
+        <input type="submit" value="SALVA">
+      </div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,36 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Storico Richieste</span>
+</div>
+<div>
+	<div class="page avviso">
+		<div class="page">
+			<div class="row">
+        <!-- 
+        RICHIESTA 1 DATA
+        RICHIESTA 2 CLIENTE
+        RICHIESTA 3 CITTA'
+        RICHIESTA 4 COSTO
+        RICHIESTA 5 NOTE/TESTO
+        RICHIESTA 6 SKILL/LINGUAGGI
+        RICHIESTA 7 RUOLO/PROFILO   
+        RICHIESTA 8 SENIORITY
+        RICHIESTA 9 STATO RICHIESTA
+        RICHIESTA 10 STATO RICHIESTA
+        -->
+        <div class="col-4 card_avvisi chiusa" *ngFor="let richiesta of listaRichieste">
+          <a class="cursor" [routerLink]="['../../default/pagina-visualizza-richiesta', richiesta[0], 1]">
+            <span class="titolo_richieste">{{richiesta[7]}}</span>
+            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta[9]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta[2]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta[3]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta[4]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Skill - Linguaggi : </span><span class="testo_richieste">{{richiesta[6]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta[8]}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta[5]}}</span></div>
+            <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste">{{richiesta[10]}}</footer>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

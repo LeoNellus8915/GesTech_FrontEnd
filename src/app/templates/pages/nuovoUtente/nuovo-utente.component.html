@@ -1,0 +1,46 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Nuovo Utente</span>
+</div>
+<form ngNativeValidate #addForm="ngForm" (ngSubmit)="addUtente(addForm)">
+  <div class="row spazio">
+    <div class="form-group col-4 m-0">
+      <label for="nomeCognome" class="col-form-label s-12">Nome e cognome</label>
+      <input ngModel name="nomeCognome" placeholder="Inserisci nome e cognome"
+        class="form-control r-0 light s-12 date-picker" type="text">
+    </div>
+    <div class="form-group col-4 m-0 ruolo">
+      <label for="azienda" class="col-form-label s-12">Azienda</label>
+      <select ngModel name="azienda" class="form-control r-0 light s-12 date-picker freccia" required>
+        <option value="" selected disabled>Selezionare...</option>
+        <option *ngFor="let azienda of listaAziende" value={{azienda.id}}>{{azienda.nome}}</option>
+      </select>
+    </div>
+    <div class="form-group col-4 m-0 ruolo">
+      <label for="ruolo" class="col-form-label s-12">Ruolo Operativo</label>
+      <select ngModel name="ruolo" class="form-control r-0 light s-12 date-picker freccia">
+        <option value="" selected>Nessuno</option>
+        <option *ngFor="let ruolo of listaRuoli" value={{ruolo.id}}>{{ruolo.nome}}</option>
+      </select>
+    </div>
+    <div class="form-group col-4 m-0">
+      <label for="email" class="col-form-label s-12">E-mail</label>
+      <input ngModel name="email" placeholder="Inserisci email"
+        class="form-control r-0 light s-12 date-picker" type="text">
+    </div>
+    <div class="form-group col-4 m-0">
+      <label for="password" class="col-form-label s-12">Password</label>
+      <input ngModel name="password" placeholder="**********"
+        class="form-control r-0 light s-12 date-picker" min="6" max="20" required type="password">
+    </div>
+    <div class="form-group col-4 m-0">
+      <label for="confermaPassword" class="col-form-label s-12">Conferma Password</label>
+      <input ngModel name="confermaPassword" placeholder="**********"
+      class="form-control r-0 light s-12 date-picker" min="6" max="20" required type="password">
+    </div>
+    <div class="row spazio">
+      <div class="col-12">
+        <input type="submit" value="AGGIUNGI">
+      </div>
+    </div>
+  </div>	  
+</form>

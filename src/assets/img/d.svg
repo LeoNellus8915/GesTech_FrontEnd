@@ -1,0 +1,27 @@
+<svg id="Componente_27_1" data-name="Componente 27 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="61.217" height="75" viewBox="0 0 61.217 75">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rettangolo_1606" data-name="Rettangolo 1606" width="61" height="75" transform="translate(0 0)" fill="#0077ed"/>
+    </clipPath>
+  </defs>
+  <path id="Tracciato_282" data-name="Tracciato 282" d="M31.493,3.606,42.819,14.932H31.493ZM30,0V16.425H46.425Z" transform="translate(14.792 0)" fill="#0077ed"/>
+  <rect id="Rettangolo_1598" data-name="Rettangolo 1598" width="25" height="1" transform="translate(21 64)" fill="#0077ed"/>
+  <rect id="Rettangolo_1599" data-name="Rettangolo 1599" width="34" height="1" transform="translate(21 60)" fill="#0077ed"/>
+  <rect id="Rettangolo_1600" data-name="Rettangolo 1600" width="25" height="1" transform="translate(21 46)" fill="#0077ed"/>
+  <rect id="Rettangolo_1601" data-name="Rettangolo 1601" width="34" height="1" transform="translate(21 42)" fill="#0077ed"/>
+  <rect id="Rettangolo_1602" data-name="Rettangolo 1602" width="25" height="1" transform="translate(21 28)" fill="#0077ed"/>
+  <rect id="Rettangolo_1603" data-name="Rettangolo 1603" width="34" height="1" transform="translate(21 24)" fill="#0077ed"/>
+  <rect id="Rettangolo_1604" data-name="Rettangolo 1604" width="25" height="1" transform="translate(18 10)" fill="#0077ed"/>
+  <rect id="Rettangolo_1605" data-name="Rettangolo 1605" width="25" height="1" transform="translate(18 6)" fill="#0077ed"/>
+  <path id="Tracciato_283" data-name="Tracciato 283" d="M11.945,0V1.494H44.174L59.721,17.043V73.161H1.493V1.494H14.031V0H0V74.653H61.216V16.425L44.792,0Z" transform="translate(0 0)" fill="#0077ed"/>
+  <path id="Tracciato_284" data-name="Tracciato 284" d="M14.451,41.7v6.753H5.493V39.493h5.538L11.885,38H4V49.944H15.945V39.091Z" transform="translate(1.972 18.737)" fill="#0077ed"/>
+  <path id="Tracciato_285" data-name="Tracciato 285" d="M14.451,29.7v6.753H5.493V27.493h5.538L11.885,26H4V37.944H15.945V27.091Z" transform="translate(1.972 12.82)" fill="#0077ed"/>
+  <path id="Tracciato_286" data-name="Tracciato 286" d="M14.451,17.7v6.753H5.493V15.493h5.538L11.885,14H4V25.944H15.945V15.091Z" transform="translate(1.972 6.903)" fill="#0077ed"/>
+  <g id="Raggruppa_72" data-name="Raggruppa 72" transform="translate(0 0)">
+    <g id="Raggruppa_71" data-name="Raggruppa 71" clip-path="url(#clip-path)">
+      <path id="Tracciato_287" data-name="Tracciato 287" d="M9.282,48.118,5.625,42.633A.747.747,0,0,1,6.868,41.8l2.317,3.474,5.372-9.4a.746.746,0,0,1,1.3.741Z" transform="translate(2.712 17.504)" fill="#0077ed"/>
+      <path id="Tracciato_288" data-name="Tracciato 288" d="M9.282,36.118,5.625,30.633A.747.747,0,0,1,6.868,29.8l2.317,3.474,5.372-9.4a.746.746,0,1,1,1.3.741Z" transform="translate(2.712 11.587)" fill="#0077ed"/>
+      <path id="Tracciato_289" data-name="Tracciato 289" d="M9.282,24.118,5.625,18.633A.747.747,0,0,1,6.868,17.8l2.317,3.474,5.372-9.4a.746.746,0,0,1,1.3.741Z" transform="translate(2.712 5.67)" fill="#0077ed"/>
+    </g>
+  </g>
+</svg>

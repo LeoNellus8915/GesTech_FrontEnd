@@ -1,0 +1,129 @@
+textarea#avviso {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.avviso {
+   margin: 15px;
+}
+
+input#titolo {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: solid 1px #333333;
+    padding: 10px;
+    background: #f9f9f9;
+}
+
+input[type=submit] {
+    background-color: rgb(12, 12, 135);
+    color: white;
+    padding: 5 25 5 25;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.btright {
+    float: right;
+    margin-bottom: 50px;
+    font-weight: 400;
+    line-height: 1.9;
+}
+
+
+input[type="submit"] {
+    padding: 5px 25px;
+}
+
+/* AVVISI*/
+.col-4 {
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+}
+.col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.card_avvisi {
+    padding: 40px;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+    max-width: 30.9% !important;
+    margin-left: 15px;
+}
+div.chiusa{
+	opacity: .3;
+}
+/* DATA AVVISI*/
+span.data_ora_avvisi {
+    font-size: 12px;
+}
+/* ICONA CESTINO*/
+.icon-delete:before {
+    content: "\e872";
+    position: absolute;
+    right: 20px;
+    font-size: 14px;
+}
+
+/* TITOLO AVVISO*/
+p.titolo_avvisi {
+    margin-top: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #000;
+    font-variant: all-petite-caps;
+}
+/* CORPO AVVISO*/
+p.testo_avvisi {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: .2px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* RUOLO AVVISI*/
+p.ruolo_avvisi {
+    border: solid 2px #f1f1f1;
+    padding: 5px;
+    border-radius: 100px;
+    color: #18448f;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+form.label_home {
+    margin-bottom: 50px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.9;
+}
+.icon-home light-blue-text s-18::before {
+    content: "\f015";    
+}
+
+.border-top_avvisi {
+    border-top: 1px solid #f1f1f1;
+}
+
+.blockquote-footer_avvisi {	
+	display: block;
+    font-size: 90%;
+    color: #6c757d;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.freccia{
+    -webkit-appearance: listbox;
+}

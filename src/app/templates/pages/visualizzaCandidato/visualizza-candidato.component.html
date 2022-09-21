@@ -1,0 +1,225 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Visualizza Candidato</span>
+</div>
+<div class="page">
+  <div class="container-fluid relative animatedParent animateOnce p-lg-3">
+    <div class="card no-b shadow no-r">
+      <div class="row no-gutters">
+        <div class="col-md-4 b-r size">
+          <div class="text-center">
+            <img *ngIf="colore == 1" class="size" src="../../../../assets/img/faccina-1.png">
+            <img *ngIf="colore == 2" class="size" src="../../../../assets/img/faccina-2.png">
+            <img *ngIf="colore == 3" class="size" src="../../../../assets/img/faccina-3.png">
+            <img *ngIf="colore == 4" class="size" src="../../../../assets/img/faccina-4.png">
+          </div>
+          <div class="text-center p-5 mt-5">
+            <div *ngIf="datiCandidato"><h4 class="p-t-10">{{datiCandidato.nomeCognome}}</h4></div>
+            <a (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{opacity}">Scarica CV</a>
+            <a [routerLink]="['../../pagina-modifica-candidato', idCandidato]" class="btn btn-success giallo mt-3 button">Modifica</a> 
+            <a (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</a>
+            <button class="btn btn-success blue mt-3" (click)="copy()">Copia Link Scheda</button>
+            <div class="mt-5">
+              <ul class="social social list-inline">
+                <li class="list-inline-item"><a (click)="openLinkedin()" class="grey-text"><i class="icon-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="p5 b-b">
+            <div class="row">
+              <div class="col-md-6">
+                <div *ngIf="datiCandidato" class="p-4">
+                  <h5 class="text-black">Email</h5>
+                  <h5 class="p-t-10">{{datiCandidato.email}}</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div *ngIf="datiCandidato" class="p-4">
+                  <h5 class="text-black">Recapito</h5>
+                  <h5 class="p-t-10">{{datiCandidato.recapito}}</h5>
+                </div>
+              </div>                                
+            </div>
+          </div>
+          <div class="p5 b-b">
+            <div class="row">
+              <div class="col-md-6">
+                <div *ngIf="datiCandidato" class="p-4">
+                  <h5 class="text-black">Citt&agrave;</h5>
+                  <h5 class="p-t-10">{{datiCandidato.citta}}</h5>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div *ngIf="datiCandidato" class="p-4">
+                  <h5 class="text-black">Data di Inseriemento</h5>
+                  <h5 class="p-t-10">{{dettagliCandidato[0].toString().replace("T", " ")}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="p5 b-b">
+            <div class="row">
+              <div class="col-md-12">
+                <div *ngIf="datiCandidato" class="p-4">
+                  <h5 class="text-black">Competenza Principale</h5>
+                  <h5 class="p-t-10">{{datiCandidato.competenzaPrincipale}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>                             
+        </div> <!-- fine campi stretti -->
+      </div>                           
+      <div class="p5 b-b bordo"> <!-- inizio campi larghi --> 
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Data Colloquio:</h5>
+              <h5 class="p-t-10">{{datiCandidato.dataColloquio}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Anno Colloquio:</h5>
+              <h5 class="p-t-10">{{datiCandidato.annoColloquio}}</h5>
+            </div>
+          </div>   
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Esito Colloquio:</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[1]}}</h5>
+            </div>
+          </div>                                                         
+        </div>
+      </div>
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Fonte Reperimento: </h5>
+              <h5 class="p-t-10">{{datiCandidato.fonteReperimento}}</h5>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Profilo: </h5>
+              <h5 class="p-t-10">{{dettagliCandidato[2]}}</h5>
+            </div>
+          </div>
+        </div>   
+      </div>
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Costo Giornaliero:</h5>
+              <h5 class="p-t-10">{{datiCandidato.costoGiornaliero}}</h5>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Possibilit&agrave; Lavorativa:</h5>
+              <h5 class="p-t-10">{{datiCandidato.possibilitaLavorativa}}</h5>
+            </div>
+          </div> 
+        </div>   
+      </div>      
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Skill 1</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[3]}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Skill 2</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[4]}}</h5>
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Skill 3</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[5]}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Skill 4</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[6]}}</h5>
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Skill 5</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[7]}}</h5>
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Skill campo libero</h5>
+              <h5 class="p-t-10">{{datiCandidato.skillCampoLibero}}</h5>
+            </div>
+          </div> 
+        </div>   
+      </div>      
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Lingua 1</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[8]}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Lingua 2</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[9]}}</h5>
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
+              <h5 class="text-black">Lingua 3</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[10]}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>             
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="datiCandidato" class="p-4">
+              <h5 class="text-black">Competenze Totali:</h5>
+              <h5 class="p-t-10">{{datiCandidato.competenzeTotali}}</h5>
+            </div>
+          </div>
+            <div class="col-md-4">
+              <div *ngIf="datiCandidato" class="p-4">
+                <h5 class="text-black">Certificazioni: </h5>
+                <h5 class="p-t-10">{{datiCandidato.certificazioni}}</h5>
+              </div>
+            </div> 
+            <div class="col-md-4">
+              <div *ngIf="dettagliCandidato" class="p-4">
+                <h5 class="text-black">Seniority: </h5>
+                <h5 class="p-t-10">{{dettagliCandidato[11]}}</h5>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="p5 b-b"> 
+        <div class="pl-4 mt-4">
+          <h5 class="text-black">Commenti</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-10 offset-1" *ngFor="let commento of commentiCandidato">
+            <span class="titolo_data">{{commento[0]}}</span>
+            <span class="titolo_data"> {{commento[1]}}</span>
+            <p class="testo_richieste">{{commento[2]}}</p>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>

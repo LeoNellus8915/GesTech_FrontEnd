@@ -1,0 +1,53 @@
+/*LOGO*/
+img {
+    max-width: 45%;
+}
+
+/*BOTTONE ACCEDI*/
+.btn-group-lg>.btn, .btn-lg {
+    border-radius: 20px;
+    font-size: 16px;
+}
+
+.btn-success {
+       background-color:  rgb(12, 12, 135);
+}
+.btn-success:hover{
+    color:#fff;
+     background-color: rgb(6, 6, 243);
+    border-color: rgb(6, 6, 243);
+}
+.btn-success.disabled,.btn-success:disabled{
+    color:#212529;
+    background-color: rgb(6, 6, 243);
+    border-color: rgb(6, 6, 243);
+}
+.btn-success:not(:disabled):not(.disabled).active,.btn-success:not(:disabled):not(.disabled):active,.show>.btn-success.dropdown-toggle{
+    color:#fff;
+    background-color: rgb(6, 6, 243);
+    border-color: rgb(6, 6, 243);
+}
+.btn-success:not(:disabled):not(.disabled).active:focus,.btn-success:not(:disabled):not(.disabled):active:focus,.show>.btn-success.dropdown-toggle:focus{
+    box-shadow:0 0 0 .2rem rgb(6, 6, 243);
+}
+/*DIMENTICATO NOME UTENTE E PASSWORD*/
+.btn {
+       margin-bottom: 15px;
+}
+
+.s-18 {
+    font-size: 18px!important;
+    color: white;
+}
+
+.col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    margin-bottom: 30px;
+}
+
+.ruoli{
+    margin-top: 60px;
+    padding: 25px;
+    border-radius: 50px;
+}

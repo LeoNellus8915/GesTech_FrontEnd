@@ -1,0 +1,142 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / CV Dipendenti</span>
+</div>
+<div class="card-body">
+	<form>
+		<div class="card no-b  no-r">
+			<div class="card-body">
+				<h5 class="card-title">Anagrafica</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-6 m-0">
+								<label for="nomeCognome" class="col-form-label s-12">NOME E COGNOME</label> 
+                <input ngModel name="nomeCognome" placeholder="Inserisci Nome e Cognome"
+									class="form-control r-0 light s-12 " type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="recapito" class="col-form-label s-12">RECAPITO</label>
+								<input ngModel name="recapito" placeholder="Inserisci Recapito"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-6 m-0">
+								<label for="email" class="col-form-label s-12">EMAIL</label>
+								<input ngModel name="email" placeholder="Inserisci Email"
+ 									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="profiloLinkedin" class="col-form-label s-12">PROFILO LINKEDIN</label>
+								<input ngModel name="profiloLinkedin" placeholder="Linkedin URL"
+									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="citta" class="col-form-label s-12">CITT&Agrave;</label> 
+                <input ngModel name="citta" placeholder="Inserisci Citt&agrave;"
+									class="form-control r-0 light s-12 datePicker" type="text">
+							</div>
+							<div class="form-group col-6 m-0">
+								<label for="cv" class="col-form-label s-12">CARICA CV</label>
+         				<input ngModel name="cv" type="file"
+         					class="form-control r-0 light s-12 datePicker">
+         			</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine row -->
+			</div>
+			<!-- Fine Card -->
+			<hr>
+      
+      <div class="card-body">
+				<h5 class="card-title">Skill</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-4 m-0">
+								<label for="skill1" class="col-form-label s-12">SKILL1</label>
+								<select ngModel name="skill1" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="skill2" class="col-form-label s-12">SKILL2</label>
+								<select ngModel name="skill2" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="skill3" class="col-form-label s-12">SKILL3</label>
+								<select ngModel name="skill3" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+
+							<div class="form-group col-4 m-0">
+								<label for="skill4" class="col-form-label s-12">SKILL4</label>
+								<select ngModel name="skill4" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="skill5" class="col-form-label s-12">SKILL5</label>
+								<select ngModel name="skill5" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="skillCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
+                <input ngModel name="skillCampoLibero" placeholder="Insersci Skill Campo Libero"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+      <div class="card-body">
+				<h5 class="card-title">Lingua</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-4 m-0">
+								<label for="lingua1" class="col-form-label s-12">LINGUA 1</label> 
+								<select ngModel name="lingua1" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
+   							</select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="lingua2" class="col-form-label s-12">LINGUA 2</label>
+								<select ngModel name="lingua2" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
+                </select>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="lingua3" class="col-form-label s-12">LINGUA 3</label> 
+								<select ngModel name="lingua3" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
+   							</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+
+				<div class="card-body">
+					<input type="submit" value="SALVA">
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

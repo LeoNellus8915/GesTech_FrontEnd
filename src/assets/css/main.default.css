@@ -1,0 +1,31 @@
+
+
+li.spazio {
+  border-bottom: 1px solid #f8f8f8;
+  padding: 3px;
+}
+
+.categorie {
+  padding: 10px;
+}
+
+span.spazio {
+  margin-left: 10px;
+}
+
+.scroll {
+  overflow: scroll;
+  height: 110px;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(225, 225, 225)
+}
+
+.grigio:hover {
+  background: rgb(245, 245, 245)
+}

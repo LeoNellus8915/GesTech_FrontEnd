@@ -1,0 +1,47 @@
+<div id="primary" class="blue4 p-t-b-100 height-full responsive-phone">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 p-t-100">
+        <div class="logo_cover">
+          <img src="../../../assets/img/logo_cover.png">
+        </div>
+
+        <div class="text-white">
+          <p class="s-18 p-t-b-20 font-weight-lighter">{{msgCredenziali}}</p>
+        </div>
+        <form ngNativeValidate #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group has-icon">
+                <i class="icon-envelope-o"></i> <input ngModel type="text"
+                  class="form-control form-control-lg no-b" name="email"
+                  placeholder="error@mail.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                  title="Esempio error@mail.com" required>
+
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group has-icon">
+                <i class="icon-user-secret"></i> <input ngModel type="password"
+                  name="password" class="form-control form-control-lg no-b"
+                  placeholder="**********" required>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <input type="submit" class="btn btn-success btn-lg btn-block marbot"
+                value="Accedi">
+            </div>
+
+            <div>
+              <p class="s-18 p-t-b-20 font-weight-lighter">Hai dimenticato il nome
+                utente o la password?</p>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

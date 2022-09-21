@@ -1,0 +1,35 @@
+<div class="card-body spazio">
+  <span class="briciole">Home</span>
+</div>
+<div class="page avviso">
+  <div class="page">
+    <form *ngIf="ruolo == 'Admin'" #addForm="ngForm" (ngSubmit)="salvaAvviso(addForm)">
+      <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" type="text">
+      <textarea ngModel class="form-control" name="note" id="avviso" placeholder="Inserire l'avviso"></textarea>
+      <div class="row">
+        <div class="col-10">
+          <input type="checkbox" value="Tutti" (change)="array($event)"> 
+          <label>Tutti</label>
+          <span *ngFor="let ruolo of listaRuoli">
+            <input type="checkbox" value={{ruolo.nome}} (change)="array($event)"> 
+            <label>{{ruolo.nome}}</label>
+          </span>
+        </div>
+        <div class="col-2">
+          <input type="hidden" name="ruoli">
+          <input type="hidden" name="idRisorsa">
+          <div class="btright"><input type="submit"></div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-4 card_avvisi" *ngFor="let avviso of listaAvvisi">
+        <span class="data_ora_avvisi">{{avviso.data.toString().replace("T", " ")}}</span>
+        <a (click)="deleteAvviso(avviso.id)"><i *ngIf="ruolo == 'Admin'" class="icon icon-delete red-text s-18 cursor"></i></a> 
+        <p class="titolo_avvisi">{{avviso.titolo}}
+        <p class="testo_avvisi">{{avviso.note}}
+        <footer *ngIf="ruolo == 'Admin'" class="blockquote-footer_avvisi pt-4 mt-4 border-top_avvisi">{{avviso.ruoli}}</footer>
+      </div>
+    </div>
+  </div>						
+</div>

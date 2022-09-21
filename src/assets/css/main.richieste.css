@@ -1,0 +1,111 @@
+textarea.note {
+    width: 70%;
+    height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+p.ruolo_richieste {
+   border: solid 2px #f1f1f1;
+    padding: 5px;
+    border-radius: 100px;
+    color: #18448f;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+/* TITOLO RICHIESTA*/
+p.titolo_data {
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    font-variant: all-petite-caps;
+}
+
+span.titolo_data {
+    margin-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    font-variant: all-petite-caps;
+}
+
+span.titolo_richieste {
+    font-size: 24px;
+    margin-top: -22px;
+    color: #0c0c87;
+    font-weight: bold;
+    font-variant: all-petite-caps;
+    margin-right: 10%;
+}
+
+/* CORPO RICHIESTA*/
+span.testo_richieste {
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: .2px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    padding-left: 3px;
+    color: #03a9f4;
+}
+
+p.testo_richieste {
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: .2px;
+    margin-top: 15px;
+    margin-bottom: 1rem;
+    padding-left: 3px;
+    color: dimgrey;
+}
+
+
+div.richieste {
+	margin-top: 5px;
+}
+
+span.titolo_testo_richieste {
+	font-size: 14px;
+    font-weight: bold;
+    color: #0c0c87;
+}
+span.button_elimina {
+	margin-left: 50px;
+    color: red;
+    font-size: larger;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+div.casella_commenti {
+    padding: 20px;
+    background-color: #f5f8fa;
+    border: solid 5px #fff;
+}
+
+textarea.richieste_commento {
+	height: 250px;
+}
+
+.border-top_richieste {
+    border-top: 1px solid #f1f1f1;
+}
+
+.blockquote-footer_richieste {	
+	display: block;
+    font-size: 90%;
+    color: #6c757d;
+    font-style: italic;
+    font-weight: bold;
+}
+
+i.icon-fiber_new:before {
+    content: "\e05e";
+    font-size: x-large;
+}

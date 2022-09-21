@@ -1,0 +1,261 @@
+<script>
+	setTimeout(function(){
+		$('.loader_bg').fadeToggle();
+	}, 0);
+</script>
+<div class="loader_bg">
+	<div class="loader"></div>
+</div>
+
+<div id="app">
+	<aside class="main-sidebar fixed shadow scroll"
+		data-toggle='icon-swap_horiz'>
+		<section class="sidebar">
+			<div class="mt-3 mb-3 ml-3">
+				 <a routerLink="../default/pagina-avvisi">
+				<input type="image" src="assets/img/logo.png" alt="">
+				</a>
+			</div>
+			<div class="relative">
+				<div class="user-panel p-3 light mb-2">
+					<div>
+						<div class="float-left image">
+							<img class="user_avatar" src="assets/img/u2.png" alt="User Image">
+						</div>
+						<div class="float-left info">
+							<h5 class="font-weight-light mt-2 mb-1">{{nomeCognome}}</h5>
+							<h4 class="font-weight-light mt-2 mb-1">{{ruolo}}</h4>
+							<h5 class="font-weight-light mt-2 mb-1">{{azienda}}</h5>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div id="userSettingsCollapse">
+						<div class="list-group mt-3 shadow">
+							<a class="list-group-item list-group-item-action" routerLink="../default/pagina-modifica-password">
+								<i class="icon-sidebar icon-lock black-text s-18"></i> 
+								<span class="cambiapass spazio">Cambia Password</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div *ngIf="ruolo !== 'Admin';then notAdmin else admin"></div>
+
+			<ng-template #admin> <!--Default vista dall'admin-->
+				<ul class="sidebar-menu">
+					<li class="treeview spazio grigio"><a routerLink="../default/pagina-avvisi">
+						<i class="icon-sidebar icon-home light-blue-text s-18 categorie"></i> 
+						<span>Home/Avvisi</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-utente"> 
+						<i class="icon-sidebar icon-add_box lime-text s-18 categorie"></i> 
+						<span>Aggiungi nuovo utente</span>
+					</a></li>
+
+					<li class="treeview" id="liDipendenti"><a (click)="dashboard('liDipendenti', 'ulDipendenti')" class="cursor grigio">
+						<i class="icon icon-sailing-boat-water red-text s-18 categorie"></i><span>Dipendenti</span> 
+						<i class="icon icon-angle-left s-18 pull-right"></i></a>
+						<ul class="treeview-menu" id="ulDipendenti">
+
+							<li *ngIf="ruolo == 'Admin'" class="treeview spazio grigio"><a routerLink="../default/pagina-dipendenti"> 
+								<i class="icon-sidebar icon-account_box  red-text s-18 categorie"></i> 
+								<span>Tutti i Dipendenti</span>
+							</a></li>
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-busta-paga">
+								<i class="icon-sidebar icon-document-list red-text s-18 categorie"></i> 
+								<span>Aggiungi Busta paga</span>
+							</a></li>
+		
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-certificazione-unica">
+								<i class="icon-sidebar icon-document-list2 red-text s-18 categorie"></i> 
+								<span>Aggiungi Certificazione unica</span>
+							</a></li>
+
+						</ul>
+					</li>
+
+					<li class="treeview" id="liCandidati"><a (click)="dashboard('liCandidati', 'ulCandidati')" class="cursor grigio">
+						<i class="icon icon-sailing-boat-water indigo-text s-18 categorie"></i><span>Candidati</span> 
+						<i class="icon icon-angle-left s-18 pull-right"></i></a>
+						<ul class="treeview-menu" id="ulCandidati">
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-candidati"> 
+								<i class="icon-sidebar icon-account_box  indigo-text s-18 categorie"></i> 
+								<span>Tutti i Candidati</span>
+							</a></li>
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-candidato">
+								<i class="icon-sidebar icon-add_box indigo-text s-18 categorie"></i> 
+								<span>Aggiungi candidato</span>
+							</a></li>
+
+						</ul>
+					</li>
+
+					<li class="treeview" id="liRichieste"><a (click)="dashboard('liRichieste', 'ulRichieste')" class="cursor grigio">
+						<i class="icon icon-sailing-boat-water brown-text s-18 categorie"></i><span>Richieste</span> 
+						<i class="icon icon-angle-left s-18 pull-right"></i></a>
+						<ul class="treeview-menu" id="ulRichieste">
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
+								<i class="icon-sidebar icon-inbox-document2 brown-text s-18 categorie"></i> 
+								<span>Tutte le Richieste</span>
+								<span *ngIf="ruolo == 'Recruiter'" class="badge r-3 badge-success pull-right brown" [innerHTML]="numeroRichieste">{{numeroRichieste}}</span>
+							</a></li>
+
+							<li *ngIf="ruolo == 'Commerciale' || ruolo == 'Admin'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-richiesta">
+								<i class="icon-sidebar icon-add_box brown-text s-18 categorie"></i> 
+								<span>Aggiungi Richiesta</span>
+							</a></li>
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
+								<i class="icon-sidebar icon-inbox-filled brown-text s-18 categorie"></i> 
+								<span>Storico Richieste</span>
+							</a></li>
+
+						</ul>
+					</li>
+
+					<li class="treeview" id="liBeni"><a (click)="dashboard('liBeni', 'ulBeni')" class="cursor grigio">
+						<i class="icon icon-sailing-boat-water amber-text s-18 categorie"></i><span>Beni</span> 
+						<i class="icon icon-angle-left s-18 pull-right"></i></a>
+						<ul class="treeview-menu" id="ulBeni">
+					
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-beni">
+								<i class="icon-sidebar icon-phonelink amber-text s-18 categorie"></i> 
+								<span>Beni assegnati</span>
+							</a></li>
+
+							<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-bene"> 
+								<i class="icon-sidebar icon-add_box amber-text s-18 categorie"></i> 
+								<span>Aggiungi Bene</span>
+							</a></li>
+
+						</ul>
+					</li>
+
+					<li class="treeview spazio cursor grigio"><a (click)="logout()"> 
+						<i class="icon-sidebar icon icon-exit_to_app deep-orange-text s-18 categorie"></i> 
+						<span>Esci</span>
+					</a></li>
+				</ul>
+			</ng-template>
+
+			<ng-template #notAdmin> <!--Default vista dal non admin-->
+				<ul class="sidebar-menu">
+					<li class="treeview spazio grigio"><a routerLink="../default/pagina-avvisi">
+						<i class="icon-sidebar icon-home light-blue-text s-18 categorie"></i> 
+						<span>Home/Avvisi</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-utente"> 
+						<i class="icon-sidebar icon-add_box lime-text s-18 categorie"></i> 
+						<span>Aggiungi nuovo utente</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-dipendenti"> 
+						<i class="icon-sidebar icon-account_box  red-text s-18 categorie"></i> 
+						<span>Tutti i Dipendenti</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Dipendente'" class="treeview spazio grigio"><a routerLink="../default/pagina-buste-paga">
+						<i class="icon-sidebar icon-document-list red-text s-18 categorie"></i> 
+						<span>Busta paga</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Dipendente'" class="treeview spazio grigio"><a routerLink="../default/pagina-certificazioni-uniche">
+						<i class="icon-sidebar icon-document-list2 red-text s-18 categorie"></i> 
+						<span>Certificazione unica</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-busta-paga">
+						<i class="icon-sidebar icon-document-list red-text s-18 categorie"></i> 
+						<span>Aggiungi Busta paga</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-certificazione-unica">
+						<i class="icon-sidebar icon-document-list2 red-text s-18 categorie"></i> 
+						<span>Aggiungi Certificazione unica</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-candidati"> 
+						<i class="icon-sidebar icon-account_box  indigo-text s-18 categorie"></i> 
+						<span>Tutti i Candidati</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-candidato">
+						<i class="icon-sidebar icon-add_box indigo-text s-18 categorie"></i> 
+						<span>Aggiungi candidato</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
+						<i class="icon-sidebar icon-inbox-document2 brown-text s-18 categorie"></i> 
+						<span>Tutte le Richieste</span>
+						<span *ngIf="ruolo == 'Recruiter'" class="badge r-3 badge-success pull-right brown" [innerHTML]="numeroRichieste">{{numeroRichieste}}</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Commerciale' || ruolo == 'Admin'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-richiesta">
+						<i class="icon-sidebar icon-add_box brown-text s-18 categorie"></i> 
+						<span>Aggiungi Richiesta</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
+						<i class="icon-sidebar icon-inbox-filled brown-text s-18 categorie"></i> 
+						<span>Storico Richieste</span>
+					</a></li>
+					
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-beni">
+						<i class="icon-sidebar icon-phonelink amber-text s-18 categorie"></i> 
+						<span>Beni assegnati</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Admin' || ruolo == 'Personale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-bene"> 
+						<i class="icon-sidebar icon-add_box amber-text s-18 categorie"></i> 
+						<span>Aggiungi Bene</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Dipendente'" class="treeview spazio grigio"><a routerLink="../default/pagina-ccnl">
+						<i class="icon-sidebar icon-document-file-pdf2 red-text s-18 categorie"></i> 
+						<span>CCNL</span>
+					</a></li>
+
+					<li *ngIf="ruolo == 'Dipendente'" class="treeview spazio grigio"><a routerLink="../default/pagina-cv-dipendenti">
+						<i class="icon-sidebar icon-documents3 red-text s-18 categorie"></i> 
+						<span>Aggiungi/Modifica CV</span>
+					</a></li>
+					
+					<li class="treeview spazio cursor grigio"><a (click)="logout()"> 
+						<i class="icon-sidebar icon icon-exit_to_app deep-orange-text s-18 categorie"></i> 
+						<span>Esci</span>
+					</a></li>
+				</ul>
+			</ng-template>
+
+		</section>
+	</aside>
+	<!--Sidebar End-->
+	<app-sticky></app-sticky>
+
+	<div class="page has-sidebar-left height-full">
+		<header class="blue accent-3 relative nav-sticky">
+			<div class="container-fluid text-white">
+				<div class="row p-t-b-10 ">
+					<div class="col">
+						<h4>
+							<i class="icon-box"></i>
+							<span [innerHTML]="titoloPagina"></span>
+						</h4>
+					</div>
+				</div>
+			</div>
+		</header>
+		<div class="container-fluid relative animatedParent animateOnce">
+			<div class="tab-content pb-3" id="v-pills-tabContent">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</div>
