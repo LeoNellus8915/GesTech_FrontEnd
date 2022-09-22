@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
-  templateUrl: './nuova-busta-paga.component.html'
-  
+  templateUrl: './nuova-busta-paga.component.html',
+  styleUrls: ['../../../../assets/css/main.dipendent.css']
 })
 export class NuovaBustaPagaComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
