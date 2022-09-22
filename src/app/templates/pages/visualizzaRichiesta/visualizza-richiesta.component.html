@@ -80,9 +80,6 @@
           <div class="col-2"></div>
           <div class="form-group col-10 m-0">
             <h5 class="text-black">Commento</h5>
-            <textarea ngModel class="noteVisualizza" name="commento"
-              placeholder="Insersci Commento" type="text"></textarea>
-          </div>
 				</div>
 				<div class="card-body">
 					<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
