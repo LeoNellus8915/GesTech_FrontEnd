@@ -2,7 +2,7 @@
   <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Modifica Candidati</span>
 </div>
 <div class="card-body">
-	<form #updateForm="ngForm" (ngSubmit)="updateCandidato(updateForm)">
+	<form ngNativeValidate #updateForm="ngForm" (ngSubmit)="updateCandidato(updateForm)">
 		<div class="card no-b  no-r">
 			<div class="card-body">
 				<h5 class="card-title">Anagrafica</h5>
@@ -26,7 +26,7 @@
 							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
 								<label for="email" class="col-form-label s-12">EMAIL</label>
 								<input ngModel name="email" [(ngModel)]=datiCandidato.email
-                  placeholder="Inserisci Email"
+                  placeholder="Inserisci Email" required
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div *ngIf="datiCandidato" class="form-group col-6 m-0">

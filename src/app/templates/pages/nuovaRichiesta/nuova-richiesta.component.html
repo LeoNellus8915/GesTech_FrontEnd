@@ -2,7 +2,7 @@
   <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Nuova Richiesta</span>
 </div>
 <div class="card-body">
-	<form #addForm="ngForm" (ngSubmit)="aggiungiRichiesta(addForm)">
+	<form ngNativeValidate #addForm="ngForm" (ngSubmit)="aggiungiRichiesta(addForm)">
 		<div class="card no-b  no-r">
 			<div class="card-body">
 				<h5 class="card-title">Nuova Richiesta</h5>
@@ -11,14 +11,14 @@
 						<div class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="profilo" class="col-form-label s-12">Ruolo</label> 
-								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia">
+								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia" required>
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="linguaggio" class="col-form-label s-12">Linguaggio</label>
-								<select ngModel name="linguaggio" class="form-control r-0 light s-12 date-picker freccia">
+								<select ngModel name="linguaggio" class="form-control r-0 light s-12 date-picker freccia" required>
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
@@ -27,7 +27,7 @@
 						<div class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="livello" class="col-form-label s-12">Seniority</label>
-								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia">
+								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia" required>
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
    							</select>
@@ -36,7 +36,7 @@
 								<label for="cliente" class="col-form-label s-12">Cliente</label>
 								<input ngModel name="cliente" placeholder="Inserisci Cliente"
 									class="form-control r-0 light s-12 datePicker"
-									type="text">
+									type="text" required>
 							</div>
 						</div>	
 						<div class="form-row">
@@ -44,15 +44,17 @@
 								<label for="citta" class="col-form-label s-12">Citt&agrave;</label>
 								<input ngModel name="citta" placeholder="Inserisci Citt&agrave;"
 									class="form-control r-0 light s-12 datePicker"
-									type="text">
+									type="text" required>
 							</div>
 							<div class="form-group col-6 m-0">
-								<label for="costo" class="col-form-label s-12">Costo</label>
+								<label for="costo" class="col-form-label s-12">Massimo Costo Giornaliero</label>
 								<input ngModel name="costo" placeholder="Inserisci Costo"
 									class="form-control r-0 light s-12 datePicker"
-									type="number" step="0.01">
+									type="number" step="0.01" required>
 							</div>
-							<textarea ngModel class="note" name="note" placeholder="Inserire messaggio"></textarea>
+							<div class="col-12">
+								<textarea ngModel class="noteNuova" name="note" placeholder="Inserire messaggio" required></textarea>
+							</div>
 							<div>
                 <input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
                 <label>Tutti</label>

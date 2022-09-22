@@ -14,17 +14,5 @@
         <th class="titolotabella">AZIONI</th>
       </tr>
     </thead>
-    <tbody>
-      <tr *ngFor="let candidato of listaCandidati" [ngClass]="{'tabella': candidato[6] == 'Inaffidabile'}">
-        <td>{{candidato[1].toString().replace("T", " ")}}</td>
-        <td>{{candidato[2]}}</td>
-        <td>{{candidato[3]}}</td>
-        <td>{{candidato[4]}}</td>
-        <td>{{candidato[5]}}</td>
-        <td>{{candidato[6]}}</td>
-        <td><a [routerLink]="['../pagina-visualizza-candidato', candidato[0]]"><i class="icon-eye mr-3"></i></a>
-        <a [routerLink]="['../pagina-modifica-candidato', candidato[0]]"><i class="icon-pencil"></i></a></td>
-      </tr>
-    </tbody>
   </table>
 </div>	

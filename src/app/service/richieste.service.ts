@@ -17,16 +17,16 @@ export class RichiesteService {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-chiuse/${ruolo}/${nomeCognome}/${idRisorsa}`);
   }
 
-  public getRichiesta(idRichiesta: number): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-richiesta/${idRichiesta}`);
+  public getRichiesta(idRichiesta: number, pagina: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-richiesta/${idRichiesta}/${pagina}`);
   }
 
-  public eliminaRichiesta(idRichiesta: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}`);
+  public eliminaRichiesta(idRichiesta: number, pagina: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}/${pagina}`);
   }
 
-  public updateRichiesta(updateForm: JSON, idRichiesta: number, idRisorsa: number): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/modifica-richiesta/${idRichiesta}/${idRisorsa}`, updateForm);
+  public updateRichiesta(updateForm: JSON, idRichiesta: number, idRisorsa: number, pagina: number): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/modifica-richiesta/${idRichiesta}/${idRisorsa}/${pagina}`, updateForm);
   }
 
   public getRecruiters(): Observable<string[]> {
@@ -35,5 +35,13 @@ export class RichiesteService {
 
   public addRichiesta(addForm: JSON): Observable<any> {
     return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta`, addForm);
+  }
+
+  public getCodiciRichiesteAperte(ruolo: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte/${ruolo}`);
+  }
+
+  public getCodiciRichiesteChiuse(ruolo: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-chiuse/${ruolo}`);
   }
 }

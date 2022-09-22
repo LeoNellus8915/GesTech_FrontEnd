@@ -9,7 +9,7 @@ import { DefaultComponent } from '../../default/default.component';
   
 })
 export class PaginaCandidatiComponent implements OnInit{
-  public ruolo: string = sessionStorage.getItem("ruolo") as string;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
   public listaCandidati!: any[];
   public titoloPagina: any;
 
@@ -27,44 +27,29 @@ export class PaginaCandidatiComponent implements OnInit{
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Candidati";
         }, 0)
-        /*setTimeout(function () {
-          $(function () {
-            $('#tabellaCandidati').DataTable({
-              "language": {
-                "emptyTable":     "Nessun candidato trovato",
-                "info":           " ",
-                "infoEmpty":      " ",
-                "lengthMenu":     "Mostra _MENU_ candidati",
-                "loadingRecords": "Caricamento...",
-                "search":         "Cerca:",
-                "zeroRecords":    "Nessun candidato trovato",
-                "paginate": {
-                    "first":      "Ultimo",
-                    "last":       "Primo",
-                    "next":       "Prossimo",
-                    "previous":   "Precedente"
-                }
-              },
-            });
-            $('.dataTables_filter input[type="search"]').css(
-              {'width':'800px','display':'inline-block'}
-            );
-          });
-        }, 150);*/
       }
   }
 
   public allCandidati(): void {
     this.risorseService.allCandidati().subscribe(
       (response: any[]) => {
+        const candidati: string[][] = [];
         this.listaCandidati = response[0];
         const listaCodici = response[1];
         for (let i = 0; i < response[0].length; i++) {
-          const candidato = this.listaCandidati[i];
-          const codice = listaCodici[i];
-          candidato[0] = codice.codice;
+          this.listaCandidati[i][0] = listaCodici[i].codice;
+          candidati.push([this.listaCandidati[i][1].toString().replace("T", " "), 
+                          this.listaCandidati[i][2], 
+                          this.listaCandidati[i][3], 
+                          this.listaCandidati[i][4], 
+                          this.listaCandidati[i][5], 
+                          this.listaCandidati[i][6],
+                          '<a routerlink="../pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'" ng-reflect-router-link="../pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'" href="/default/pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'"><i class="icon-eye mr-3"></i></a>' +
+                          '<a ng-reflect-router-link="../pagina-modifica-candidato,'+this.listaCandidati[i][0]+'" href="/default/pagina-modifica-candidato/'+this.listaCandidati[i][0]+'"><i class="icon-pencil"></i></a>'
+                        ]);
         }
         $('#tabellaCandidati').DataTable({
+          data: candidati,
           "language": {
             "emptyTable":     "Nessun candidato trovato",
             "info":           " ",
@@ -79,7 +64,7 @@ export class PaginaCandidatiComponent implements OnInit{
                 "next":       "Prossimo",
                 "previous":   "Precedente"
             }
-          },
+          }
         });
         $('.dataTables_filter input[type="search"]').css(
           {'width':'800px','display':'inline-block'}

@@ -44,7 +44,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   }
 
   public getRichiesta(): void {
-    this.richiesteService.getRichiesta(this.idRichiesta).subscribe(
+    this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina).subscribe(
       (response: any[]) => {
         this.richiesta = response[0];
         this.statoRichiesta = response[1];
@@ -57,10 +57,13 @@ export class VisualizzaRichiestaComponent implements OnInit{
 
   public eliminaRichiesta(): void {
     if (confirm("Sicuro di voler eliminare questa richista?") == true)
-      this.richiesteService.eliminaRichiesta(this.idRichiesta).subscribe(
+      this.richiesteService.eliminaRichiesta(this.idRichiesta, this.statoPagina).subscribe(
         (response: any) => {
           alert("Richiesta eliminata con successo");
-          this.router.navigate(['default/pagina-richieste'])
+          if (this.statoPagina == 0)
+            this.router.navigate(['default/pagina-richieste']);
+          else
+            this.router.navigate(['default/pagina-storico-richieste']);
         }
       )
   }
@@ -68,10 +71,13 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public updateRichiesta(updateForm: NgForm): void {
     if (updateForm.value.statoRichiesta == "")
     updateForm.value.statoRichiesta = this.idStatoRichiesta;
-    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idRisorsa).subscribe(
+    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idRisorsa, this.statoPagina).subscribe(
       (response: any) => {
         alert("Richiesta aggiornata con successo");
-        this.router.navigate(['default/pagina-richieste'])
+        if (this.statoPagina == 0)
+          this.router.navigate(['default/pagina-richieste']);
+        else
+          this.router.navigate(['default/pagina-storico-richieste']);
       }
     )
   }

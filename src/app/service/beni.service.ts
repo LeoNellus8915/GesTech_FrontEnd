@@ -29,4 +29,8 @@ export class BeniService {
   public modificaBene(updateForm: Beni): Observable<any> {
     return this.http.post<any>(`${this.apiServerUrl}/modifica-bene`, updateForm);
   }
+
+  public getCodiciBeni(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-beni`);
+  }
 }

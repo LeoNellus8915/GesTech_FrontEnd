@@ -32,13 +32,13 @@ export class PaginaBeniComponent implements OnInit{
           $(function () {
             $('#tabellaBeni').DataTable({
               "language": {
-                "emptyTable":     "Nessun candidato trovato",
+                "emptyTable":     "Nessun bene trovato",
                 "info":           " ",
                 "infoEmpty":      " ",
-                "lengthMenu":     "Mostra _MENU_ candidati",
+                "lengthMenu":     "Mostra _MENU_ beni",
                 "loadingRecords": "Caricamento...",
                 "search":         "Cerca:",
-                "zeroRecords":    "Nessun candidato trovato",
+                "zeroRecords":    "Nessun bene trovato",
                 "paginate": {
                     "first":      "Ultimo",
                     "last":       "Primo",
@@ -57,8 +57,11 @@ export class PaginaBeniComponent implements OnInit{
 
   public allBeni(): void {
     this.beniService.allBeni().subscribe(
-      (response: Beni[]) => {
-        this.listaBeni = response;
+      (response: any[]) => {
+        this.listaBeni = response[0];
+        const listaCodici = response[1];
+        for (let i = 0; i < response[0].length; i++)
+          this.listaBeni[i].id = listaCodici[i].codice;
       }
     )
   }

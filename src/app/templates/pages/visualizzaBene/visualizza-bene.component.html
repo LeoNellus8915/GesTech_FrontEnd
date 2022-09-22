@@ -71,13 +71,13 @@
           <div class="col-md-6">
             <div *ngIf="bene" class="p-4">
               <h5 class="text-black">Data Consegna</h5>
-              <h5 class="p-t-10">{{bene.dataConsegna.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataConsegna.toString().replace("T", " ")}}</h5>
             </div>
           </div>   
           <div class="col-md-6">
             <div *ngIf="bene" class="p-4">
               <h5 class="text-black">Data Restituzione</h5>
-              <h5 class="p-t-10">{{bene.dataRestituzione.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataRestituzione.toString().replace("T", " ")}}</h5>
             </div>
           </div>                                                         
         </div>

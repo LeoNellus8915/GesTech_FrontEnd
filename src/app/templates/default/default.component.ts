@@ -1,6 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BeniService } from 'src/app/service/beni.service';
+import { RichiesteService } from 'src/app/service/richieste.service';
 import { RisorseService } from 'src/app/service/risorse.service';
 
 @Component({
@@ -14,21 +16,46 @@ export class DefaultComponent implements OnInit{
   public numeroRichieste = sessionStorage.getItem("numeroRichieste") as unknown as number;
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public azienda = sessionStorage.getItem("azienda") as string;
-  public codici = sessionStorage.getItem("codici");
+  
+  public codiciCandidati = sessionStorage.getItem("codiciCandidati");
+  public codiciBeni = sessionStorage.getItem("codiciBeni");
+  public codiciRichiesteAperte = sessionStorage.getItem("codiciRichiesteAperte");
+  public codiciRichiesteChiuse = sessionStorage.getItem("codiciRichiesteChiuse");
+
   public titoloPagina: any;
 
-  constructor(private router: Router, private risorseService: RisorseService, @Inject(DOCUMENT) private document: Document) {}
+  constructor(private router: Router, private risorseService: RisorseService, @Inject(DOCUMENT) private document: Document,
+              private richiesteService: RichiesteService, private beniService: BeniService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
       this.router.navigate([""]);
-    else
-      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.codici == null)
+    else {
+      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.codiciCandidati == null)
         this.risorseService.getCodiciCandidati().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codici", "presenti");
+            sessionStorage.setItem("codiciCandidati", "presenti");
           }
         );
+      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Commerciale' && this.ruolo !== 'Recruiter' && this.codiciBeni == null)
+        this.beniService.getCodiciBeni().subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciBeni", "presenti");
+          }
+        );
+      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.ruolo !== 'Recruiter' && this.codiciRichiesteAperte == null)
+        this.richiesteService.getCodiciRichiesteAperte(this.ruolo).subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteAperte", "presenti");
+          }
+        );
+      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.ruolo !== 'Recruiter' && this.codiciRichiesteChiuse == null)
+        this.richiesteService.getCodiciRichiesteChiuse(this.ruolo).subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
+          }
+        );
+    }
   }
 
   public logout(): void {
@@ -37,7 +64,11 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("numeroRichieste");
     sessionStorage.removeItem("ruolo");
     sessionStorage.removeItem("azienda");
-    sessionStorage.removeItem("codici");
+    sessionStorage.removeItem("codiciCandidati");
+    sessionStorage.removeItem("codiciRichiesteAperte");
+    sessionStorage.removeItem("codiciRichiesteChiuse");
+    sessionStorage.removeItem("codiciBeni");
+
     this.router.navigate([""]);
   }
 

@@ -1,6 +1,15 @@
-textarea.note {
+textarea.noteVisualizza {
     width: 70%;
     height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+textarea.noteNuova {
+    width: 100%;
+    height: 300px;
     margin-bottom: 20px;
     padding: 10px;
     border-radius: 5px;
