@@ -28,6 +28,7 @@ import { VisualizzaBeneComponent } from './templates/pages/visualizzaBene/visual
 import { VisualizzaCandidatoComponent } from './templates/pages/visualizzaCandidato/visualizza-candidato.component';
 import { VisualizzaRichiestaComponent } from './templates/pages/visualizzaRichiesta/visualizza-richiesta.component';
 import { PaginaSceltaRuoloComponent } from './templates/paginaSceltaRuolo/pagina-scelta-ruolo.component';
+import { PaginaModulisticaComponent } from './templates/pages/paginaModulistica/pagina-modulistica.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -47,6 +48,7 @@ const routes: Routes = [
     {path: "pagina-beni", component: PaginaBeniComponent},
     {path: "pagina-buste-paga", component: PaginaBustePagaComponent},
     {path: "pagina-candidati", component: PaginaCandidatiComponent},
+    {path: "pagina-modulistica", component: PaginaModulisticaComponent},
     {path: "pagina-ccnl", component: PaginaCCNLComponent},
     {path: "pagina-certificazioni-uniche", component: PaginaCertificazioniUnicheComponent},
     {path: "pagina-cv-dipendenti", component: PaginaCVDipendentiComponent},
@@ -71,4 +73,4 @@ export const RoutingComponents = [LoginComponent, DefaultComponent, ErrorPageCom
   NuovaRichiestaComponent, NuovoBeneComponent, NuovoCandidatoComponent, NuovoCCNLComponent, NuovoUtenteComponent, PaginaBeniComponent,  
   PaginaBustePagaComponent, PaginaCandidatiComponent, PaginaCCNLComponent, PaginaCertificazioniUnicheComponent, PaginaCVDipendentiComponent,
   PaginaDipendentiComponent, PaginaRapportinoComponent, PaginaRichiesteComponent, PaginaStoricoRichiesteComponent, VisualizzaBeneComponent,
-  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent]
+  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent]

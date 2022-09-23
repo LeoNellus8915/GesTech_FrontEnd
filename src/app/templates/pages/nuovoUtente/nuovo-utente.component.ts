@@ -16,7 +16,7 @@ import { Md5 } from "md5-typescript";
   
 })
 export class NuovoUtenteComponent implements OnInit{
-  public ruolo: string = sessionStorage.getItem("ruolo") as string;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
   public listaRuoli!: Ruoli[];
   public listaAziende!: Aziende[];
   public titoloPagina: any;
@@ -28,7 +28,7 @@ export class NuovoUtenteComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo != 'Admin')
+      if (this.ruolo != 'Admin' && this.ruolo != 'Personale')
         this.router.navigate(['default/pagina-avvisi']);
         else {
           this.titleService.setTitle("Gestech | Nuovo Utente");
@@ -41,11 +41,18 @@ export class NuovoUtenteComponent implements OnInit{
   }
 
   public getRuoli(): void {
-    this.ruoliService.getRuoliDipendente().subscribe(
-      (response: Ruoli[]) => {
-        this.listaRuoli = response;
-      }
-    )
+    if (this.ruolo == 'Admin')
+      this.ruoliService.getRuoliDipendenteAdmin().subscribe(
+        (response: Ruoli[]) => {
+          this.listaRuoli = response;
+        }
+      )
+    else
+      this.ruoliService.getRuoliDipendentePersonale().subscribe(
+        (response: Ruoli[]) => {
+          this.listaRuoli = response;
+        }
+      )
   }
 
   public getAziende(): void {

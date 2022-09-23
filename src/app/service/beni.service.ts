@@ -18,7 +18,7 @@ export class BeniService {
     return this.http.get<any>(`${this.apiServerUrl}/get-bene-visualizza/${idBene}`);
   }
 
-  public getBeneModifica(idBene: number): Observable<any> {
+  public getBeneModifica(idBene: string): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/get-bene-modifica/${idBene}`);
   }
 
@@ -26,8 +26,8 @@ export class BeniService {
     return this.http.post<any>(`${this.apiServerUrl}/salva-bene`, addForm);
   }
 
-  public modificaBene(updateForm: Beni): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/modifica-bene`, updateForm);
+  public modificaBene(updateForm: Beni, codiceBene: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/modifica-bene/${codiceBene}`, updateForm);
   }
 
   public getCodiciBeni(): Observable<any> {

@@ -4,10 +4,10 @@ import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
-  templateUrl: './pagina-certificazioni-uniche.component.html'
+  templateUrl: './pagina-modulistica.component.html'
   
 })
-export class PaginaCertificazioniUnicheComponent implements OnInit{
+export class PaginaModulisticaComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public titoloPagina: any;
 
@@ -20,9 +20,9 @@ export class PaginaCertificazioniUnicheComponent implements OnInit{
         if (this.ruolo != 'Dipendente')
           this.router.navigate(["default/pagina-avvisi"]);
         else {
-          this.titleService.setTitle("Gestech | Certificazione Unica");
+          this.titleService.setTitle("Gestech | Modulistica");
           setTimeout(() => {
-            this.defaultService.titoloPagina=" Certificazione Unica";
+            this.defaultService.titoloPagina=" Modulistica";
           }, 0)
         }
   }

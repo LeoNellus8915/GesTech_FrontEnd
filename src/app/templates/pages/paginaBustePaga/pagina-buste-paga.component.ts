@@ -8,7 +8,7 @@ import { DefaultComponent } from '../../default/default.component';
   
 })
 export class PaginaBustePagaComponent implements OnInit{
-  public ruolo: string = sessionStorage.getItem("ruolo") as string;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent) {}
@@ -17,7 +17,7 @@ export class PaginaBustePagaComponent implements OnInit{
       if (this.ruolo == null)
         this.router.navigate([""]);
       else
-        if (this.ruolo == 'Commerciale' || this.ruolo == 'Recruiter')
+        if (this.ruolo != 'Dipendente')
           this.router.navigate(["default/pagina-avvisi"]);
         else {
           this.titleService.setTitle("Gestech | Busta Paga");

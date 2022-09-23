@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
@@ -28,10 +28,8 @@ export class LoginComponent{
             sessionStorage.setItem("ruolo", listaRuoli[0]);
             this.router.navigate(["default/pagina-avvisi"]);
           }
-          else {
-            this.router.navigate(["pagina-scelta-ruolo", JSON.stringify(listaRuoli)]);
-          }
-            
+          else
+            this.router.navigate(["pagina-scelta-ruolo", JSON.stringify(listaRuoli)]); 
         }
         else
           this.msgCredenziali = "Credenziali errate, si prega di riprovare";
