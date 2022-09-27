@@ -1,7 +1,7 @@
-export interface CommentiRichieste {
+export interface CommentiCandidati {
   id: number;
   idDipendente: number;
-  idRichiesta: number;
+  idCandidato: number;
   note: string;
   data: Date;
 }

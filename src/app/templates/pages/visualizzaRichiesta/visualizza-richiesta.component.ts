@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class VisualizzaRichiestaComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public idRichiesta!: number;
   public statoPagina!: number;
   public richiesta!: any[];
@@ -71,7 +71,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public updateRichiesta(updateForm: NgForm): void {
     if (updateForm.value.statoRichiesta == "")
     updateForm.value.statoRichiesta = this.idStatoRichiesta;
-    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idRisorsa, this.statoPagina).subscribe(
+    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina).subscribe(
       (response: any) => {
         alert("Richiesta aggiornata con successo");
         if (this.statoPagina == 0)

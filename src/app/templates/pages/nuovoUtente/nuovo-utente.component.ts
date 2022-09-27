@@ -70,8 +70,12 @@ export class NuovoUtenteComponent implements OnInit{
       addForm.value.password = Md5.init(addForm.value.password);
       this.authService.addUtente(addForm.value).subscribe(
         (response: any) => {
-          alert("Utente registrato con successo");
-          this.router.navigate(['default/pagina-avvisi']);
+          if (response == 0)
+            alert("Email già esistente");
+          else {
+            alert("Utente registrato con successo");
+            this.router.navigate(['default/pagina-avvisi']);
+          }
         }
       )
     }

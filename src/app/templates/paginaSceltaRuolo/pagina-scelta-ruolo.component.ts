@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
-import { RisorseCCNLService } from 'src/app/service/risorse-ccnl.service';
+import { DipendentiCCNLService } from 'src/app/service/dipendenti-ccnl.service';
 
 @Component({
   templateUrl: './pagina-scelta-ruolo.component.html',
@@ -10,12 +10,12 @@ import { RisorseCCNLService } from 'src/app/service/risorse-ccnl.service';
   
 })
 export class PaginaSceltaRuoloComponent implements OnInit{
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public ruolo!: string;
   public listaRuoli!: string[];
   public titoloPagina: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private risorseCCNLService: RisorseCCNLService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private authService: AuthService, private dipendentiCCNLService: DipendentiCCNLService) {}
 
   ngOnInit(): void {
     this.ruolo = this.route.snapshot.params['ruolo'];
@@ -33,7 +33,7 @@ export class PaginaSceltaRuoloComponent implements OnInit{
   }
 
   public controlloDownload(): void {
-    this.risorseCCNLService.controlloDownload(this.idRisorsa).subscribe(
+    this.dipendentiCCNLService.controlloDownload(this.idDipendente).subscribe(
       (response: any[]) => {
         if (response[0] != null) {
           const button = document.createElement('button');
@@ -51,7 +51,7 @@ export class PaginaSceltaRuoloComponent implements OnInit{
   }
 
   public download(): void {
-    this.risorseCCNLService.download(this.idRisorsa).subscribe(
+    this.dipendentiCCNLService.download(this.idDipendente).subscribe(
       (response: any) => {
         const button = document.createElement('button');
         const container = document.getElementById("controlloModal");

@@ -1,5 +1,5 @@
 export interface LocalSession {
-  idRisorsa: number;
+  idDipendente: number;
   nomeCognome: string;
   numeroRichieste: number;
   ruolo: string;

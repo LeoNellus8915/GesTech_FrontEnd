@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RisorseService } from 'src/app/service/risorse.service';
+import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 
@@ -13,7 +13,7 @@ export class PaginaCandidatiComponent implements OnInit{
   public listaCandidati!: any[];
   public titoloPagina: any;
 
-  constructor(private router: Router, private risorseService: RisorseService, private titleService: Title, private defaultService: DefaultComponent) {}
+  constructor(private router: Router, private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -31,7 +31,7 @@ export class PaginaCandidatiComponent implements OnInit{
   }
 
   public allCandidati(): void {
-    this.risorseService.allCandidati().subscribe(
+    this.candidatiService.allCandidati().subscribe(
       (response: any[]) => {
         const candidati: string[][] = [];
         this.listaCandidati = response[0];
@@ -64,7 +64,12 @@ export class PaginaCandidatiComponent implements OnInit{
                 "next":       "Prossimo",
                 "previous":   "Precedente"
             }
-          }
+          },
+          "createdRow": function( row, data ) {
+            
+            if(data.toString().indexOf("Inaffidabile") != -1)
+                $(row).addClass( 'tabella' );
+          },
         });
         $('.dataTables_filter input[type="search"]').css(
           {'width':'800px','display':'inline-block'}

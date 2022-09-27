@@ -3,7 +3,6 @@ import { RichiesteService } from 'src/app/service/richieste.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
-import { RisorseRichiesteService } from 'src/app/service/risorse-richieste.service';
 
 @Component({
   templateUrl: './pagina-storico-richieste.component.html',
@@ -11,9 +10,9 @@ import { RisorseRichiesteService } from 'src/app/service/risorse-richieste.servi
 })
 export class PaginaStoricoRichiesteComponent implements OnInit {
   public listaRichieste!: any[];
-  public ruolo = sessionStorage.getItem("ruolo");
-  public nomeCognome = sessionStorage.getItem("nomeCognome");
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
+  public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
 
   constructor(private defaultService: DefaultComponent, private titleService: Title, private router: Router, 
             private richiesteService: RichiesteService) { }
@@ -34,7 +33,7 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
   }
 
   public getRichieste(): void {
-    this.richiesteService.getRichiesteChiuse(this.ruolo as string, this.nomeCognome as string, this.idRisorsa).subscribe(
+    this.richiesteService.getRichiesteChiuse(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
         const candidati: string[][] = [];
         this.listaRichieste = response[1];

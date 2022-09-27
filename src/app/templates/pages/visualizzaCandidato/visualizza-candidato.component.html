@@ -37,7 +37,7 @@
               <div class="col-md-6">
                 <div *ngIf="datiCandidato" class="p-4">
                   <h5 class="text-black">Recapito</h5>
-                  <h5 class="p-t-10">{{datiCandidato.recapito}}</h5>
+                  <h5 class="p-t-10">{{datiCandidato.cellulare}}</h5>
                 </div>
               </div>                                
             </div>
@@ -51,9 +51,9 @@
                 </div>
               </div>
               <div class="col-md-6">
-                <div *ngIf="datiCandidato" class="p-4">
+                <div *ngIf="dettagliCandidato" class="p-4">
                   <h5 class="text-black">Data di Inseriemento</h5>
-                  <h5 class="p-t-10">{{dettagliCandidato[0].toString().replace("T", " ")}}</h5>
+                  <h5 class="p-t-10">{{dettagliCandidato[0].dataInserimento.toString().replace("T", " ")}}</h5>
                 </div>
               </div>
             </div>
@@ -61,9 +61,9 @@
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-12">
-                <div *ngIf="datiCandidato" class="p-4">
+                <div *ngIf="dettagliCandidato" class="p-4">
                   <h5 class="text-black">Competenza Principale</h5>
-                  <h5 class="p-t-10">{{datiCandidato.competenzaPrincipale}}</h5>
+                  <h5 class="p-t-10">{{dettagliCandidato[0].competenzaPrincipale}}</h5>
                 </div>
               </div>
             </div>
@@ -73,15 +73,15 @@
       <div class="p5 b-b bordo"> <!-- inizio campi larghi --> 
         <div class="row">
           <div class="col-md-4">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Data Colloquio:</h5>
-              <h5 class="p-t-10">{{datiCandidato.dataColloquio}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].dataColloquio}}</h5>
             </div>
           </div>
           <div class="col-md-4">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Anno Colloquio:</h5>
-              <h5 class="p-t-10">{{datiCandidato.annoColloquio}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].annoColloquio}}</h5>
             </div>
           </div>   
           <div class="col-md-4">
@@ -95,9 +95,9 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-6">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Fonte Reperimento: </h5>
-              <h5 class="p-t-10">{{datiCandidato.fonteReperimento}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].fonteReperimento}}</h5>
             </div>
           </div>
           <div class="col-md-6">
@@ -111,15 +111,15 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-6">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Costo Giornaliero:</h5>
-              <h5 class="p-t-10">{{datiCandidato.costoGiornaliero}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].costoGiornaliero}}</h5>
             </div>
           </div>
           <div class="col-md-6">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Possibilit&agrave; Lavorativa:</h5>
-              <h5 class="p-t-10">{{datiCandidato.possibilitaLavorativa}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].possibilitaLavorativa}}</h5>
             </div>
           </div> 
         </div>   
@@ -157,9 +157,9 @@
             </div>
           </div> 
           <div class="col-md-4">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Skill campo libero</h5>
-              <h5 class="p-t-10">{{datiCandidato.skillCampoLibero}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].linguaggioCampoLibero}}</h5>
             </div>
           </div> 
         </div>   
@@ -189,15 +189,15 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-4">
-            <div *ngIf="datiCandidato" class="p-4">
+            <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Competenze Totali:</h5>
-              <h5 class="p-t-10">{{datiCandidato.competenzeTotali}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato[0].competenzeTotali}}</h5>
             </div>
           </div>
             <div class="col-md-4">
-              <div *ngIf="datiCandidato" class="p-4">
+              <div *ngIf="dettagliCandidato" class="p-4">
                 <h5 class="text-black">Certificazioni: </h5>
-                <h5 class="p-t-10">{{datiCandidato.certificazioni}}</h5>
+                <h5 class="p-t-10">{{dettagliCandidato[0].certificazioni}}</h5>
               </div>
             </div> 
             <div class="col-md-4">

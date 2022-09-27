@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { RisorseService } from 'src/app/service/risorse.service';
+import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 
@@ -13,7 +13,7 @@ export class PaginaDipendentiComponent implements OnInit{
   public listaDipendenti!: any[];
   public titoloPagina: any;
 
-  constructor(private router: Router, private risorseService: RisorseService, private titleService: Title, private defaultService: DefaultComponent) {}
+  constructor(private router: Router, private dipendentiService: DipendentiService, private titleService: Title, private defaultService: DefaultComponent) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -55,7 +55,7 @@ export class PaginaDipendentiComponent implements OnInit{
   }
 
   public allDipendenti(): void {
-    this.risorseService.allDipendenti().subscribe(
+    this.dipendentiService.allDipendenti().subscribe(
       (response: any[]) => {
         this.listaDipendenti = response;
       }

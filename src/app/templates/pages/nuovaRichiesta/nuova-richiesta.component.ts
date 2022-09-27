@@ -18,7 +18,7 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class NuovaRichiestaComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public listaProfili!: Profili[];
   public listaLinguaggi!: Linguaggi[];
   public listaLivelli!: Livelli[];
@@ -103,7 +103,7 @@ export class NuovaRichiestaComponent implements OnInit{
       else
         addForm.value.costo = addForm.value.costo.toString();
 
-      addForm.value.idRisorsa = this.idRisorsa;
+      addForm.value.idDipendente = this.idDipendente;
       this.richiesteService.addRichiesta(addForm.value).subscribe(
         (response: any) => {
           alert("Richiesta salvata con successo");

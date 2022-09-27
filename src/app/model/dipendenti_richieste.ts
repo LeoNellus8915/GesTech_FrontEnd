@@ -1,6 +1,6 @@
-export interface RisorseRichieste {
+export interface DipendentiRichieste {
   id: number;
-  idRisorsa: number;
+  idDipendente: number;
   idRichiesta: number;
   visualizzato: boolean;
 }

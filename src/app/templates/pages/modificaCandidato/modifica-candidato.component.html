@@ -16,9 +16,9 @@
 									class="form-control r-0 light s-12 " type="text">
 							</div>
 							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
-								<label for="recapito" class="col-form-label s-12">RECAPITO</label>
-								<input ngModel name="recapito" [(ngModel)]=datiCandidato.recapito
-									placeholder="Inserisci Recapito"
+								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
+								<input ngModel name="cellulare" [(ngModel)]=datiCandidato.cellulare
+									placeholder="Inserisci Cellulare"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -54,22 +54,22 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="dataColloquio" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA COLLOQUIO</label> 
-								<input ngModel name="dataColloquio" [(ngModel)]=datiCandidato.dataColloquio
+								<input ngModel name="dataColloquio" [(ngModel)]=dettagliCandidato.dataColloquio
 									placeholder="Inserisci Data Colloquio"
 									class="form-control r-0 light s-12 datePicker" type="date">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="annoColloquio" class="col-form-label s-12">ANNO COLLOQUIO</label> 
-								<input ngModel name="annoColloquio" [(ngModel)]=datiCandidato.annoColloquio
+								<input ngModel name="annoColloquio" [(ngModel)]=dettagliCandidato.annoColloquio
 									class="form-control r-0 light s-12 date-picker" type="number">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="esitoColloquio" class="col-form-label s-12">ESITO COLLOQUIO</label> 
 								<select ngModel name="esitoColloquio" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[0]}}</option>
-    							<option *ngFor="let esitoColloquio of dettagliCandidato[1]" value={{esitoColloquio.id}}>{{esitoColloquio.nome}}</option>
+									<option value="">{{listaSelects[0]}}</option>
+    							<option *ngFor="let esitoColloquio of listaSelects[1]" value={{esitoColloquio.id}}>{{esitoColloquio.nome}}</option>
     						</select>
 							</div>
 						</div>
@@ -83,22 +83,22 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="fonteReperimento" class="col-form-label s-12">FONTE REPERIMENTO</label> 
-								<input ngModel name="fonteReperimento" [(ngModel)]=datiCandidato.fonteReperimento
+								<input ngModel name="fonteReperimento" [(ngModel)]=dettagliCandidato.fonteReperimento
 									placeholder="Inserisci Fonte Reperimento"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="profilo" class="col-form-label s-12">RUOLO</label>
 								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[2]}}</option>
-    							<option *ngFor="let profilo of dettagliCandidato[3]" value={{profilo.id}}>{{profilo.nome}}</option>
+									<option value="">{{listaSelects[2]}}</option>
+    							<option *ngFor="let profilo of listaSelects[3]" value={{profilo.id}}>{{profilo.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="competenzaPrincipale" class="col-form-label s-12">COMPETENZA PRINCIPALE</label>
-								<input ngModel name="competenzaPrincipale" [(ngModel)]=datiCandidato.competenzaPrincipale
+								<input ngModel name="competenzaPrincipale" [(ngModel)]=dettagliCandidato.competenzaPrincipale
 									placeholder="Insersci Competenza Principale"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
@@ -113,15 +113,15 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
 								<label for="costoGiornaliero" class="col-form-label s-12">COSTO GIORNALIERO</label> 
-								<input ngmodel name="costoGiornaliero" [(ngModel)]=datiCandidato.costoGiornaliero
+								<input ngmodel name="costoGiornaliero" [(ngModel)]=dettagliCandidato.costoGiornaliero
 									placeholder="Insersci Costo Giornaliero"
 									class="form-control r-0 light s-12 date-picker" type="number" step="0.01">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
 								<label for="possibilitaLavorativa" class="col-form-label s-12">POSSIBILIT&Agrave; LAVORATIVA</label>
-								<input ngModel name="possibilitaLavorativa" [(ngModel)]=datiCandidato.possibilitaLavorativa
+								<input ngModel name="possibilitaLavorativa" [(ngModel)]=dettagliCandidato.possibilitaLavorativa
 									placeholder="Insersci Possibilit&Agrave; Lavorativa"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
@@ -136,44 +136,44 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="skill1" class="col-form-label s-12">SKILL1</label>
 								<select ngModel name="skill1" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[4]}}</option>
-    							<option *ngFor="let skill of dettagliCandidato[5]" value={{skill.id}}>{{skill.nome}}</option>
+									<option value="">{{listaSelects[4]}}</option>
+    							<option *ngFor="let skill of listaSelects[5]" value={{skill.id}}>{{skill.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="skill2" class="col-form-label s-12">SKILL2</label>
 								<select ngModel name="skill2" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[6]}}</option>
-    							<option *ngFor="let skill of dettagliCandidato[7]" value={{skill.id}}>{{skill.nome}}</option>
+									<option value="">{{listaSelects[6]}}</option>
+    							<option *ngFor="let skill of listaSelects[7]" value={{skill.id}}>{{skill.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="skill3" class="col-form-label s-12">SKILL3</label>
 								<select ngModel name="skill3" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[8]}}</option>
-    							<option *ngFor="let skill of dettagliCandidato[9]" value={{skill.id}}>{{skill.nome}}</option>
+									<option value="">{{listaSelects[8]}}</option>
+    							<option *ngFor="let skill of listaSelects[9]" value={{skill.id}}>{{skill.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="skill4" class="col-form-label s-12">SKILL4</label>
 								<select ngModel name="skill4" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[10]}}</option>
-    							<option *ngFor="let skill of dettagliCandidato[11]" value={{skill.id}}>{{skill.nome}}</option>
+									<option value="">{{listaSelects[10]}}</option>
+    							<option *ngFor="let skill of listaSelects[11]" value={{skill.id}}>{{skill.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="skill5" class="col-form-label s-12">SKILL5</label>
 								<select ngModel name="skill5" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[12]}}</option>
-    							<option *ngFor="let skill of dettagliCandidato[13]" value={{skill.id}}>{{skill.nome}}</option>
+									<option value="">{{listaSelects[12]}}</option>
+    							<option *ngFor="let skill of listaSelects[13]" value={{skill.id}}>{{skill.nome}}</option>
     						</select>
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
-								<label for="skillCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
-								<input ngModel name="skillCampoLibero" [(ngModel)]=datiCandidato.skillCampoLibero
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+								<label for="linguaggioCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
+								<input ngModel name="linguaggioCampoLibero" [(ngModel)]=dettagliCandidato.linguaggioCampoLibero
 									placeholder="Insersci Skill Campo Libero"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
@@ -188,25 +188,25 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="lingua1" class="col-form-label s-12">LINGUA 1</label> 
 								<select ngModel name="lingua1" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[14]}}</option>
-    							<option *ngFor="let lingua of dettagliCandidato[15]" value={{lingua.id}}>{{lingua.nome}}</option>
+									<option value="">{{listaSelects[14]}}</option>
+    							<option *ngFor="let lingua of listaSelects[15]" value={{lingua.id}}>{{lingua.nome}}</option>
 								</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="lingua2" class="col-form-label s-12">LINGUA 2</label>
 								<select ngModel name="lingua2" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[16]}}</option>
-    							<option *ngFor="let lingua of dettagliCandidato[17]" value={{lingua.id}}>{{lingua.nome}}</option>
+									<option value="">{{listaSelects[16]}}</option>
+    							<option *ngFor="let lingua of listaSelects[17]" value={{lingua.id}}>{{lingua.nome}}</option>
    							</select>
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="lingua3" class="col-form-label s-12">LINGUA 3</label> 
 								<select ngModel name="lingua3" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[18]}}</option>
-    							<option *ngFor="let lingua of dettagliCandidato[19]" value={{lingua.id}}>{{lingua.nome}}</option>
+									<option value="">{{listaSelects[18]}}</option>
+    							<option *ngFor="let lingua of listaSelects[19]" value={{lingua.id}}>{{lingua.nome}}</option>
    							</select>
 							</div>
 						</div>
@@ -221,22 +221,22 @@
 					<div class="col-md-12">
 						<div class="form-row">
 							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
-								<label for="competenzeTotali" class="col-form-label s-12">COMPETENZE TOTALI</label> 
-								<input id="competenzeTotali" name="competenzeTotali" [(ngModel)]=datiCandidato.competenzeTotali
+								<label for="dettagliCandidato" class="col-form-label s-12">COMPETENZE TOTALI</label> 
+								<input ngModel name="competenzeTotali" [(ngModel)]=dettagliCandidato.competenzeTotali
 									placeholder="Insersci Competenze Totali"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
 								<label for="certificazioni" class="col-form-label s-12">CERTIFICAZIONI</label>
-								<input ngModel name="certificazioni" [(ngModel)]=datiCandidato.certificazioni
+								<input ngModel name="certificazioni" [(ngModel)]=dettagliCandidato.certificazioni
 									placeholder="Insersci Certificazioni"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="listaSelects" class="form-group col-4 m-0">
 								<label for="livello" class="col-form-label s-12">SENIORITY</label>
 								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{dettagliCandidato[20]}}</option>
-    							<option *ngFor="let livello of dettagliCandidato[21]" value={{livello.id}}>{{livello.nome}}</option>
+									<option value="">{{listaSelects[20]}}</option>
+    							<option *ngFor="let livello of listaSelects[21]" value={{livello.id}}>{{livello.nome}}</option>
    							</select>
 							</div>
 						</div>

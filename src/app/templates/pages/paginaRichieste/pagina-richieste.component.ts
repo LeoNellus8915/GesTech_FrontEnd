@@ -3,7 +3,7 @@ import { RichiesteService } from 'src/app/service/richieste.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
-import { RisorseRichiesteService } from 'src/app/service/risorse-richieste.service';
+import { DipendentiRichiesteService } from 'src/app/service/dipendenti-richieste.service';
 
 @Component({
   templateUrl: './pagina-richieste.component.html',
@@ -11,11 +11,11 @@ import { RisorseRichiesteService } from 'src/app/service/risorse-richieste.servi
 })
 export class PaginaRichiesteComponent implements OnInit {
   public listaRichieste!: any[];
-  public ruolo = sessionStorage.getItem("ruolo");
-  public nomeCognome = sessionStorage.getItem("nomeCognome");
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
+  public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
 
-  constructor(private risorseRichiesteService: RisorseRichiesteService, private defaultService: DefaultComponent, 
+  constructor(private dipendentiRichiesteService: DipendentiRichiesteService, private defaultService: DefaultComponent, 
     private titleService: Title, private router: Router, private richiesteService: RichiesteService) { }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class PaginaRichiesteComponent implements OnInit {
   }
 
   public getRichieste(): void {
-    this.richiesteService.getRichiesteAperte(this.ruolo as string, this.nomeCognome as string, this.idRisorsa).subscribe(
+    this.richiesteService.getRichiesteAperte(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
         const candidati: string[][] = [];
         this.listaRichieste = response[1];
@@ -48,7 +48,7 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public goVisualizzaRichiesta(idRichiesta: number, visualizzata: boolean): void {
     if (visualizzata == false)
-      this.risorseRichiesteService.setVisualizzato(idRichiesta, this.idRisorsa as unknown as number).subscribe (
+      this.dipendentiRichiesteService.setVisualizzato(idRichiesta, this.idDipendente).subscribe (
         (response: any) => {
           this.defaultService.numeroRichieste --;
           sessionStorage.setItem("numeroRichieste", this.defaultService.numeroRichieste.toString())

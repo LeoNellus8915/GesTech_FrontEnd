@@ -4,21 +4,13 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
-export class RisorseService {
+export class CandidatiService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
   
   public allCandidati(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-candidati`);
-  }
-
-  public allDipendenti(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-dipendenti`);
-  }
-
-  public getDipendenti(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/get-dipendenti`);
   }
 
   public getCandidatoVisualizza(idCandidato: number): Observable<any[]> {

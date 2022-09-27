@@ -13,8 +13,8 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['../../../../assets/css/main.home.css']
 })
 export class AvvisiComponent implements OnInit{
-  public ruolo = sessionStorage.getItem("ruolo");
-  public idRisorsa = sessionStorage.getItem("idRisorsa");
+  public ruolo = sessionStorage.getItem("ruolo") as string;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public listaAvvisi!: Avvisi[];
   public listaRuoli!: Ruoli[];
   public checkArray: any[] = new Array();
@@ -44,7 +44,7 @@ export class AvvisiComponent implements OnInit{
   }
 
   public getAvvisi(): void {
-    this.avvisiService.allAvvisi(this.ruolo as string).subscribe(
+    this.avvisiService.allAvvisi(this.ruolo).subscribe(
       (response: Avvisi[]) => {
         this.listaAvvisi = response;
       }
@@ -76,7 +76,7 @@ export class AvvisiComponent implements OnInit{
       alert("Inserire tutti o almeno un ruolo");
     else {
       addForm.value.ruoli = this.checkArray;
-      addForm.value.idRisorsa = this.idRisorsa;
+      addForm.value.idDipendente = this.idDipendente;
       this.avvisiService.salvaAvviso(addForm.value).subscribe(
         (response: any) => {
           alert("Avviso salvato con successo");

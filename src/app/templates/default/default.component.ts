@@ -3,7 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BeniService } from 'src/app/service/beni.service';
 import { RichiesteService } from 'src/app/service/richieste.service';
-import { RisorseService } from 'src/app/service/risorse.service';
+import { CandidatiService } from 'src/app/service/candidati.service';
 
 @Component({
   templateUrl: './default.component.html',
@@ -24,7 +24,7 @@ export class DefaultComponent implements OnInit{
 
   public titoloPagina: any;
 
-  constructor(private router: Router, private risorseService: RisorseService, @Inject(DOCUMENT) private document: Document,
+  constructor(private router: Router, private candidatiService: CandidatiService, @Inject(DOCUMENT) private document: Document,
               private richiesteService: RichiesteService, private beniService: BeniService) {}
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class DefaultComponent implements OnInit{
       this.router.navigate([""]);
     else {
       if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.codiciCandidati == null)
-        this.risorseService.getCodiciCandidati().subscribe(
+        this.candidatiService.getCodiciCandidati().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciCandidati", "presenti");
           }

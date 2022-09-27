@@ -15,8 +15,8 @@
 									class="form-control r-0 light s-12 " type="text">
 							</div>
 							<div class="form-group col-6 m-0">
-								<label for="recapito" class="col-form-label s-12">RECAPITO</label>
-								<input ngModel name="recapito" placeholder="Inserisci Recapito"
+								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
+								<input ngModel name="cellulare" placeholder="Inserisci Cellulare"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -88,7 +88,7 @@
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 							<div class="form-group col-4 m-0">
-								<label for="ruoloProfilo" class="col-form-label s-12">RUOLO</label>
+								<label for="profilo" class="col-form-label s-12">RUOLO</label>
 								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let profili of listaProfili" value={{profili.id}}>{{profili.nome}}</option>
@@ -132,44 +132,44 @@
 					<div class="col-md-12">
 						<div class="form-row">
 							<div class="form-group col-4 m-0">
-								<label for="skill1" class="col-form-label s-12">SKILL1</label>
-								<select ngModel name="skill1" class="form-control r-0 light s-12 date-picker freccia">
+								<label for="linguaggio1" class="col-form-label s-12">SKILL1</label>
+								<select ngModel name="linguaggio1" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-4 m-0">
-								<label for="skill2" class="col-form-label s-12">SKILL2</label>
-								<select ngModel name="skill2" class="form-control r-0 light s-12 date-picker freccia">
+								<label for="linguaggio2" class="col-form-label s-12">SKILL2</label>
+								<select ngModel name="linguaggio2" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-4 m-0">
-								<label for="skill3" class="col-form-label s-12">SKILL3</label>
-								<select ngModel name="skill3" class="form-control r-0 light s-12 date-picker freccia">
+								<label for="linguaggio3" class="col-form-label s-12">SKILL3</label>
+								<select ngModel name="linguaggio3" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
 							</div>
 
 							<div class="form-group col-4 m-0">
-								<label for="skill4" class="col-form-label s-12">SKILL4</label>
-								<select ngModel name="skill4" class="form-control r-0 light s-12 date-picker freccia">
+								<label for="linguaggio4" class="col-form-label s-12">SKILL4</label>
+								<select ngModel name="linguaggio4" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-4 m-0">
-								<label for="skill5" class="col-form-label s-12">SKILL5</label>
-								<select ngModel name="skill5" class="form-control r-0 light s-12 date-picker freccia">
+								<label for="linguaggio5" class="col-form-label s-12">SKILL5</label>
+								<select ngModel name="linguaggio5" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-4 m-0">
-								<label for="skillCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
-                <input ngModel name="skillCampoLibero" placeholder="Insersci Skill Campo Libero"
+								<label for="linguaggioCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
+                <input ngModel name="linguaggioCampoLibero" placeholder="Insersci Skill Campo Libero"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -255,7 +255,7 @@
 				<hr>
 
 				<div class="card-body">
-          <input type="hidden" name="idRisorsa">
+          <input type="hidden" name="idDipendente">
 					<input type="submit" value="SALVA">
 				</div>
 			</div>

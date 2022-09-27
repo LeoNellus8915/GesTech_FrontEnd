@@ -1,8 +1,8 @@
 export interface Avvisi {
   id: number;
+  idDipendente: number;
   titolo: string;
   ruoli: string;
-  idRisorsa: number;
   note: string;
   data: Date;
 }
