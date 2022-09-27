@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms'
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
@@ -7,7 +7,6 @@ import { Md5 } from "md5-typescript";
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['../../../assets/css/main.login.css']
-  
 })
 export class LoginComponent{
   public msgCredenziali: string = "Inserisci le credenziali per accedere al sistema";
