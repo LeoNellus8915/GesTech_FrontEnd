@@ -50,6 +50,12 @@ export class PaginaBeniComponent implements OnInit{
             $('.dataTables_filter input[type="search"]').css(
               {'width':'800px','display':'inline-block'}
            );
+           $("input").on("click", function(){
+            $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
+            " (esempio: dispositivo marca ecc...)");
+            $("#tooltip").css({"margin-left": "31%"})
+            $("br").remove();
+          });
           });
         }, 40);
       }

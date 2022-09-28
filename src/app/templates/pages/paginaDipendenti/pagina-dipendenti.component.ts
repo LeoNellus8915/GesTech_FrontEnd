@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
+import { allDipendenti } from 'src/app/model/mapper/allDipendenti';
 
 @Component({
   templateUrl: './pagina-dipendenti.component.html'
@@ -10,7 +11,7 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class PaginaDipendentiComponent implements OnInit{
   public ruolo: string = sessionStorage.getItem("ruolo") as string;
-  public listaDipendenti!: any[];
+  public listaDipendenti!: allDipendenti[];
   public titoloPagina: any;
 
   constructor(private router: Router, private dipendentiService: DipendentiService, private titleService: Title, private defaultService: DefaultComponent) {}
@@ -49,6 +50,12 @@ export class PaginaDipendentiComponent implements OnInit{
             $('.dataTables_filter input[type="search"]').css(
               {'width':'800px','display':'inline-block'}
            );
+           $("input").on("click", function(){
+            $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
+            " (esempio Nome Data ecc...)");
+            $("#tooltip").css({"margin-left": "31%"})
+            $("br").remove();
+          });
           });
         }, 40);
       }

@@ -214,9 +214,9 @@
         </div>
         <div class="row">
           <div class="col-md-10 offset-1" *ngFor="let commento of commentiCandidato">
-            <span class="titolo_data">{{commento[0]}}</span>
-            <span class="titolo_data"> {{commento[1]}}</span>
-            <p class="testo_richieste">{{commento[2]}}</p>
+            <span class="titolo_data">{{commento.data}}</span>
+            <span class="titolo_data"> {{commento.nomeCognome}}</span>
+            <p class="testo_richieste">{{commento.note}}</p>
           </div>
         </div>
       </div>

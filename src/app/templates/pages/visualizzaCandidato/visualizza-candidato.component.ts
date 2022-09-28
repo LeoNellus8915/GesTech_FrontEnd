@@ -5,6 +5,7 @@ import { DefaultComponent } from '../../default/default.component';
 import { CandidatiService } from 'src/app/service/candidati.service';
 import { Candidati } from 'src/app/model/candidati';
 import { DOCUMENT } from '@angular/common';
+import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato';
 
 @Component({
   templateUrl: './visualizza-candidato.component.html',
@@ -15,7 +16,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public datiCandidato!: Candidati;
   public dettagliCandidato!: any;
-  public commentiCandidato!: any;
+  public commentiCandidato!: allCommentiCandidato[];
   public colore!: number;
   opacity = "1";
   public fileBase64!: string;
