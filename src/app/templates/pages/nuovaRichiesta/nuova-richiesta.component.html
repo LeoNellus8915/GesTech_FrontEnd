@@ -55,7 +55,7 @@
 							<div class="col-12">
 								<textarea ngModel class="noteNuova" name="note" placeholder="Inserire messaggio" required></textarea>
 							</div>
-							<div>
+							<div *ngIf="ruolo != 'Account'">
                 <input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
                 <label>Tutti</label>
                 <span *ngFor="let recruiter of listaRecruiters">

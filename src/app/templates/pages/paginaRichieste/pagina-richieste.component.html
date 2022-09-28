@@ -28,6 +28,9 @@
             <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta[8]}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta[5]}}</span></div>
             <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste">{{richiesta[10]}}</footer>
+            <div *ngIf="ruolo == 'Direttore Commerciale'" class="row">
+              <div class="col"></div>
+            </div>
           </a>
         </div>
       </div>

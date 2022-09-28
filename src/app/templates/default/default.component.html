@@ -171,28 +171,28 @@
 						<span>Aggiungi Certificazione unica</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-candidati"> 
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-candidati"> 
 						<i class="icon-sidebar icon-account_box  indigo-text s-18 categorie"></i> 
 						<span>Tutti i Candidati</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-candidato">
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuovo-candidato">
 						<i class="icon-sidebar icon-add_box indigo-text s-18 categorie"></i> 
 						<span>Aggiungi candidato</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
 						<i class="icon-sidebar icon-inbox-document2 brown-text s-18 categorie"></i> 
 						<span>Tutte le Richieste</span>
 						<span *ngIf="ruolo == 'Recruiter'" class="badge r-3 badge-success pull-right brown" [innerHTML]="numeroRichieste">{{numeroRichieste}}</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-richiesta">
+					<li *ngIf="ruolo == 'Direttore Commerciale' || ruolo == 'Account'" class="treeview spazio grigio"><a routerLink="../default/pagina-nuova-richiesta">
 						<i class="icon-sidebar icon-add_box brown-text s-18 categorie"></i> 
 						<span>Aggiungi Richiesta</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Commerciale'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
 						<i class="icon-sidebar icon-inbox-filled brown-text s-18 categorie"></i> 
 						<span>Storico Richieste</span>
 					</a></li>

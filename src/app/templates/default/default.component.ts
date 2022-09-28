@@ -44,13 +44,13 @@ export class DefaultComponent implements OnInit{
           }
         );
       if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.ruolo !== 'Recruiter' && this.codiciRichiesteAperte == null)
-        this.richiesteService.getCodiciRichiesteAperte(this.ruolo).subscribe(
+        this.richiesteService.getCodiciRichiesteAperte().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteAperte", "presenti");
           }
         );
       if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.ruolo !== 'Recruiter' && this.codiciRichiesteChiuse == null)
-        this.richiesteService.getCodiciRichiesteChiuse(this.ruolo).subscribe(
+        this.richiesteService.getCodiciRichiesteChiuse().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
           }

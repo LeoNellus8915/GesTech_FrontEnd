@@ -33,15 +33,15 @@ export class RichiesteService {
     return this.http.get<string[]>(`${this.apiServerUrl}/get-nomi-recruiter`);
   }
 
-  public addRichiesta(addForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta`, addForm);
+  public addRichiesta(addForm: JSON, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta/${ruolo}`, addForm);
   }
 
-  public getCodiciRichiesteAperte(ruolo: string): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte/${ruolo}`);
+  public getCodiciRichiesteAperte(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte`);
   }
 
-  public getCodiciRichiesteChiuse(ruolo: string): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-chiuse/${ruolo}`);
+  public getCodiciRichiesteChiuse(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-chiuse`);
   }
 }

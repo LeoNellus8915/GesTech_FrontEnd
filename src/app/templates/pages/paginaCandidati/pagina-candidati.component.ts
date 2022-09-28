@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
+import { allCandidati } from 'src/app/model/mapper/allCandidati';
 
 @Component({
   templateUrl: './pagina-candidati.component.html'
@@ -10,7 +11,8 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class PaginaCandidatiComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public listaCandidati!: any[];
+  public listaCandidati!: allCandidati[];
+  public candidati!: allCandidati[];
   public titoloPagina: any;
 
   constructor(private router: Router, private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent) {}
@@ -36,16 +38,16 @@ export class PaginaCandidatiComponent implements OnInit{
         const candidati: string[][] = [];
         this.listaCandidati = response[0];
         const listaCodici = response[1];
-        for (let i = 0; i < response[0].length; i++) {
-          this.listaCandidati[i][0] = listaCodici[i].codice;
-          candidati.push([this.listaCandidati[i][1].toString().replace("T", " "), 
-                          this.listaCandidati[i][2], 
-                          this.listaCandidati[i][3], 
-                          this.listaCandidati[i][4], 
-                          this.listaCandidati[i][5], 
-                          this.listaCandidati[i][6],
-                          '<a routerlink="../pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'" ng-reflect-router-link="../pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'" href="/default/pagina-visualizza-candidato/'+this.listaCandidati[i][0]+'"><i class="icon-eye mr-3"></i></a>' +
-                          '<a ng-reflect-router-link="../pagina-modifica-candidato,'+this.listaCandidati[i][0]+'" href="/default/pagina-modifica-candidato/'+this.listaCandidati[i][0]+'"><i class="icon-pencil"></i></a>'
+        for (let i = 0; i < this.listaCandidati.length; i++) {
+          this.listaCandidati[i].id = listaCodici[i].codice;
+          candidati.push([this.listaCandidati[i].dataInserimento.toString().replace("T", " "), 
+                          this.listaCandidati[i].nomeCognome, 
+                          this.listaCandidati[i].citta, 
+                          this.listaCandidati[i].profiloNome, 
+                          this.listaCandidati[i].competenzaPrincipale, 
+                          this.listaCandidati[i].esitoNome,
+                          '<a routerlink="../pagina-visualizza-candidato/'+this.listaCandidati[i].id+'" ng-reflect-router-link="../pagina-visualizza-candidato/'+this.listaCandidati[i].id+'" href="/default/pagina-visualizza-candidato/'+this.listaCandidati[i].id+'"><i class="icon-eye mr-3"></i></a>' +
+                          '<a ng-reflect-router-link="../pagina-modifica-candidato,'+this.listaCandidati[i].id+'" href="/default/pagina-modifica-candidato/'+this.listaCandidati[i].id+'"><i class="icon-pencil"></i></a>'
                         ]);
         }
         $('#tabellaCandidati').DataTable({

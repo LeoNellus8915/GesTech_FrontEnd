@@ -33,7 +33,7 @@ export class NuovaRichiestaComponent implements OnInit{
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Commerciale')
+      if (this.ruolo !== 'Admin' && this.ruolo !== 'Direttore Commerciale' && this.ruolo != 'Account')
         this.router.navigate(['default/pagina-avvisi'])
       else {
         this.titleService.setTitle("Gestech | Nuova Richiesta");
@@ -82,7 +82,7 @@ export class NuovaRichiestaComponent implements OnInit{
   }
 
   public aggiungiRichiesta(addForm: NgForm): void {
-    if (this.checkArray.length == 0)
+    if (this.checkArray.length == 0 && this.ruolo != 'Account')
       alert("Inserire tutti o almeno un recruiter");
     else {
       addForm.value.listaRecruiters = this.checkArray;
@@ -104,7 +104,7 @@ export class NuovaRichiestaComponent implements OnInit{
         addForm.value.costo = addForm.value.costo.toString();
 
       addForm.value.idDipendente = this.idDipendente;
-      this.richiesteService.addRichiesta(addForm.value).subscribe(
+      this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
         (response: any) => {
           alert("Richiesta salvata con successo");
           this.router.navigate(['default/pagina-richieste'])
