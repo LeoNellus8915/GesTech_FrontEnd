@@ -21,15 +21,17 @@ export class PaginaCandidatiComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else {
+      if (this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
+      || this.ruolo == 'Direttore Commerciale'){
         this.allCandidati();
         this.titleService.setTitle("Gestech | Pagina Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Candidati";
         }, 0)
       }
+      else {
+        this.router.navigate(["default/pagina-avvisi"]);
+      }   
   }
 
   public allCandidati(): void {

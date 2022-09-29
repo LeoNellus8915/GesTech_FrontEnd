@@ -29,15 +29,16 @@ export class ModificaCandidatoComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter'){
         this.titleService.setTitle("Gestech | Modifica Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Modifica Candidati";
         }, 0)
         this.idCandidato = this.route.snapshot.params['idCandidato'];
         this.getDatiModifica();
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 

@@ -23,15 +23,16 @@ export class VisualizzaBeneComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Visualizza Bene");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Visualizza Bene";
         }, 0)
         this.idBene = this.route.snapshot.params['idBene'];
         this.getBene();
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 

@@ -22,14 +22,16 @@ export class PaginaRichiesteComponent implements OnInit {
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo === 'Dipendente' || this.ruolo === 'Personale')
-        this.router.navigate(['default/pagina-avvisi'])
+    if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
+    || this.ruolo === 'Direttore Commerciale'){
+      this.titleService.setTitle("Gestech | Storico Richieste");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Storico Richieste";
+      }, 0)
+      this.getRichieste();
+      }
       else {
-        this.titleService.setTitle("Gestech | Richieste");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Richieste";
-        }, 0)
-        this.getRichieste();
+        this.router.navigate(['default/pagina-avvisi'])
       }
   }
 

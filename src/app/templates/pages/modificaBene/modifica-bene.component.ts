@@ -23,18 +23,19 @@ export class ModificaBeneComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
-    else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
-        this.titleService.setTitle("Gestech | Visualizza Bene");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Visualizza Bene";
-        }, 0)
-        this.codiceBene = this.route.snapshot.params['idBene'];
-        this.getBene();
-      }
+    this.router.navigate([""]);
+  else
+    if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+      this.titleService.setTitle("Gestech | Visualizza Bene");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Visualizza Bene";
+      }, 0)
+      this.codiceBene = this.route.snapshot.params['idBene'];
+      this.getBene();
+    }
+    else{
+      this.router.navigate(["default/pagina-avvisi"]);
+    }
   }
 
   public getBene(): void {

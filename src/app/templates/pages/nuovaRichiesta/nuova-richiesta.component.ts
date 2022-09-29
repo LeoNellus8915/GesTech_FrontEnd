@@ -33,15 +33,16 @@ export class NuovaRichiestaComponent implements OnInit{
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Direttore Commerciale' && this.ruolo != 'Account')
-        this.router.navigate(['default/pagina-avvisi'])
-      else {
+      if (this.ruolo == 'Admin' || this.ruolo == 'Account'){
         this.titleService.setTitle("Gestech | Nuova Richiesta");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuova Richiesta";
         }, 0)
         this.getSelects();
         this.getRecruiters();
+      }
+      else {
+        this.router.navigate(['default/pagina-avvisi']);
       }
   }
 

@@ -17,13 +17,14 @@ export class NuovaBustaPagaComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Personale' && this.ruolo !== 'Admin')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Personale' || this.ruolo == 'Admin'){
         this.titleService.setTitle("Gestech | Nuova Busta Paga");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuova Busta Paga";
         }, 0)
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 }

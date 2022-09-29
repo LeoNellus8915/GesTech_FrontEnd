@@ -23,14 +23,15 @@ export class NuovoBeneComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Nuovo Beni");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuovo Beni";
         }, 0)
         this.allDipendenti();
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 

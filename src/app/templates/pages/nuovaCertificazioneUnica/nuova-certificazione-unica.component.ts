@@ -18,13 +18,14 @@ export class NuovaCertificazioneUnicaComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Personale' && this.ruolo !== 'Admin')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Personale' || this.ruolo == 'Admin'){
         this.titleService.setTitle("Gestech | Nuova Certificazione Unica");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuova Certificazione Unica";
         }, 0)
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 }

@@ -20,9 +20,7 @@ export class PaginaDipendentiComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else {
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.allDipendenti();
         this.titleService.setTitle("Gestech | Pagina Dipendenti");
         setTimeout(() => {
@@ -58,6 +56,9 @@ export class PaginaDipendentiComponent implements OnInit{
           });
           });
         }, 40);
+      }
+      else {
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 

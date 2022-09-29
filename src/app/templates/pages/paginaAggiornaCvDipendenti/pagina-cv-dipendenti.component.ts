@@ -25,14 +25,15 @@ export class PaginaCVDipendentiComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Dipendente'){
         this.titleService.setTitle("Gestech | CV Dipendenti");
         setTimeout(() => {
           this.defaultService.titoloPagina=" CV Dipendenti";
         }, 0)
         this.getSelects();
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 

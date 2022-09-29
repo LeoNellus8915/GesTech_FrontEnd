@@ -30,16 +30,18 @@ export class VisualizzaRichiestaComponent implements OnInit{
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo === 'Dipendente' || this.ruolo === 'Personale')
-        this.router.navigate(['default/pagina-avvisi'])
+    if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
+    || this.ruolo === 'Direttore Commerciale'){
+      this.titleService.setTitle("Gestech | Visualizza Richiesta");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Visualizza Richiesta";
+      }, 0)
+      this.idRichiesta = this.route.snapshot.params['idRichiesta'];
+      this.statoPagina = this.route.snapshot.params['statoPagina'];
+      this.getRichiesta();
+    }
       else {
-        this.titleService.setTitle("Gestech | Visualizza Richiesta");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Visualizza Richiesta";
-        }, 0)
-        this.idRichiesta = this.route.snapshot.params['idRichiesta'];
-        this.statoPagina = this.route.snapshot.params['statoPagina'];
-        this.getRichiesta();
+        this.router.navigate(['default/pagina-avvisi'])
       }
   }
 

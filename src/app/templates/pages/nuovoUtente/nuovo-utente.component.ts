@@ -28,15 +28,16 @@ export class NuovoUtenteComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo != 'Admin' && this.ruolo != 'Personale')
-        this.router.navigate(['default/pagina-avvisi']);
-        else {
-          this.titleService.setTitle("Gestech | Nuovo Utente");
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+        this.titleService.setTitle("Gestech | Nuovo Utente");
           setTimeout(() => {
             this.defaultService.titoloPagina=" Nuovo Utente";
           }, 0)
         this.getRuoli();
         this.getAziende();
+      }
+        else {
+          this.router.navigate(['default/pagina-avvisi']);
       }
   }
 

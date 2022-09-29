@@ -30,15 +30,17 @@ export class VisualizzaCandidatoComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
+    if (this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
+    || this.ruolo == 'Direttore Commerciale'){
+      this.titleService.setTitle("Gestech | Visualizza Candidato");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Visualizza Candidato";
+      }, 0)
+      this.idCandidato = this.route.snapshot.params['idCandidato'];
+      this.getCandidato();
+    }
       else {
-        this.titleService.setTitle("Gestech | Visualizza Candidato");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Visualizza Candidato";
-        }, 0)
-        this.idCandidato = this.route.snapshot.params['idCandidato'];
-        this.getCandidato();
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 
