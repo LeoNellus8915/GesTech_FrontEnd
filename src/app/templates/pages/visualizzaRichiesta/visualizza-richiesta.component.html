@@ -33,10 +33,11 @@
 						
 						<div class="col-md-4  p-4">
 							<h5 class="text-black">Stato Richiesta</h5>
-							<select ngModel name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
+							<select *ngIf="ruolo == 'Account'" ngModel name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
 								<option value="" selected disabled>{{statoRichiesta}}</option>
 								<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
 							</select>
+							<h5 *ngIf="ruolo != 'Account'" class="p-t-10">{{statoRichiesta}}</h5>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
@@ -86,11 +87,21 @@
 								placeholder="Insersci Commento" type="text"></textarea>
 						</div>
 					</div>
+					<div *ngIf="richiesta">
+						<div *ngIf="richiesta[10] == null && ruolo == 'Direttore Recruiter'">
+							<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
+							<label>Tutti</label>
+							<span *ngFor="let recruiter of listaRecruiters">
+								<input type="checkbox" value={{recruiter}} (change)="array($event)"/> 
+								<label>{{recruiter}}</label>
+							</span>
+						</div>
+					</div>
 					<div class="card-body">
 						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
 					<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
-							<span class="titolo_data">{{commento[0].toString().replace("T", " ")}}</span>
+						<span class="titolo_data">{{commento[0].toString().replace("T", " ")}}</span>
 						<span class="titolo_data"> {{commento[1]}}</span>
 						<p class="testo_richieste">{{commento[2]}}</p>
 					</div>

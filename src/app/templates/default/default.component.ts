@@ -11,7 +11,7 @@ import { CandidatiService } from 'src/app/service/candidati.service';
   
 })
 export class DefaultComponent implements OnInit{
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
   public numeroRichieste = sessionStorage.getItem("numeroRichieste") as unknown as number;
   public ruolo = sessionStorage.getItem("ruolo") as string;
@@ -19,7 +19,11 @@ export class DefaultComponent implements OnInit{
   
   public codiciCandidati = sessionStorage.getItem("codiciCandidati");
   public codiciBeni = sessionStorage.getItem("codiciBeni");
+  public codiciRichiesteAperteAccount = sessionStorage.getItem("codiciRichiesteAperteAccount");
+  public codiciRichiesteAperteCommerciale = sessionStorage.getItem("codiciRichiesteAperteCommerciale");
+  public codiciRichiesteAperteRecruiter = sessionStorage.getItem("codiciRichiesteAperteRecruiter");
   public codiciRichiesteAperte = sessionStorage.getItem("codiciRichiesteAperte");
+
   public codiciRichiesteChiuse = sessionStorage.getItem("codiciRichiesteChiuse");
 
   public titoloPagina: any;
@@ -43,8 +47,26 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciBeni", "presenti");
           }
         );
-      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.ruolo !== 'Recruiter' && this.codiciRichiesteAperte == null)
-        this.richiesteService.getCodiciRichiesteAperte().subscribe(
+      if (this.ruolo == 'Account' && this.codiciRichiesteAperteAccount == null)
+        this.richiesteService.getCodiciRichiesteAperteAccount(this.idDipendente).subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteAperteAccount", "presenti");
+          }
+        );
+      if (this.ruolo == 'Direttore Commerciale' && this.codiciRichiesteAperteCommerciale == null)
+        this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteAperteCommerciale", "presenti");
+          }
+        );
+      if (this.ruolo == 'Direttore Recruiter' && this.codiciRichiesteAperteRecruiter == null)
+        this.richiesteService.getCodiciRichiesteAperteRecruiter().subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteAperteRecruiter", "presenti");
+          }
+        );
+      if (this.ruolo == 'Recruiter' && this.codiciRichiesteAperte == null)
+        this.richiesteService.getCodiciRichiesteAperte(this.nomeCognome).subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteAperte", "presenti");
           }
@@ -65,6 +87,9 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("ruolo");
     sessionStorage.removeItem("azienda");
     sessionStorage.removeItem("codiciCandidati");
+    sessionStorage.removeItem("codiciRichiesteAperteAccount");
+    sessionStorage.removeItem("codiciRichiesteAperteCommerciale");
+    sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
     sessionStorage.removeItem("codiciRichiesteAperte");
     sessionStorage.removeItem("codiciRichiesteChiuse");
     sessionStorage.removeItem("codiciBeni");

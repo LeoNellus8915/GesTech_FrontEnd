@@ -118,3 +118,20 @@ i.icon-fiber_new:before {
     content: "\e05e";
     font-size: x-large;
 }
+
+.prioritaAlta {
+    border-bottom: solid green;
+}
+
+.prioritaMedia {
+    border-bottom: solid orange;
+}
+
+.prioritaBassa {
+    border-bottom: solid yellow;
+}
+
+.allineamentoInvio {
+    float: right;
+    margin-right: 50px;
+}

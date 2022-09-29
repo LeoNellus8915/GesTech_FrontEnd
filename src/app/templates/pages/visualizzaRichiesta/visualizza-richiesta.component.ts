@@ -21,6 +21,8 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public idStatoRichiesta!: number;
   public listaStatiRichiesta!: StatiRichiesta[];
   public commentiRichiesta!: any[];
+  public listaRecruiters!: string[];
+  public checkArray: any[] = new Array();
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
@@ -31,7 +33,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
       this.router.navigate(['']);
     else
     if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
-    || this.ruolo === 'Direttore Commerciale'){
+      || this.ruolo === 'Direttore Commerciale'){
       this.titleService.setTitle("Gestech | Visualizza Richiesta");
       setTimeout(() => {
         this.defaultService.titoloPagina=" Visualizza Richiesta";
@@ -39,20 +41,40 @@ export class VisualizzaRichiestaComponent implements OnInit{
       this.idRichiesta = this.route.snapshot.params['idRichiesta'];
       this.statoPagina = this.route.snapshot.params['statoPagina'];
       this.getRichiesta();
+      if (this.ruolo == 'Direttore Recruiter')
+        this.getRecruiters();
     }
-      else {
-        this.router.navigate(['default/pagina-avvisi'])
-      }
+    else {
+      this.router.navigate(['default/pagina-avvisi']);
+    }
+  }
+
+  public array(e: any): void {
+    if (e.target.checked)
+      this.checkArray.push(e.target.value.toString());
+    else {
+      this.checkArray.forEach((value,index) => {
+        if(value==e.target.value.toString()) this.checkArray.splice(index,1);
+      });
+    }
   }
 
   public getRichiesta(): void {
-    this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina).subscribe(
+    this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
       (response: any[]) => {
         this.richiesta = response[0];
         this.statoRichiesta = response[1];
         this.idStatoRichiesta = response[2];
         this.listaStatiRichiesta = response[3];
         this.commentiRichiesta = response[4];
+      }
+    )
+  }
+
+  public getRecruiters(): void {
+    this.richiesteService.getRecruiters().subscribe(
+      (response: string[]) => {
+        this.listaRecruiters = response;
       }
     )
   }
@@ -71,9 +93,12 @@ export class VisualizzaRichiestaComponent implements OnInit{
   }
 
   public updateRichiesta(updateForm: NgForm): void {
+    updateForm.value.listaRecruiters = this.checkArray;
     if (updateForm.value.statoRichiesta == "")
-    updateForm.value.statoRichiesta = this.idStatoRichiesta;
-    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina).subscribe(
+      updateForm.value.statoRichiesta = this.idStatoRichiesta;
+    if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')
+      updateForm.value.statoRichiesta = "2";
+    this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina, this.ruolo).subscribe(
       (response: any) => {
         alert("Richiesta aggiornata con successo");
         if (this.statoPagina == 0)

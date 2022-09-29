@@ -181,7 +181,7 @@
 						<span>Aggiungi candidato</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account' || ruolo == 'Direttore Recruiter'" class="treeview spazio grigio"><a routerLink="../default/pagina-richieste">
 						<i class="icon-sidebar icon-inbox-document2 brown-text s-18 categorie"></i> 
 						<span>Tutte le Richieste</span>
 						<span *ngIf="ruolo == 'Recruiter'" class="badge r-3 badge-success pull-right brown" [innerHTML]="numeroRichieste">{{numeroRichieste}}</span>
@@ -192,7 +192,7 @@
 						<span>Aggiungi Richiesta</span>
 					</a></li>
 
-					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
+					<li *ngIf="ruolo == 'Recruiter' || ruolo == 'Direttore Commerciale' || ruolo == 'Account' || ruolo == 'Direttore Recruiter'" class="treeview spazio grigio"><a routerLink="../default/pagina-storico-richieste">
 						<i class="icon-sidebar icon-inbox-filled brown-text s-18 categorie"></i> 
 						<span>Storico Richieste</span>
 					</a></li>

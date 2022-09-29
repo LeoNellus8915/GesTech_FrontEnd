@@ -18,31 +18,83 @@ export class PaginaRichiesteComponent implements OnInit {
   constructor(private dipendentiRichiesteService: DipendentiRichiesteService, private defaultService: DefaultComponent, 
     private titleService: Title, private router: Router, private richiesteService: RichiesteService) { }
 
+  public radioArray: any[] = new Array();
+
   ngOnInit(): void {
     if (this.ruolo === null)
       this.router.navigate(['']);
-    else
-    if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
-    || this.ruolo === 'Direttore Commerciale'){
-      this.titleService.setTitle("Gestech | Storico Richieste");
+    else if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
+              || this.ruolo === 'Direttore Commerciale'){
+      this.titleService.setTitle("Gestech | Richieste");
       setTimeout(() => {
-        this.defaultService.titoloPagina=" Storico Richieste";
+        this.defaultService.titoloPagina=" Richieste";
       }, 0)
-      this.getRichieste();
+      if (this.ruolo == 'Account')
+        this.getRichiesteAccount();
+      if (this.ruolo == 'Direttore Commerciale')
+        this.getRichiesteCommerciale();
+      if (this.ruolo == 'Direttore Recruiter')
+        this.getRichiesteRecruiter();
+      if (this.ruolo == 'Recruiter')
+        this.getRichieste();
+    }
+    else {
+      this.router.navigate(['default/pagina-avvisi']);
+    }
+  }
+
+  public getRichiesteRecruiter(): void {
+    this.richiesteService.getRichiesteAperteRecruiter().subscribe(
+      (response: any[]) => {
+        if (response[1].length > 0) {
+          const candidati: string[][] = [];
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaRichieste[i][0] = listaCodici[i].codice;
+        }
       }
-      else {
-        this.router.navigate(['default/pagina-avvisi'])
+    )
+  }
+
+  public getRichiesteCommerciale(): void {
+    this.richiesteService.getRichiesteAperteCommerciale().subscribe(
+      (response: any[]) => {
+        if (response[1].length > 0) {
+          const candidati: string[][] = [];
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaRichieste[i][0] = listaCodici[i].codice;
+        }
       }
+    )
+  }
+
+  public getRichiesteAccount(): void {
+    this.richiesteService.getRichiesteAperteAccount(this.idDipendente).subscribe(
+      (response: any[]) => {
+        console.log(response)
+        if (response[1].length > 0) {
+          const candidati: string[][] = [];
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaRichieste[i][0] = listaCodici[i].codice;
+        }
+      }
+    )
   }
 
   public getRichieste(): void {
-    this.richiesteService.getRichiesteAperte(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
+    this.richiesteService.getRichiesteAperte(this.nomeCognome).subscribe(
       (response: any[]) => {
-        const candidati: string[][] = [];
-        this.listaRichieste = response[1];
-        const listaCodici = response[0];
-        for (let i = 0; i < response[0].length; i++) {
-          this.listaRichieste[i][0] = listaCodici[i].codice;
+        if (response[1].length > 0) {
+          const candidati: string[][] = [];
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaRichieste[i][0] = listaCodici[i].codice;
         }
       }
     )
@@ -59,5 +111,40 @@ export class PaginaRichiesteComponent implements OnInit {
       )
     else
       this.router.navigate(["default/pagina-visualizza-richiesta", idRichiesta, 0]);
+  }
+
+  public arrayPriorita(codiceRichiesta: string, priorita: number): void {
+    var x = new Array();
+    if (this.radioArray.length > 0) {
+      var oggetto = {codiceRichiesta: codiceRichiesta, priorita: priorita};
+      this.radioArray.push(oggetto);
+      this.radioArray.forEach((value, index) => {
+        if(value.codiceRichiesta == codiceRichiesta) {
+          x.push(index);
+        }
+      });
+    } 
+    else {
+      var oggetto = {codiceRichiesta: codiceRichiesta, priorita: priorita};
+      this.radioArray.push(oggetto);
+    }
+    if (x.length == 2){
+      this.radioArray[x[0]].priorita = priorita;
+      this.radioArray.pop();
+    }
+  }
+
+  public salvaPriorita(): void {
+    var array = JSON.parse(JSON.stringify(this.radioArray));
+    this.richiesteService.salvaPriorita(array).subscribe(
+      (response: any) => {
+        alert("Invio riuscito");
+        this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(
+          (response: any) => {
+            this.ngOnInit();
+          }
+        );
+      }
+    )
   }
 }
