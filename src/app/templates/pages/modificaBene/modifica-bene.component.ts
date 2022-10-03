@@ -16,6 +16,7 @@ export class ModificaBeneComponent implements OnInit{
   public codiceBene!: string;
   public bene!: Beni;
   public listaDipendenti!: string[];
+  public listaStorico!: Beni[];
   public titoloPagina: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private titleService: Title, private defaultService: DefaultComponent,
@@ -43,11 +44,15 @@ export class ModificaBeneComponent implements OnInit{
       (response: any[]) => {
         this.bene = response[0];
         this.listaDipendenti = response[1];
+        this.listaStorico = response[2];
       }
     )
   }
 
   public modificaBene(updateForm: NgForm): void {
+    if(updateForm.value.dipendente == ''){
+      updateForm.value.dipendente = this.bene.dipendente;
+    }
     this.beniService.modificaBene(updateForm.value, this.codiceBene).subscribe(
       (response: any) => {
         alert("Bene modificato con successo");

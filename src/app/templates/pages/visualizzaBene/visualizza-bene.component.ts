@@ -14,6 +14,7 @@ export class VisualizzaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public idBene!: number;
   public bene!: Beni;
+  public listaStorico!: Beni[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
@@ -38,8 +39,9 @@ export class VisualizzaBeneComponent implements OnInit{
 
   public getBene(): void {
     this.beniService.getBeneVisualizza(this.idBene).subscribe(
-      (response: Beni) => {
-        this.bene = response;
+      (response: any[]) => {
+        this.bene = response[0];
+        this.listaStorico = response[1];
       }
     )
   }
