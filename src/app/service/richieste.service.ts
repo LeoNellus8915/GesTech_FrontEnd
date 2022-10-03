@@ -21,8 +21,8 @@ export class RichiesteService {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-recruiter`);
   }
 
-  public getRichiesteAperte(nomeCognome: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${nomeCognome}`);
+  public getRichiesteAperte(nomeCognome: string, idDipendente: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${nomeCognome}/${idDipendente}`);
   }
 
   public getRichiesteChiuse(ruolo: string, nomeCognome: string, idDipendente: number): Observable<any[]> {

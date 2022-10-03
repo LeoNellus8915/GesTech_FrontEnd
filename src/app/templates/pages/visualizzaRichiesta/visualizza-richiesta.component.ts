@@ -97,6 +97,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
 
   public updateRichiesta(updateForm: NgForm): void {
     updateForm.value.listaRecruiters = this.checkArray;
+    console.log(updateForm.value)
     if (updateForm.value.statoRichiesta == "")
       updateForm.value.statoRichiesta = this.idStatoRichiesta;
     if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')

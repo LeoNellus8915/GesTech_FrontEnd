@@ -31,13 +31,16 @@
 							<h5 class="p-t-10">{{richiesta[1].toString().replace("T", " ")}}</h5>
 						</div>
 						
-						<div class="col-md-4  p-4">
+						<div class="col-md-4 p-4">
 							<h5 class="text-black">Stato Richiesta</h5>
-							<select *ngIf="ruolo == 'Account'" ngModel name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
+							<select ngModel *ngIf="ruolo == 'Account'" name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
 								<option value="" selected disabled>{{statoRichiesta}}</option>
 								<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
 							</select>
-							<h5 *ngIf="ruolo != 'Account'" class="p-t-10">{{statoRichiesta}}</h5>
+							<div *ngIf="ruolo != 'Account'">
+								<h5 class="p-t-10">{{statoRichiesta}}</h5>
+								<input type="hidden" ngModel name="statoRichiesta">
+							</div>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">

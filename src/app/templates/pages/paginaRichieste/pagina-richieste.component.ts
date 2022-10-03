@@ -90,7 +90,7 @@ export class PaginaRichiesteComponent implements OnInit {
   }
 
   public getRichieste(): void {
-    this.richiesteService.getRichiesteAperte(this.nomeCognome).subscribe(
+    this.richiesteService.getRichiesteAperte(this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
         if (response[1].length > 0) {
           const candidati: string[][] = [];
