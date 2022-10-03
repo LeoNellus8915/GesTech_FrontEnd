@@ -21,7 +21,7 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo === 'Dipendente' || this.ruolo === 'Personale')
+      if (this.ruolo == 'Admin' || this.ruolo === 'Dipendente' || this.ruolo === 'Personale')
         this.router.navigate(['default/pagina-avvisi'])
       else {
         this.titleService.setTitle("Gestech | Storico Richieste");

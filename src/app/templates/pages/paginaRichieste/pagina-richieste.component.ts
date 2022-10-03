@@ -23,7 +23,10 @@ export class PaginaRichiesteComponent implements OnInit {
   ngOnInit(): void {
     if (this.ruolo === null)
       this.router.navigate(['']);
-    else if (this.ruolo === 'Account' || this.ruolo === 'Recruiter' || this.ruolo === 'Direttore Recruiter'
+    else if (this.ruolo == 'Admin' 
+              || this.ruolo === 'Account' 
+              || this.ruolo === 'Recruiter' 
+              || this.ruolo === 'Direttore Recruiter'
               || this.ruolo === 'Direttore Commerciale'){
       this.titleService.setTitle("Gestech | Richieste");
       setTimeout(() => {

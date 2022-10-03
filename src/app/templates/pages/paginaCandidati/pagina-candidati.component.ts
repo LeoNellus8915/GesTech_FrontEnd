@@ -21,8 +21,9 @@ export class PaginaCandidatiComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
-      || this.ruolo == 'Direttore Commerciale'){
+      if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' 
+            || this.ruolo == 'Direttore Recruiter' 
+            || this.ruolo == 'Direttore Commerciale'){
         this.allCandidati();
         this.titleService.setTitle("Gestech | Pagina Candidati");
         setTimeout(() => {

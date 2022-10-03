@@ -20,7 +20,7 @@ export class PaginaBeniComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale'){
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Pagina Beni");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Beni";
