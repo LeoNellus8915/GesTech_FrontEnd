@@ -28,7 +28,7 @@
 						<!-- PRIMA RIGA -->
 						<div *ngIf="richiesta" class="col-md-4 p-4">
 							<h5 class="text-black">Data</h5>
-							<h5 class="p-t-10">{{richiesta[1].toString().replace("T", " ")}}</h5>
+							<h5 class="p-t-10">{{richiesta.data.toString().replace("T", " ")}}</h5>
 						</div>
 						
 						<div class="col-md-4 p-4">
@@ -45,41 +45,41 @@
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Ruolo</h5>
-							<h5 class="p-t-10">{{richiesta[7]}}</h5>
+							<h5 class="p-t-10">{{richiesta.profiliNome}}</h5>
 						</div>
 						
 						<!-- SECONDA RIGA -->
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Seniority</h5>
-							<h5 class="p-t-10">{{richiesta[8]}}</h5>
+							<h5 class="p-t-10">{{richiesta.livelliNome}}</h5>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Citt&agrave;</h5>
-							<h5 *ngIf="richiesta[3] != ''" class="p-t-10">{{richiesta[3]}}</h5>
-							<h5 *ngIf="richiesta[3] == ''" class="p-t-10">Da definire</h5>
+							<h5 *ngIf="richiesta.citta != ''" class="p-t-10">{{richiesta.citta}}</h5>
+							<h5 *ngIf="richiesta.citta == ''" class="p-t-10">Da definire</h5>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Skill/Linguaggio</h5>
-							<h5 class="p-t-10">{{richiesta[6]}}</h5>
+							<h5 class="p-t-10">{{richiesta.linguaggiNome}}</h5>
 						</div>
 						<!-- TERZA RIGA -->
 						<div *ngIf="richiesta" class="col-sm-4  p-4">
 							<h5 class="text-black">Cliente</h5>
-							<h5 *ngIf="richiesta[2] != ''" class="p-t-10">{{richiesta[2]}}</h5>
-							<h5 *ngIf="richiesta[2] == ''" class="p-t-10">Da definire</h5>
+							<h5 *ngIf="richiesta.cliente != ''" class="p-t-10">{{richiesta.cliente}}</h5>
+							<h5 *ngIf="richiesta.cliente == ''" class="p-t-10">Da definire</h5>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Massimo Costo Giornaliero</h5>
-							<h5 *ngIf="richiesta[4] != ''" class="p-t-10">{{richiesta[4]}}</h5>
-							<h5 *ngIf="richiesta[4] == ''" class="p-t-10">Da definire</h5>
+							<h5 *ngIf="richiesta.costo != ''" class="p-t-10">{{richiesta.costo}}</h5>  //costo
+							<h5 *ngIf="richiesta.costo == ''" class="p-t-10">Da definire</h5>
 						</div>
 						
 						<div *ngIf="richiesta" class="col-md-4  p-4">
 							<h5 class="text-black">Note Aggiuntive</h5>
-							<h5 class="p-t-10">{{richiesta[5]}}</h5>
+							<h5 class="p-t-10">{{richiesta.note}}</h5>
 						</div>
 					</div>
 					<div class="row">
@@ -91,7 +91,7 @@
 						</div>
 					</div>
 					<div *ngIf="richiesta">
-						<div *ngIf="richiesta[10] == null && ruolo == 'Direttore Recruiter'">
+						<div *ngIf="richiesta.priorita == null && ruolo == 'Direttore Recruiter'">
 							<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
 							<label>Tutti</label>
 							<span *ngFor="let recruiter of listaRecruiters">
@@ -104,9 +104,9 @@
 						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
 					<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
-						<span class="titolo_data">{{commento[0].toString().replace("T", " ")}}</span>
-						<span class="titolo_data"> {{commento[1]}}</span>
-						<p class="testo_richieste">{{commento[2]}}</p>
+						<span class="titolo_data">{{commento.data.toString().replace("T", " ")}}</span>
+						<span class="titolo_data"> {{commento.nomeCognome}}</span>
+						<p class="testo_richieste">{{commento.note}}</p>
 					</div>
 				</form>
 			</div>

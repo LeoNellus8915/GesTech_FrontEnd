@@ -4,13 +4,15 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { DipendentiRichiesteService } from 'src/app/service/dipendenti-richieste.service';
+import { allRichieste } from 'src/app/model/mapper/allRichieste';
 
 @Component({
   templateUrl: './pagina-richieste.component.html',
   styleUrls: ['../../../../assets/css/main.richieste.css', '../../../../assets/css/main.home.css', '../../../../assets/css/main.candidati.css']
 })
+
 export class PaginaRichiesteComponent implements OnInit {
-  public listaRichieste!: any[];
+  public listaRichieste!: allRichieste[];
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
@@ -50,11 +52,12 @@ export class PaginaRichiesteComponent implements OnInit {
     this.richiesteService.getRichiesteAperteRecruiter().subscribe(
       (response: any[]) => {
         if (response[1].length > 0) {
-          const candidati: string[][] = [];
           this.listaRichieste = response[1];
           const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i][0] = listaCodici[i].codice;
+          for (let i = 0; i < response[0].length; i++){
+            this.listaRichieste[i].id = listaCodici[i].codice;
+            console.log(this.listaRichieste[i].id);
+          }
         }
       }
     )
@@ -64,11 +67,10 @@ export class PaginaRichiesteComponent implements OnInit {
     this.richiesteService.getRichiesteAperteCommerciale().subscribe(
       (response: any[]) => {
         if (response[1].length > 0) {
-          const candidati: string[][] = [];
           this.listaRichieste = response[1];
           const listaCodici = response[0];
           for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i][0] = listaCodici[i].codice;
+            this.listaRichieste[i].id = listaCodici[i].codice;
         }
       }
     )
@@ -79,11 +81,10 @@ export class PaginaRichiesteComponent implements OnInit {
       (response: any[]) => {
         console.log(response)
         if (response[1].length > 0) {
-          const candidati: string[][] = [];
           this.listaRichieste = response[1];
           const listaCodici = response[0];
           for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i][0] = listaCodici[i].codice;
+            this.listaRichieste[i].id = listaCodici[i].codice;
         }
       }
     )
@@ -93,11 +94,10 @@ export class PaginaRichiesteComponent implements OnInit {
     this.richiesteService.getRichiesteAperte(this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
         if (response[1].length > 0) {
-          const candidati: string[][] = [];
           this.listaRichieste = response[1];
           const listaCodici = response[0];
           for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i][0] = listaCodici[i].codice;
+            this.listaRichieste[i].id = listaCodici[i].codice;
         }
       }
     )

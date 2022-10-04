@@ -5,6 +5,8 @@ import { DefaultComponent } from '../../default/default.component';
 import { RichiesteService } from 'src/app/service/richieste.service';
 import { StatiRichiesta } from 'src/app/model/stati_richiesta';
 import { NgForm } from '@angular/forms';
+import { allRichieste } from 'src/app/model/mapper/allRichieste';
+import { allCommentiRichieste } from 'src/app/model/mapper/allCommentiRichieste';
 
 @Component({
   templateUrl: './visualizza-richiesta.component.html',
@@ -16,11 +18,11 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public idRichiesta!: number;
   public statoPagina!: number;
-  public richiesta!: any[];
+  public richiesta!: allRichieste;
   public statoRichiesta!: string;
   public idStatoRichiesta!: number;
   public listaStatiRichiesta!: StatiRichiesta[];
-  public commentiRichiesta!: any[];
+  public commentiRichiesta!: allCommentiRichieste[];
   public listaRecruiters!: string[];
   public checkArray: any[] = new Array();
   public titoloPagina: any;
