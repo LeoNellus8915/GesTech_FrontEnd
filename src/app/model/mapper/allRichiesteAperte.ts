@@ -1,6 +1,6 @@
 import { Data } from "@angular/router";
 
-export interface allRichieste{
+export interface allRichiesteAperte{
   id: any;
   data: Data;
   cliente: string;
@@ -12,4 +12,5 @@ export interface allRichieste{
   livelliNome: string;
   statiRichiestaNome: string;
   priorita: number;
+  visualizzato: boolean;
 }

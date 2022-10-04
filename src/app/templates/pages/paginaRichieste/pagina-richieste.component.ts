@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { DipendentiRichiesteService } from 'src/app/service/dipendenti-richieste.service';
 import { allRichieste } from 'src/app/model/mapper/allRichieste';
+import { allRichiesteAperte } from 'src/app/model/mapper/allRichiesteAperte';
 
 @Component({
   templateUrl: './pagina-richieste.component.html',
@@ -12,7 +13,7 @@ import { allRichieste } from 'src/app/model/mapper/allRichieste';
 })
 
 export class PaginaRichiesteComponent implements OnInit {
-  public listaRichieste!: allRichieste[];
+  public listaRichieste!: allRichiesteAperte[];
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
@@ -56,7 +57,6 @@ export class PaginaRichiesteComponent implements OnInit {
           const listaCodici = response[0];
           for (let i = 0; i < response[0].length; i++){
             this.listaRichieste[i].id = listaCodici[i].codice;
-            console.log(this.listaRichieste[i].id);
           }
         }
       }
