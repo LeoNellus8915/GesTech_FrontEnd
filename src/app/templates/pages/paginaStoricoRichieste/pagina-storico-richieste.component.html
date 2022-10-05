@@ -18,16 +18,16 @@
         RICHIESTA 10 STATO RICHIESTA
         -->
         <div class="col-4 card_avvisi chiusa" *ngFor="let richiesta of listaRichieste">
-          <a class="cursor" [routerLink]="['../../default/pagina-visualizza-richiesta', richiesta[0], 1]">
-            <span class="titolo_richieste">{{richiesta[7]}}</span>
-            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta[9]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta[2]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta[3]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta[4]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Skill - Linguaggi : </span><span class="testo_richieste">{{richiesta[6]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta[8]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta[5]}}</span></div>
-            <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste">{{richiesta[10]}}</footer>
+          <a class="cursor" [routerLink]="['../../default/pagina-visualizza-richiesta', richiesta.id, 1]">
+            <span class="titolo_richieste">{{richiesta.profiliNome}}</span>
+            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiestaNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta.cliente}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta.citta}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta.costo}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Skill - Linguaggi : </span><span class="testo_richieste">{{richiesta.linguaggiNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta.livelliNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta.note}}</span></div>
+            <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste"></footer>
           </a>
         </div>
       </div>

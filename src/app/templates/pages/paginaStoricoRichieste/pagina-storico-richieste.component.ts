@@ -3,13 +3,14 @@ import { RichiesteService } from 'src/app/service/richieste.service';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
+import { allRichiesteChiuse } from 'src/app/model/mapper/allRichiesteChiuse';
 
 @Component({
   templateUrl: './pagina-storico-richieste.component.html',
   styleUrls: ['../../../../assets/css/main.richieste.css', '../../../../assets/css/main.home.css', '../../../../assets/css/main.candidati.css']
 })
 export class PaginaStoricoRichiesteComponent implements OnInit {
-  public listaRichieste!: any[];
+  public listaRichieste!: allRichiesteChiuse[];
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
@@ -35,11 +36,12 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
   public getRichieste(): void {
     this.richiesteService.getRichiesteChiuse(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
+        console.log(response)
         const candidati: string[][] = [];
         this.listaRichieste = response[1];
         const listaCodici = response[0];
         for (let i = 0; i < response[0].length; i++) {
-          this.listaRichieste[i][0] = listaCodici[i].codice;
+          this.listaRichieste[i].id = listaCodici[i].codice;
         }
       }
     )
