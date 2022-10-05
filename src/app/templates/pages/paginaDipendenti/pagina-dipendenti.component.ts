@@ -26,6 +26,16 @@ export class PaginaDipendentiComponent implements OnInit{
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Dipendenti";
         }, 0)
+      }
+      else {
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
+  }
+
+  public allDipendenti(): void {
+    this.dipendentiService.allDipendenti().subscribe(
+      (response: any[]) => {
+        this.listaDipendenti = response;
         setTimeout(function () {
           $(function () {
             $('#tabellaDipendenti').DataTable({
@@ -55,17 +65,7 @@ export class PaginaDipendentiComponent implements OnInit{
             $("br").remove();
           });
           });
-        }, 40);
-      }
-      else {
-        this.router.navigate(["default/pagina-avvisi"]);
-      }
-  }
-
-  public allDipendenti(): void {
-    this.dipendentiService.allDipendenti().subscribe(
-      (response: any[]) => {
-        this.listaDipendenti = response;
+        });
       }
     )
   }

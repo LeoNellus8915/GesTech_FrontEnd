@@ -23,7 +23,7 @@ export class PaginaSceltaRuoloComponent implements OnInit{
       this.router.navigate([""]);
     else {
       this.listaRuoli = this.ruolo.replace(/["]/g,'').replace("[",'').replace("]",'').split(',');
-      this.controlloDownload();
+      //this.controlloDownload();
     }
   }
 

@@ -1,5 +1,12 @@
-<div class="card-body spazio">
-  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Modifica Candidati</span>
+<div class="card-body spazio" *ngIf="pagina == 0">
+  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / 
+		<a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Modifica Candidati</span>
+</div>
+<div class="card-body spazio" *ngIf="pagina == 1">
+  <span class="briciole"><a routerLink="../../../../../default/pagina-avvisi">Home</a> / 
+    <a routerLink="../../../../../default/pagina-richieste">Pagina Richieste</a> /
+		<a [routerLink]="['../../../../../default/pagina-scelta-candidati-richiesta', idRichiesta]">Scelta Candidati Richiesta</a> / 
+		Modifica Candidati</span>
 </div>
 <div class="card-body">
 	<form ngNativeValidate #updateForm="ngForm" (ngSubmit)="updateCandidato(updateForm)">

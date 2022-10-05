@@ -5,23 +5,14 @@
 	<span *ngIf="statoPagina == 1" class="briciole">
 		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
-	
 </div>
 <div class="card-body">
 	<div class="page">
 		<div class="col-md-12">
 			<div class="card no-b shadow no-r">
-				<!-- 
-				RICHIESTA 1 DATA
-				RICHIESTA 2 CLIENTE
-				RICHIESTA 3 CITTA'
-				RICHIESTA 4 COSTO
-				RICHIESTA 5 NOTE/TESTO
-				RICHIESTA 6 SKILL/LINGUAGGI
-				RICHIESTA 7 RUOLO/PROFILO
-				RICHIESTA 8 SENIORITY
-				RICHIESTA 9 STATO RICHIESTA
-				-->
+				<div *ngIf="richiesta && ruolo == 'Recruiter' && richiesta.candidati == null">
+					<button [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]">Seleziona Candidati</button>
+				</div>
 				<form #updateForm="ngForm" (ngSubmit)="updateRichiesta(updateForm)">
 					<div class="row no-gutters">
 						
@@ -90,25 +81,23 @@
 								placeholder="Insersci Commento" type="text"></textarea>
 						</div>
 					</div>
-					<div *ngIf="richiesta">
-						<div *ngIf="richiesta.priorita == null && ruolo == 'Direttore Recruiter'">
-							<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
-							<label>Tutti</label>
-							<span *ngFor="let recruiter of listaRecruiters">
-								<input type="checkbox" value={{recruiter}} (change)="array($event)"/> 
-								<label>{{recruiter}}</label>
-							</span>
-						</div>
+					<div *ngIf="richiesta && richiesta.recruiter == null && ruolo == 'Direttore Recruiter'">
+						<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
+						<label>Tutti</label>
+						<span *ngFor="let recruiter of listaRecruiters">
+							<input type="checkbox" value={{recruiter}} (change)="array($event)"/> 
+							<label>{{recruiter}}</label>
+						</span>
 					</div>
 					<div class="card-body">
 						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
-					<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
-						<span class="titolo_data">{{commento.data.toString().replace("T", " ")}}</span>
-						<span class="titolo_data"> {{commento.nomeCognome}}</span>
-						<p class="testo_richieste">{{commento.note}}</p>
-					</div>
 				</form>
+				<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
+					<span class="titolo_data">{{commento.data.toString().replace("T", " ")}}</span>
+					<span class="titolo_data"> {{commento.nomeCognome}}</span>
+					<p class="testo_richieste">{{commento.note}}</p>
+				</div>
 			</div>
     </div>
 	</div>

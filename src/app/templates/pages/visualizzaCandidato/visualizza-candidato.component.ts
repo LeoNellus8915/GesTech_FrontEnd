@@ -19,6 +19,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public commentiCandidato!: allCommentiCandidato[];
   public colore!: number;
   opacity = "1";
+  public pagina!: number;
+  public idRichiesta!: number;
   public fileBase64!: string;
   public idCandidato!: number;
   public titoloPagina: any;
@@ -37,6 +39,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
         this.defaultService.titoloPagina=" Visualizza Candidato";
       }, 0)
       this.idCandidato = this.route.snapshot.params['idCandidato'];
+      this.pagina = this.route.snapshot.params['pagina'];
+      this.idRichiesta = this.route.snapshot.params['idRichiesta'];
       this.getCandidato();
     }
       else {
@@ -68,7 +72,10 @@ export class VisualizzaCandidatoComponent implements OnInit{
       this.candidatiService.eliminaCandidato(this.idCandidato).subscribe(
         (response: any) => {
           alert("Candidato eliminato con successo");
-          this.router.navigate(["default/pagina-candidati"]);
+          if (this.pagina == 0)
+            this.router.navigate(["default/pagina-candidati"]);
+          else
+            this.router.navigate(["default/pagina-scelta-candidati-richiesta"]);
         }
       )
   }

@@ -16,5 +16,17 @@
         <th class="titolotabella">AZIONI</th>
       </tr>
     </thead>
+    <tbody>
+      <tr *ngFor="let candidato of listaCandidati">
+        <td>{{candidato.dataInserimento}}</td>
+        <td>{{candidato.nomeCognome}}</td>
+        <td>{{candidato.citta}}</td>
+        <td>{{candidato.profiloNome}}</td>
+        <td>{{candidato.competenzaPrincipale}}</td>
+        <td>{{candidato.esitoNome}}</td>
+        <td><a [routerLink]="['../pagina-visualizza-candidato', candidato.id, 0, 0]"><i class="icon-eye mr-3"></i></a>
+        <a [routerLink]="['../pagina-modifica-candidato', candidato.id, 0, 0]"><i class="icon-pencil"></i></a></td>
+      </tr>
+    </tbody>
   </table>
 </div>	

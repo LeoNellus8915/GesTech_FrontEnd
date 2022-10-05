@@ -11,4 +11,5 @@ export interface Richieste {
   note: string;
   recruiter: string;
   idStato: number;
+  candidati: string;
 }

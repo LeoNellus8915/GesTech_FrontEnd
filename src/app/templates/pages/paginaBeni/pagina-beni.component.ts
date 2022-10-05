@@ -26,6 +26,19 @@ export class PaginaBeniComponent implements OnInit{
           this.defaultService.titoloPagina=" Pagina Beni";
         }, 0)
         this.allBeni();
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
+  }
+
+  public allBeni(): void {
+    this.beniService.allBeni().subscribe(
+      (response: any[]) => {
+        this.listaBeni = response[0];
+        const listaCodici = response[1];
+        for (let i = 0; i < response[0].length; i++)
+          this.listaBeni[i].id = listaCodici[i].codice;
         setTimeout(function () {
           $(function () {
             $('#tabellaBeni').DataTable({
@@ -47,28 +60,15 @@ export class PaginaBeniComponent implements OnInit{
             });
             $('.dataTables_filter input[type="search"]').css(
               {'width':'800px','display':'inline-block'}
-           );
-           $("input").on("click", function(){
+            );
+            $("input").on("click", function(){
             $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
             " (esempio: dispositivo marca ecc...)");
             $("#tooltip").css({"margin-left": "31%"})
             $("br").remove();
           });
           });
-        }, 40);
-      }
-      else{
-        this.router.navigate(["default/pagina-avvisi"]);
-      }
-  }
-
-  public allBeni(): void {
-    this.beniService.allBeni().subscribe(
-      (response: any[]) => {
-        this.listaBeni = response[0];
-        const listaCodici = response[1];
-        for (let i = 0; i < response[0].length; i++)
-          this.listaBeni[i].id = listaCodici[i].codice;
+        });
       }
     )
   }

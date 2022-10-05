@@ -72,4 +72,8 @@ export class RichiesteService {
   public salvaPriorita(array: JSON): Observable<any> {
     return this.http.post<any>(`${this.apiServerUrl}/salva-priorita`, array);
   }
+
+  public assegnazioneCandidati(listaCandidati: string, idRichiesta: number): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/assegna-candidati/${idRichiesta}`, listaCandidati);
+  }
 }

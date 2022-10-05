@@ -5,8 +5,8 @@ import { DefaultComponent } from '../../default/default.component';
 import { RichiesteService } from 'src/app/service/richieste.service';
 import { StatiRichiesta } from 'src/app/model/stati_richiesta';
 import { NgForm } from '@angular/forms';
-import { allRichieste } from 'src/app/model/mapper/allRichieste';
 import { allCommentiRichieste } from 'src/app/model/mapper/allCommentiRichieste';
+import { getRichieste } from 'src/app/model/mapper/getRichiesta';
 
 @Component({
   templateUrl: './visualizza-richiesta.component.html',
@@ -18,7 +18,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public idRichiesta!: number;
   public statoPagina!: number;
-  public richiesta!: allRichieste;
+  public richiesta!: getRichieste;
   public statoRichiesta!: string;
   public idStatoRichiesta!: number;
   public listaStatiRichiesta!: StatiRichiesta[];
@@ -98,8 +98,10 @@ export class VisualizzaRichiestaComponent implements OnInit{
   }
 
   public updateRichiesta(updateForm: NgForm): void {
-    updateForm.value.listaRecruiters = this.checkArray;
-    console.log(updateForm.value)
+    if (this.richiesta.recruiter == null)
+      updateForm.value.listaRecruiters = this.checkArray;
+    else
+      updateForm.value.listaRecruiters = this.richiesta.recruiter;
     if (updateForm.value.statoRichiesta == "")
       updateForm.value.statoRichiesta = this.idStatoRichiesta;
     if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')

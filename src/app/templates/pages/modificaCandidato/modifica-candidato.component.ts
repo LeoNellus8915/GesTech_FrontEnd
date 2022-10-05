@@ -20,6 +20,8 @@ export class ModificaCandidatoComponent implements OnInit{
   public idCandidato!: number;
   public datiCandidato!: Candidati;
   public dettagliCandidato!: DettagliCandidati;
+  public pagina!: number;
+  public idRichiesta!: number;
   public listaSelects!: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private candidatiService: CandidatiService,
@@ -35,6 +37,8 @@ export class ModificaCandidatoComponent implements OnInit{
           this.defaultService.titoloPagina=" Modifica Candidati";
         }, 0)
         this.idCandidato = this.route.snapshot.params['idCandidato'];
+        this.pagina = this.route.snapshot.params['pagina'];
+        this.idRichiesta = this.route.snapshot.params['idRichiesta'];
         this.getDatiModifica();
       }
       else{
@@ -46,7 +50,6 @@ export class ModificaCandidatoComponent implements OnInit{
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any[]) => {
         if (response != null) {
-          console.log(response);
           this.datiCandidato = response[0];
           this.listaSelects = response[1];
           this.dettagliCandidato = response[2];
@@ -106,7 +109,10 @@ export class ModificaCandidatoComponent implements OnInit{
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {
               alert("Candidato modificato con successo");
-              this.router.navigate(["default/pagina-candidati"]);
+              if (this.pagina == 0)
+                this.router.navigate(["default/pagina-candidati"]);
+              else
+                this.router.navigate(["default/pagina-scelta-candidati-richiesta"]);
             }
           )
         }

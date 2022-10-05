@@ -79,7 +79,6 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteAccount(): void {
     this.richiesteService.getRichiesteAperteAccount(this.idDipendente).subscribe(
       (response: any[]) => {
-        console.log(response)
         if (response[1].length > 0) {
           this.listaRichieste = response[1];
           const listaCodici = response[0];

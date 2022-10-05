@@ -1,5 +1,12 @@
-<div class="card-body spazio">
-  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Visualizza Candidato</span>
+<div class="card-body spazio" *ngIf="pagina == 0">
+  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / 
+		<a routerLink="../../../default/pagina-candidati">Pagina Candidati</a> / Modifica Candidati</span>
+</div>
+<div class="card-body spazio" *ngIf="pagina == 1">
+  <span class="briciole"><a routerLink="../../../../../default/pagina-avvisi">Home</a> / 
+    <a routerLink="../../../../../default/pagina-richieste">Pagina Richieste</a> /
+		<a [routerLink]="['../../../../../default/pagina-scelta-candidati-richiesta', idRichiesta]">Scelta Candidati Richiesta</a> / 
+		Modifica Candidati</span>
 </div>
 <div class="page">
   <div class="container-fluid relative animatedParent animateOnce p-lg-3">
@@ -15,7 +22,7 @@
           <div class="text-center p-5 mt-5">
             <div *ngIf="datiCandidato"><h4 class="p-t-10">{{datiCandidato.nomeCognome}}</h4></div>
             <a (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{opacity}">Scarica CV</a>
-            <a [routerLink]="['../../pagina-modifica-candidato', idCandidato]" class="btn btn-success giallo mt-3 button">Modifica</a> 
+            <a [routerLink]="['../../../../pagina-modifica-candidato', idCandidato, pagina, idRichiesta]" class="btn btn-success giallo mt-3 button">Modifica</a> 
             <a (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</a>
             <button class="btn btn-success blue mt-3" (click)="copy()">Copia Link Scheda</button>
             <div class="mt-5">
