@@ -22,14 +22,18 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
     if (this.ruolo === null)
       this.router.navigate(['']);
     else
-      if (this.ruolo == 'Admin' || this.ruolo === 'Dipendente' || this.ruolo === 'Personale')
-        this.router.navigate(['default/pagina-avvisi'])
-      else {
-        this.titleService.setTitle("Gestech | Storico Richieste");
+      if (this.ruolo == 'Admin' 
+          || this.ruolo === 'Account' 
+          || this.ruolo === 'Direttore Commerciale'
+          || this.ruolo === 'Direttore Recruiter'){
+            this.titleService.setTitle("Gestech | Storico Richieste");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Storico Richieste";
         }, 0)
         this.getRichieste();
+          }
+      else {
+        this.router.navigate(['default/pagina-avvisi'])
       }
   }
 
