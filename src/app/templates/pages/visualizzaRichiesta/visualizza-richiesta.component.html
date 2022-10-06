@@ -1,18 +1,16 @@
 <div class="card-body spazio">
   <span *ngIf="statoPagina == 0" class="briciole">
-		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
+		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
 	</span>
+	<span *ngIf="richiesta && ruolo == 'Recruiter' && richiesta.candidati == null" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
 	<span *ngIf="statoPagina == 1" class="briciole">
-		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
+		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
 </div>
 <div class="card-body">
 	<div class="page">
 		<div class="col-md-12">
 			<div class="card no-b shadow no-r">
-				<div *ngIf="richiesta && ruolo == 'Recruiter' && richiesta.candidati == null">
-					<button [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]">Seleziona Candidati</button>
-				</div>
 				<form #updateForm="ngForm" (ngSubmit)="updateRichiesta(updateForm)">
 					<div class="row no-gutters">
 						

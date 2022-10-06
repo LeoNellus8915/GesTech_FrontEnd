@@ -6,18 +6,6 @@
 	<div class="page avviso">
 		<div class="page">
 			<div class="row">
-        <!-- 
-        RICHIESTA 1 DATA
-        RICHIESTA 2 CLIENTE
-        RICHIESTA 3 CITTA'
-        RICHIESTA 4 COSTO
-        RICHIESTA 5 NOTE/TESTO
-        RICHIESTA 6 SKILL/LINGUAGGI
-        RICHIESTA 7 RUOLO/PROFILO   
-        RICHIESTA 8 SENIORITY
-        RICHIESTA 9 STATO RICHIESTA
-        RICHIESTA 10 STATO RICHIESTA
-        -->
         <div class="col-4 card_avvisi" *ngFor="let richiesta of listaRichieste" [ngClass]="{'prioritaAlta': richiesta.priorita == 1, 'prioritaMedia': richiesta.priorita == 2, 'prioritaBassa': richiesta.priorita == 3}">
           <a class="cursor" (click)="goVisualizzaRichiesta(richiesta.id, richiesta.visualizzato)">
             <span class="titolo_richieste">{{richiesta.profiliNome}}</span><i *ngIf="richiesta.visualizzato == false && ruolo == 'Recruiter'" class="icon-fiber_new green-text s18"></i>
