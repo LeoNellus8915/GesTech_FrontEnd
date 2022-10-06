@@ -35,12 +35,4 @@ export class LoginComponent{
       }
     )
   }
-
-  public sceltaRuoli(email: string): void {
-    this.authService.getDatiByEmail(email).subscribe(
-      (response: any[]) => {
-        this.router.navigate(["pagina-scelta-ruolo", response[0], response[1]])
-      }
-    )
-  }
 }
