@@ -41,15 +41,20 @@ export class NuovoCandidatoComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Admin' || this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' 
+          || this.ruolo == 'Direttore Commerciale'
+          || this.ruolo == 'Direttore Recruiter' 
+          || this.ruolo == 'Recruiter'){
         this.titleService.setTitle("Gestech | Nuovo Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuovo Candidati";
         }, 0)
         this.getSelects();
       }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
+      
   }
 
   public getSelects(): void {
