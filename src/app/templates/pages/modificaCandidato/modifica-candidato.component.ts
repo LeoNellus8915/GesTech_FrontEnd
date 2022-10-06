@@ -31,7 +31,10 @@ export class ModificaCandidatoComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter'){
+      if (this.ruolo == 'Admin' 
+          || this.ruolo == 'Recruiter' 
+          || this.ruolo == 'Direttore Recruiter'
+          || this.ruolo == 'Direttore Commerciale'){
         this.titleService.setTitle("Gestech | Modifica Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Modifica Candidati";

@@ -23,7 +23,7 @@
             <div *ngIf="datiCandidato"><h4 class="p-t-10">{{datiCandidato.nomeCognome}}</h4></div>
             <a (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{opacity}">Scarica CV</a>
             <a [routerLink]="['../../../../pagina-modifica-candidato', idCandidato, pagina, idRichiesta]" class="btn btn-success giallo mt-3 button">Modifica</a> 
-            <a (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</a>
+            <a *ngIf="ruolo=='Admin'" (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</a>
             <button class="btn btn-success blue mt-3" (click)="copy()">Copia Link Scheda</button>
             <div class="mt-5">
               <ul class="social social list-inline">
