@@ -8,6 +8,10 @@ export class RichiesteService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
+
+  public getRichiesteAperteAdmin(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-admin`);
+  }
   
   public getRichiesteAperteAccount(idDipendente: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-account/${idDipendente}`);
@@ -49,6 +53,10 @@ export class RichiesteService {
     return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta`, addForm);
   }
 
+  public getCodiciRichiesteAperteAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-admin`);
+  }
+
   public getCodiciRichiesteAperteAccount(idDipendente: number): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-account/${idDipendente}`);
   }
@@ -69,8 +77,8 @@ export class RichiesteService {
     return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-chiuse`);
   }
 
-  public salvaPriorita(array: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-priorita`, array);
+  public salvaPriorita(array: JSON, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-priorita/${ruolo}`, array);
   }
 
   public assegnazioneCandidati(listaCandidati: string, idRichiesta: number): Observable<any> {

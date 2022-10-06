@@ -1,6 +1,6 @@
 <div class="card-body spazio">  
   <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Richieste</span>
-  <span class="allineamentoInvio" *ngIf="ruolo == 'Direttore Commerciale'"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
+  <span class="allineamentoInvio" *ngIf="ruolo == 'Direttore Commerciale' || ruolo == 'Admin'"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
 </div>
 <div>
 	<div class="page avviso">
@@ -24,7 +24,7 @@
             <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta.note}}</span></div>
             <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste"></footer>
           </a>
-          <div *ngIf="ruolo == 'Direttore Commerciale' && richiesta.priorita == 0" class="row">
+          <div *ngIf="ruolo == 'Direttore Commerciale' || ruolo == 'Admin' && richiesta.priorita == 0" class="row">
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 1)">Alta</div>
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 2)">Media</div>
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 3)">Bassa</div>

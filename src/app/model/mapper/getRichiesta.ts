@@ -13,4 +13,5 @@ export interface getRichieste{
   statiRichiestaNome: string;
   recruiter: string;
   candidati: string;
+  priorita: string;
 }

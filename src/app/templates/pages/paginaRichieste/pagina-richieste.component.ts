@@ -35,6 +35,8 @@ export class PaginaRichiesteComponent implements OnInit {
       setTimeout(() => {
         this.defaultService.titoloPagina=" Richieste";
       }, 0)
+      if (this.ruolo == 'Admin')
+        this.getRichiesteAdmin();
       if (this.ruolo == 'Account')
         this.getRichiesteAccount();
       if (this.ruolo == 'Direttore Commerciale')
@@ -47,6 +49,19 @@ export class PaginaRichiesteComponent implements OnInit {
     else {
       this.router.navigate(['default/pagina-avvisi']);
     }
+  }
+
+  public getRichiesteAdmin(): void {
+    this.richiesteService.getRichiesteAperteAdmin().subscribe(
+      (response: any[]) => {
+        if (response[1].length > 0) {
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaRichieste[i].id = listaCodici[i].codice;
+        }
+      }
+    )
   }
 
   public getRichiesteRecruiter(): void {
@@ -138,7 +153,7 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public salvaPriorita(): void {
     var array = JSON.parse(JSON.stringify(this.radioArray));
-    this.richiesteService.salvaPriorita(array).subscribe(
+    this.richiesteService.salvaPriorita(array, this.ruolo).subscribe(
       (response: any) => {
         alert("Invio riuscito");
         this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(

@@ -25,6 +25,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public commentiRichiesta!: allCommentiRichieste[];
   public listaRecruiters!: string[];
   public checkArray: any[] = new Array();
+  public priorita!: number;
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
@@ -106,6 +107,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
       updateForm.value.statoRichiesta = this.idStatoRichiesta;
     if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')
       updateForm.value.statoRichiesta = "2";
+    updateForm.value.priorita = this.priorita.toString();
     this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina, this.ruolo).subscribe(
       (response: any) => {
         alert("Richiesta aggiornata con successo");
@@ -115,5 +117,9 @@ export class VisualizzaRichiestaComponent implements OnInit{
           this.router.navigate(['default/pagina-storico-richieste']);
       }
     )
+  }
+
+  public setPriorita(priorita: number): void {
+    this.priorita = priorita;
   }
 }

@@ -20,6 +20,7 @@ export class DefaultComponent implements OnInit{
   public codiciCandidati = sessionStorage.getItem("codiciCandidati");
   public codiciBeni = sessionStorage.getItem("codiciBeni");
   public codiciRichiesteAperteAccount = sessionStorage.getItem("codiciRichiesteAperteAccount");
+  public codiciRichiesteAperteAdmin = sessionStorage.getItem("codiciRichiesteAperteAdmin");
   public codiciRichiesteAperteCommerciale = sessionStorage.getItem("codiciRichiesteAperteCommerciale");
   public codiciRichiesteAperteRecruiter = sessionStorage.getItem("codiciRichiesteAperteRecruiter");
   public codiciRichiesteAperte = sessionStorage.getItem("codiciRichiesteAperte");
@@ -45,6 +46,12 @@ export class DefaultComponent implements OnInit{
         this.beniService.getCodiciBeni().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciBeni", "presenti");
+          }
+        );
+      if (this.ruolo == 'Admin' && this.codiciRichiesteAperteAdmin == null)
+        this.richiesteService.getCodiciRichiesteAperteAdmin().subscribe(
+          (response: any) => {
+            sessionStorage.setItem("codiciRichiesteAperteAdmin", "presenti");
           }
         );
       if (this.ruolo == 'Account' && this.codiciRichiesteAperteAccount == null)
@@ -87,6 +94,7 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("ruolo");
     sessionStorage.removeItem("azienda");
     sessionStorage.removeItem("codiciCandidati");
+    sessionStorage.removeItem("codiciRichiesteAperteAdmin");
     sessionStorage.removeItem("codiciRichiesteAperteAccount");
     sessionStorage.removeItem("codiciRichiesteAperteCommerciale");
     sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
