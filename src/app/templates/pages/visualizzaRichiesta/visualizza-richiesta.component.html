@@ -74,9 +74,9 @@
 
 					<div *ngIf="richiesta" class="row">
 						<div class="col-2 p-4 offset-1"><h5 class="text-black">Priorit&agrave;:</h5></div>
-						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '1'" (click)="setPriorita(1)">Alta</div>
-						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '2'" (click)="setPriorita(2)">Media</div>
-						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '3'" (click)="setPriorita(3)">Bassa</div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '1'" (click)="setPriorita('1')">Alta</div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '2'" (click)="setPriorita('2')">Media</div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '3'" (click)="setPriorita('3')">Bassa</div>
 						<input type="hidden" name="priorita">
 					</div>
 
@@ -100,6 +100,16 @@
 						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
 				</form>
+				<table>
+					<thead>
+						<th class="titolotabella">NOME E COGNOME</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let candidato of candidati">
+							<td><span class="titolo_data">{{candidato}}</span></td>
+						</tr>
+					</tbody>
+				</table>
 				<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
 					<span class="titolo_data">{{commento.data.toString().replace("T", " ")}}</span>
 					<span class="titolo_data"> {{commento.nomeCognome}}</span>

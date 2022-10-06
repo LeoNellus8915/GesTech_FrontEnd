@@ -25,8 +25,9 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public commentiRichiesta!: allCommentiRichieste[];
   public listaRecruiters!: string[];
   public checkArray: any[] = new Array();
-  public priorita!: number;
+  public priorita!: string;
   public titoloPagina: any;
+  public candidati!: string[];
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
               private route: ActivatedRoute, private richiesteService: RichiesteService) {}
@@ -69,6 +70,9 @@ export class VisualizzaRichiestaComponent implements OnInit{
     this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
       (response: any[]) => {
         this.richiesta = response[0];
+        this.priorita = this.richiesta.priorita as string;
+        if (this.richiesta.candidati != null)
+          this.candidati = this.richiesta.candidati.toString().split(",");
         this.statoRichiesta = response[1];
         this.idStatoRichiesta = response[2];
         this.listaStatiRichiesta = response[3];
@@ -119,7 +123,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
     )
   }
 
-  public setPriorita(priorita: number): void {
+  public setPriorita(priorita: string): void {
     this.priorita = priorita;
   }
 }
