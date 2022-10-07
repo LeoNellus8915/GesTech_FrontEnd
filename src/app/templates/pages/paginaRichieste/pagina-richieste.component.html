@@ -1,6 +1,17 @@
-<div class="card-body spazio">  
-  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Richieste</span>
+<div class="card-body spazio">
+  <div class="row">
+    <div class="col-1">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a></span>
+  </div>
+  <div class="col-3">
+    <h5> <span><i class="icon-circle 1" style="font-size: 27px;color :yellow"></i> Bassa  </span>
+    <span><i class="icon-circle 2" style="font-size: 27px;color :orange"></i> Media </span>
+    <span><i class="icon-circle 3" style="font-size: 27px;color :green"></i> Alta  </span></h5>
+  </div>
+  <div class="col-3 offset-5">
   <span class="allineamentoInvio" *ngIf="ruolo == 'Direttore Commerciale' || ruolo == 'Admin'"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
+</div>
+</div>
 </div>
 <div>
 	<div class="page avviso">
