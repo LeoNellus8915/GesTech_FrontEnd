@@ -2,7 +2,7 @@
   <span *ngIf="statoPagina == 0" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
 	</span>
-	<span *ngIf="richiesta && ruolo == 'Recruiter' && richiesta.candidati == null" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
+	<span *ngIf="richiesta && ruolo == 'Recruiter' && (richiesta.candidati == null || richiesta.candidati == '')" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
 	<span *ngIf="statoPagina == 1" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
@@ -71,8 +71,9 @@
 							<h5 class="p-t-10">{{richiesta.note}}</h5>
 						</div>
 					</div>
+					
 
-					<div *ngIf="richiesta" class="row">
+					<div *ngIf="richiesta && (ruolo=='Admin' || ruolo=='Direttore Commerciale')" class="row">
 						<div class="col-2 p-4 offset-1"><h5 class="text-black">Priorit&agrave;:</h5></div>
 						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '1'" (click)="setPriorita('1')">Alta</div>
 						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '2'" (click)="setPriorita('2')">Media</div>
@@ -88,6 +89,8 @@
 								placeholder="Insersci Commento" type="text"></textarea>
 						</div>
 					</div>
+
+					<!-- da sistemare -->
 					<div *ngIf="richiesta && richiesta.recruiter == null && ruolo == 'Direttore Recruiter'">
 						<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
 						<label>Tutti</label>
@@ -96,10 +99,12 @@
 							<label>{{recruiter}}</label>
 						</span>
 					</div>
+
 					<div class="card-body">
 						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
 				</form>
+				<label>Lista Candidati Selezionati</label>
 				<table>
 					<thead>
 						<th class="titolotabella">NOME E COGNOME</th>
