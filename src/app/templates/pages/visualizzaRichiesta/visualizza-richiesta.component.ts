@@ -91,7 +91,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
 
   public eliminaRichiesta(): void {
     if (confirm("Sicuro di voler eliminare questa richista?") == true)
-      this.richiesteService.eliminaRichiesta(this.idRichiesta, this.statoPagina).subscribe(
+      this.richiesteService.eliminaRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
         (response: any) => {
           alert("Richiesta eliminata con successo");
           if (this.statoPagina == 0)

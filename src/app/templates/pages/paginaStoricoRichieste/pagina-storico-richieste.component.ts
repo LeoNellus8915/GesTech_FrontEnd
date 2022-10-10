@@ -40,7 +40,6 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
   public getRichieste(): void {
     this.richiesteService.getRichiesteChiuse(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
-        console.log(response)
         const candidati: string[][] = [];
         this.listaRichieste = response[1];
         const listaCodici = response[0];

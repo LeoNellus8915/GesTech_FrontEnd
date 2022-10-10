@@ -10,6 +10,6 @@ export interface allRichieste{
   linguaggiNome: string;
   profiliNome: string;
   livelliNome: string;
-  statiRichiestaNome: string;
+  statiRichiesteNome: string;
   priorita: number;
 }

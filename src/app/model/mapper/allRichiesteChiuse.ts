@@ -10,6 +10,6 @@ export interface allRichiesteChiuse{
   linguaggiNome: string;
   profiliNome: string;
   livelliNome: string;
-  statiRichiestaNome: string;
+  statiRichiesteNome: string;
   recruiter: string;
 }

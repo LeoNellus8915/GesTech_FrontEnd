@@ -17,6 +17,7 @@ export class PaginaRichiesteComponent implements OnInit {
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
+  public contatore!: number;
 
   constructor(private dipendentiRichiesteService: DipendentiRichiesteService, private defaultService: DefaultComponent, 
     private titleService: Title, private router: Router, private richiesteService: RichiesteService) { }
@@ -45,6 +46,7 @@ export class PaginaRichiesteComponent implements OnInit {
         this.getRichiesteRecruiter();
       if (this.ruolo == 'Recruiter')
         this.getRichieste();
+        this.contatore = 0;
     }
     else {
       this.router.navigate(['default/pagina-avvisi']);
@@ -54,6 +56,12 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteAdmin(): void {
     this.richiesteService.getRichiesteAperteAdmin().subscribe(
       (response: any[]) => {
+        response[1].forEach((richiesta: { priorita: number; }) => {
+          if (richiesta.priorita == 0) {
+            this.contatore++;
+            console.log(this.contatore)
+          }
+        });
         if (response[1].length > 0) {
           this.listaRichieste = response[1];
           const listaCodici = response[0];

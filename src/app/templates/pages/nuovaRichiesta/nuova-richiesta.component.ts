@@ -79,7 +79,7 @@ export class NuovaRichiestaComponent implements OnInit{
       addForm.value.costo = addForm.value.costo.toString();
 
     addForm.value.idDipendente = this.idDipendente;
-    this.richiesteService.addRichiesta(addForm.value).subscribe(
+    this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
       (response: any) => {
         alert("Richiesta salvata con successo");
         this.router.navigate(['default/pagina-richieste'])

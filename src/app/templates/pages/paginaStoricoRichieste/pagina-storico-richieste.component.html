@@ -8,7 +8,7 @@
         <div class="col-4 card_avvisi chiusa" *ngFor="let richiesta of listaRichieste">
           <a class="cursor" [routerLink]="['../../default/pagina-visualizza-richiesta', richiesta.id, 1]">
             <span class="titolo_richieste">{{richiesta.profiliNome}}</span>
-            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiestaNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiesteNome}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta.cliente}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta.citta}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta.costo}}</span></div>

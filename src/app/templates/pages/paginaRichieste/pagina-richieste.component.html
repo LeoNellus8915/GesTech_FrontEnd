@@ -9,7 +9,7 @@
     <span><i class="icon-circle 3" style="font-size: 27px;color :green"></i> Alta  </span></h5>
   </div>
   <div class="col-3 offset-5">
-  <span class="allineamentoInvio" *ngIf="ruolo == 'Direttore Commerciale' || ruolo == 'Admin'"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
+  <span class="allineamentoInvio" *ngIf="(ruolo == 'Direttore Commerciale' || ruolo == 'Admin') && contatore != 0"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
 </div>
 </div>
 </div>
@@ -26,7 +26,7 @@
               <span *ngIf="richiesta.priorita == 2" class="testo_richieste">Media</span>
               <span *ngIf="richiesta.priorita == 3" class="testo_richieste">Bassa</span>
             </div>
-            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiestaNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiesteNome}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta.cliente}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta.citta}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta.costo}}</span></div>

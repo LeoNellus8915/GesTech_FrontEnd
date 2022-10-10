@@ -37,8 +37,8 @@ export class RichiesteService {
     return this.http.get<any>(`${this.apiServerUrl}/get-richiesta/${idRichiesta}/${pagina}/${ruolo}`);
   }
 
-  public eliminaRichiesta(idRichiesta: number, pagina: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}/${pagina}`);
+  public eliminaRichiesta(idRichiesta: number, pagina: number, ruolo: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}/${pagina}/${ruolo}`);
   }
 
   public updateRichiesta(updateForm: JSON, idRichiesta: number, idDipendente: number, pagina: number, ruolo: string): Observable<any> {
@@ -49,8 +49,8 @@ export class RichiesteService {
     return this.http.get<string[]>(`${this.apiServerUrl}/get-nomi-recruiter`);
   }
 
-  public addRichiesta(addForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta`, addForm);
+  public addRichiesta(addForm: JSON, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta/${ruolo}`, addForm);
   }
 
   public getCodiciRichiesteAperteAdmin(): Observable<any> {
