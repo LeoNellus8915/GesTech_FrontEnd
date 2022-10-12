@@ -12,13 +12,13 @@ import { CandidatiService } from 'src/app/service/candidati.service';
 })
 export class DefaultComponent implements OnInit{
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
-  public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
+  public nome = sessionStorage.getItem("nome") as string;
+  public cognome = sessionStorage.getItem("cognome") as string;
   public numeroRichieste = sessionStorage.getItem("numeroRichieste") as unknown as number;
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public azienda = sessionStorage.getItem("azienda") as string;
   
   public codiciCandidati = sessionStorage.getItem("codiciCandidati");
-  public codiciBeni = sessionStorage.getItem("codiciBeni");
   public codiciRichiesteAperteAccount = sessionStorage.getItem("codiciRichiesteAperteAccount");
   public codiciRichiesteAperteAdmin = sessionStorage.getItem("codiciRichiesteAperteAdmin");
   public codiciRichiesteAperteCommerciale = sessionStorage.getItem("codiciRichiesteAperteCommerciale");
@@ -40,12 +40,6 @@ export class DefaultComponent implements OnInit{
         this.candidatiService.getCodiciCandidati().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciCandidati", "presenti");
-          }
-        );
-      if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Commerciale' && this.ruolo !== 'Recruiter' && this.codiciBeni == null)
-        this.beniService.getCodiciBeni().subscribe(
-          (response: any) => {
-            sessionStorage.setItem("codiciBeni", "presenti");
           }
         );
       if (this.ruolo == 'Admin' && this.codiciRichiesteAperteAdmin == null)
@@ -73,7 +67,7 @@ export class DefaultComponent implements OnInit{
           }
         );
       if (this.ruolo == 'Recruiter' && this.codiciRichiesteAperte == null)
-        this.richiesteService.getCodiciRichiesteAperte(this.nomeCognome).subscribe(
+        this.richiesteService.getCodiciRichiesteAperte(this.nome).subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteAperte", "presenti");
           }
@@ -100,7 +94,6 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
     sessionStorage.removeItem("codiciRichiesteAperte");
     sessionStorage.removeItem("codiciRichiesteChiuse");
-    sessionStorage.removeItem("codiciBeni");
 
     this.router.navigate([""]);
   }

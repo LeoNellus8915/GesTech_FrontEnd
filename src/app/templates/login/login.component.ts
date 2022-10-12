@@ -20,7 +20,8 @@ export class LoginComponent{
         if (response != null) {
           let listaRuoli: string[] = response.ruolo.toString().split(",");
           sessionStorage.setItem("idDipendente", response.idDipendente);
-          sessionStorage.setItem("nomeCognome", response.nomeCognome);
+          sessionStorage.setItem("nome", response.nome);
+          sessionStorage.setItem("cognome", response.cognome);
           sessionStorage.setItem("azienda", response.azienda);
           sessionStorage.setItem("numeroRichieste", response.numeroRichieste);
           if (listaRuoli.length == 1) {
