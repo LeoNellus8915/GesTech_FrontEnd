@@ -1,10 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, DefaultUrlSerializer, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
-import { RisorseService } from 'src/app/service/risorse.service';
-import { Risorse } from 'src/app/model/risorse';
+import { CandidatiService } from 'src/app/service/candidati.service';
+import { Candidati } from 'src/app/model/candidati';
 import { DOCUMENT } from '@angular/common';
+import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato';
 
 @Component({
   templateUrl: './visualizza-candidato.component.html',
@@ -12,37 +13,43 @@ import { DOCUMENT } from '@angular/common';
   
 })
 export class VisualizzaCandidatoComponent implements OnInit{
-  public ruolo: string = sessionStorage.getItem("ruolo") as string;
-  public datiCandidato!: Risorse;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
+  public datiCandidato!: Candidati;
   public dettagliCandidato!: any;
-  public commentiCandidato!: any;
+  public commentiCandidato!: allCommentiCandidato[];
   public colore!: number;
   opacity = "1";
+  public pagina!: number;
+  public idRichiesta!: number;
   public fileBase64!: string;
   public idCandidato!: number;
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private route: ActivatedRoute, private defaultService: DefaultComponent,
-              private risorseService: RisorseService, @Inject(DOCUMENT) private document: Document) {}
+              private candidatiService: CandidatiService, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
+    if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
+    || this.ruolo == 'Direttore Commerciale'){
+      this.titleService.setTitle("Gestech | Visualizza Candidato");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Visualizza Candidato";
+      }, 0)
+      this.idCandidato = this.route.snapshot.params['idCandidato'];
+      this.pagina = this.route.snapshot.params['pagina'];
+      this.idRichiesta = this.route.snapshot.params['idRichiesta'];
+      this.getCandidato();
+    }
       else {
-        this.titleService.setTitle("Gestech | Visualizza Candidato");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Visualizza Candidato";
-        }, 0)
-        this.idCandidato = this.route.snapshot.params['idCandidato'];
-        this.getCandidato();
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 
   public getCandidato(): void {
-    this.risorseService.getCandidatoVisualizza(this.idCandidato).subscribe(
+    this.candidatiService.getCandidatoVisualizza(this.idCandidato).subscribe(
       (response: any[]) => {
         if (response != null) {
           this.datiCandidato = response[0];
@@ -62,10 +69,13 @@ export class VisualizzaCandidatoComponent implements OnInit{
 
   public eliminaCandidato(): void{
     if (confirm("Sicuro di voler eliminare " + this.datiCandidato.nomeCognome + "?") == true)
-      this.risorseService.eliminaCandidato(this.idCandidato).subscribe(
+      this.candidatiService.eliminaCandidato(this.idCandidato).subscribe(
         (response: any) => {
           alert("Candidato eliminato con successo");
-          this.router.navigate(["default/pagina-candidati"]);
+          if (this.pagina == 0)
+            this.router.navigate(["default/pagina-candidati"]);
+          else
+            this.router.navigate(["default/pagina-scelta-candidati-richiesta"]);
         }
       )
   }

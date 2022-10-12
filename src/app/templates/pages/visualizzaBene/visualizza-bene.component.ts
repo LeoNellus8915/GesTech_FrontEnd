@@ -14,6 +14,7 @@ export class VisualizzaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public idBene!: number;
   public bene!: Beni;
+  public listaStorico!: Beni[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
@@ -23,9 +24,7 @@ export class VisualizzaBeneComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Visualizza Bene");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Visualizza Bene";
@@ -33,12 +32,16 @@ export class VisualizzaBeneComponent implements OnInit{
         this.idBene = this.route.snapshot.params['idBene'];
         this.getBene();
       }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
   }
 
   public getBene(): void {
     this.beniService.getBeneVisualizza(this.idBene).subscribe(
-      (response: Beni) => {
-        this.bene = response;
+      (response: any[]) => {
+        this.bene = response[0];
+        this.listaStorico = response[1];
       }
     )
   }

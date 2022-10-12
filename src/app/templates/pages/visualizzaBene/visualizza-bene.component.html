@@ -71,16 +71,40 @@
           <div class="col-md-6">
             <div *ngIf="bene" class="p-4">
               <h5 class="text-black">Data Consegna</h5>
-              <h5 class="p-t-10">{{bene.dataConsegna.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataConsegna.toString().replace("T", " ")}}</h5>
             </div>
           </div>   
           <div class="col-md-6">
             <div *ngIf="bene" class="p-4">
               <h5 class="text-black">Data Restituzione</h5>
-              <h5 class="p-t-10">{{bene.dataRestituzione.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataRestituzione.toString().replace("T", " ")}}</h5>
             </div>
           </div>                                                         
         </div>
+      </div>
+      <div class="card-body">
+				<h5 class="card-title">Storico</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
+                <div class="form-row">
+                  <div class="col-md-2">
+                    <span>{{storico.dipendente}}</span>
+                  </div>
+                  <div class="col-md-2">
+                    <span> {{storico.dataConsegna}}</span>
+                  </div>
+                  <div class="col-md-2">
+                    <span> {{storico.dataRestituzione}}</span>
+                  </div>
+                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
       </div>
     </div>  
   </div>

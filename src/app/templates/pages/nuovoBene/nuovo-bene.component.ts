@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BeniService } from 'src/app/service/beni.service';
-import { RisorseService } from 'src/app/service/risorse.service';
+import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
@@ -17,25 +17,26 @@ export class NuovoBeneComponent implements OnInit{
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, 
-              private risorseService: RisorseService, private beniService: BeniService) {}
+              private dipendentiService: DipendentiService, private beniService: BeniService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Nuovo Beni");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuovo Beni";
         }, 0)
         this.allDipendenti();
       }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
   }
 
   public allDipendenti(): void {
-    this.risorseService.getDipendenti().subscribe(
+    this.dipendentiService.getDipendenti().subscribe(
       (response: any[]) => {
         this.listaDipendenti = response;
       }

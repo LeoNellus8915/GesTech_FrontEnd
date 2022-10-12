@@ -16,7 +16,7 @@ import { Md5 } from "md5-typescript";
   
 })
 export class NuovoUtenteComponent implements OnInit{
-  public ruolo: string = sessionStorage.getItem("ruolo") as string;
+  public ruolo = sessionStorage.getItem("ruolo") as string;
   public listaRuoli!: Ruoli[];
   public listaAziende!: Aziende[];
   public titoloPagina: any;
@@ -28,24 +28,32 @@ export class NuovoUtenteComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo != 'Admin')
-        this.router.navigate(['default/pagina-avvisi']);
-        else {
-          this.titleService.setTitle("Gestech | Nuovo Utente");
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+        this.titleService.setTitle("Gestech | Nuovo Utente");
           setTimeout(() => {
             this.defaultService.titoloPagina=" Nuovo Utente";
           }, 0)
         this.getRuoli();
         this.getAziende();
       }
+        else {
+          this.router.navigate(['default/pagina-avvisi']);
+      }
   }
 
   public getRuoli(): void {
-    this.ruoliService.getRuoliDipendente().subscribe(
-      (response: Ruoli[]) => {
-        this.listaRuoli = response;
-      }
-    )
+    if (this.ruolo == 'Admin')
+      this.ruoliService.getRuoliDipendenteAdmin().subscribe(
+        (response: Ruoli[]) => {
+          this.listaRuoli = response;
+        }
+      )
+    else
+      this.ruoliService.getRuoliDipendentePersonale().subscribe(
+        (response: Ruoli[]) => {
+          this.listaRuoli = response;
+        }
+      )
   }
 
   public getAziende(): void {
@@ -63,8 +71,12 @@ export class NuovoUtenteComponent implements OnInit{
       addForm.value.password = Md5.init(addForm.value.password);
       this.authService.addUtente(addForm.value).subscribe(
         (response: any) => {
-          alert("Utente registrato con successo");
-          this.router.navigate(['default/pagina-avvisi']);
+          if (response == 0)
+            alert("Email già esistente");
+          else {
+            alert("Utente registrato con successo");
+            this.router.navigate(['default/pagina-avvisi']);
+          }
         }
       )
     }

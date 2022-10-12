@@ -14,7 +14,11 @@ export class RuoliService {
     return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli`);
   }
 
-  public getRuoliDipendente(): Observable<Ruoli[]> {
-    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente`);
+  public getRuoliDipendenteAdmin(): Observable<Ruoli[]> {
+    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-admin`);
+  }
+
+  public getRuoliDipendentePersonale(): Observable<Ruoli[]> {
+    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-personale`);
   }
 }

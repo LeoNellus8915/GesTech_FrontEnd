@@ -13,7 +13,7 @@ import { Md5 } from "md5-typescript";
 })
 export class ModificaPasswordComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public titoloPagina: any;
 
   constructor(private router: Router, private authService: AuthService, private titleService: Title, private defaultService: DefaultComponent) {}
@@ -33,7 +33,7 @@ export class ModificaPasswordComponent implements OnInit{
     if (updateForm.value.password != updateForm.value.confermaPassword)
       alert("Le password non coincidono");
     else {
-      updateForm.value.idRisorsa = this.idRisorsa;
+      updateForm.value.idDipendente = this.idDipendente;
       updateForm.value.password = Md5.init(updateForm.value.password);
       this.authService.cambiaPassword(updateForm.value).subscribe(
         (response: any) => {

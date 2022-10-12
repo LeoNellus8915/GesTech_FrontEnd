@@ -1,6 +1,6 @@
 export interface Auth {
   id: number;
-  idRisorsa: number;
+  idDipendente: number;
   password: string;
   data: Date;
 }

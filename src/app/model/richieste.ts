@@ -1,14 +1,15 @@
 export interface Richieste {
   id: number;
-  idRisorsa: number;
+  idDipendente: number;
   data: Date;
-  idSkill: number;
+  idLinguaggio: number;
   idProfilo: number;
-  idSeniority: number;
+  idLivello: number;
   cliente: string;
   citta: string;
   costo: number;
   note: string;
   recruiter: string;
   idStato: number;
+  candidati: string;
 }

@@ -1,0 +1,53 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-richieste">Pagina Richieste</a> / Scelta Candidati Richiesta</span>
+  <span class="allineamentoInvio"><input type="submit" value="Salva" (click)="riepilogo()"></span>
+</div>
+<span id="tooltip"></span>
+<br>
+<div id="container">
+  <div class="card-body">
+    <table id="tabellaCandidati" class="table table-striped table-bordered">
+      <thead>
+        <tr class="no-b">
+          <th class="titolotabella">DATA INSERIMENTO</th>
+          <th class="titolotabella">NOME E COGNOME</th>
+          <th class="titolotabella">CITT&Agrave;</th>
+          <th class="titolotabella">RUOLO</th>
+          <th class="titolotabella">SKILL PRINCIPALE</th>
+          <th class="titolotabella">ESITO COLLOQUIO</th>
+          <th class="titolotabella">AZIONI</th>
+          <th class="titolotabella">SELEZIONA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidato of listaCandidati">
+          <td>{{candidato.dataInserimento}}</td>
+          <td>{{candidato.nomeCognome}}</td>
+          <td>{{candidato.citta}}</td>
+          <td>{{candidato.profiloNome}}</td>
+          <td>{{candidato.competenzaPrincipale}}</td>
+          <td>{{candidato.esitoNome}}</td>
+          <td><a [routerLink]="['../../pagina-visualizza-candidato', candidato.id, 1, idRichiesta]"><i class="icon-eye mr-3"></i></a>
+          <a [routerLink]="['../../pagina-modifica-candidato', candidato.id, 1, idRichiesta]"><i class="icon-pencil"></i></a></td>
+          <td><input type="checkbox" value={{candidato.nomeCognome}} (change)="array($event)"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="modal fade" id="candidatiModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Riepilogo</h5>
+          </div>
+          <div class="modal-body">
+            <p *ngFor="let nome of checkArray">{{nome}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>
+            <button type="button" class="btn btn-secondary" (click)="assegnazione()">Invia Candidati</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>	
+</div>

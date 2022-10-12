@@ -1,7 +1,7 @@
 export interface CommentiRichieste {
   id: number;
-  idRisorsa: number;
-  idDestinatario: number;
+  idDipendente: number;
+  idRichiesta: number;
   note: string;
   data: Date;
 }

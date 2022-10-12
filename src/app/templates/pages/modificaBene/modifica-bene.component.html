@@ -41,6 +41,12 @@
                   placeholder="Inserisci Password"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
+							<div *ngIf="bene" class="form-group col-6 m-0">
+								<label for="societa" class="col-form-label s-12">SOCIET&Agrave; PROPRIETARIA</label>
+								<input ngModel name="societa" [(ngModel)]=bene.societa
+                  placeholder="Insersci Societ&agrave;"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -54,12 +60,6 @@
 					<div class="col-md-12">
 						<div class="form-row">
 							<div *ngIf="bene" class="form-group col-4 m-0">
-								<label for="note" class="col-form-label s-12">NOTE</label> 
-                <input ngModel name="note" [(ngModel)]=bene.note
-                  placeholder="Insersci Note"
-									class="form-control r-0 light s-12 date-picker" type="text">
-							</div>
-							<div *ngIf="bene" class="form-group col-4 m-0">
 								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
 								<select ngModel name="dipendente" class="form-control r-0 light s-12 date-picker freccia">
 									<option *ngIf="bene.dipendente != ''" value="" selected disabled>{{bene.dipendente}}</option>
@@ -67,10 +67,10 @@
     							<option *ngFor="let dipendente of listaDipendenti" value={{dipendente}}>{{dipendente}}</option>
     						</select>
 							</div>
-              <div *ngIf="bene" class="form-group col-4 m-0">
-								<label for="societa" class="col-form-label s-12">SOCIET&Agrave;</label>
-								<input ngModel name="societa" [(ngModel)]=bene.societa
-                  placeholder="Insersci Societ&agrave;"
+							<div *ngIf="bene" class="form-group col-8 m-0">
+								<label for="note" class="col-form-label s-12">NOTE</label> 
+                <input ngModel name="note" [(ngModel)]=bene.note
+                  placeholder="Insersci Note"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
               <div *ngIf="bene" class="form-group col-6 m-0">
@@ -89,10 +89,33 @@
 					</div>
 				</div>
 				<!-- Fine Row -->
+			</div>
+			<!-- Fine Card -->
+			<div class="card-body">
+				<h5 class="card-title">Storico</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
+								<div class="form-row">
+                  <div class="col-md-2">
+                    <span>{{storico.dipendente}}</span>
+                  </div>
+                  <div class="col-md-2">
+                    <span> {{storico.dataConsegna}}</span>
+                  </div>
+                  <div class="col-md-2">
+                    <span> {{storico.dataRestituzione}}</span>
+                  </div>
+                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
 				<hr>
       </div>
       <div class="card-body">
-        <input type="hidden" name="id">
         <input type="submit" value="SALVA">
       </div>
 		</div>

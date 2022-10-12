@@ -1,34 +1,45 @@
 <div class="card-body spazio">
-  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Richieste</span>
+  <div class="row">
+    <div class="col-1">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a></span>
+  </div>
+  <div class="col-3">
+    <h5> <span><i class="icon-circle 1" style="font-size: 27px;color :yellow"></i> Bassa  </span>
+    <span><i class="icon-circle 2" style="font-size: 27px;color :orange"></i> Media </span>
+    <span><i class="icon-circle 3" style="font-size: 27px;color :green"></i> Alta  </span></h5>
+  </div>
+  <div class="col-3 offset-5">
+  <span class="allineamentoInvio" *ngIf="(ruolo == 'Direttore Commerciale' || ruolo == 'Admin') && contatore != 0"><input type="submit" value="Invia Richieste" (click)="salvaPriorita()"></span>
+</div>
+</div>
 </div>
 <div>
 	<div class="page avviso">
 		<div class="page">
 			<div class="row">
-        <!-- 
-        RICHIESTA 1 DATA
-        RICHIESTA 2 CLIENTE
-        RICHIESTA 3 CITTA'
-        RICHIESTA 4 COSTO
-        RICHIESTA 5 NOTE/TESTO
-        RICHIESTA 6 SKILL/LINGUAGGI
-        RICHIESTA 7 RUOLO/PROFILO   
-        RICHIESTA 8 SENIORITY
-        RICHIESTA 9 STATO RICHIESTA
-        RICHIESTA 10 STATO RICHIESTA
-        -->
-        <div class="col-4 card_avvisi" *ngFor="let richiesta of listaRichieste">
-          <a class="cursor" (click)="goVisualizzaRichiesta(richiesta[0], richiesta[11])">
-            <span class="titolo_richieste">{{richiesta[7]}}</span><i *ngIf="richiesta[11] == false && ruolo == 'Recruiter'" class="icon-fiber_new green-text s18"></i>
-            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta[9]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta[2]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta[3]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta[4]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Skill - Linguaggi : </span><span class="testo_richieste">{{richiesta[6]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta[8]}}</span></div>
-            <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta[5]}}</span></div>
-            <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste">{{richiesta[10]}}</footer>
+        <div class="col-4 card_avvisi" *ngFor="let richiesta of listaRichieste" [ngClass]="{'prioritaAlta': richiesta.priorita == 1, 'prioritaMedia': richiesta.priorita == 2, 'prioritaBassa': richiesta.priorita == 3}">
+          <a class="cursor" (click)="goVisualizzaRichiesta(richiesta.id, richiesta.visualizzato)">
+            <span class="titolo_richieste">{{richiesta.profiliNome}}</span><i *ngIf="richiesta.visualizzato == false && ruolo == 'Recruiter'" class="icon-fiber_new green-text s18"></i>
+            <div class="richieste"><span class="titolo_testo_richieste">Priorit&agrave; : </span>
+              <span *ngIf="richiesta.priorita == 0" class="testo_richieste">Non assegnata</span>
+              <span *ngIf="richiesta.priorita == 1" class="testo_richieste">Alta</span>
+              <span *ngIf="richiesta.priorita == 2" class="testo_richieste">Media</span>
+              <span *ngIf="richiesta.priorita == 3" class="testo_richieste">Bassa</span>
+            </div>
+            <div class="richieste"><span class="titolo_testo_richieste">Stato Richiesta : </span><span class="testo_richieste">{{richiesta.statiRichiesteNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Cliente : </span><span class="testo_richieste">{{richiesta.cliente}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Citt&agrave; : </span><span class="testo_richieste">{{richiesta.citta}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Costo : </span><span class="testo_richieste">{{richiesta.costo}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Skill - Linguaggi : </span><span class="testo_richieste">{{richiesta.linguaggiNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta.livelliNome}}</span></div>
+            <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta.note}}</span></div>
+            <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste"></footer>
           </a>
+          <div *ngIf="(ruolo == 'Direttore Commerciale' || ruolo == 'Admin') && richiesta.priorita == 0" class="row">
+            <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 1)">Alta</div>
+            <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 2)">Media</div>
+            <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 3)">Bassa</div>
+          </div>
         </div>
       </div>
     </div>

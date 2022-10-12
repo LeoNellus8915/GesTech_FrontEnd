@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
-  templateUrl: './nuova-busta-paga.component.html'
-  
+  templateUrl: './nuova-busta-paga.component.html',
+  styleUrls: ['../../../../assets/css/main.dipendent.css']
 })
 export class NuovaBustaPagaComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
@@ -17,13 +17,14 @@ export class NuovaBustaPagaComponent implements OnInit{
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo !== 'Personale' && this.ruolo !== 'Admin')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Personale' || this.ruolo == 'Admin'){
         this.titleService.setTitle("Gestech | Nuova Busta Paga");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuova Busta Paga";
         }, 0)
+      }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 }

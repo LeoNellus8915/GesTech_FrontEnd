@@ -1,95 +1,126 @@
 <div class="card-body spazio">
   <span *ngIf="statoPagina == 0" class="briciole">
-		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
+		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
 	</span>
+	<span *ngIf="richiesta && ruolo == 'Recruiter' && (richiesta.candidati == null || richiesta.candidati == '')" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
 	<span *ngIf="statoPagina == 1" class="briciole">
-		<a  routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
+		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
-	
 </div>
 <div class="card-body">
 	<div class="page">
 		<div class="col-md-12">
 			<div class="card no-b shadow no-r">
-			<!-- 
-			RICHIESTA 1 DATA
-			RICHIESTA 2 CLIENTE
-			RICHIESTA 3 CITTA'
-			RICHIESTA 4 COSTO
-			RICHIESTA 5 NOTE/TESTO
-			RICHIESTA 6 SKILL/LINGUAGGI
-			RICHIESTA 7 RUOLO/PROFILO
-			RICHIESTA 8 SENIORITY
-			RICHIESTA 9 STATO RICHIESTA
-			 -->
-			<form #updateForm="ngForm" (ngSubmit)="updateRichiesta(updateForm)">
-				<div class="row no-gutters">
-					<!-- PRIMA RIGA -->
-					<div *ngIf="richiesta" class="col-md-4 p-4">
-						<h5 class="text-black">Data</h5>
-						<h5 class="p-t-10">{{richiesta[1].toString().replace("T", " ")}}</h5>
+				<form #updateForm="ngForm" (ngSubmit)="updateRichiesta(updateForm)">
+					<div class="row no-gutters">
+						
+						<!-- PRIMA RIGA -->
+						<div *ngIf="richiesta" class="col-md-4 p-4">
+							<h5 class="text-black">Data</h5>
+							<h5 class="p-t-10">{{richiesta.data.toString().replace("T", " ")}}</h5>
+						</div>
+						
+						<div class="col-md-4 p-4">
+							<h5 class="text-black">Stato Richiesta</h5>
+							<select ngModel *ngIf="ruolo == 'Account'" name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
+								<option value="" selected disabled>{{statoRichiesta}}</option>
+								<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
+							</select>
+							<div *ngIf="ruolo != 'Account'">
+								<h5 class="p-t-10">{{statoRichiesta}}</h5>
+								<input type="hidden" ngModel name="statoRichiesta">
+							</div>
+						</div>
+						
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Ruolo</h5>
+							<h5 class="p-t-10">{{richiesta.profiliNome}}</h5>
+						</div>
+						
+						<!-- SECONDA RIGA -->
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Seniority</h5>
+							<h5 class="p-t-10">{{richiesta.livelliNome}}</h5>
+						</div>
+						
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Citt&agrave;</h5>
+							<h5 *ngIf="richiesta.citta != ''" class="p-t-10">{{richiesta.citta}}</h5>
+							<h5 *ngIf="richiesta.citta == ''" class="p-t-10">Da definire</h5>
+						</div>
+						
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Skill/Linguaggio</h5>
+							<h5 class="p-t-10">{{richiesta.linguaggiNome}}</h5>
+						</div>
+						<!-- TERZA RIGA -->
+						<div *ngIf="richiesta" class="col-sm-4  p-4">
+							<h5 class="text-black">Cliente</h5>
+							<h5 *ngIf="richiesta.cliente != ''" class="p-t-10">{{richiesta.cliente}}</h5>
+							<h5 *ngIf="richiesta.cliente == ''" class="p-t-10">Da definire</h5>
+						</div>
+						
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Massimo Costo Giornaliero</h5>
+							<h5 *ngIf="richiesta.costo != ''" class="p-t-10">{{richiesta.costo}}</h5>
+							<h5 *ngIf="richiesta.costo == ''" class="p-t-10">Da definire</h5>
+						</div>
+						
+						<div *ngIf="richiesta" class="col-md-4  p-4">
+							<h5 class="text-black">Note Aggiuntive</h5>
+							<h5 class="p-t-10">{{richiesta.note}}</h5>
+						</div>
 					</div>
 					
-					<div class="col-md-4  p-4">
-						<h5 class="text-black">Stato Richiesta</h5>
-						<select ngModel name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
-							<option value="" selected disabled>{{statoRichiesta}}</option>
-    					<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
-    				</select>
+
+					<div *ngIf="richiesta && (ruolo=='Admin' || ruolo=='Direttore Commerciale')" class="row">
+						<div class="col-2 p-4 offset-1"><h5 class="text-black">Priorit&agrave;:</h5></div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '1'" (click)="setPriorita('1')">Alta</div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '2'" (click)="setPriorita('2')">Media</div>
+						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '3'" (click)="setPriorita('3')">Bassa</div>
+						<input type="hidden" name="priorita">
 					</div>
-					
-					<div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Ruolo</h5>
-						<h5 class="p-t-10">{{richiesta[7]}}</h5>
+
+					<div class="row">
+						<div class="col-2"></div>
+						<div class="form-group col-10 m-0">
+							<h5 class="text-black">Commento</h5>
+							<textarea ngModel class="noteVisualizza" name="commento"
+								placeholder="Insersci Commento" type="text"></textarea>
+						</div>
 					</div>
-					<!-- SECONDA RIGA -->
-          <div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Seniority</h5>
-						<h5 class="p-t-10">{{richiesta[8]}}</h5>
+
+					<!-- da sistemare -->
+					<div *ngIf="richiesta && richiesta.recruiter == null && ruolo == 'Direttore Recruiter'">
+						<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
+						<label>Tutti</label>
+						<span *ngFor="let recruiter of listaRecruiters">
+							<input type="checkbox" value={{recruiter}} (change)="array($event)"/> 
+							<label>{{recruiter}}</label>
+						</span>
 					</div>
-					
-					<div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Citt&agrave;</h5>
-						<h5 class="p-t-10">{{richiesta[3]}}</h5>
+
+					<div class="card-body">
+						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
-					
-					<div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Skill/Linguaggio</h5>
-						<h5 class="p-t-10">{{richiesta[6]}}</h5>
-					</div>
-					<!-- TERZA RIGA -->
-          <div *ngIf="richiesta" class="col-sm-4  p-4">
-						<h5 class="text-black">Cliente</h5>
-						<h5 class="p-t-10">{{richiesta[2]}}</h5>
-					</div>
-					
-					<div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Costo</h5>
-						<h5 class="p-t-10">{{richiesta[4]}}</h5>
-					</div>
-					
-					<div *ngIf="richiesta" class="col-md-4  p-4">
-						<h5 class="text-black">Note Aggiuntive</h5>
-						<h5 class="p-t-10">{{richiesta[5]}}</h5>
-					</div>
-        </div>
-        <div class="row">
-          <div class="col-2"></div>
-          <div class="form-group col-10 m-0">
-            <h5 class="text-black">Commento</h5>
-            <textarea ngModel class="note" name="commento"
-              placeholder="Insersci Commento" type="text"></textarea>
-          </div>
+				</form>
+				<label>Lista Candidati Selezionati</label>
+				<table>
+					<thead>
+						<th class="titolotabella">NOME E COGNOME</th>
+					</thead>
+					<tbody>
+						<tr *ngFor="let candidato of candidati">
+							<td><span class="titolo_data">{{candidato}}</span></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
+					<span class="titolo_data">{{commento.data.toString().replace("T", " ")}}</span>
+					<span class="titolo_data"> {{commento.nomeCognome}}</span>
+					<p class="testo_richieste">{{commento.note}}</p>
 				</div>
-				<div class="card-body">
-					<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
-				</div>
-	      <div class="casella_commenti col-12" *ngFor="let commento of commentiRichiesta">
-	       	<span class="titolo_data">{{commento[0].toString().replace("T", " ")}}</span>
-					<span class="titolo_data"> {{commento[1]}}</span>
-					<p class="testo_richieste">{{commento[2]}}</p>
-				</div>
-			</form>
+			</div>
     </div>
 	</div>
 </div>

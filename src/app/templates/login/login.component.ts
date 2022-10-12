@@ -7,7 +7,6 @@ import { Md5 } from "md5-typescript";
 @Component({
   templateUrl: './login.component.html',
   styleUrls: ['../../../assets/css/main.login.css']
-  
 })
 export class LoginComponent{
   public msgCredenziali: string = "Inserisci le credenziali per accedere al sistema";
@@ -20,7 +19,7 @@ export class LoginComponent{
       (response: any) => {
         if (response != null) {
           let listaRuoli: string[] = response.ruolo.toString().split(",");
-          sessionStorage.setItem("idRisorsa", response.idRisorsa);
+          sessionStorage.setItem("idDipendente", response.idDipendente);
           sessionStorage.setItem("nomeCognome", response.nomeCognome);
           sessionStorage.setItem("azienda", response.azienda);
           sessionStorage.setItem("numeroRichieste", response.numeroRichieste);
@@ -28,22 +27,11 @@ export class LoginComponent{
             sessionStorage.setItem("ruolo", listaRuoli[0]);
             this.router.navigate(["default/pagina-avvisi"]);
           }
-          else {
-            this.router.navigate(["pagina-scelta-ruolo", JSON.stringify(listaRuoli)]);
-          }
-            
+          else
+            this.router.navigate(["pagina-scelta-ruolo", JSON.stringify(listaRuoli)]); 
         }
         else
           this.msgCredenziali = "Credenziali errate, si prega di riprovare";
-      }
-    )
-  }
-
-  public sceltaRuoli(email: string): void {
-    this.authService.getDatiByEmail(email).subscribe(
-      (response: any[]) => {
-        console.log(response);
-        this.router.navigate(["pagina-scelta-ruolo", response[0], response[1]])
       }
     )
   }

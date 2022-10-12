@@ -8,32 +8,80 @@ export class RichiesteService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
+
+  public getRichiesteAperteAdmin(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-admin`);
+  }
   
-  public getRichiesteAperte(ruolo: string, nomeCognome: string, idRisorsa: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${ruolo}/${nomeCognome}/${idRisorsa}`);
+  public getRichiesteAperteAccount(idDipendente: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-account/${idDipendente}`);
   }
 
-  public getRichiesteChiuse(ruolo: string, nomeCognome: string, idRisorsa: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-chiuse/${ruolo}/${nomeCognome}/${idRisorsa}`);
+  public getRichiesteAperteCommerciale(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-commerciale`);
   }
 
-  public getRichiesta(idRichiesta: number): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-richiesta/${idRichiesta}`);
+  public getRichiesteAperteRecruiter(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-recruiter`);
   }
 
-  public eliminaRichiesta(idRichiesta: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}`);
+  public getRichiesteAperte(nomeCognome: string, idDipendente: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${nomeCognome}/${idDipendente}`);
   }
 
-  public updateRichiesta(updateForm: JSON, idRichiesta: number, idRisorsa: number): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/modifica-richiesta/${idRichiesta}/${idRisorsa}`, updateForm);
+  public getRichiesteChiuse(ruolo: string, nomeCognome: string, idDipendente: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-chiuse/${ruolo}/${nomeCognome}/${idDipendente}`);
+  }
+
+  public getRichiesta(idRichiesta: number, pagina: number, ruolo: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-richiesta/${idRichiesta}/${pagina}/${ruolo}`);
+  }
+
+  public eliminaRichiesta(idRichiesta: number, pagina: number, ruolo: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiServerUrl}/elimina-richiesta/${idRichiesta}/${pagina}/${ruolo}`);
+  }
+
+  public updateRichiesta(updateForm: JSON, idRichiesta: number, idDipendente: number, pagina: number, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/modifica-richiesta/${idRichiesta}/${idDipendente}/${pagina}/${ruolo}`, updateForm);
   }
 
   public getRecruiters(): Observable<string[]> {
     return this.http.get<string[]>(`${this.apiServerUrl}/get-nomi-recruiter`);
   }
 
-  public addRichiesta(addForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta`, addForm);
+  public addRichiesta(addForm: JSON, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-richiesta/${ruolo}`, addForm);
+  }
+
+  public getCodiciRichiesteAperteAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-admin`);
+  }
+
+  public getCodiciRichiesteAperteAccount(idDipendente: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-account/${idDipendente}`);
+  }
+
+  public getCodiciRichiesteAperteCommerciale(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-commerciale`);
+  }
+
+  public getCodiciRichiesteAperteRecruiter(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-recruiter`);
+  }
+
+  public getCodiciRichiesteAperte(nomeCognome: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte/${nomeCognome}`);
+  }
+
+  public getCodiciRichiesteChiuse(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-chiuse`);
+  }
+
+  public salvaPriorita(array: JSON, ruolo: string): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-priorita/${ruolo}`, array);
+  }
+
+  public assegnazioneCandidati(listaCandidati: string, idRichiesta: number): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/assegna-candidati/${idRichiesta}`, listaCandidati);
   }
 }

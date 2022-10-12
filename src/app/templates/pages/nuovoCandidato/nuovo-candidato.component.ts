@@ -12,7 +12,7 @@ import { LinguaggiService } from 'src/app/service/linguaggi.service';
 import { LingueService } from 'src/app/service/lingua.service';
 import { LivelliService } from 'src/app/service/livelli.service';
 import { formatDate } from '@angular/common';
-import { RisorseService } from 'src/app/service/risorse.service';
+import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 
@@ -23,7 +23,7 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class NuovoCandidatoComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idRisorsa = sessionStorage.getItem("idRisorsa") as unknown as number;
+  public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public listaEsitiColloquio!: EsitiColloquio[];
   public listaProfili!: Profili[];
   public listaLinguaggi!: Linguaggi[];
@@ -35,21 +35,26 @@ export class NuovoCandidatoComponent implements OnInit{
 
   constructor(private router: Router, private esitiColloquioService: EsitiColloquioService, private profiliService: ProfiliService,
               private linguaggiService: LinguaggiService, private lingueService: LingueService, private livelliService: LivelliService,
-              private risorseService: RisorseService, private titleService: Title, private defaultService: DefaultComponent) {}
+              private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
       this.router.navigate([""]);
     else
-      if (this.ruolo == 'Personale' || this.ruolo == 'Dipendente')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
+      if (this.ruolo == 'Admin' 
+          || this.ruolo == 'Direttore Commerciale'
+          || this.ruolo == 'Direttore Recruiter' 
+          || this.ruolo == 'Recruiter'){
         this.titleService.setTitle("Gestech | Nuovo Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuovo Candidati";
         }, 0)
         this.getSelects();
       }
+      else{
+        this.router.navigate(["default/pagina-avvisi"]);
+      }
+      
   }
 
   public getSelects(): void {
@@ -87,16 +92,16 @@ export class NuovoCandidatoComponent implements OnInit{
     if (addForm.value.profilo == "")
       addForm.value.profilo = "17";
 
-    if (addForm.value.skill1 == "")
-      addForm.value.skill1 = "55";
-    if (addForm.value.skill2 == "")
-      addForm.value.skill2 = "55";
-    if (addForm.value.skill3 == "")
-      addForm.value.skill3 = "55";
-    if (addForm.value.skill4 == "")
-      addForm.value.skill4 = "55";
-    if (addForm.value.skill5 == "")
-      addForm.value.skill5 = "55";
+    if (addForm.value.linguaggio1 == "")
+      addForm.value.linguaggio1 = "55";
+    if (addForm.value.linguaggio2 == "")
+      addForm.value.linguaggio2 = "55";
+    if (addForm.value.linguaggio3 == "")
+      addForm.value.linguaggio3 = "55";
+    if (addForm.value.linguaggio4 == "")
+      addForm.value.linguaggio4 = "55";
+    if (addForm.value.linguaggio5 == "")
+      addForm.value.linguaggio5 = "55";
 
     if (addForm.value.lingua1 == "")
       addForm.value.lingua1 = "25";
@@ -119,13 +124,15 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.dataColloquio = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
     if (addForm.value.annoColloquio == "")
-    addForm.value.annoColloquio = new Date().getFullYear;
+      addForm.value.annoColloquio = new Date().getFullYear();
 
-    addForm.value.idRisorsa = this.idRisorsa;
+    addForm.value.idDipendente = this.idDipendente;
 
     addForm.value.cv = this.base64;
+
+    console.log(addForm.value)
     
-    this.risorseService.salvaCandidato(addForm.value).subscribe(
+    this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
         if (response == 0)
           alert("Email già esistente");

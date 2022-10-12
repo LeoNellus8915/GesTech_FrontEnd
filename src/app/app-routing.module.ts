@@ -28,6 +28,8 @@ import { VisualizzaBeneComponent } from './templates/pages/visualizzaBene/visual
 import { VisualizzaCandidatoComponent } from './templates/pages/visualizzaCandidato/visualizza-candidato.component';
 import { VisualizzaRichiestaComponent } from './templates/pages/visualizzaRichiesta/visualizza-richiesta.component';
 import { PaginaSceltaRuoloComponent } from './templates/paginaSceltaRuolo/pagina-scelta-ruolo.component';
+import { PaginaModulisticaComponent } from './templates/pages/paginaModulistica/pagina-modulistica.component';
+import { PaginaSceltaCandidatiRichiestaComponent } from './templates/pages/sceltaCandidatiRichiesta/scelta-candidati-richiesta.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -35,7 +37,7 @@ const routes: Routes = [
   {path: "default", component: DefaultComponent, children: [
     {path: "pagina-avvisi", component: AvvisiComponent},
     {path: "pagina-modifica-bene/:idBene", component: ModificaBeneComponent},
-    {path: "pagina-modifica-candidato/:idCandidato", component: ModificaCandidatoComponent},
+    {path: "pagina-modifica-candidato/:idCandidato/:pagina/:idRichiesta", component: ModificaCandidatoComponent},
     {path: "pagina-modifica-password", component: ModificaPasswordComponent},
     {path: "pagina-nuova-busta-paga", component: NuovaBustaPagaComponent},
     {path: "pagina-nuova-certificazione-unica", component: NuovaCertificazioneUnicaComponent},
@@ -47,6 +49,7 @@ const routes: Routes = [
     {path: "pagina-beni", component: PaginaBeniComponent},
     {path: "pagina-buste-paga", component: PaginaBustePagaComponent},
     {path: "pagina-candidati", component: PaginaCandidatiComponent},
+    {path: "pagina-modulistica", component: PaginaModulisticaComponent},
     {path: "pagina-ccnl", component: PaginaCCNLComponent},
     {path: "pagina-certificazioni-uniche", component: PaginaCertificazioniUnicheComponent},
     {path: "pagina-cv-dipendenti", component: PaginaCVDipendentiComponent},
@@ -55,8 +58,9 @@ const routes: Routes = [
     {path: "pagina-richieste", component: PaginaRichiesteComponent},
     {path: "pagina-storico-richieste", component: PaginaStoricoRichiesteComponent},
     {path: "pagina-visualizza-bene/:idBene", component: VisualizzaBeneComponent},
-    {path: "pagina-visualizza-candidato/:idCandidato", component: VisualizzaCandidatoComponent},
-    {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent}
+    {path: "pagina-visualizza-candidato/:idCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
+    {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
+    {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent}
   ]},
   {path:"**", component: ErrorPageComponent}
 ];
@@ -71,4 +75,4 @@ export const RoutingComponents = [LoginComponent, DefaultComponent, ErrorPageCom
   NuovaRichiestaComponent, NuovoBeneComponent, NuovoCandidatoComponent, NuovoCCNLComponent, NuovoUtenteComponent, PaginaBeniComponent,  
   PaginaBustePagaComponent, PaginaCandidatiComponent, PaginaCCNLComponent, PaginaCertificazioniUnicheComponent, PaginaCVDipendentiComponent,
   PaginaDipendentiComponent, PaginaRapportinoComponent, PaginaRichiesteComponent, PaginaStoricoRichiesteComponent, VisualizzaBeneComponent,
-  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent]
+  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent]

@@ -13,9 +13,10 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class ModificaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idBene!: number;
+  public codiceBene!: string;
   public bene!: Beni;
   public listaDipendenti!: string[];
+  public listaStorico!: Beni[];
   public titoloPagina: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private titleService: Title, private defaultService: DefaultComponent,
@@ -23,32 +24,36 @@ export class ModificaBeneComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
-    else
-      if (this.ruolo !== 'Admin' && this.ruolo !== 'Personale')
-        this.router.navigate(["default/pagina-avvisi"]);
-      else{
-        this.titleService.setTitle("Gestech | Visualizza Bene");
-        setTimeout(() => {
-          this.defaultService.titoloPagina=" Visualizza Bene";
-        }, 0)
-        this.idBene = this.route.snapshot.params['idBene'];
-        this.getBene();
-      }
+    this.router.navigate([""]);
+  else
+    if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+      this.titleService.setTitle("Gestech | Visualizza Bene");
+      setTimeout(() => {
+        this.defaultService.titoloPagina=" Visualizza Bene";
+      }, 0)
+      this.codiceBene = this.route.snapshot.params['idBene'];
+      this.getBene();
+    }
+    else{
+      this.router.navigate(["default/pagina-avvisi"]);
+    }
   }
 
   public getBene(): void {
-    this.beniService.getBeneModifica(this.idBene).subscribe(
+    this.beniService.getBeneModifica(this.codiceBene).subscribe(
       (response: any[]) => {
         this.bene = response[0];
         this.listaDipendenti = response[1];
+        this.listaStorico = response[2];
       }
     )
   }
 
   public modificaBene(updateForm: NgForm): void {
-    updateForm.value.id = this.idBene;
-    this.beniService.modificaBene(updateForm.value).subscribe(
+    if(updateForm.value.dipendente == ''){
+      updateForm.value.dipendente = this.bene.dipendente;
+    }
+    this.beniService.modificaBene(updateForm.value, this.codiceBene).subscribe(
       (response: any) => {
         alert("Bene modificato con successo");
         this.router.navigate(["default/pagina-beni"]);
