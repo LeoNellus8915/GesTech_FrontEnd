@@ -1,5 +1,6 @@
 export interface allDipendenti{
   id: number;
-  nomeCognome: string;
   nome: string;
+  cognome: string;
+  azienda: string;
 }

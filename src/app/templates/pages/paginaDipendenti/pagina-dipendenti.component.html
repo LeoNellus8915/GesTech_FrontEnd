@@ -14,8 +14,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let dipendente of listaDipendenti">
-        <td>{{dipendente.nomeCognome}}</td>
-        <td>{{dipendente.nome}}</td>
+        <td>{{dipendente.cognome + " " + dipendente.nome}}</td>
+        <td>{{dipendente.azienda}}</td>
         <td><a [routerLink]="['../pagina-visualizza-dipendente', dipendente.id]"><i class="icon-eye mr-3"></i></a>
         <a [routerLink]="['../pagina-modifica-dipendente', dipendente.id]"><i class="icon-pencil"></i></a></td>
       </tr>
