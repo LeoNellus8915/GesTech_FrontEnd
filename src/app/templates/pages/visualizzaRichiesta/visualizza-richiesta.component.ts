@@ -7,6 +7,7 @@ import { StatiRichiesta } from 'src/app/model/stati_richiesta';
 import { NgForm } from '@angular/forms';
 import { allCommentiRichieste } from 'src/app/model/mapper/allCommentiRichieste';
 import { getRichieste } from 'src/app/model/mapper/getRichiesta';
+import { Persone } from 'src/app/model/persone';
 
 @Component({
   templateUrl: './visualizza-richiesta.component.html',
@@ -28,6 +29,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public priorita!: string;
   public titoloPagina: any;
   public candidati!: string[];
+  public candidatiSelezionati!: Persone[];
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
               private route: ActivatedRoute, private richiesteService: RichiesteService) {}
@@ -71,12 +73,11 @@ export class VisualizzaRichiestaComponent implements OnInit{
       (response: any[]) => {
         this.richiesta = response[0];
         this.priorita = this.richiesta.priorita as string;
-        if (this.richiesta.candidati != null)
-          this.candidati = this.richiesta.candidati.toString().split(",");
         this.statoRichiesta = response[1];
         this.idStatoRichiesta = response[2];
         this.listaStatiRichiesta = response[3];
-        this.commentiRichiesta = response[4];
+        this.candidatiSelezionati = response[4];
+        this.commentiRichiesta = response[5];
       }
     )
   }

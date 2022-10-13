@@ -2,7 +2,9 @@
   <span *ngIf="statoPagina == 0" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
 	</span>
+	<!-- 
 	<span *ngIf="richiesta && ruolo == 'Recruiter' && (richiesta.candidati == null || richiesta.candidati == '')" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
+	-->
 	<span *ngIf="statoPagina == 1" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
@@ -110,8 +112,8 @@
 						<th class="titolotabella">NOME E COGNOME</th>
 					</thead>
 					<tbody>
-						<tr *ngFor="let candidato of candidati">
-							<td><span class="titolo_data">{{candidato}}</span></td>
+						<tr *ngFor="let candidato of candidatiSelezionati">
+							<td><span class="titolo_data">{{candidato.cognome + candidato.nome}}</span></td>
 						</tr>
 					</tbody>
 				</table>

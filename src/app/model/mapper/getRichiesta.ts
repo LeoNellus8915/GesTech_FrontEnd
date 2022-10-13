@@ -12,6 +12,5 @@ export interface getRichieste{
   livelliNome: string;
   statiRichiestaNome: string;
   recruiter: string;
-  candidati: string;
   priorita: string;
 }

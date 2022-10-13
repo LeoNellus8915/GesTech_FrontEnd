@@ -157,6 +157,7 @@ export class PaginaRichiesteComponent implements OnInit {
       this.radioArray[x[0]].priorita = priorita;
       this.radioArray.pop();
     }
+    this.contatore ++;  //??
   }
 
   public salvaPriorita(): void {

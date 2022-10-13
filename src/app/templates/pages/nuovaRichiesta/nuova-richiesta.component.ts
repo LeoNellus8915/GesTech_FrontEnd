@@ -9,7 +9,9 @@ import { LinguaggiService } from 'src/app/service/linguaggi.service';
 import { LivelliService } from 'src/app/service/livelli.service';
 import { ProfiliService } from 'src/app/service/profili.service';
 import { RichiesteService } from 'src/app/service/richieste.service';
+import { ClientiService } from 'src/app/service/clienti.service';
 import { DefaultComponent } from '../../default/default.component';
+import { Clienti } from 'src/app/model/clienti';
 
 @Component({
   templateUrl: './nuova-richiesta.component.html',
@@ -22,10 +24,12 @@ export class NuovaRichiestaComponent implements OnInit{
   public listaProfili!: Profili[];
   public listaLinguaggi!: Linguaggi[];
   public listaLivelli!: Livelli[];
+  public listaClienti!: Clienti[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private richiesteService: RichiesteService,
-              private profiliService: ProfiliService, private linguaggiService: LinguaggiService, private livelliService: LivelliService) {}
+              private profiliService: ProfiliService, private linguaggiService: LinguaggiService, private livelliService: LivelliService,
+              private clientiService: ClientiService) {}
 
   ngOnInit(): void {
     if (this.ruolo === null)
@@ -57,6 +61,11 @@ export class NuovaRichiestaComponent implements OnInit{
     this.livelliService.getLivelli().subscribe(
       (response: Livelli[]) => {
         this.listaLivelli = response;
+      }
+    )
+    this.clientiService.getClienti().subscribe(
+      (response: Clienti[]) => {
+        this.listaClienti = response;
       }
     )
   }
