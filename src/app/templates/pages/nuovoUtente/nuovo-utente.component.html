@@ -4,8 +4,13 @@
 <form ngNativeValidate #addForm="ngForm" (ngSubmit)="addUtente(addForm)">
   <div class="row spazio">
     <div class="form-group col-4 m-0">
-      <label for="nomeCognome" class="col-form-label s-12">Nome e cognome</label>
-      <input ngModel name="nomeCognome" placeholder="Inserisci nome e cognome"
+      <label for="nome" class="col-form-label s-12">Nome</label>
+      <input ngModel name="nome" placeholder="Inserisci nome"
+        class="form-control r-0 light s-12 date-picker" type="text">
+    </div>
+    <div class="form-group col-4 m-0">
+      <label for="cognome" class="col-form-label s-12">Cognome</label>
+      <input ngModel name="cognome" placeholder="Inserisci cognome"
         class="form-control r-0 light s-12 date-picker" type="text">
     </div>
     <div class="form-group col-4 m-0 ruolo">

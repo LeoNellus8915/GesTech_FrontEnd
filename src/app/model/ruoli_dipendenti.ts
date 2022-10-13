@@ -1,5 +1,5 @@
 export interface RuoliDipendenti {
   id: number;
-  idDipendente: number;
+  idPersona: number;
   idRuolo: number;
 }
