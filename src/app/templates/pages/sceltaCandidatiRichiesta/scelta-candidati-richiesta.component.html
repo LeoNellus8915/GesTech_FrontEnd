@@ -22,14 +22,14 @@
       <tbody>
         <tr *ngFor="let candidato of listaCandidati">
           <td>{{candidato.dataInserimento}}</td>
-          <td>{{candidato.nomeCognome}}</td>
+          <td>{{candidato.nome + " " + candidato.cognome}}</td>
           <td>{{candidato.citta}}</td>
           <td>{{candidato.profiloNome}}</td>
           <td>{{candidato.competenzaPrincipale}}</td>
           <td>{{candidato.esitoNome}}</td>
           <td><a [routerLink]="['../../pagina-visualizza-candidato', candidato.id, 1, idRichiesta]"><i class="icon-eye mr-3"></i></a>
           <a [routerLink]="['../../pagina-modifica-candidato', candidato.id, 1, idRichiesta]"><i class="icon-pencil"></i></a></td>
-          <td><input type="checkbox" value={{candidato.nomeCognome}} (change)="array($event)"></td>
+          <td><input type="checkbox" value={{candidato.nome + candidato.cognome}} (change)="array($event)"></td>
         </tr>
       </tbody>
     </table>

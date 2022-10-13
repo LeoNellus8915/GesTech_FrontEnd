@@ -19,7 +19,7 @@
     <tbody>
       <tr *ngFor="let candidato of listaCandidati">
         <td>{{candidato.dataInserimento}}</td>
-        <td>{{candidato.nomeCognome}}</td>
+        <td>{{candidato.nome + " " + candidato.cognome}}</td>
         <td>{{candidato.citta}}</td>
         <td>{{candidato.profiloNome}}</td>
         <td>{{candidato.competenzaPrincipale}}</td>

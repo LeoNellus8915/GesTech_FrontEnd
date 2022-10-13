@@ -12,7 +12,6 @@ import { allCandidati } from 'src/app/model/mapper/allCandidati';
 export class PaginaCandidatiComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public listaCandidati!: allCandidati[];
-  public candidati!: allCandidati[];
   public titoloPagina: any;
 
   constructor(private router: Router, private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent) {}
@@ -42,6 +41,7 @@ export class PaginaCandidatiComponent implements OnInit{
         const listaCodici = response[1];
         for (let i = 0; i < response[0].length; i++)
           this.listaCandidati[i].id = listaCodici[i].codice;
+          console.log(this.listaCandidati);
         setTimeout(function () {
           $(function () {
             $('#tabellaCandidati').DataTable({
