@@ -32,6 +32,7 @@ export class AvvisiComponent implements OnInit{
       }, 0)
       this.getAvvisi();
       this.getRuoli();
+      this.checkArray = new Array();
     }
   }
 

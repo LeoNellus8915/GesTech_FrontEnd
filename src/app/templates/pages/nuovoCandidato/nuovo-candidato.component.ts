@@ -18,7 +18,7 @@ import { DefaultComponent } from '../../default/default.component';
 
 @Component({
   templateUrl: './nuovo-candidato.component.html',
-  styleUrls: ['../../../../assets/css/main.home.css']
+  styleUrls: ['../../../../assets/css/main.home.css', "../../../../assets/css/main.candidati.css"]
   
 })
 export class NuovoCandidatoComponent implements OnInit{
@@ -154,6 +154,11 @@ export class NuovoCandidatoComponent implements OnInit{
     setTimeout(() => {
       this.base64 = appoggio;
     }, 50)
-    
+  }
+
+  selectProfilo(livello: string, note: string, botton: string): void {
+    document.getElementById(livello)?.style.removeProperty("display");
+    document.getElementById(note)?.style.removeProperty("display");
+    document.getElementById(botton)?.style.removeProperty("display");
   }
 }

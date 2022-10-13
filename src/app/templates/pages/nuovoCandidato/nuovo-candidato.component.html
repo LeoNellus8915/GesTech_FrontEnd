@@ -9,12 +9,17 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div class="form-group col-6 m-0">
-								<label for="nomeCognome" class="col-form-label s-12">NOME E COGNOME</label> 
-                <input ngModel name="nomeCognome" placeholder="Inserisci Nome e Cognome"
+							<div class="form-group col-4 m-0">
+								<label for="nomeCognome" class="col-form-label s-12">NOME</label> 
+                <input ngModel name="nome" placeholder="Inserisci Nome"
 									class="form-control r-0 light s-12 " type="text">
 							</div>
-							<div class="form-group col-6 m-0">
+							<div class="form-group col-4 m-0">
+								<label for="nomeCognome" class="col-form-label s-12">COGNOME</label> 
+                <input ngModel name="cognome" placeholder="Inserisci Cognome"
+									class="form-control r-0 light s-12 " type="text">
+							</div>
+							<div class="form-group col-4 m-0">
 								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
 								<input ngModel name="cellulare" placeholder="Inserisci Cellulare"
 									class="form-control r-0 light s-12 date-picker" type="text">
@@ -105,6 +110,40 @@
 				<!-- Fine Row -->
 				<hr>
       </div>
+			<div class="card-body">
+				<h5 class="card-title">Competenze</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-3 m-0">
+								<label for="profilo" class="col-form-label s-12">RUOLO</label>
+								<select ngModel (change)="selectProfilo('livello1', 'note1', 'botton1')" name="profilo" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option> 
+    							<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
+								</select>
+							</div>
+							<div id="livello1" class="form-group col-4 m-0" style="display: none">
+								<label for="livello" class="col-form-label s-12">SENIORITY</label>
+								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+   							</select>
+							</div>
+							<div id="note1" class="form-group col-4 m-0" style="display: none">
+								<label for="note" class="col-form-label s-12">NOTE</label> 
+                <input ngModel name="note" placeholder="Inserisci Note"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+							<div id="botton1" class="form-group col-1 m-0" style="display: none">
+								<label for="note" class="col-form-label s-12">ADD</label> 
+                <span class="plus form-control r-0 light s-12 date-picker">+</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
       <div class="card-body">
 				<h5 class="card-title">Costo Impiego</h5>
 				<div class="form-row">
@@ -126,59 +165,7 @@
 				<!-- Fine Row -->
 				<hr>
       </div>
-      <div class="card-body">
-				<h5 class="card-title">Skill</h5>
-				<div class="form-row">
-					<div class="col-md-12">
-						<div class="form-row">
-							<div class="form-group col-4 m-0">
-								<label for="linguaggio1" class="col-form-label s-12">SKILL1</label>
-								<select ngModel name="linguaggio1" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-								</select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="linguaggio2" class="col-form-label s-12">SKILL2</label>
-								<select ngModel name="linguaggio2" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-								</select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="linguaggio3" class="col-form-label s-12">SKILL3</label>
-								<select ngModel name="linguaggio3" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-								</select>
-							</div>
-
-							<div class="form-group col-4 m-0">
-								<label for="linguaggio4" class="col-form-label s-12">SKILL4</label>
-								<select ngModel name="linguaggio4" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-								</select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="linguaggio5" class="col-form-label s-12">SKILL5</label>
-								<select ngModel name="linguaggio5" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-								</select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="linguaggioCampoLibero" class="col-form-label s-12">SKILL (campo libero)</label> 
-                <input ngModel name="linguaggioCampoLibero" placeholder="Insersci Skill Campo Libero"
-									class="form-control r-0 light s-12 date-picker" type="text">
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- Fine Row -->
-				<hr>
-      </div>
-      <div class="card-body">
+      <!--<div class="card-body">
 				<h5 class="card-title">Lingua</h5>
 				<div class="form-row">
 					<div class="col-md-12">
@@ -207,30 +194,23 @@
 						</div>
 					</div>
 				</div>
-				<!-- Fine Row -->
+				 Fine Row 
 				<hr>
-      </div>
+      </div>-->
       <div class="card-body">
 				<h5 class="card-title">Info Extra</h5>
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div class="form-group col-4 m-0">
+							<div class="form-group col-6 m-0">
 								<label for="competenzeTotali" class="col-form-label s-12">COMPETENZE TOTALI</label> 
                 <input ngModel name="competenzeTotali" placeholder="Insersci Competenze Totali"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div class="form-group col-4 m-0">
+							<div class="form-group col-6 m-0">
 								<label for="certificazioni" class="col-form-label s-12">CERTIFICAZIONI</label>
 								<input ngModel name="certificazioni" placeholder="Insersci Certificazioni"
 									class="form-control r-0 light s-12 date-picker" type="text">
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="livello" class="col-form-label s-12">SENIORITY</label>
-								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-   							</select>
 							</div>
 						</div>
 					</div>
