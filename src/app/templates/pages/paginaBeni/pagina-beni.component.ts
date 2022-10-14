@@ -25,15 +25,15 @@ export class PaginaBeniComponent implements OnInit{
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Beni";
         }, 0)
-        this.allBeni();
+        this.allHardware();
       }
       else{
         this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 
-  public allBeni(): void {
-    this.beniService.allBeni().subscribe(
+  public allHardware(): void {
+    this.beniService.allHardware().subscribe(
       (response: any[]) => {
         this.listaBeni = response[0];
         const listaCodici = response[1];

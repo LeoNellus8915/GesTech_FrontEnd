@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Beni } from '../model/beni';
+import { hardware } from '../model/mapper/hardware';
 
 @Injectable({providedIn: 'root'})
 export class BeniService {
@@ -10,8 +11,8 @@ export class BeniService {
 
   constructor(private http: HttpClient) {}
   
-  public allBeni(): Observable<Beni[]> {
-    return this.http.get<Beni[]>(`${this.apiServerUrl}/all-beni`);
+  public allHardware(): Observable<hardware[]> {
+    return this.http.get<hardware[]>(`${this.apiServerUrl}/all-hardware`);
   }
 
   public getBeneVisualizza(idBene: number): Observable<any> {

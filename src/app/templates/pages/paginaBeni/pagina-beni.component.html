@@ -16,11 +16,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let bene of listaBeni">
-        <td>{{bene.dispositivo}}</td>
+        <td>{{bene.idDispositivo}}</td>
         <td>{{bene.marca}}</td>
         <td>{{bene.modello}}</td>
-        <td *ngIf="bene.dipendente != ''">{{bene.dipendente}}</td>
-        <td *ngIf="bene.dipendente == ''">Non Assegnato</td>
+        <td *ngIf="bene.idDipendente != ''">{{bene.idDipendente}}</td>
+        <td *ngIf="bene.dipendente == null">Non Assegnato</td>
         <td><a [routerLink]="['../pagina-visualizza-bene', bene.id]"><i class="icon-eye mr-3"></i></a>
         <a [routerLink]="['../pagina-modifica-bene', bene.id]"><i class="icon-pencil"></i></a></td>
       </tr>
