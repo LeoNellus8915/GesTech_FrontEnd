@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Persone } from '../model/persone';
 
 @Injectable({providedIn: 'root'})
 export class RichiesteService {
@@ -25,8 +26,8 @@ export class RichiesteService {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-recruiter`);
   }
 
-  public getRichiesteAperte(nomeCognome: string, idDipendente: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${nomeCognome}/${idDipendente}`);
+  public getRichiesteAperte(nome: string, cognome: string, idDipendente: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte/${nome}/${cognome}/${idDipendente}`);
   }
 
   public getRichiesteChiuse(ruolo: string, nomeCognome: string, idDipendente: number): Observable<any[]> {
@@ -69,8 +70,8 @@ export class RichiesteService {
     return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte-recruiter`);
   }
 
-  public getCodiciRichiesteAperte(nomeCognome: string): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte/${nomeCognome}`);
+  public getCodiciRichiesteAperte(nome: string, cognome: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-codici-richieste-aperte/${nome}/${cognome}`);
   }
 
   public getCodiciRichiesteChiuse(): Observable<any> {

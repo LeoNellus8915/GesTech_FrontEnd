@@ -15,7 +15,8 @@ import { allRichiesteAperte } from 'src/app/model/mapper/allRichiesteAperte';
 export class PaginaRichiesteComponent implements OnInit {
   public listaRichieste!: allRichiesteAperte[];
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public nomeCognome = sessionStorage.getItem("nomeCognome") as string;
+  public nome = sessionStorage.getItem("nome") as string;
+  public cognome = sessionStorage.getItem("cognome") as string;
   public idDipendente = sessionStorage.getItem("idDipendente") as unknown as number;
   public contatore!: number;
 
@@ -113,7 +114,7 @@ export class PaginaRichiesteComponent implements OnInit {
   }
 
   public getRichieste(): void {
-    this.richiesteService.getRichiesteAperte(this.nomeCognome, this.idDipendente).subscribe(
+    this.richiesteService.getRichiesteAperte(this.nome, this.cognome, this.idDipendente).subscribe(
       (response: any[]) => {
         if (response[1].length > 0) {
           this.listaRichieste = response[1];

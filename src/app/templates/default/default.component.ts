@@ -67,7 +67,7 @@ export class DefaultComponent implements OnInit{
           }
         );
       if (this.ruolo == 'Recruiter' && this.codiciRichiesteAperte == null)
-        this.richiesteService.getCodiciRichiesteAperte(this.nome).subscribe(
+        this.richiesteService.getCodiciRichiesteAperte(this.nome, this.cognome).subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteAperte", "presenti");
           }
