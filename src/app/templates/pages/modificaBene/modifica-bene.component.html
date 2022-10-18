@@ -2,51 +2,54 @@
   <span class="briciole"><a routerLink="../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../default/pagina-beni">Pagina Beni</a> / Modifica Bene</span>
 </div>
 <div class="card-body">
-	<form #updateForm="ngForm" (ngSubmit)="modificaBene(updateForm)">
+	<form #updateForm="ngForm" (ngSubmit)="modificaHardware(updateForm)">
 		<div class="card no-b  no-r">
 			<div class="card-body">
 				<h5 class="card-title">Informazioni</h5>
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="bene" class="form-group col-6 m-0">
-								<label for="dispositivo" class="col-form-label s-12">DISPOSITIVO</label> 
-                <input ngModel name="dispositivo" [(ngModel)]=bene.dispositivo
+							<div *ngIf="hardware" class="form-group col-6 m-0">
+								<label for="idDispositivo" class="col-form-label s-12">DISPOSITIVO</label> 
+                <input ngModel name="dispositivo" [(ngModel)]=hardware.idDispositivo
                   placeholder="Inserisci Dispositivo"
 									class="form-control r-0 light s-12 " type="text">
 							</div>
-							<div *ngIf="bene" class="form-group col-6 m-0">
+							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="marca" class="col-form-label s-12">MARCA</label>
-								<input ngModel name="marca" [(ngModel)]=bene.marca
+								<input ngModel name="marca" [(ngModel)]=hardware.marca
                   placeholder="Inserisci Marca"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
-						<div *ngIf="bene" class="form-row">
+						<div *ngIf="hardware" class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="modello" class="col-form-label s-12">MODELLO</label>
-								<input ngModel name="modello" [(ngModel)]=bene.modello
+								<input ngModel name="modello" [(ngModel)]=hardware.modello
                   placeholder="Inserisci Modello"
  									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<div *ngIf="bene" class="form-group col-6 m-0">
-								<label for="numeroSeriale" class="col-form-label s-12">NUMERO SERIALE</label>
-								<input ngModel name="numeroSeriale" [(ngModel)]=bene.numeroSeriale
+							<div *ngIf="hardware" class="form-group col-6 m-0">
+								<label for="seriale" class="col-form-label s-12">NUMERO SERIALE</label>
+								<input ngModel name="seriale" [(ngModel)]=hardware.seriale
                   placeholder="Linkedin Numero Seriale"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<div *ngIf="bene" class="form-group col-6 m-0">
+							<!--
+							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="password" class="col-form-label s-12">PASSWORD</label> 
-                <input ngModel name="password" [(ngModel)]=bene.password
+                <input ngModel name="password" [(ngModel)]=hardware.password
                   placeholder="Inserisci Password"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<div *ngIf="bene" class="form-group col-6 m-0">
+							
+							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="societa" class="col-form-label s-12">SOCIET&Agrave; PROPRIETARIA</label>
-								<input ngModel name="societa" [(ngModel)]=bene.societa
+								<input ngModel name="societa" [(ngModel)]=hardware.societa
                   placeholder="Insersci Societ&agrave;"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
+							-->
 						</div>
 					</div>
 				</div>
@@ -59,29 +62,29 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="bene" class="form-group col-4 m-0">
-								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
+							<div *ngIf="hardware" class="form-group col-4 m-0">
+								<label for="idPersona" class="col-form-label s-12">DIPENDENTE</label>
 								<select ngModel name="dipendente" class="form-control r-0 light s-12 date-picker freccia">
-									<option *ngIf="bene.dipendente != ''" value="" selected disabled>{{bene.dipendente}}</option>
-									<option *ngIf="bene.dipendente == ''" value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let dipendente of listaDipendenti" value={{dipendente}}>{{dipendente}}</option>
+									<option *ngIf="hardware.idPersona != null" value="" selected disabled>{{hardware.idPersona}}</option>
+									<option *ngIf="hardware.idPersona == null" value="" selected disabled>Selezionare...</option>
+    						<!--<option *ngFor="let persona of listaDipendenti" value={{idPersona}}>{{idPersona}}</option>-->	
     						</select>
 							</div>
-							<div *ngIf="bene" class="form-group col-8 m-0">
+							<div *ngIf="hardware" class="form-group col-8 m-0">
 								<label for="note" class="col-form-label s-12">NOTE</label> 
-                <input ngModel name="note" [(ngModel)]=bene.note
+                <input ngModel name="note" [(ngModel)]=hardware.note
                   placeholder="Insersci Note"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-              <div *ngIf="bene" class="form-group col-6 m-0">
+              <div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="dataConsegna" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA CONSEGNA</label>
-								<input ngModel name="dataConsegna" [(ngModel)]=bene.dataConsegna
+								<input ngModel name="dataConsegna" [(ngModel)]=hardware.dataConsegna
                   placeholder="Insersci Data Consegna"
 									class="form-control r-0 light s-12 date-picker" type="date">
 							</div>
-              <div *ngIf="bene" class="form-group col-6 m-0">
+              <div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="dataRestituzione" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA RESTITUZIONE</label>
-								<input ngModel name="dataRestituzione" [(ngModel)]=bene.dataRestituzione
+								<input ngModel name="dataRestituzione" [(ngModel)]=hardware.dataRestituzione
                   placeholder="Insersci Data Restituzione"
 									class="form-control r-0 light s-12 date-picker" type="date">
 							</div>
@@ -99,7 +102,7 @@
 							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
 								<div class="form-row">
                   <div class="col-md-2">
-                    <span>{{storico.dipendente}}</span>
+                    <span>{{storico.idPersona}}</span>
                   </div>
                   <div class="col-md-2">
                     <span> {{storico.dataConsegna}}</span>

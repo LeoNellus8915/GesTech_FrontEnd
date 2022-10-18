@@ -7,4 +7,5 @@ export interface hardware{
     seriale:string;
     dataConsegna:Date;
     dataRestituzione:Date;
+    note:string;
 }

@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BeniService } from 'src/app/service/beni.service';
+import { HardwareService } from 'src/app/service/hardware.service';
 import { RichiesteService } from 'src/app/service/richieste.service';
 import { CandidatiService } from 'src/app/service/candidati.service';
 
@@ -24,13 +24,13 @@ export class DefaultComponent implements OnInit{
   public codiciRichiesteAperteCommerciale = sessionStorage.getItem("codiciRichiesteAperteCommerciale");
   public codiciRichiesteAperteRecruiter = sessionStorage.getItem("codiciRichiesteAperteRecruiter");
   public codiciRichiesteAperte = sessionStorage.getItem("codiciRichiesteAperte");
-
+  public codiciHardware = sessionStorage.getItem("codiciHardware");
   public codiciRichiesteChiuse = sessionStorage.getItem("codiciRichiesteChiuse");
 
   public titoloPagina: any;
 
   constructor(private router: Router, private candidatiService: CandidatiService, @Inject(DOCUMENT) private document: Document,
-              private richiesteService: RichiesteService, private beniService: BeniService) {}
+              private richiesteService: RichiesteService, private hardwareService: HardwareService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -42,6 +42,12 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciCandidati", "presenti");
           }
         );
+        if(this.ruolo == 'Admin' || this.ruolo == 'Personale' && this.codiciHardware == null)
+          this.hardwareService.getCodiciHardware().subscribe(
+            (response: any) => {
+              sessionStorage.setItem("codiciHardware","Presenti");
+            }
+          );
       if (this.ruolo == 'Admin' && this.codiciRichiesteAperteAdmin == null)
         this.richiesteService.getCodiciRichiesteAperteAdmin().subscribe(
           (response: any) => {
@@ -78,6 +84,7 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
           }
         );
+        console.log(this.codiciHardware);
     }
   }
 
@@ -94,6 +101,7 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
     sessionStorage.removeItem("codiciRichiesteAperte");
     sessionStorage.removeItem("codiciRichiesteChiuse");
+    sessionStorage.removeItem("codiciHardware");
 
     this.router.navigate([""]);
   }

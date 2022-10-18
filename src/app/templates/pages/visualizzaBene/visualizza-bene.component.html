@@ -10,40 +10,42 @@
             <img class="size" src="../../../../assets/img/img-laptop.png">
           </div>
           <div class="text-center p-5 mt-5">
-            <div *ngIf="bene"><h4 class="p-t-10">{{bene.dispositivo}}</h4></div>
-            <div *ngIf="bene"><h4 class="p-t-10">{{bene.numeroSeriale}}</h4></div>
-            <a [routerLink]="['../../pagina-modifica-bene', idBene]" class="btn btn-success giallo mt-3 button">Modifica</a>
+            <div *ngIf="hardware"><h4 class="p-t-10">{{hardware.idDispositivo}}</h4></div>
+            <div *ngIf="hardware"><h4 class="p-t-10">{{hardware.seriale}}</h4></div>
+            <a [routerLink]="['../../pagina-modifica-bene', idHardware]" class="btn btn-success giallo mt-3 button">Modifica</a>
           </div>
         </div>
         <div class="col-md-8">
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-6">
-                <div *ngIf="bene" class="p-4">
+                <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Marca</h5>
-                  <h5 class="p-t-10">{{bene.marca}}</h5>
+                  <h5 class="p-t-10">{{hardware.marca}}</h5>
                 </div>
               </div>
               <div class="col-md-6">
-                <div *ngIf="bene" class="p-4">
+                <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Modello</h5>
-                  <h5 class="p-t-10">{{bene.modello}}</h5>
+                  <h5 class="p-t-10">{{hardware.modello}}</h5>
                 </div>
               </div>                                
             </div>
           </div>
           <div class="p5 b-b">
             <div class="row">
+              <!--
               <div class="col-md-6">
-                <div *ngIf="bene" class="p-4">
+                <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Password</h5>
-                  <h5 class="p-t-10">{{bene.password}}</h5>
+                  <h5 class="p-t-10">{{hardware.password}}</h5>
                 </div>
               </div>
+              -->
               <div class="col-md-6">
-                <div *ngIf="bene" class="p-4">
+                <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Note</h5>
-                  <h5 class="p-t-10">{{bene.note}}</h5>
+                  <h5 class="p-t-10">{{hardware.note}}</h5>
                 </div>
               </div>
             </div>
@@ -51,17 +53,19 @@
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-6">
-                <div *ngIf="bene" class="p-4">
+                <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Dipendente</h5>
-                  <h5 class="p-t-10">{{bene.dipendente}}</h5>
+                  <h5 class="p-t-10">{{hardware.idPersona}}</h5>
                 </div>
               </div>
+              <!--
               <div class="col-md-6">
                 <div *ngIf="bene" class="p-4">
                   <h5 class="text-black">Societ&agrave;</h5>
                   <h5 class="p-t-10">{{bene.societa}}</h5>
                 </div>
               </div>
+              -->
             </div>
           </div>                             
         </div> <!-- fine campi stretti -->
@@ -69,15 +73,15 @@
       <div class="p5 b-b bordo"> <!-- inizio campi larghi --> 
         <div class="row">
           <div class="col-md-6">
-            <div *ngIf="bene" class="p-4">
+            <div *ngIf="hardware" class="p-4">
               <h5 class="text-black">Data Consegna</h5>
-              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataConsegna.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataConsegna.toString().replace("T", " ")}}</h5>
             </div>
           </div>   
           <div class="col-md-6">
-            <div *ngIf="bene" class="p-4">
+            <div *ngIf="hardware" class="p-4">
               <h5 class="text-black">Data Restituzione</h5>
-              <h5 *ngIf="bene.dataConsegna != null" class="p-t-10">{{bene.dataRestituzione.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataRestituzione.toString().replace("T", " ")}}</h5>
             </div>
           </div>                                                         
         </div>
@@ -90,7 +94,7 @@
 							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
                 <div class="form-row">
                   <div class="col-md-2">
-                    <span>{{storico.dipendente}}</span>
+                    <span>{{storico.idPersona}}</span>
                   </div>
                   <div class="col-md-2">
                     <span> {{storico.dataConsegna}}</span>

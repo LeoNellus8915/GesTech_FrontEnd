@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
-import { BeniService } from 'src/app/service/beni.service';
+import { hardware } from 'src/app/model/mapper/hardware';
+import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
@@ -12,13 +13,13 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class VisualizzaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idBene!: number;
-  public bene!: Beni;
-  public listaStorico!: Beni[];
+  public idHardware!: number;
+  public hardware!:hardware ;
+  public listaStorico!: hardware[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
-              private route: ActivatedRoute, private beniService: BeniService) {}
+              private route: ActivatedRoute, private hardwareService: HardwareService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -29,18 +30,18 @@ export class VisualizzaBeneComponent implements OnInit{
         setTimeout(() => {
           this.defaultService.titoloPagina=" Visualizza Bene";
         }, 0)
-        this.idBene = this.route.snapshot.params['idBene'];
-        this.getBene();
+        this.idHardware = this.route.snapshot.params['idHardware'];
+        this.getHardware();
       }
       else{
         this.router.navigate(["default/pagina-avvisi"]);
       }
   }
 
-  public getBene(): void {
-    this.beniService.getBeneVisualizza(this.idBene).subscribe(
+  public getHardware(): void {
+    this.hardwareService.getHardwareVisualizza(this.idHardware).subscribe(
       (response: any[]) => {
-        this.bene = response[0];
+        this.hardware = response[0];
         this.listaStorico = response[1];
       }
     )

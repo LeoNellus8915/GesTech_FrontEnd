@@ -15,14 +15,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let bene of listaBeni">
-        <td>{{bene.idDispositivo}}</td>
-        <td>{{bene.marca}}</td>
-        <td>{{bene.modello}}</td>
-        <td *ngIf="bene.idDipendente != ''">{{bene.idDipendente}}</td>
-        <td *ngIf="bene.dipendente == null">Non Assegnato</td>
-        <td><a [routerLink]="['../pagina-visualizza-bene', bene.id]"><i class="icon-eye mr-3"></i></a>
-        <a [routerLink]="['../pagina-modifica-bene', bene.id]"><i class="icon-pencil"></i></a></td>
+      <tr *ngFor="let hardware of listaHardware">
+        <td>{{hardware.idDispositivo}}</td>
+        <td>{{hardware.marca}}</td>
+        <td>{{hardware.modello}}</td>
+        <td *ngIf="hardware.idPersona != null">{{hardware.idPersona}}</td>
+        <td *ngIf="hardware.idPersona == null">Non Assegnato</td>
+        <td><a [routerLink]="['../pagina-visualizza-bene', hardware.id]"><i class="icon-eye mr-3"></i></a>
+        <a [routerLink]="['../pagina-modifica-bene', hardware.id]"><i class="icon-pencil"></i></a></td>
       </tr>
     </tbody>
   </table>

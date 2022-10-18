@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { BeniService } from 'src/app/service/beni.service';
+import { HardwareService } from 'src/app/service/hardware.service';
 import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { DefaultComponent } from '../../default/default.component';
+import{allDipendenti} from 'src/app/model/mapper/allDipendenti';
+import { dispositivi } from 'src/app/model/mapper/dispositivi';
+import { formatDate } from '@angular/common';
 
 @Component({
   templateUrl: './nuovo-bene.component.html',
@@ -13,11 +16,12 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class NuovoBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public listaDipendenti!: any[];
+  public listaDipendenti!: allDipendenti[];
   public titoloPagina: any;
+  public listaDispositivi!: dispositivi[];
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, 
-              private dipendentiService: DipendentiService, private beniService: BeniService) {}
+              private dipendentiService: DipendentiService, private hardwareService: HardwareService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -29,6 +33,7 @@ export class NuovoBeneComponent implements OnInit{
           this.defaultService.titoloPagina=" Nuovo Beni";
         }, 0)
         this.allDipendenti();
+        this.allDispositivi();
       }
       else{
         this.router.navigate(["default/pagina-avvisi"]);
@@ -36,15 +41,37 @@ export class NuovoBeneComponent implements OnInit{
   }
 
   public allDipendenti(): void {
-    this.dipendentiService.getDipendenti().subscribe(
+    this.dipendentiService.allDipendenti().subscribe(
       (response: any[]) => {
         this.listaDipendenti = response;
       }
     )
   }
 
-  public salvaBene(addForm: NgForm): void {
-    this.beniService.salvaBene(addForm.value).subscribe(
+  public allDispositivi():void{
+    this.hardwareService.getAllDispositivi().subscribe(
+      (response: any[])=> {
+        this.listaDispositivi = response;
+       
+      }
+     
+    )
+  }
+
+  public salvaHardware(addForm: NgForm): void {
+    if(addForm.value.dispositivi == "")
+    addForm.value.dispositivi = "5";
+
+    if(addForm.value.dipendente == "")
+    addForm.value.dipendente = "0";
+
+    if(addForm.value.dataConsegna == "")
+    addForm.value.dataConsegna = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
+    if(addForm.value.dataRestituzione == "")
+    addForm.value.dataRestituzione = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+
+    this.hardwareService.salvaHardware(addForm.value).subscribe(
       (response: any) => {
         alert("Bene salvato con successo");
         this.router.navigate(["default/pagina-beni"]);

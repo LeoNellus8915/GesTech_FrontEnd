@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
-import { BeniService } from 'src/app/service/beni.service';
+import { hardware } from 'src/app/model/mapper/hardware';
+import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
@@ -13,14 +14,14 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class ModificaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public codiceBene!: string;
-  public bene!: Beni;
-  public listaDipendenti!: string[];
-  public listaStorico!: Beni[];
+  public codiceHardware!: string;
+  public hardware!: hardware;
+  public listaDipendenti!: number[];
+  public listaStorico!: hardware[];
   public titoloPagina: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private titleService: Title, private defaultService: DefaultComponent,
-              private beniService: BeniService) {}
+              private hardwareService: HardwareService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -31,29 +32,30 @@ export class ModificaBeneComponent implements OnInit{
       setTimeout(() => {
         this.defaultService.titoloPagina=" Visualizza Bene";
       }, 0)
-      this.codiceBene = this.route.snapshot.params['idBene'];
-      this.getBene();
+      this.codiceHardware = this.route.snapshot.params['idHardware'];
+      this.getHardware();
     }
     else{
       this.router.navigate(["default/pagina-avvisi"]);
     }
   }
 
-  public getBene(): void {
-    this.beniService.getBeneModifica(this.codiceBene).subscribe(
+  public getHardware(): void {
+    this.hardwareService.getHardwareModifica(this.codiceHardware).subscribe(
       (response: any[]) => {
-        this.bene = response[0];
+        this.hardware = response[0];
         this.listaDipendenti = response[1];
         this.listaStorico = response[2];
+        console.log(this.listaDipendenti);
       }
     )
   }
 
-  public modificaBene(updateForm: NgForm): void {
-    if(updateForm.value.dipendente == ''){
-      updateForm.value.dipendente = this.bene.dipendente;
+  public modificaHardware(updateForm: NgForm): void {
+    if(updateForm.value.idPersona == ''){
+      updateForm.value.idPersona = this.hardware.idPersona;
     }
-    this.beniService.modificaBene(updateForm.value, this.codiceBene).subscribe(
+    this.hardwareService.modificaHardware(updateForm.value, this.codiceHardware).subscribe(
       (response: any) => {
         alert("Bene modificato con successo");
         this.router.navigate(["default/pagina-beni"]);

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
-import { BeniService } from 'src/app/service/beni.service';
+import { hardware } from 'src/app/model/mapper/hardware';
+import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
 
 @Component({
@@ -11,10 +12,10 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class PaginaBeniComponent implements OnInit{
   public ruolo: string = sessionStorage.getItem("ruolo") as string;
-  public listaBeni!: Beni[];
+  public listaHardware!: hardware[];
   public titoloPagina: any;
 
-  constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private beniService: BeniService) {}
+  constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private hardwareService: HardwareService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -33,12 +34,12 @@ export class PaginaBeniComponent implements OnInit{
   }
 
   public allHardware(): void {
-    this.beniService.allHardware().subscribe(
+    this.hardwareService.allHardware().subscribe(
       (response: any[]) => {
-        this.listaBeni = response[0];
+        this.listaHardware = response[0];
         const listaCodici = response[1];
         for (let i = 0; i < response[0].length; i++)
-          this.listaBeni[i].id = listaCodici[i].codice;
+          this.listaHardware[i].id = listaCodici[i].codice;
         setTimeout(function () {
           $(function () {
             $('#tabellaBeni').DataTable({
