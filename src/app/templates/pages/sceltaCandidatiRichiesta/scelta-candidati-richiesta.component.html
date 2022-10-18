@@ -10,7 +10,7 @@
       <thead>
         <tr class="no-b">
           <th class="titolotabella">DATA INSERIMENTO</th>
-          <th class="titolotabella">NOME E COGNOME</th>
+          <th class="titolotabella">COGNOME E NOME</th>
           <th class="titolotabella">CITT&Agrave;</th>
           <th class="titolotabella">RUOLO</th>
           <th class="titolotabella">SKILL PRINCIPALE</th>
@@ -22,14 +22,14 @@
       <tbody>
         <tr *ngFor="let candidato of listaCandidati">
           <td>{{candidato.dataInserimento}}</td>
-          <td>{{candidato.nome + " " + candidato.cognome}}</td>
+          <td>{{candidato.cognome + " " + candidato.nome}}</td>
           <td>{{candidato.citta}}</td>
           <td>{{candidato.profiloNome}}</td>
           <td>{{candidato.competenzaPrincipale}}</td>
           <td>{{candidato.esitoNome}}</td>
           <td><a [routerLink]="['../../pagina-visualizza-candidato', candidato.id, 1, idRichiesta]"><i class="icon-eye mr-3"></i></a>
           <a [routerLink]="['../../pagina-modifica-candidato', candidato.id, 1, idRichiesta]"><i class="icon-pencil"></i></a></td>
-          <td><input type="checkbox" value={{candidato.nome + candidato.cognome}} (change)="array($event)"></td>
+          <td><input type="checkbox" value={{candidato.id}} (change)="array($event)"></td>
         </tr>
       </tbody>
     </table>

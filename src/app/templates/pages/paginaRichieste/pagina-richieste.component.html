@@ -19,7 +19,9 @@
 			<div class="row">
         <div class="col-4 card_avvisi" *ngFor="let richiesta of listaRichieste" [ngClass]="{'prioritaAlta': richiesta.priorita == 1, 'prioritaMedia': richiesta.priorita == 2, 'prioritaBassa': richiesta.priorita == 3}">
           <a class="cursor" (click)="goVisualizzaRichiesta(richiesta.id, richiesta.visualizzato)">
-            <span class="titolo_richieste">{{richiesta.profiliNome}}</span><i *ngIf="richiesta.visualizzato == false && ruolo == 'Recruiter'" class="icon-fiber_new green-text s18"></i>
+            <span class="titolo_richieste">{{richiesta.profiliNome}}</span>
+            <i *ngIf="richiesta.visualizzato == false && ruolo == 'Recruiter'" class="icon-fiber_new green-text s18"></i>
+            <i *ngIf="richiesta.statiRichiesteNome == 'Attesa Conferma' && ruolo == 'Account'" class="icon-work"></i>
             <div class="richieste"><span class="titolo_testo_richieste">Priorit&agrave; : </span>
               <span *ngIf="richiesta.priorita == 0" class="testo_richieste">Non assegnata</span>
               <span *ngIf="richiesta.priorita == 1" class="testo_richieste">Alta</span>
@@ -34,8 +36,13 @@
             <div class="richieste"><span class="titolo_testo_richieste">Seniority : </span><span class="testo_richieste">{{richiesta.livelliNome}}</span></div>
             <div class="richieste"><span class="titolo_testo_richieste">Messaggio : </span><span class="testo_richieste">{{richiesta.note}}</span></div>
             <footer class="blockquote-footer_richieste pt-4 mt-4 border-top_richieste"></footer>
+            <div class="richieste" *ngIf="richiesta.recruiters">
+              <span class="titolo_testo_richieste">Recruiter Assegnati : </span>
+              <div *ngFor="let recruiter of richiesta.recruiters.toString().split(',')" class="richieste"><span class="testo_richieste">{{recruiter}}</span></div>
+            </div>
           </a>
           <div *ngIf="(ruolo == 'Direttore Commerciale' || ruolo == 'Admin') && richiesta.priorita == 0" class="row">
+            <span class="titolo_testo_richieste">Assegna una priorità : </span><br><br>
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 1)">Alta</div>
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 2)">Media</div>
             <div class="col"><input type="radio" name={{richiesta.id}} (change)="arrayPriorita(richiesta.id, 3)">Bassa</div>

@@ -2,9 +2,7 @@
   <span *ngIf="statoPagina == 0" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-richieste">Pagina Richieste</a> / Visualizza Richiesta
 	</span>
-	<!-- 
-	<span *ngIf="richiesta && ruolo == 'Recruiter' && (richiesta.candidati == null || richiesta.candidati == '')" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
-	-->
+	<span *ngIf="richiesta && ruolo == 'Recruiter'" class="allineamentoInvio"><input type="submit" value="Seleziona Candidati" [routerLink]="['../../../pagina-scelta-candidati-richiesta', richiesta.id]"></span>
 	<span *ngIf="statoPagina == 1" class="briciole">
 		<a routerLink="../../../../default/pagina-avvisi">Home</a> / <a routerLink="../../../../default/pagina-storico-richieste">Pagina Storico Richieste</a> / Visualizza Richiesta
 	</span>
@@ -109,11 +107,23 @@
 				<label>Lista Candidati Selezionati</label>
 				<table>
 					<thead>
-						<th class="titolotabella">NOME E COGNOME</th>
+						<th class="titolotabella">DATA INSERIMENTO</th>
+        <th class="titolotabella">NOME E COGNOME</th>
+        <th class="titolotabella">CITT&Agrave;</th>
+        <th class="titolotabella">RUOLO</th>
+        <th class="titolotabella">SKILL PRINCIPALE</th>
+        <th class="titolotabella">ESITO COLLOQUIO</th>
+        <th class="titolotabella">AZIONI</th>
 					</thead>
 					<tbody>
 						<tr *ngFor="let candidato of candidatiSelezionati">
-							<td><span class="titolo_data">{{candidato.cognome + candidato.nome}}</span></td>
+							<td>{{candidato.dataInserimento}}</td>
+        			<td>{{candidato.nome + " " + candidato.cognome}}</td>
+        			<td>{{candidato.citta}}</td>
+        			<td>{{candidato.profiloNome}}</td>
+        			<td>{{candidato.competenzaPrincipale}}</td>
+        			<td>{{candidato.esitoNome}}</td>
+        			<td><a [routerLink]="['../pagina-visualizza-candidato', candidato.id, 0, 0]"><i class="icon-eye mr-3"></i></a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -122,6 +132,7 @@
 					<span class="titolo_data"> {{commento.nomeCognome}}</span>
 					<p class="testo_richieste">{{commento.note}}</p>
 				</div>
+				<br><br><br>
 			</div>
     </div>
 	</div>

@@ -118,6 +118,7 @@ export class PaginaRichiesteComponent implements OnInit {
       (response: any[]) => {
         if (response[1].length > 0) {
           this.listaRichieste = response[1];
+          console.log(this.listaRichieste);
           const listaCodici = response[0];
           for (let i = 0; i < response[0].length; i++)
             this.listaRichieste[i].id = listaCodici[i].codice;

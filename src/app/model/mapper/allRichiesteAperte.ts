@@ -13,4 +13,5 @@ export interface allRichiesteAperte{
   statiRichiesteNome: string;
   priorita: number;
   visualizzato: boolean;
+  recruiters: string;
 }

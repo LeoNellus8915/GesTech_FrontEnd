@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { allCommentiRichieste } from 'src/app/model/mapper/allCommentiRichieste';
 import { getRichieste } from 'src/app/model/mapper/getRichiesta';
 import { Persone } from 'src/app/model/persone';
+import { allCandidati } from 'src/app/model/mapper/allCandidati';
 
 @Component({
   templateUrl: './visualizza-richiesta.component.html',
@@ -29,7 +30,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public priorita!: string;
   public titoloPagina: any;
   public candidati!: string[];
-  public candidatiSelezionati!: Persone[];
+  public candidatiSelezionati!: allCandidati[];
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
               private route: ActivatedRoute, private richiesteService: RichiesteService) {}
@@ -49,6 +50,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
       }, 0)
       this.idRichiesta = this.route.snapshot.params['idRichiesta'];
       this.statoPagina = this.route.snapshot.params['statoPagina'];
+      console.log(this.idRichiesta + " " + this.statoPagina + " " + this.ruolo)
       this.getRichiesta();
       if (this.ruolo == 'Direttore Recruiter')
         this.getRecruiters();
