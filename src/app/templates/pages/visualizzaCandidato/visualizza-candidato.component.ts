@@ -53,13 +53,16 @@ export class VisualizzaCandidatoComponent implements OnInit{
     this.candidatiService.getCandidatoVisualizza(this.idCandidato).subscribe(
       (response: any[]) => {
         if (response != null) {
+          console.log(response)
           this.datiCandidato = response[0];
           this.dettagliCandidato = response[1];
           this.commentiCandidato = response[2];
           this.colore = response[3];
           this.fileBase64 = response[4];
-          if (this.fileBase64 == "") {
+          if (this.fileBase64 == null) {
             this.opacity = "0.3";
+            var buttonCv = document.getElementById("cv") as HTMLButtonElement;
+            buttonCv.disabled = true;
           }
         }
         else
@@ -82,8 +85,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public openLinkedin(): void {
-    if (this.dettagliCandidato.profiloLinkedin != "")
-      window.open(this.dettagliCandidato.profiloLinkedin, '_black')
+    if (this.dettagliCandidato[0].profiloLinkedin != "")
+      window.open(this.dettagliCandidato[0].profiloLinkedin, '_black')
     else
       alert("Nessun link a linkedin trovato");
   }

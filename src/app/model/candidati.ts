@@ -1,8 +1,8 @@
 export interface Candidati {
   id: number;
-  nomeCognome: string;
+  nome: string;
+  cognome: string
   email: string;
   cellulare: string;
-  profiloLinkedin: string;
-  citta: string;
+  cittaDiResidenza: string;
 }

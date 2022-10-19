@@ -53,6 +53,7 @@ export class ModificaCandidatoComponent implements OnInit{
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any[]) => {
         if (response != null) {
+          console.log(response)
           this.datiCandidato = response[0];
           this.listaSelects = response[1];
           this.dettagliCandidato = response[2];
@@ -71,30 +72,6 @@ export class ModificaCandidatoComponent implements OnInit{
         else {
           if (updateForm.value.esitoColloquio == "")
             updateForm.value.esitoColloquio = this.dettagliCandidato.idEsitoColloquio.toString();
-
-          if (updateForm.value.profilo == "")
-            updateForm.value.profilo = this.dettagliCandidato.idProfilo.toString();
-
-          if (updateForm.value.skill1 == "")
-            updateForm.value.skill1 = this.dettagliCandidato.idLinguaggio1.toString();
-          if (updateForm.value.skill2 == "")
-            updateForm.value.skill2 = this.dettagliCandidato.idLinguaggio2.toString();
-          if (updateForm.value.skill3 == "")
-            updateForm.value.skill3 = this.dettagliCandidato.idLinguaggio3.toString();
-          if (updateForm.value.skill4 == "")
-            updateForm.value.skill4 = this.dettagliCandidato.idLinguaggio4.toString();
-          if (updateForm.value.skill5 == "")
-            updateForm.value.skill5 = this.dettagliCandidato.idLinguaggio5.toString();
-
-          if (updateForm.value.lingua1 == "")
-            updateForm.value.lingua1 = this.dettagliCandidato.idLingua1.toString();
-          if (updateForm.value.lingua2 == "")
-            updateForm.value.lingua2 = this.dettagliCandidato.idLingua2.toString();
-          if (updateForm.value.lingua3 == "")
-            updateForm.value.lingua3 = this.dettagliCandidato.idLingua3.toString();
-
-          if (updateForm.value.livello == "")
-            updateForm.value.livello = this.dettagliCandidato.idLivello.toString();
 
           if (updateForm.value.costoGiornaliero == "") {
             updateForm.value.costoGiornaliero = 0;
