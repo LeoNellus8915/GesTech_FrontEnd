@@ -84,7 +84,6 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
           }
         );
-        console.log(this.codiciHardware);
     }
   }
 
