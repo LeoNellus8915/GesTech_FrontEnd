@@ -173,6 +173,7 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = true;
         this.arrayValori[numeroRiga].profilo = idProfilo;
+        this.arrayValori[numeroRiga].linguaggio = 55;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         e.path[2].children.livelloProgrammatore.children[1].selectedIndex = "";
