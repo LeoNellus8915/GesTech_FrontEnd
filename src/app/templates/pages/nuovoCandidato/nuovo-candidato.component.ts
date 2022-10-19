@@ -175,8 +175,19 @@ export class NuovoCandidatoComponent implements OnInit{
         this.arrayValori[numeroRiga].profilo = idProfilo;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
-        
-        $(e.path[2].children.livello.id).val('6');
+        e.path[2].children.livelloProgrammatore.children[1].selectedIndex = "";
+        e.path[2].children.linguaggio.children[1].selectedIndex = "";
+        var note = e.path[2].children[4].children[1] as HTMLInputElement;
+        note.value = "";
+      }
+      if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
+        e.path[2].children.livello.children[1].selectedIndex = "";
+        this.arrayValori[numeroRiga].profilo = idProfilo;
+        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].livello = 6;
+        this.arrayValori[numeroRiga].note = "";
+        var note = e.path[2].children[4].children[1] as HTMLInputElement;
+        note.value = "";
       }
       if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == true) {
         e.path[2].children.linguaggio.style.display = 'none';
@@ -187,11 +198,11 @@ export class NuovoCandidatoComponent implements OnInit{
         this.arrayValori[numeroRiga].linguaggio = 55;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
-        e.path[2].children.livello.selectedIndex = 6;
+        e.path[2].children.livello.children[1].selectedIndex = "";
+        var note = e.path[2].children[4].children[1] as HTMLInputElement;
+        note.value = "";
       }
     }
-
-    console.log(this.arrayValori[numeroRiga].profilo);
   }
 
   selectLingua(e: any) {
@@ -260,16 +271,12 @@ export class NuovoCandidatoComponent implements OnInit{
     var idLinguaggio = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     this.arrayValori[numeroRiga].linguaggio = idLinguaggio;
-    
-    console.log(this.arrayValori[numeroRiga].linguaggio);
   }
 
   selectLivello(e: any) {
     var idLivello = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     this.arrayValori[numeroRiga].livello = idLivello;
-    
-    console.log(this.arrayValori[numeroRiga].livello);
   }
 
   selectNote(e: any) {
