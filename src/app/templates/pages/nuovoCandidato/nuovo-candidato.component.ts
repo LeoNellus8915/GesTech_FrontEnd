@@ -152,11 +152,12 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
+        
       }
       if (idProfilo != '2') {
         e.path[2].children.livello.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
-        this.arrayValori.push({"profilo": idProfilo});
+        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
       }
       e.path[2].children.note.style.removeProperty("display");
 
@@ -172,6 +173,10 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = true;
         this.arrayValori[numeroRiga].profilo = idProfilo;
+        this.arrayValori[numeroRiga].livello = 6;
+        this.arrayValori[numeroRiga].note = "";
+        
+        $(e.path[2].children.livello.id).val('6');
       }
       if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == true) {
         e.path[2].children.linguaggio.style.display = 'none';
@@ -179,8 +184,14 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livello.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = false;
         this.arrayValori[numeroRiga].profilo = idProfilo;
+        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].livello = 6;
+        this.arrayValori[numeroRiga].note = "";
+        e.path[2].children.livello.selectedIndex = 6;
       }
     }
+
+    console.log(this.arrayValori[numeroRiga].profilo);
   }
 
   selectLingua(e: any) {
@@ -249,12 +260,16 @@ export class NuovoCandidatoComponent implements OnInit{
     var idLinguaggio = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     this.arrayValori[numeroRiga].linguaggio = idLinguaggio;
+    
+    console.log(this.arrayValori[numeroRiga].linguaggio);
   }
 
   selectLivello(e: any) {
     var idLivello = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     this.arrayValori[numeroRiga].livello = idLivello;
+    
+    console.log(this.arrayValori[numeroRiga].livello);
   }
 
   selectNote(e: any) {
