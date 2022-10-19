@@ -41,7 +41,6 @@ export class PaginaCandidatiComponent implements OnInit{
         const listaCodici = response[1];
         for (let i = 0; i < response[0].length; i++)
           this.listaCandidati[i].id = listaCodici[i].codice;
-          console.log(this.listaCandidati);
         setTimeout(function () {
           $(function () {
             $('#tabellaCandidati').DataTable({

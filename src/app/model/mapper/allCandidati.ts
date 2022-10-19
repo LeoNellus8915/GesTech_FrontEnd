@@ -4,7 +4,6 @@ export interface allCandidati {
   nome:string;
   cognome: string;
   citta: string;
-  profiloNome: string;
   competenzaPrincipale: string;
   esitoNome: string;
 }

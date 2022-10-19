@@ -6,6 +6,7 @@ import { CandidatiService } from 'src/app/service/candidati.service';
 import { Candidati } from 'src/app/model/candidati';
 import { DOCUMENT } from '@angular/common';
 import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato';
+import { Persone } from 'src/app/model/persone';
 
 @Component({
   templateUrl: './visualizza-candidato.component.html',
@@ -14,7 +15,7 @@ import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato'
 })
 export class VisualizzaCandidatoComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public datiCandidato!: Candidati;
+  public datiCandidato!: Persone;
   public dettagliCandidato!: any;
   public commentiCandidato!: allCommentiCandidato[];
   public colore!: number;
@@ -68,7 +69,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public eliminaCandidato(): void{
-    if (confirm("Sicuro di voler eliminare " + this.datiCandidato.nomeCognome + "?") == true)
+    if (confirm("Sicuro di voler eliminare " + this.datiCandidato.nome + " " + this.datiCandidato.nome + "?") == true)
       this.candidatiService.eliminaCandidato(this.idCandidato).subscribe(
         (response: any) => {
           alert("Candidato eliminato con successo");
@@ -81,8 +82,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public openLinkedin(): void {
-    if (this.datiCandidato.profiloLinkedin != "")
-      window.open(this.datiCandidato.profiloLinkedin, '_black')
+    if (this.dettagliCandidato.profiloLinkedin != "")
+      window.open(this.dettagliCandidato.profiloLinkedin, '_black')
     else
       alert("Nessun link a linkedin trovato");
   }

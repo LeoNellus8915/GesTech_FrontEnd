@@ -10,7 +10,6 @@
         <th class="titolotabella">DATA INSERIMENTO</th>
         <th class="titolotabella">NOME E COGNOME</th>
         <th class="titolotabella">CITT&Agrave;</th>
-        <th class="titolotabella">RUOLO</th>
         <th class="titolotabella">SKILL PRINCIPALE</th>
         <th class="titolotabella">ESITO COLLOQUIO</th>
         <th class="titolotabella">AZIONI</th>
@@ -21,7 +20,6 @@
         <td>{{candidato.dataInserimento}}</td>
         <td>{{candidato.nome + " " + candidato.cognome}}</td>
         <td>{{candidato.citta}}</td>
-        <td>{{candidato.profiloNome}}</td>
         <td>{{candidato.competenzaPrincipale}}</td>
         <td>{{candidato.esitoNome}}</td>
         <td><a [routerLink]="['../pagina-visualizza-candidato', candidato.id, 0, 0]"><i class="icon-eye mr-3"></i></a>

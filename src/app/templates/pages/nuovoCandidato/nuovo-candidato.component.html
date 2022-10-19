@@ -38,7 +38,7 @@
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="citta" class="col-form-label s-12">CITT&Agrave;</label> 
-                <input ngModel name="citta" placeholder="Inserisci Citt&agrave;"
+                <input ngModel name="cittaDiResidenza" placeholder="Inserisci Citt&agrave;"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
@@ -87,19 +87,12 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div class="form-group col-4 m-0">
+							<div class="form-group col-6 m-0">
 								<label for="fonteReperimento" class="col-form-label s-12">FONTE REPERIMENTO</label> 
                 <input ngModel name="fonteReperimento" placeholder="Inserisci Fonte Reperimento"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div class="form-group col-4 m-0">
-								<label for="profilo" class="col-form-label s-12">RUOLO</label>
-								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let profili of listaProfili" value={{profili.id}}>{{profili.nome}}</option>
-								</select>
-							</div>
-							<div class="form-group col-4 m-0">
+							<div class="form-group col-6 m-0">
 								<label for="competenzaPrincipale" class="col-form-label s-12">COMPETENZA PRINCIPALE</label>
 								<input ngModel name="competenzaPrincipale" placeholder="Insersci Competenza Principale"
 									class="form-control r-0 light s-12 date-picker" type="text">
@@ -113,30 +106,104 @@
 			<div class="card-body">
 				<h5 class="card-title">Competenze</h5>
 				<div class="form-row">
-					<div class="col-md-12">
-						<div class="form-row">
+					<div id="lista-ruoli" class="col-md-12">
+						<div id="row-ruolo-0" class="form-row">
+
 							<div class="form-group col-3 m-0">
 								<label for="profilo" class="col-form-label s-12">RUOLO</label>
-								<select ngModel (change)="selectProfilo('livello1', 'note1', 'botton1')" name="profilo" class="form-control r-0 light s-12 date-picker freccia">
+								<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option> 
     							<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
 								</select>
 							</div>
-							<div id="livello1" class="form-group col-4 m-0" style="display: none">
-								<label for="livello" class="col-form-label s-12">SENIORITY</label>
-								<select ngModel name="livello" class="form-control r-0 light s-12 date-picker freccia">
+
+							<div id="linguaggio" class="form-group col-2 m-0" style="display: none">
+								<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label> 
+								<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLinguaggio($event)">
 									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-   							</select>
+									<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
 							</div>
-							<div id="note1" class="form-group col-4 m-0" style="display: none">
+							<div id="livelloProgrammatore" class="form-group col-2 m-0" style="display: none">
+								<label for="livello" class="col-form-label s-12">SENIORITY</label>
+								<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+									<option value="" selected disabled>Selezionare...</option>
+									<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+								</select>
+							</div>
+
+							<div id="livello" class="form-group col-4 m-0" style="display: none">
+								<label for="livello" class="col-form-label s-12">SENIORITY</label>
+								<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+									<option value="" selected disabled>Selezionare...</option>
+									<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+								</select>
+							</div>
+
+							<div id="note" class="form-group col-4 m-0" style="display: none">
 								<label for="note" class="col-form-label s-12">NOTE</label> 
-                <input ngModel name="note" placeholder="Inserisci Note"
+								<input placeholder="Inserisci Note" (change)="selectNote($event)"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div id="botton1" class="form-group col-1 m-0" style="display: none">
-								<label for="note" class="col-form-label s-12">ADD</label> 
-                <span class="plus form-control r-0 light s-12 date-picker">+</span>
+							<div id="button" class="col 1" style="display: none">
+								<div class="row">
+									<div class="form-group col-12 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
+									</div>
+								</div>
+							</div>
+							<div id="buttons" class="col 1" style="display: none">
+								<div class="row">
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">REMOVE</label>
+										<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+			<div class="card-body">
+				<h5 class="card-title">Lingue</h5>
+				<div class="form-row">
+					<div id="lista-lingue" class="col-md-12">
+						<div id="row-lingua-0" class="form-row">
+
+							<div class="form-group col-10 m-0">
+								<label for="lingua" class="col-form-label s-12">LINGUA</label>
+								<select id="lingua" (change)="selectLingua($event)" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" selected disabled>Selezionare...</option> 
+    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
+								</select>
+							</div>
+
+							<div id="button" class="col-2" style="display: none">
+								<div class="row">
+									<div class="form-group col-12 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowLingua()">+</button>
+									</div>
+								</div>
+							</div>
+							<div id="buttons" class="col-2" style="display: none">
+								<div class="row">
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">REMOVE</label>
+										<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowLingua()">+</button>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -165,38 +232,6 @@
 				<!-- Fine Row -->
 				<hr>
       </div>
-      <!--<div class="card-body">
-				<h5 class="card-title">Lingua</h5>
-				<div class="form-row">
-					<div class="col-md-12">
-						<div class="form-row">
-							<div class="form-group col-4 m-0">
-								<label for="lingua1" class="col-form-label s-12">LINGUA 1</label> 
-								<select ngModel name="lingua1" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
-   							</select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="lingua2" class="col-form-label s-12">LINGUA 2</label>
-								<select ngModel name="lingua2" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
-                </select>
-							</div>
-							<div class="form-group col-4 m-0">
-								<label for="lingua3" class="col-form-label s-12">LINGUA 3</label> 
-								<select ngModel name="lingua3" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let lingua of listaLingue" value={{lingua.id}}>{{lingua.nome}}</option>
-   							</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				 Fine Row 
-				<hr>
-      </div>-->
       <div class="card-body">
 				<h5 class="card-title">Info Extra</h5>
 				<div class="form-row">
@@ -235,7 +270,6 @@
 				<hr>
 
 				<div class="card-body">
-          <input type="hidden" name="idDipendente">
 					<input type="submit" value="SALVA">
 				</div>
 			</div>
