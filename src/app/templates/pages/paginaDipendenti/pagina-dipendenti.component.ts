@@ -43,6 +43,7 @@ export class PaginaDipendentiComponent implements OnInit{
                 "emptyTable":     "Nessun dipendente trovato",
                 "info":           " ",
                 "infoEmpty":      " ",
+                "infoFiltered":   "Filtrati i _MAX_ dipendenti",
                 "lengthMenu":     "Mostra _MENU_ dipendenti",
                 "loadingRecords": "Caricamento...",
                 "search":         "Cerca:",

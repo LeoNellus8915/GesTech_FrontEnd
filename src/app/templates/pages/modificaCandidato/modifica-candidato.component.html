@@ -78,11 +78,11 @@
 								<input ngModel name="annoColloquio" [(ngModel)]=dettagliCandidato.annoColloquio
 									class="form-control r-0 light s-12 date-picker" type="number">
 							</div>
-							<div *ngIf="listaSelects" class="form-group col-4 m-0">
+							<div *ngIf="esitoColloquio" class="form-group col-4 m-0">
 								<label for="esitoColloquio" class="col-form-label s-12">ESITO COLLOQUIO</label> 
 								<select ngModel name="esitoColloquio" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="">{{listaSelects[0]}}</option>
-    							<option *ngFor="let esitoColloquio of listaSelects[1]" value={{esitoColloquio.id}}>{{esitoColloquio.nome}}</option>
+									<option value="">{{esitoColloquio}}</option>
+    							<option *ngFor="let esitoColloquio of listaEsitiColloquio" value={{esitoColloquio.id}}>{{esitoColloquio.nome}}</option>
     						</select>
 							</div>
 						</div>
@@ -107,6 +107,136 @@
 								<input ngModel name="competenzaPrincipale" [(ngModel)]=dettagliCandidato.competenzaPrincipale
 									placeholder="Insersci Competenza Principale"
 									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+			<div class="card-body">
+				<h5 class="card-title">Competenze</h5>
+				<div class="form-row">
+					<div id="lista-ruoli" class="col-md-12">
+						<div *ngFor="let profilo of arrayValori; let i = index">
+							<div id="row-ruolo-{{i}}" class="form-row">
+
+								<div *ngIf="i < (arrayValori.length)" class="form-group col-3 m-0">
+									<label for="profilo" class="col-form-label s-12">RUOLO</label>
+									<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
+										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeProfilo}}</option>
+										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
+										<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
+									</select>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" class="form-group col-3 m-0">
+									<label for="profilo" class="col-form-label s-12">RUOLO</label>
+									<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
+										<option value="" selected disabled>Selezionare...</option> 
+										<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
+									</select>
+								</div>
+	
+								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo == 'analista programmatore'" id="linguaggio" class="form-group col-2 m-0">
+									<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label> 
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLinguaggio($event)">
+										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLinguaggio}}</option>
+										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
+										<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+									</select>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="linguaggio" class="form-group col-2 m-0" style="display: none">
+									<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label> 
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLinguaggio($event)">
+										<option value="" selected disabled>Selezionare...</option>
+										<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+									</select>
+								</div>
+
+								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo == 'analista programmatore'" id="livelloProgrammatore" class="form-group col-2 m-0">
+									<label for="livello" class="col-form-label s-12">SENIORITY</label>
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLivello}}</option>
+										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
+										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+									</select>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="livelloProgrammatore" class="form-group col-2 m-0" style="display: none">
+									<label for="livello" class="col-form-label s-12">SENIORITY</label>
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+										<option value="" selected disabled>Selezionare...</option>
+										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+									</select>
+								</div>
+	
+								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo != 'analista programmatore'" id="livello" class="form-group col-4 m-0">
+									<label for="livello" class="col-form-label s-12">SENIORITY</label>
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLivello}}</option>
+										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
+										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+									</select>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="livello" class="form-group col-4 m-0" style="display: none">
+									<label for="livello" class="col-form-label s-12">SENIORITY</label>
+									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+										<option value="" selected disabled>Selezionare...</option>
+										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+									</select>
+								</div>
+	
+								<div *ngIf="i < (arrayValori.length)" id="note" class="form-group col-4 m-0">
+									<label for="note" class="col-form-label s-12">NOTE</label> 
+									<input placeholder="Inserisci Note" (change)="selectNote($event)"
+										value={{profilo.descrizione}}
+										class="form-control r-0 light s-12 date-picker" type="text">
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="note" class="form-group col-4 m-0" style="display: none">
+									<label for="note" class="col-form-label s-12">NOTE</label> 
+									<input placeholder="Inserisci Note" (change)="selectNote($event)"
+										class="form-control r-0 light s-12 date-picker" type="text">
+								</div>
+
+								<div *ngIf="i < (arrayValori.length-1)" id="button" class="col 1">
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<label for="button" class="col-form-label s-12">ADD</label>
+											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()" disabled>+</button>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="button" class="col 1" style="display: none">
+									<div class="row">
+										<div class="form-group col-12 m-0">
+											<label for="button" class="col-form-label s-12">ADD</label>
+											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="i == (arrayValori.length-1)" id="buttons" class="col 1">
+									<div class="row">
+										<div class="form-group col-6 m-0">
+											<label for="button" class="col-form-label s-12">REMOVE</label>
+											<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
+										</div>
+										<div class="form-group col-6 m-0">
+											<label for="button" class="col-form-label s-12">ADD</label>
+											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="i > (arrayValori.length)" id="buttons" class="col 1" style="display: none">
+									<div class="row">
+										<div class="form-group col-6 m-0">
+											<label for="button" class="col-form-label s-12">REMOVE</label>
+											<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
+										</div>
+										<div class="form-group col-6 m-0">
+											<label for="button" class="col-form-label s-12">ADD</label>
+											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -16,6 +16,7 @@ import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { event } from 'jquery';
+import { Observable, ReplaySubject, Subscriber } from 'rxjs';
 
 @Component({
   templateUrl: './nuovo-candidato.component.html',
@@ -132,15 +133,22 @@ export class NuovoCandidatoComponent implements OnInit{
   }
 
   selectFile(event: any) {
-    let reader = new FileReader();
-    var appoggio: string | ArrayBuffer | null;
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onloadend = () => {
-      appoggio = reader.result
-    }
-    setTimeout(() => {
-      this.base64 = appoggio;
+    const file = event.target.files[0];
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
     })
+    observable.subscribe((base64) => {
+      this.base64 = base64
+    })
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      subscriber.next(reader.result);
+      subscriber.complete();
+    }
   }
 
   selectProfilo(e: any) {

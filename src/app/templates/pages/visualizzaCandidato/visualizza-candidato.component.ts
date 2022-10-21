@@ -7,6 +7,7 @@ import { Candidati } from 'src/app/model/candidati';
 import { DOCUMENT } from '@angular/common';
 import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato';
 import { Persone } from 'src/app/model/persone';
+import { getProfili } from 'src/app/model/mapper/getProfili';
 
 @Component({
   templateUrl: './visualizza-candidato.component.html',
@@ -19,9 +20,12 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public dettagliCandidato!: any;
   public commentiCandidato!: allCommentiCandidato[];
   public colore!: number;
+  public profili!: getProfili[];
+  public lingue!: string[];
   opacity = "1";
   public pagina!: number;
   public idRichiesta!: number;
+  public esitoColloquio!: string;
   public fileBase64!: string;
   public idCandidato!: number;
   public titoloPagina: any;
@@ -56,9 +60,12 @@ export class VisualizzaCandidatoComponent implements OnInit{
           console.log(response)
           this.datiCandidato = response[0];
           this.dettagliCandidato = response[1];
-          this.commentiCandidato = response[2];
-          this.colore = response[3];
-          this.fileBase64 = response[4];
+          this.profili = response[2];
+          this.lingue = response[3];
+          this.commentiCandidato = response[4];
+          this.colore = response[5];
+          this.esitoColloquio = response[6];
+          this.fileBase64 = response[7]
           if (this.fileBase64 == null) {
             this.opacity = "0.3";
             var buttonCv = document.getElementById("cv") as HTMLButtonElement;
@@ -85,8 +92,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public openLinkedin(): void {
-    if (this.dettagliCandidato[0].profiloLinkedin != "")
-      window.open(this.dettagliCandidato[0].profiloLinkedin, '_black')
+    if (this.dettagliCandidato.profiloLinkedin != "")
+      window.open(this.dettagliCandidato.profiloLinkedin, '_black')
     else
       alert("Nessun link a linkedin trovato");
   }

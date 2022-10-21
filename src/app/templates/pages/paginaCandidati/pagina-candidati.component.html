@@ -17,7 +17,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let candidato of listaCandidati">
-        <td>{{candidato.dataInserimento}}</td>
+        <td>{{candidato.dataInserimento.toString().replace("T", " ")}}</td>
         <td>{{candidato.nome + " " + candidato.cognome}}</td>
         <td>{{candidato.citta}}</td>
         <td>{{candidato.competenzaPrincipale}}</td>

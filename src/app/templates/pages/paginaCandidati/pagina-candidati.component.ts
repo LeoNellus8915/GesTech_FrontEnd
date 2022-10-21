@@ -37,6 +37,7 @@ export class PaginaCandidatiComponent implements OnInit{
   public allCandidati(): void {
     this.candidatiService.allCandidati().subscribe(
       (response: any[]) => {
+        console.log(response)
         this.listaCandidati = response[0];
         const listaCodici = response[1];
         for (let i = 0; i < response[0].length; i++)
@@ -48,6 +49,7 @@ export class PaginaCandidatiComponent implements OnInit{
                 "emptyTable":     "Nessun candidato trovato",
                 "info":           " ",
                 "infoEmpty":      " ",
+                "infoFiltered":   "Filtrati i _MAX_ candidati",
                 "lengthMenu":     "Mostra _MENU_ candidati",
                 "loadingRecords": "Caricamento...",
                 "search":         "Cerca:",

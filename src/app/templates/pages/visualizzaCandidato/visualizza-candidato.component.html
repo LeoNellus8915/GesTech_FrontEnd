@@ -27,7 +27,7 @@
             <button class="btn btn-success blue mt-3" (click)="copy()">Copia Link Scheda</button>
             <div class="mt-5">
               <ul class="social social list-inline">
-                <li class="list-inline-item"><a class="grey-text"><i class="icon-linkedin" (click)="openLinkedin()"></i></a></li>
+                <li class="list-inline-item"><a class="grey-text cursor"><i class="icon-linkedin" (click)="openLinkedin()"></i></a></li>
               </ul>
             </div>
           </div>
@@ -60,7 +60,7 @@
               <div class="col-md-6">
                 <div *ngIf="dettagliCandidato" class="p-4">
                   <h5 class="text-black">Data di Inseriemento</h5>
-                  <h5 class="p-t-10">{{dettagliCandidato[0].dataInserimento.toString().replace("T", " ")}}</h5>
+                  <h5 class="p-t-10">{{dettagliCandidato.dataInserimento.toString().replace("T", " ")}}</h5>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
               <div class="col-md-12">
                 <div *ngIf="dettagliCandidato" class="p-4">
                   <h5 class="text-black">Competenza Principale</h5>
-                  <h5 class="p-t-10">{{dettagliCandidato[0].competenzaPrincipale}}</h5>
+                  <h5 class="p-t-10">{{dettagliCandidato.competenzaPrincipale}}</h5>
                 </div>
               </div>
             </div>
@@ -82,19 +82,19 @@
           <div class="col-md-4">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Data Colloquio:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].dataColloquio}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.dataColloquio}}</h5>
             </div>
           </div>
           <div class="col-md-4">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Anno Colloquio:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].annoColloquio}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.annoColloquio}}</h5>
             </div>
           </div>   
           <div class="col-md-4">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Esito Colloquio:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[1]}}</h5>
+              <h5 class="p-t-10">{{esitoColloquio}}</h5>
             </div>
           </div>                                                         
         </div>
@@ -104,7 +104,45 @@
           <div class="col-md-12">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Fonte Reperimento: </h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].fonteReperimento}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.fonteReperimento}}</h5>
+            </div>
+          </div>
+        </div>   
+      </div>
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="profili" class="p-4">
+              <h5 class="text-black">Competenze: </h5><br>
+              <div class="row">
+                <div class="col-3"><h5 class="p-t-10">PROFILO</h5></div>
+                <div class="col-2"><h5 class="p-t-10">LINGUAGGIO</h5></div>
+                <div class="col-2"><h5 class="p-t-10">LIVELLO</h5></div>
+                <div class="col-5"><h5 class="p-t-10">DESCRIZIONE</h5></div>
+              </div>
+              <div *ngFor="let profilo of profili">
+                <div *ngIf="profilo.nomeProfilo == 'analista programmatore'" class="row">
+                  <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
+                  <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLinguaggio}}</h5></div>
+                  <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLivello}}</h5></div>
+                  <div class="col-5"><h5 class="p-t-10">{{profilo.descrizione}}</h5></div>
+                </div>
+                <div *ngIf="profilo.nomeProfilo != 'analista programmatore'" class="row">
+                  <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
+                  <div class="col-2 offset-2"><h5 class="p-t-10">{{profilo.nomeLivello}}</h5></div>
+                  <div class="col-5"><h5 class="p-t-10">{{profilo.descrizione}}</h5></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>   
+      </div>
+      <div class="p5 b-b">
+        <div *ngIf="lingue" class="p-4">
+          <h5 class="text-black">Lingue: </h5><br>
+          <div class="row">
+            <div class="col-2" *ngFor="let lingua of lingue">
+              <h5 class="p-t-10">{{lingua}}</h5>
             </div>
           </div>
         </div>   
@@ -114,13 +152,13 @@
           <div class="col-md-6">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Costo Giornaliero:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].costoGiornaliero}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.costoGiornaliero}}</h5>
             </div>
           </div>
           <div class="col-md-6">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Possibilit&agrave; Lavorativa:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].possibilitaLavorativa}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.possibilitaLavorativa}}</h5>
             </div>
           </div> 
         </div>   
@@ -130,13 +168,13 @@
           <div class="col-md-6">
             <div *ngIf="dettagliCandidato" class="p-4">
               <h5 class="text-black">Competenze Totali:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato[0].competenzeTotali}}</h5>
+              <h5 class="p-t-10">{{dettagliCandidato.competenzeTotali}}</h5>
             </div>
           </div>
             <div class="col-md-6">
               <div *ngIf="dettagliCandidato" class="p-4">
                 <h5 class="text-black">Certificazioni: </h5>
-                <h5 class="p-t-10">{{dettagliCandidato[0].certificazioni}}</h5>
+                <h5 class="p-t-10">{{dettagliCandidato.certificazioni}}</h5>
               </div>
             </div>
         </div>
