@@ -16,7 +16,7 @@ export class HardwareService {
     return this.http.get<hardware[]>(`${this.apiServerUrl}/all-hardware`);
   }
 
-  public getHardwareVisualizza(idHardware: number): Observable<any> {
+  public getHardwareVisualizza(idHardware: string): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/get-hardware-visualizza/${idHardware}`);
   }
 

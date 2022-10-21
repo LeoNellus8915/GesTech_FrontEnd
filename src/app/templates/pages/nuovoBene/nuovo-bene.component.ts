@@ -63,13 +63,12 @@ export class NuovoBeneComponent implements OnInit{
     addForm.value.dispositivi = "5";
 
     if(addForm.value.dipendente == "")
-    addForm.value.dipendente = "0";
+    addForm.value.dipendente = "10";
 
     if(addForm.value.dataConsegna == "")
     addForm.value.dataConsegna = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
-    if(addForm.value.dataRestituzione == "")
-    addForm.value.dataRestituzione = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+   
 
     this.hardwareService.salvaHardware(addForm.value).subscribe(
       (response: any) => {

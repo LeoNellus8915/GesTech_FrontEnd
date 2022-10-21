@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
+import { allDipendenti } from 'src/app/model/mapper/allDipendenti';
+import { allHardware } from 'src/app/model/mapper/allHardware';
+import { dispositivi } from 'src/app/model/mapper/dispositivi';
 import { hardware } from 'src/app/model/mapper/hardware';
+import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
 
@@ -12,10 +16,12 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class PaginaBeniComponent implements OnInit{
   public ruolo: string = sessionStorage.getItem("ruolo") as string;
-  public listaHardware!: hardware[];
+  public listaHardware!: allHardware[];
+  public listaDipendenti!: allDipendenti[];
+  public listaDispositivi!: dispositivi[];
   public titoloPagina: any;
 
-  constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private hardwareService: HardwareService) {}
+  constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent, private hardwareService: HardwareService, private dipendentiService: DipendentiService) {}
 
   ngOnInit(): void {
     if (this.ruolo == null)
@@ -27,11 +33,14 @@ export class PaginaBeniComponent implements OnInit{
           this.defaultService.titoloPagina=" Pagina Beni";
         }, 0)
         this.allHardware();
+        
+
       }
       else{
         this.router.navigate(["default/pagina-avvisi"]);
       }
   }
+
 
   public allHardware(): void {
     this.hardwareService.allHardware().subscribe(

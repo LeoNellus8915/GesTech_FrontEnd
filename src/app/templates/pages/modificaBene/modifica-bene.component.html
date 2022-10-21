@@ -9,16 +9,18 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="hardware" class="form-group col-6 m-0">
-								<label for="idDispositivo" class="col-form-label s-12">DISPOSITIVO</label> 
-                <input ngModel name="dispositivo" [(ngModel)]=hardware.idDispositivo
-                  placeholder="Inserisci Dispositivo"
-									class="form-control r-0 light s-12 " type="text">
+							<div *ngIf="dispositivo" class="form-group col-4 m-0">
+								<label for="idDispositivo" class="col-form-label s-12">DISPOSITIVO</label>
+								<select ngModel name="dispositivo" class="form-control r-0 light s-12 date-picker freccia">
+									<option *ngIf="hardware.idDispositivo != null" value="" selected disabled>{{dispositivo.nome}}</option>
+									<option *ngIf="hardware.idDispositivo == null" value="" selected disabled>Selezionare...</option>
+    								<option *ngFor="let dispositivo of listaDispositivi" value={{dispositivo.id}}>{{dispositivo.nome}}</option>	
+    							</select>
 							</div>
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="marca" class="col-form-label s-12">MARCA</label>
 								<input ngModel name="marca" [(ngModel)]=hardware.marca
-                  placeholder="Inserisci Marca"
+                  					placeholder="Inserisci Marca"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -62,12 +64,12 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="hardware" class="form-group col-4 m-0">
+							<div *ngIf="dipendente" class="form-group col-4 m-0">
 								<label for="idPersona" class="col-form-label s-12">DIPENDENTE</label>
 								<select ngModel name="dipendente" class="form-control r-0 light s-12 date-picker freccia">
-									<option *ngIf="hardware.idPersona != null" value="" selected disabled>{{hardware.idPersona}}</option>
+									<option *ngIf="hardware.idPersona != null" value="" selected disabled>{{dipendente.nome + " " + dipendente.cognome}}</option>
 									<option *ngIf="hardware.idPersona == null" value="" selected disabled>Selezionare...</option>
-    						<!--<option *ngFor="let persona of listaDipendenti" value={{idPersona}}>{{idPersona}}</option>-->	
+    								<option *ngFor="let dipendente of listaDipendenti" value={{dipendente.id}}>{{dipendente.nome + " " + dipendente.cognome}}</option>	
     						</select>
 							</div>
 							<div *ngIf="hardware" class="form-group col-8 m-0">

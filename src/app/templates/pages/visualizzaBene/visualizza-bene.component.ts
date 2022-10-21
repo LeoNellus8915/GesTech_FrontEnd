@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
+import { allHardware } from 'src/app/model/mapper/allHardware';
 import { hardware } from 'src/app/model/mapper/hardware';
 import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
@@ -13,9 +14,9 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class VisualizzaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public idHardware!: number;
-  public hardware!:hardware ;
-  public listaStorico!: hardware[];
+  public idHardware!: string;
+  public hardware!:allHardware ;
+  public listaStorico!: allHardware[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,
@@ -31,6 +32,7 @@ export class VisualizzaBeneComponent implements OnInit{
           this.defaultService.titoloPagina=" Visualizza Bene";
         }, 0)
         this.idHardware = this.route.snapshot.params['idHardware'];
+        console.log(this.idHardware);
         this.getHardware();
       }
       else{

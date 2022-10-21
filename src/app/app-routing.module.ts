@@ -36,7 +36,7 @@ const routes: Routes = [
   {path: "pagina-scelta-ruolo/:ruolo", component: PaginaSceltaRuoloComponent},
   {path: "default", component: DefaultComponent, children: [
     {path: "pagina-avvisi", component: AvvisiComponent},
-    {path: "pagina-modifica-bene/:idBene", component: ModificaBeneComponent},
+    {path: "pagina-modifica-bene/:idHardware", component: ModificaBeneComponent},
     {path: "pagina-modifica-candidato/:idCandidato/:pagina/:idRichiesta", component: ModificaCandidatoComponent},
     {path: "pagina-modifica-password", component: ModificaPasswordComponent},
     {path: "pagina-nuova-busta-paga", component: NuovaBustaPagaComponent},
@@ -57,7 +57,7 @@ const routes: Routes = [
     {path: "pagina-rapportino", component: PaginaRapportinoComponent},
     {path: "pagina-richieste", component: PaginaRichiesteComponent},
     {path: "pagina-storico-richieste", component: PaginaStoricoRichiesteComponent},
-    {path: "pagina-visualizza-bene/:idBene", component: VisualizzaBeneComponent},
+    {path: "pagina-visualizza-bene/:idHardware", component: VisualizzaBeneComponent},
     {path: "pagina-visualizza-candidato/:idCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
     {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
     {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent}

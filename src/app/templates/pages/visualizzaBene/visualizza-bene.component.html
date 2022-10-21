@@ -10,7 +10,7 @@
             <img class="size" src="../../../../assets/img/img-laptop.png">
           </div>
           <div class="text-center p-5 mt-5">
-            <div *ngIf="hardware"><h4 class="p-t-10">{{hardware.idDispositivo}}</h4></div>
+            <div *ngIf="hardware"><h4 class="p-t-10">{{hardware.nomeDispositivo}}</h4></div>
             <div *ngIf="hardware"><h4 class="p-t-10">{{hardware.seriale}}</h4></div>
             <a [routerLink]="['../../pagina-modifica-bene', idHardware]" class="btn btn-success giallo mt-3 button">Modifica</a>
           </div>
@@ -55,7 +55,7 @@
               <div class="col-md-6">
                 <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Dipendente</h5>
-                  <h5 class="p-t-10">{{hardware.idPersona}}</h5>
+                  <h5 class="p-t-10">{{hardware.nomePersona + " " + hardware.cognomePersona}}</h5>
                 </div>
               </div>
               <!--
@@ -75,13 +75,13 @@
           <div class="col-md-6">
             <div *ngIf="hardware" class="p-4">
               <h5 class="text-black">Data Consegna</h5>
-              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataConsegna.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataConsegna}}</h5>
             </div>
           </div>   
           <div class="col-md-6">
             <div *ngIf="hardware" class="p-4">
               <h5 class="text-black">Data Restituzione</h5>
-              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataRestituzione.toString().replace("T", " ")}}</h5>
+              <h5 *ngIf="hardware.dataConsegna != null" class="p-t-10">{{hardware.dataRestituzione}}</h5>
             </div>
           </div>                                                         
         </div>
@@ -94,7 +94,7 @@
 							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
                 <div class="form-row">
                   <div class="col-md-2">
-                    <span>{{storico.idPersona}}</span>
+                    <span>{{storico.nomePersona + " " + hardware.cognomePersona}}</span>
                   </div>
                   <div class="col-md-2">
                     <span> {{storico.dataConsegna}}</span>
