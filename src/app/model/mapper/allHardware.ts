@@ -9,5 +9,4 @@ export interface allHardware {
     seriale: string;
     dataConsegna: Date;
     dataRestituzione: Date;
-
   }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { allDipendenti } from 'src/app/model/mapper/allDipendenti';
+import { allStoriciBeni } from 'src/app/model/mapper/allStoriciBeni';
 import { dispositivi } from 'src/app/model/mapper/dispositivi';
 import { findAllDipendentiException } from 'src/app/model/mapper/findAllDipendentiException';
 import { getDipendente } from 'src/app/model/mapper/getDipendente';
@@ -22,7 +23,7 @@ export class ModificaBeneComponent implements OnInit{
   public hardware!: hardware;
   public listaDipendenti!: findAllDipendentiException[];
   public listaDispositivi!: dispositivi[];
-  public listaStorico!: hardware[];
+  public listaStorico!: allStoriciBeni[];
   public dipendente!: getDipendente;
   public listaSelectDipendenti!:allDipendenti[];
   public titoloPagina: any;
@@ -57,20 +58,18 @@ export class ModificaBeneComponent implements OnInit{
         this.dispositivo = response[2];
         this.listaDipendenti = response[3];
         this.listaStorico = response[4];
-
       }
     )
   }
 
   public modificaHardware(updateForm: NgForm): void {
     
-    if(updateForm.value.dispositivo == ""){
-      updateForm.value.dispositivo = this.dispositivo.id.toString();
+    if(updateForm.value.idDispositivo == ""){
+      updateForm.value.idDispositivo = this.dispositivo.id.toString();
     }
-    if(updateForm.value.dipendente == ""){
-      updateForm.value.dipendente = this.dipendente.id.toString();
+    if(updateForm.value.idPersona == ""){
+      updateForm.value.idPersona = this.dipendente.id.toString();
     }
-    console.log(updateForm.value.dipendente);
     this.hardwareService.modificaHardware(updateForm.value, this.codiceHardware).subscribe(
       (response: any) => {
         alert("Bene modificato con successo");
@@ -79,14 +78,10 @@ export class ModificaBeneComponent implements OnInit{
     )
   }
 
-
-
   public allDispositivi():void{
     this.hardwareService.getAllDispositivi().subscribe(
       (response: any[])=> {
         this.listaDispositivi = response;
-        console.log(this.listaDispositivi);
-
       }
      
     )

@@ -28,7 +28,8 @@ export class HardwareService {
     return this.http.post<any>(`${this.apiServerUrl}/salva-hardware`, addForm);
   }
 
-  public modificaHardware(updateForm: hardware, codiceHardware: string): Observable<any> {
+  public modificaHardware(updateForm: JSON, codiceHardware: string): Observable<any> {
+    console.log(updateForm);
     return this.http.post<any>(`${this.apiServerUrl}/modifica-hardware/${codiceHardware}`, updateForm);
   }
 

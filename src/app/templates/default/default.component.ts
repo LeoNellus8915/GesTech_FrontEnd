@@ -42,7 +42,7 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciCandidati", "presenti");
           }
         );
-        if(this.ruolo == 'Admin' || this.ruolo == 'Personale' && this.codiciHardware == null)
+        if((this.ruolo == 'Admin' || this.ruolo == 'Personale') && this.codiciHardware == null)
           this.hardwareService.getCodiciHardware().subscribe(
             (response: any) => {
               sessionStorage.setItem("codiciHardware","Presenti");
@@ -78,7 +78,7 @@ export class DefaultComponent implements OnInit{
             sessionStorage.setItem("codiciRichiesteAperte", "presenti");
           }
         );
-      if (this.ruolo == 'Account' || this.ruolo == 'Direttore Commerciale' || this.ruolo == 'Direttore Recruiter' || this.ruolo == 'Admin' && this.codiciRichiesteChiuse == null)
+      if ((this.ruolo == 'Account' || this.ruolo == 'Direttore Commerciale' || this.ruolo == 'Direttore Recruiter' || this.ruolo == 'Admin') && this.codiciRichiesteChiuse == null)
         this.richiesteService.getCodiciRichiesteChiuse().subscribe(
           (response: any) => {
             sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
