@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Beni } from 'src/app/model/beni';
 import { allHardware } from 'src/app/model/mapper/allHardware';
+import { allStoriciBeni } from 'src/app/model/mapper/allStoriciBeni';
 import { hardware } from 'src/app/model/mapper/hardware';
 import { HardwareService } from 'src/app/service/hardware.service';
 import { DefaultComponent } from '../../default/default.component';
@@ -16,7 +17,7 @@ export class VisualizzaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
   public idHardware!: string;
   public hardware!:allHardware ;
-  public listaStorico!: allHardware[];
+  public listaStorico!: allStoriciBeni[];
   public titoloPagina: any;
 
   constructor(private router: Router, private titleService: Title, private defaultService: DefaultComponent,

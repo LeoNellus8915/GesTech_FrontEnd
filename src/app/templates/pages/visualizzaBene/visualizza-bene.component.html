@@ -87,29 +87,26 @@
         </div>
       </div>
       <div class="card-body">
-				<h5 class="card-title">Storico</h5>
-				<div class="form-row">
-					<div class="col-md-12">
-						<div class="form-row">
-							<div class="col-md-10 offset-1" *ngFor="let storico of listaStorico">
-                <div class="form-row">
-                  <div class="col-md-2">
-                    <span>{{storico.nomePersona + " " + hardware.cognomePersona}}</span>
-                  </div>
-                  <div class="col-md-2">
-                    <span> {{storico.dataConsegna}}</span>
-                  </div>
-                  <div class="col-md-2">
-                    <span> {{storico.dataRestituzione}}</span>
-                  </div>
-                </div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<table id="tabellaBeni" class="table table-striped table-bordered">
+					<thead>
+						<tr class="no-b">
+							<th class="titolotabella">DIPENDENTE</th>
+							<th class="titolotabella">DATA DI CONSEGNA</th>
+							<th class="titolotabella">DATA DI RESTITUZIONE</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let storico of listaStorico">
+							<td>{{storico.cognome + " " + storico.nome}}</td>
+							<td>{{storico.dataConsegna}}</td>
+							<td>{{storico.dataRestituzione}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 				<!-- Fine Row -->
 				<hr>
       </div>
     </div>  
   </div>
-</div>
+
