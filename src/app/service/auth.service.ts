@@ -9,9 +9,13 @@ export class AuthService {
   private apiServerUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
-  
+
   public login(loginForm: JSON): Observable<any> {
     return this.http.post<any>(`${this.apiServerUrl}/login`, loginForm);
+  }
+
+  public token(idDipendente: number): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/token`, idDipendente);
   }
 
   public getDatiByEmail(email: string): Observable<any[]> {

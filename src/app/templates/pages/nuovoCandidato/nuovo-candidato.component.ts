@@ -15,8 +15,7 @@ import { formatDate } from '@angular/common';
 import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
-import { event } from 'jquery';
-import { Observable, ReplaySubject, Subscriber } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   templateUrl: './nuovo-candidato.component.html',

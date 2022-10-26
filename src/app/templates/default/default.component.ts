@@ -88,20 +88,6 @@ export class DefaultComponent implements OnInit{
   }
 
   public logout(): void {
-    sessionStorage.removeItem("idRisorsa");
-    sessionStorage.removeItem("nomeCognome");
-    sessionStorage.removeItem("numeroRichieste");
-    sessionStorage.removeItem("ruolo");
-    sessionStorage.removeItem("azienda");
-    sessionStorage.removeItem("codiciCandidati");
-    sessionStorage.removeItem("codiciRichiesteAperteAdmin");
-    sessionStorage.removeItem("codiciRichiesteAperteAccount");
-    sessionStorage.removeItem("codiciRichiesteAperteCommerciale");
-    sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
-    sessionStorage.removeItem("codiciRichiesteAperte");
-    sessionStorage.removeItem("codiciRichiesteChiuse");
-    sessionStorage.removeItem("codiciHardware");
-
     this.router.navigate([""]);
   }
 
