@@ -47,7 +47,10 @@ export class AvvisiComponent implements OnInit{
   public getAvvisi(): void {
     this.avvisiService.allAvvisi(this.ruolo).subscribe(
       (response: Avvisi[]) => {
-        this.listaAvvisi = response;
+        if (response == null)
+          this.router.navigate([""]);
+        else
+          this.listaAvvisi = response;
       }
     )
   }

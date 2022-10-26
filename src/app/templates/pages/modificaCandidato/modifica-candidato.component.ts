@@ -75,7 +75,6 @@ export class ModificaCandidatoComponent implements OnInit{
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any[]) => {
         if (response != null) {
-          console.log(response)
           this.datiCandidato = response[0];
           this.dettagliCandidato = response[1];
           this.arrayValori = response[2];

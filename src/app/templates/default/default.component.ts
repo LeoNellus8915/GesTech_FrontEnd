@@ -101,6 +101,7 @@ export class DefaultComponent implements OnInit{
     sessionStorage.removeItem("codiciRichiesteAperte");
     sessionStorage.removeItem("codiciRichiesteChiuse");
     sessionStorage.removeItem("codiciHardware");
+    sessionStorage.removeItem("App-Key");
 
     this.router.navigate([""]);
   }
