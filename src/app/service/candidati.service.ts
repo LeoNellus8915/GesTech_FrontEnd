@@ -13,10 +13,12 @@ export class CandidatiService {
     return this.http.get<any[]>(`${this.apiServerUrl}/all-candidati`);
   }
 
-  public getCandidatoVisualizza(idCandidato: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/get-candidato-visualizza/${idCandidato}`);
+
+  public getCandidatoVisualizza(idCandidato: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-candidato-visualizza/${idCandidato}`);
   }
 
+  
   public getCandidatoModifica(idCandidato: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiServerUrl}/get-candidato-modifica/${idCandidato}`);
   }

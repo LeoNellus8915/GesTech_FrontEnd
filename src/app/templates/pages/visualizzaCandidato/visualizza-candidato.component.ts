@@ -30,6 +30,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public idCandidato!: number;
   public titoloPagina: any;
 
+  public response!: any;
+
   constructor(private router: Router, private titleService: Title, private route: ActivatedRoute, private defaultService: DefaultComponent,
               private candidatiService: CandidatiService, @Inject(DOCUMENT) private document: Document) {}
 
@@ -55,10 +57,12 @@ export class VisualizzaCandidatoComponent implements OnInit{
 
   public getCandidato(): void {
     this.candidatiService.getCandidatoVisualizza(this.idCandidato).subscribe(
-      (response: any[]) => {
-        if (response != null) {
-          console.log(response)
-          this.datiCandidato = response[0];
+      (response: any) => {
+        if (response.code != 0) {
+          console.log(response);
+          console.log(response.dataSource);
+          this.response = response.dataSource;
+          /*this.datiCandidato = response[0];
           this.dettagliCandidato = response[1];
           this.profili = response[2];
           this.lingue = response[3];
@@ -70,7 +74,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
             this.opacity = "0.3";
             var buttonCv = document.getElementById("cv") as HTMLButtonElement;
             buttonCv.disabled = true;
-          }
+          }*/
         }
         else
           this.router.navigate(["candidato-con-trovato"]);
@@ -92,8 +96,8 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public openLinkedin(): void {
-    if (this.dettagliCandidato.profiloLinkedin != "")
-      window.open(this.dettagliCandidato.profiloLinkedin, '_black')
+    if (this.response.infoDettaglioCandidato.profiloLinkedin != "")
+      window.open(this.response.infoDettaglioCandidato.profiloLinkedin, '_black')
     else
       alert("Nessun link a linkedin trovato");
   }
@@ -103,7 +107,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
   }
 
   public scaricaCV() {
-    if (this.fileBase64 != "")
-      window.open(this.fileBase64, '_black')
+    if (this.response.cvBase64 != "")
+      window.open(this.response.cvBase64, '_black')
   }
 }

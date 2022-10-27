@@ -14,13 +14,13 @@
       <div class="row no-gutters">
         <div class="col-md-4 b-r size">
           <div class="text-center">
-            <img *ngIf="colore == 1" class="size" src="../../../../assets/img/faccina-1.png">
-            <img *ngIf="colore == 2" class="size" src="../../../../assets/img/faccina-2.png">
-            <img *ngIf="colore == 3" class="size" src="../../../../assets/img/faccina-3.png">
-            <img *ngIf="colore == 4" class="size" src="../../../../assets/img/faccina-4.png">
+            <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 1" class="size" src="../../../../assets/img/faccina-1.png">
+            <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 2" class="size" src="../../../../assets/img/faccina-2.png">
+            <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 3" class="size" src="../../../../assets/img/faccina-3.png">
+            <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 4" class="size" src="../../../../assets/img/faccina-4.png">
           </div>
           <div class="text-center p-5 mt-5">
-            <div *ngIf="datiCandidato"><h4 class="p-t-10">{{datiCandidato.nome + datiCandidato.cognome}}</h4></div>
+            <div *ngIf="response"><h4 class="p-t-10">{{response.infoPersona.nome + " " + response.infoPersona.cognome}}</h4></div>
             <button id="cv" (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{opacity}">Scarica CV</button>
             <button [routerLink]="['../../../../pagina-modifica-candidato', idCandidato, pagina, idRichiesta]" class="btn btn-success giallo mt-3 button">Modifica</button> 
             <button *ngIf="ruolo=='Admin'" (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</button>
@@ -36,15 +36,15 @@
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-6">
-                <div *ngIf="datiCandidato" class="p-4">
+                <div *ngIf="response.infoPersona" class="p-4">
                   <h5 class="text-black">Email</h5>
-                  <h5 class="p-t-10">{{datiCandidato.email}}</h5>
+                  <h5 class="p-t-10">{{response.infoPersona.email}}</h5>
                 </div>
               </div>
               <div class="col-md-6">
-                <div *ngIf="datiCandidato" class="p-4">
+                <div *ngIf="response.infoPersona" class="p-4">
                   <h5 class="text-black">Recapito</h5>
-                  <h5 class="p-t-10">{{datiCandidato.cellulare}}</h5>
+                  <h5 class="p-t-10">{{response.infoPersona.cellulare}}</h5>
                 </div>
               </div>                                
             </div>
@@ -52,15 +52,15 @@
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-6">
-                <div *ngIf="datiCandidato" class="p-4">
+                <div *ngIf="response.infoPersona" class="p-4">
                   <h5 class="text-black">Citt&agrave;</h5>
-                  <h5 class="p-t-10">{{datiCandidato.cittaDiResidenza}}</h5>
+                  <h5 class="p-t-10">{{response.infoPersona.cittaDiResidenza}}</h5>
                 </div>
               </div>
               <div class="col-md-6">
-                <div *ngIf="dettagliCandidato" class="p-4">
+                <div *ngIf="response.infoDettaglioCandidato" class="p-4">
                   <h5 class="text-black">Data di Inseriemento</h5>
-                  <h5 class="p-t-10">{{dettagliCandidato.dataInserimento.toString().replace("T", " ")}}</h5>
+                  <h5 class="p-t-10">{{response.infoDettaglioCandidato.dataInserimento.toString().replace("T", " ")}}</h5>
                 </div>
               </div>
             </div>
@@ -68,9 +68,9 @@
           <div class="p5 b-b">
             <div class="row">
               <div class="col-md-12">
-                <div *ngIf="dettagliCandidato" class="p-4">
+                <div *ngIf="response.infoDettaglioCandidato" class="p-4">
                   <h5 class="text-black">Competenza Principale</h5>
-                  <h5 class="p-t-10">{{dettagliCandidato.competenzaPrincipale}}</h5>
+                  <h5 class="p-t-10">{{response.infoDettaglioCandidato.competenzaPrincipale}}</h5>
                 </div>
               </div>
             </div>
@@ -80,21 +80,21 @@
       <div class="p5 b-b bordo"> <!-- inizio campi larghi --> 
         <div class="row">
           <div class="col-md-4">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Data Colloquio:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato.dataColloquio}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.dataColloquio}}</h5>
             </div>
           </div>
           <div class="col-md-4">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Anno Colloquio:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato.annoColloquio}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.annoColloquio}}</h5>
             </div>
           </div>   
           <div class="col-md-4">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Esito Colloquio:</h5>
-              <h5 class="p-t-10">{{esitoColloquio}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.esitoColloquio}}</h5>
             </div>
           </div>                                                         
         </div>
@@ -102,9 +102,9 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-12">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Fonte Reperimento: </h5>
-              <h5 class="p-t-10">{{dettagliCandidato.fonteReperimento}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.fonteReperimento}}</h5>
             </div>
           </div>
         </div>   
@@ -112,7 +112,7 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-12">
-            <div *ngIf="profili" class="p-4">
+            <div *ngIf="response.infoProfili" class="p-4">
               <h5 class="text-black">Competenze: </h5><br>
               <div class="row">
                 <div class="col-3"><h5 class="p-t-10">PROFILO</h5></div>
@@ -120,7 +120,7 @@
                 <div class="col-2"><h5 class="p-t-10">LIVELLO</h5></div>
                 <div class="col-5"><h5 class="p-t-10">DESCRIZIONE</h5></div>
               </div>
-              <div *ngFor="let profilo of profili">
+              <div *ngFor="let profilo of response.infoProfili">
                 <div *ngIf="profilo.nomeProfilo == 'analista programmatore'" class="row">
                   <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
                   <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLinguaggio}}</h5></div>
@@ -138,11 +138,11 @@
         </div>   
       </div>
       <div class="p5 b-b">
-        <div *ngIf="lingue" class="p-4">
+        <div *ngIf="response.infoLingue" class="p-4">
           <h5 class="text-black">Lingue: </h5><br>
           <div class="row">
-            <div class="col-2" *ngFor="let lingua of lingue">
-              <h5 class="p-t-10">{{lingua}}</h5>
+            <div class="col-2" *ngFor="let lingua of response.infoLingue">
+              <h5 class="p-t-10">{{lingua.nomeLingua}}</h5>
             </div>
           </div>
         </div>   
@@ -150,15 +150,15 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-6">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Costo Giornaliero:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato.costoGiornaliero}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.costoGiornaliero}}</h5>
             </div>
           </div>
           <div class="col-md-6">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Possibilit&agrave; Lavorativa:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato.possibilitaLavorativa}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.possibilitaLavorativa}}</h5>
             </div>
           </div> 
         </div>   
@@ -166,15 +166,15 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-6">
-            <div *ngIf="dettagliCandidato" class="p-4">
+            <div *ngIf="response.infoDettaglioCandidato" class="p-4">
               <h5 class="text-black">Competenze Totali:</h5>
-              <h5 class="p-t-10">{{dettagliCandidato.competenzeTotali}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.competenzeTotali}}</h5>
             </div>
           </div>
             <div class="col-md-6">
-              <div *ngIf="dettagliCandidato" class="p-4">
+              <div *ngIf="response.infoDettaglioCandidato" class="p-4">
                 <h5 class="text-black">Certificazioni: </h5>
-                <h5 class="p-t-10">{{dettagliCandidato.certificazioni}}</h5>
+                <h5 class="p-t-10">{{response.infoDettaglioCandidato.certificazioni}}</h5>
               </div>
             </div>
         </div>
@@ -184,9 +184,9 @@
           <h5 class="text-black">Commenti</h5>
         </div>
         <div class="row">
-          <div class="col-md-10 offset-1" *ngFor="let commento of commentiCandidato">
+          <div class="col-md-10 offset-1" *ngFor="let commento of response.commentiCandidato">
             <span class="titolo_data">{{commento.data}}</span>
-            <span class="titolo_data"> {{commento.nomeCognome}}</span>
+            <span class="titolo_data"> {{commento.nome + " " + commento.cognome}}</span>
             <p class="testo_richieste">{{commento.note}}</p>
           </div>
         </div>
