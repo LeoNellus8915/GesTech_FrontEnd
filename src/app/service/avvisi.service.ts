@@ -15,10 +15,10 @@ export class AvvisiService {
   }
 
   public salvaAvviso(addForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-avviso`, addForm);
+    return this.http.post<any>(`${this.apiServerUrl}/salva-avviso`, addForm, {headers: header.header()});
   }
 
   public deleteAvviso(idAvviso: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiServerUrl}/delete-avviso/${idAvviso}`);
+    return this.http.delete<any>(`${this.apiServerUrl}/delete-avviso/${idAvviso}`, {headers: header.header()});
   }
 }

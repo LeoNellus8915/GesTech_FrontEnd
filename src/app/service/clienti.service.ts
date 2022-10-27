@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { environment, header } from 'src/environments/environment';
 import { Clienti } from '../model/clienti';
 import { Observable } from 'rxjs';
 
@@ -11,6 +11,6 @@ export class ClientiService {
   constructor(private http: HttpClient) {}
 
   public getClienti(): Observable<Clienti[]> {
-    return this.http.get<Clienti[]>(`${this.apiServerUrl}/all-clienti`);
+    return this.http.get<Clienti[]>(`${this.apiServerUrl}/all-clienti`,{headers: header.header()});
   }
 }
