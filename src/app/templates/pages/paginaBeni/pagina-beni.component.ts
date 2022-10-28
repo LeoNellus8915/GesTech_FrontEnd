@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -45,40 +46,43 @@ export class PaginaBeniComponent implements OnInit{
   public allHardware(): void {
     this.hardwareService.allHardware().subscribe(
       (response: any[]) => {
-        this.listaHardware = response[0];
-        const listaCodici = response[1];
-        for (let i = 0; i < response[0].length; i++)
-          this.listaHardware[i].id = listaCodici[i].codice;
-        setTimeout(function () {
-          $(function () {
-            $('#tabellaBeni').DataTable({
-              "language": {
-                "emptyTable":     "Nessun bene trovato",
-                "info":           " ",
-                "infoEmpty":      " ",
-                "lengthMenu":     "Mostra _MENU_ beni",
-                "loadingRecords": "Caricamento...",
-                "search":         "Cerca:",
-                "zeroRecords":    "Nessun bene trovato",
-                "paginate": {
-                    "first":      "Ultimo",
-                    "last":       "Primo",
-                    "next":       "Prossimo",
-                    "previous":   "Precedente"
+          this.listaHardware = response[0];
+          const listaCodici = response[1];
+          for (let i = 0; i < response[0].length; i++)
+            this.listaHardware[i].id = listaCodici[i].codice;
+          setTimeout(function () {
+            $(function () {
+              $('#tabellaBeni').DataTable({
+                "language": {
+                  "emptyTable":     "Nessun bene trovato",
+                  "info":           " ",
+                  "infoEmpty":      " ",
+                  "lengthMenu":     "Mostra _MENU_ beni",
+                  "loadingRecords": "Caricamento...",
+                  "search":         "Cerca:",
+                  "zeroRecords":    "Nessun bene trovato",
+                  "paginate": {
+                      "first":      "Ultimo",
+                      "last":       "Primo",
+                      "next":       "Prossimo",
+                      "previous":   "Precedente"
+                  }
                 }
-              }
+              });
+              $('.dataTables_filter input[type="search"]').css(
+                {'width':'800px','display':'inline-block'}
+              );
+              $("input").on("click", function(){
+              $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
+              " (esempio: dispositivo marca ecc...)");
+              $("#tooltip").css({"margin-left": "31%"})
+              $("br").remove();
             });
-            $('.dataTables_filter input[type="search"]').css(
-              {'width':'800px','display':'inline-block'}
-            );
-            $("input").on("click", function(){
-            $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
-            " (esempio: dispositivo marca ecc...)");
-            $("#tooltip").css({"margin-left": "31%"})
-            $("br").remove();
+            });
           });
-          });
-        });
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

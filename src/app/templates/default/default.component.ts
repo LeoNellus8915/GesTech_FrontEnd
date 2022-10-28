@@ -39,49 +39,100 @@ export class DefaultComponent implements OnInit{
       if (this.ruolo !== 'Dipendente' && this.ruolo !== 'Personale' && this.codiciCandidati == null)
         this.candidatiService.getCodiciCandidati().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciCandidati", "presenti");
+            // if (response == null){
+            //   console.log("porco dio8");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciCandidati", "presenti");
+            // }
+            
           }
         );
         if((this.ruolo == 'Admin' || this.ruolo == 'Personale') && this.codiciHardware == null)
           this.hardwareService.getCodiciHardware().subscribe(
             (response: any) => {
-              sessionStorage.setItem("codiciHardware","Presenti");
+              // if (response == null){
+              //   console.log("porco dio7");
+              //   this.router.navigate(['']);
+              // } 
+              // else{
+                sessionStorage.setItem("codiciHardware","Presenti");
+              // }
+              
             }
           );
       if (this.ruolo == 'Admin' && this.codiciRichiesteAperteAdmin == null)
         this.richiesteService.getCodiciRichiesteAperteAdmin().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteAperteAdmin", "presenti");
+            // if (response == null){
+            //   console.log("porco dio6");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteAperteAdmin", "presenti");
+            // }
           }
         );
       if (this.ruolo == 'Account' && this.codiciRichiesteAperteAccount == null)
         this.richiesteService.getCodiciRichiesteAperteAccount(this.idDipendente).subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteAperteAccount", "presenti");
-          }
+            // if (response == null){
+            //   console.log("porco dio5");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteAperteAccount", "presenti");
+            }
+          // }
         );
       if (this.ruolo == 'Direttore Commerciale' && this.codiciRichiesteAperteCommerciale == null)
         this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteAperteCommerciale", "presenti");
-          }
+            // if (response == null){
+            //   console.log("porco dio4");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteAperteCommerciale", "presenti");
+            }
+          // }
         );
       if (this.ruolo == 'Direttore Recruiter' && this.codiciRichiesteAperteRecruiter == null)
         this.richiesteService.getCodiciRichiesteAperteRecruiter().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteAperteRecruiter", "presenti");
-          }
+            // if (response == null){
+            //   console.log(response);
+            //   console.log("porco dio3");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteAperteRecruiter", "presenti");
+            }
+          // }
         );
       if (this.ruolo == 'Recruiter' && this.codiciRichiesteAperte == null)
         this.richiesteService.getCodiciRichiesteAperte(this.nome, this.cognome).subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteAperte", "presenti");
-          }
+            // if (response == null){
+            //   console.log("porco dio2");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteAperte", "presenti");
+            }
+          // }
         );
       if ((this.ruolo == 'Account' || this.ruolo == 'Direttore Commerciale' || this.ruolo == 'Direttore Recruiter' || this.ruolo == 'Admin') && this.codiciRichiesteChiuse == null)
         this.richiesteService.getCodiciRichiesteChiuse().subscribe(
           (response: any) => {
-            sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
+            // if (response == null){
+            //   console.log("porco dio1");
+            //   this.router.navigate(['']);
+            // } 
+            // else{
+              sessionStorage.setItem("codiciRichiesteChiuse", "presenti");
+            // }
           }
         );
     }

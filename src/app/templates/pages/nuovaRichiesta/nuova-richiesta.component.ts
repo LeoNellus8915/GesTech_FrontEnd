@@ -12,6 +12,7 @@ import { RichiesteService } from 'src/app/service/richieste.service';
 import { ClientiService } from 'src/app/service/clienti.service';
 import { DefaultComponent } from '../../default/default.component';
 import { Clienti } from 'src/app/model/clienti';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './nuova-richiesta.component.html',
@@ -51,21 +52,36 @@ export class NuovaRichiestaComponent implements OnInit{
     this.profiliService.getProfili().subscribe(
       (response: Profili[]) => {
         this.listaProfili = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
     this.linguaggiService.getLinguaggi().subscribe(
       (response: Linguaggi[]) => {
+
         this.listaLinguaggi = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
     this.livelliService.getLivelli().subscribe(
       (response: Livelli[]) => {
+
         this.listaLivelli = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
     this.clientiService.getClienti().subscribe(
       (response: Clienti[]) => {
+
         this.listaClienti = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -90,8 +106,12 @@ export class NuovaRichiestaComponent implements OnInit{
     addForm.value.idDipendente = this.idDipendente;
     this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
       (response: any) => {
-        alert("Richiesta salvata con successo");
-        this.router.navigate(['default/pagina-richieste'])
+        
+          alert("Richiesta salvata con successo");
+          this.router.navigate(['default/pagina-richieste'])
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

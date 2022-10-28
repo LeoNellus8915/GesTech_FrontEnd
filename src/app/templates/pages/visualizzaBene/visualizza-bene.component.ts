@@ -44,8 +44,11 @@ export class VisualizzaBeneComponent implements OnInit{
   public getHardware(): void {
     this.hardwareService.getHardwareVisualizza(this.idHardware).subscribe(
       (response: any[]) => {
-        this.hardware = response[0];
-        this.listaStorico = response[1];
+        if (response == null) this.router.navigate(['']);
+        else{
+          this.hardware = response[0];
+          this.listaStorico = response[1];
+        }
       }
     )
   }

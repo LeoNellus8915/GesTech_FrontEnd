@@ -9,6 +9,7 @@ import { DefaultComponent } from '../../default/default.component';
 import { Aziende } from 'src/app/model/aziende';
 import { AuthService } from 'src/app/service/auth.service';
 import { Md5 } from "md5-typescript";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './nuovo-utente.component.html',
@@ -46,12 +47,18 @@ export class NuovoUtenteComponent implements OnInit{
       this.ruoliService.getRuoliDipendenteAdmin().subscribe(
         (response: Ruoli[]) => {
           this.listaRuoli = response;
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
         }
       )
     else
       this.ruoliService.getRuoliDipendentePersonale().subscribe(
         (response: Ruoli[]) => {
           this.listaRuoli = response;
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
         }
       )
   }
@@ -60,6 +67,9 @@ export class NuovoUtenteComponent implements OnInit{
     this.aziendeService.getAziende().subscribe(
       (response: Aziende[]) => {
         this.listaAziende = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -71,12 +81,16 @@ export class NuovoUtenteComponent implements OnInit{
       addForm.value.password = Md5.init(addForm.value.password);
       this.authService.addUtente(addForm.value).subscribe(
         (response: any) => {
-          if (response == 0)
+
+            if (response == 0)
             alert("Email già esistente");
           else {
             alert("Utente registrato con successo");
             this.router.navigate(['default/pagina-avvisi']);
           }
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
         }
       )
     }

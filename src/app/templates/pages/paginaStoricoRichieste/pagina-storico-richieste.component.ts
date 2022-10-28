@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { allRichiesteChiuse } from 'src/app/model/mapper/allRichiesteChiuse';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './pagina-storico-richieste.component.html',
@@ -40,12 +41,15 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
   public getRichieste(): void {
     this.richiesteService.getRichiesteChiuse(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
       (response: any[]) => {
-        const candidati: string[][] = [];
-        this.listaRichieste = response[1];
-        const listaCodici = response[0];
-        for (let i = 0; i < response[0].length; i++) {
-          this.listaRichieste[i].id = listaCodici[i].codice;
-        }
+          const candidati: string[][] = [];
+          this.listaRichieste = response[1];
+          const listaCodici = response[0];
+          for (let i = 0; i < response[0].length; i++) {
+            this.listaRichieste[i].id = listaCodici[i].codice;
+          }
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

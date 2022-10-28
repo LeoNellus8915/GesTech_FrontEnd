@@ -8,6 +8,7 @@ import { DefaultComponent } from '../../default/default.component';
 import{allDipendenti} from 'src/app/model/mapper/allDipendenti';
 import { dispositivi } from 'src/app/model/mapper/dispositivi';
 import { formatDate } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './nuovo-bene.component.html',
@@ -43,7 +44,11 @@ export class NuovoBeneComponent implements OnInit{
   public allDipendenti(): void {
     this.dipendentiService.allDipendenti().subscribe(
       (response: any[]) => {
+
         this.listaDipendenti = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -51,8 +56,11 @@ export class NuovoBeneComponent implements OnInit{
   public allDispositivi():void{
     this.hardwareService.getAllDispositivi().subscribe(
       (response: any[])=> {
-        this.listaDispositivi = response;
-       
+
+        this.listaDispositivi = response; 
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
      
     )
@@ -72,8 +80,11 @@ export class NuovoBeneComponent implements OnInit{
 
     this.hardwareService.salvaHardware(addForm.value).subscribe(
       (response: any) => {
-        alert("Bene salvato con successo");
-        this.router.navigate(["default/pagina-beni"]);
+          alert("Bene salvato con successo");
+          this.router.navigate(["default/pagina-beni"]);
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

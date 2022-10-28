@@ -11,11 +11,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
   
   public login(loginForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/login`, loginForm,{headers: header.header()});
+    return this.http.post<any>(`${this.apiServerUrl}/login`, loginForm);
   }
 
   public getDatiByEmail(email: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/get-dati-by-email/${email}`,{headers: header.header()});
+    return this.http.get<any[]>(`${this.apiServerUrl}/get-dati-by-email/${email}`);
   }
 
   public sceltaRuolo(idRisorsa: number, ruolo: string): Observable<LocalSession> {

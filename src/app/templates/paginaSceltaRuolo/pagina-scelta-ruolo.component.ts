@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
@@ -35,17 +36,21 @@ export class PaginaSceltaRuoloComponent implements OnInit{
   public controlloDownload(): void {
     this.dipendentiCCNLService.controlloDownload(this.idDipendente).subscribe(
       (response: any[]) => {
-        if (response[0] != null) {
-          const button = document.createElement('button');
-          const container = document.getElementById("container");
-          button.style.visibility = "hidden";
-          button.setAttribute('data-toggle', 'modal');
-          button.setAttribute('data-target', '#controlloModal');
-          button.setAttribute('data-backdrop', 'static');
-          button.setAttribute('data-keyboard', 'false');
-          container?.appendChild(button);
-          button.click();
+          if (response[0] != null) {
+            const button = document.createElement('button');
+            const container = document.getElementById("container");
+            button.style.visibility = "hidden";
+            button.setAttribute('data-toggle', 'modal');
+            button.setAttribute('data-target', '#controlloModal');
+            button.setAttribute('data-backdrop', 'static');
+            button.setAttribute('data-keyboard', 'false');
+            container?.appendChild(button);
+            button.click();
+          
         }
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -53,15 +58,19 @@ export class PaginaSceltaRuoloComponent implements OnInit{
   public download(): void {
     this.dipendentiCCNLService.download(this.idDipendente).subscribe(
       (response: any) => {
-        const button = document.createElement('button');
-        const container = document.getElementById("controlloModal");
-        button.style.visibility = "hidden";
-        button.setAttribute('data-dismiss', 'modal');
-        button.setAttribute('aria-label', 'close');
-        container?.appendChild(button);
-        button.click();
-        alert("Download eseguito con successo. Ora puoi accedere al gestionale");
-      }
+  
+          const button = document.createElement('button');
+          const container = document.getElementById("controlloModal");
+          button.style.visibility = "hidden";
+          button.setAttribute('data-dismiss', 'modal');
+          button.setAttribute('aria-label', 'close');
+          container?.appendChild(button);
+          button.click();
+          alert("Download eseguito con successo. Ora puoi accedere al gestionale");
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
+        }
     )
   }
 }

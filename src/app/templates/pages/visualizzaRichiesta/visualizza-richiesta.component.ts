@@ -9,6 +9,7 @@ import { allCommentiRichieste } from 'src/app/model/mapper/allCommentiRichieste'
 import { getRichieste } from 'src/app/model/mapper/getRichiesta';
 import { Persone } from 'src/app/model/persone';
 import { allCandidati } from 'src/app/model/mapper/allCandidati';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './visualizza-richiesta.component.html',
@@ -73,13 +74,18 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public getRichiesta(): void {
     this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
       (response: any[]) => {
-        this.richiesta = response[0];
-        this.priorita = this.richiesta.priorita as string;
-        this.statoRichiesta = response[1];
-        this.idStatoRichiesta = response[2];
-        this.listaStatiRichiesta = response[3];
-        this.candidatiSelezionati = response[4];
-        this.commentiRichiesta = response[5];
+
+          this.richiesta = response[0];
+          this.priorita = this.richiesta.priorita as string;
+          this.statoRichiesta = response[1];
+          this.idStatoRichiesta = response[2];
+          this.listaStatiRichiesta = response[3];
+          this.candidatiSelezionati = response[4];
+          this.commentiRichiesta = response[5];
+        
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -87,7 +93,11 @@ export class VisualizzaRichiestaComponent implements OnInit{
   public getRecruiters(): void {
     this.richiesteService.getRecruiters().subscribe(
       (response: string[]) => {
-        this.listaRecruiters = response;
+  
+          this.listaRecruiters = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -96,11 +106,14 @@ export class VisualizzaRichiestaComponent implements OnInit{
     if (confirm("Sicuro di voler eliminare questa richista?") == true)
       this.richiesteService.eliminaRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
         (response: any) => {
-          alert("Richiesta eliminata con successo");
-          if (this.statoPagina == 0)
-            this.router.navigate(['default/pagina-richieste']);
-          else
-            this.router.navigate(['default/pagina-storico-richieste']);
+            alert("Richiesta eliminata con successo");
+            if (this.statoPagina == 0)
+              this.router.navigate(['default/pagina-richieste']);
+            else
+              this.router.navigate(['default/pagina-storico-richieste']);
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
         }
       )
   }
@@ -117,11 +130,14 @@ export class VisualizzaRichiestaComponent implements OnInit{
     updateForm.value.priorita = this.priorita.toString();
     this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina, this.ruolo).subscribe(
       (response: any) => {
-        alert("Richiesta aggiornata con successo");
-        if (this.statoPagina == 0)
-          this.router.navigate(['default/pagina-richieste']);
-        else
-          this.router.navigate(['default/pagina-storico-richieste']);
+          alert("Richiesta aggiornata con successo");
+          if (this.statoPagina == 0)
+            this.router.navigate(['default/pagina-richieste']);
+          else
+            this.router.navigate(['default/pagina-storico-richieste']);
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

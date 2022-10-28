@@ -4,6 +4,7 @@ import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { allDipendenti } from 'src/app/model/mapper/allDipendenti';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './pagina-dipendenti.component.html'
@@ -35,38 +36,41 @@ export class PaginaDipendentiComponent implements OnInit{
   public allDipendenti(): void {
     this.dipendentiService.allDipendenti().subscribe(
       (response: any[]) => {
-        this.listaDipendenti = response;
-        setTimeout(function () {
-          $(function () {
-            $('#tabellaDipendenti').DataTable({
-              "language": {
-                "emptyTable":     "Nessun dipendente trovato",
-                "info":           " ",
-                "infoEmpty":      " ",
-                "infoFiltered":   "Filtrati i _MAX_ dipendenti",
-                "lengthMenu":     "Mostra _MENU_ dipendenti",
-                "loadingRecords": "Caricamento...",
-                "search":         "Cerca:",
-                "zeroRecords":    "Nessun dipendente trovato",
-                "paginate": {
-                    "first":      "Ultimo",
-                    "last":       "Primo",
-                    "next":       "Prossimo",
-                    "previous":   "Precedente"
+          this.listaDipendenti = response;
+          setTimeout(function () {
+            $(function () {
+              $('#tabellaDipendenti').DataTable({
+                "language": {
+                  "emptyTable":     "Nessun dipendente trovato",
+                  "info":           " ",
+                  "infoEmpty":      " ",
+                  "infoFiltered":   "Filtrati i _MAX_ dipendenti",
+                  "lengthMenu":     "Mostra _MENU_ dipendenti",
+                  "loadingRecords": "Caricamento...",
+                  "search":         "Cerca:",
+                  "zeroRecords":    "Nessun dipendente trovato",
+                  "paginate": {
+                      "first":      "Ultimo",
+                      "last":       "Primo",
+                      "next":       "Prossimo",
+                      "previous":   "Precedente"
+                  }
                 }
-              }
+              });
+              $('.dataTables_filter input[type="search"]').css(
+                {'width':'800px','display':'inline-block'}
+             );
+             $("input").on("click", function(){
+              $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
+              " (esempio Nome Data ecc...)");
+              $("#tooltip").css({"margin-left": "31%"})
+              $("br").remove();
             });
-            $('.dataTables_filter input[type="search"]').css(
-              {'width':'800px','display':'inline-block'}
-           );
-           $("input").on("click", function(){
-            $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
-            " (esempio Nome Data ecc...)");
-            $("#tooltip").css({"margin-left": "31%"})
-            $("br").remove();
+            });
           });
-          });
-        });
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

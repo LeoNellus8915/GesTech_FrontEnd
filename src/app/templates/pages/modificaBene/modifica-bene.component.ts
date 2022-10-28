@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
@@ -53,11 +54,15 @@ export class ModificaBeneComponent implements OnInit{
   public getHardware(): void {
     this.hardwareService.getHardwareModifica(this.codiceHardware).subscribe(
       (response: any[]) => {
+        
         this.hardware = response[0];
         this.dipendente = response[1];
         this.dispositivo = response[2];
         this.listaDipendenti = response[3];
         this.listaStorico = response[4];
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -72,8 +77,11 @@ export class ModificaBeneComponent implements OnInit{
     }
     this.hardwareService.modificaHardware(updateForm.value, this.codiceHardware).subscribe(
       (response: any) => {
-        alert("Bene modificato con successo");
-        this.router.navigate(["default/pagina-beni"]);
+          alert("Bene modificato con successo");
+          this.router.navigate(["default/pagina-beni"]);
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -81,7 +89,12 @@ export class ModificaBeneComponent implements OnInit{
   public allDispositivi():void{
     this.hardwareService.getAllDispositivi().subscribe(
       (response: any[])=> {
-        this.listaDispositivi = response;
+
+          this.listaDispositivi = response;
+        
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
      
     )

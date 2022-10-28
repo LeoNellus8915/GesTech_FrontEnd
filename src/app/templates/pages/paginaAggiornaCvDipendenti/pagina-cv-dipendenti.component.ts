@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -40,12 +41,20 @@ export class PaginaCVDipendentiComponent implements OnInit{
   public getSelects(): void {
     this.linguaggiService.getLinguaggi().subscribe(
       (response: Linguaggi[]) => {
-        this.listaLinguaggi = response;
+
+          this.listaLinguaggi = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
     this.lingueService.getLingue().subscribe(
       (response: Lingue[]) => {
-        this.listaLingue = response;
+
+          this.listaLingue = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }

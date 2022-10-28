@@ -6,6 +6,7 @@ import { DefaultComponent } from '../../default/default.component';
 import { DipendentiRichiesteService } from 'src/app/service/dipendenti-richieste.service';
 import { allRichieste } from 'src/app/model/mapper/allRichieste';
 import { allRichiesteAperte } from 'src/app/model/mapper/allRichiesteAperte';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './pagina-richieste.component.html',
@@ -57,17 +58,20 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteAdmin(): void {
     this.richiesteService.getRichiesteAperteAdmin().subscribe(
       (response: any[]) => {
-        response[1].forEach((richiesta: { priorita: number; }) => {
-          if (richiesta.priorita == 0) {
-            this.contatore++;
-            console.log(this.contatore)
+        if (response == null) this.router.navigate(['']);
+        else{
+          response[1].forEach((richiesta: { priorita: number; }) => {
+            if (richiesta.priorita == 0) {
+              this.contatore++;
+              console.log(this.contatore)
+            }
+          });
+          if (response[1].length > 0) {
+            this.listaRichieste = response[1];
+            const listaCodici = response[0];
+            for (let i = 0; i < response[0].length; i++)
+              this.listaRichieste[i].id = listaCodici[i].codice;
           }
-        });
-        if (response[1].length > 0) {
-          this.listaRichieste = response[1];
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i].id = listaCodici[i].codice;
         }
       }
     )
@@ -76,11 +80,14 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteRecruiter(): void {
     this.richiesteService.getRichiesteAperteRecruiter().subscribe(
       (response: any[]) => {
-        if (response[1].length > 0) {
-          this.listaRichieste = response[1];
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++){
-            this.listaRichieste[i].id = listaCodici[i].codice;
+        if (response == null) this.router.navigate(['']);
+        else{
+          if (response[1].length > 0) {
+            this.listaRichieste = response[1];
+            const listaCodici = response[0];
+            for (let i = 0; i < response[0].length; i++){
+              this.listaRichieste[i].id = listaCodici[i].codice;
+            }
           }
         }
       }
@@ -90,11 +97,14 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteCommerciale(): void {
     this.richiesteService.getRichiesteAperteCommerciale().subscribe(
       (response: any[]) => {
-        if (response[1].length > 0) {
-          this.listaRichieste = response[1];
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i].id = listaCodici[i].codice;
+        if (response == null) this.router.navigate(['']);
+        else{
+          if (response[1].length > 0) {
+            this.listaRichieste = response[1];
+            const listaCodici = response[0];
+            for (let i = 0; i < response[0].length; i++)
+              this.listaRichieste[i].id = listaCodici[i].codice;
+          }
         }
       }
     )
@@ -103,11 +113,14 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteAccount(): void {
     this.richiesteService.getRichiesteAperteAccount(this.idDipendente).subscribe(
       (response: any[]) => {
-        if (response[1].length > 0) {
-          this.listaRichieste = response[1];
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i].id = listaCodici[i].codice;
+        if (response == null) this.router.navigate(['']);
+        else{
+          if (response[1].length > 0) {
+            this.listaRichieste = response[1];
+            const listaCodici = response[0];
+            for (let i = 0; i < response[0].length; i++)
+              this.listaRichieste[i].id = listaCodici[i].codice;
+          }
         }
       }
     )
@@ -116,13 +129,17 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichieste(): void {
     this.richiesteService.getRichiesteAperte(this.nome, this.cognome, this.idDipendente).subscribe(
       (response: any[]) => {
-        if (response[1].length > 0) {
-          this.listaRichieste = response[1];
-          console.log(this.listaRichieste);
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaRichieste[i].id = listaCodici[i].codice;
-        }
+
+          if (response[1].length > 0) {
+            this.listaRichieste = response[1];
+            console.log(this.listaRichieste);
+            const listaCodici = response[0];
+            for (let i = 0; i < response[0].length; i++)
+              this.listaRichieste[i].id = listaCodici[i].codice;
+          }
+      },
+      (error: HttpErrorResponse) => {
+        this.router.navigate(['']);
       }
     )
   }
@@ -131,9 +148,12 @@ export class PaginaRichiesteComponent implements OnInit {
     if (visualizzata == false)
       this.dipendentiRichiesteService.setVisualizzato(idRichiesta, this.idDipendente).subscribe (
         (response: any) => {
-          this.defaultService.numeroRichieste --;
-          sessionStorage.setItem("numeroRichieste", this.defaultService.numeroRichieste.toString())
-          this.router.navigate(["default/pagina-visualizza-richiesta", idRichiesta, 0]);
+          if (response == null) this.router.navigate(['']);
+          else{
+            this.defaultService.numeroRichieste --;
+            sessionStorage.setItem("numeroRichieste", this.defaultService.numeroRichieste.toString())
+            this.router.navigate(["default/pagina-visualizza-richiesta", idRichiesta, 0]);
+          }
         }
       )
     else
@@ -166,10 +186,16 @@ export class PaginaRichiesteComponent implements OnInit {
     var array = JSON.parse(JSON.stringify(this.radioArray));
     this.richiesteService.salvaPriorita(array, this.ruolo).subscribe(
       (response: any) => {
-        alert("Invio riuscito");
+        if (response == null) this.router.navigate(['']);
+        else{
+          alert("Invio riuscito");
+        }
         this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(
           (response: any) => {
-            this.ngOnInit();
+            if (response == null) this.router.navigate([''])
+            else{
+              this.ngOnInit();
+            }
           }
         );
       }

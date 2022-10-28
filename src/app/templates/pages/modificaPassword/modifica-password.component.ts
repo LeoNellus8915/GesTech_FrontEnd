@@ -5,6 +5,7 @@ import { DefaultComponent } from '../../default/default.component';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { Md5 } from "md5-typescript";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './modifica-password.component.html',
@@ -37,8 +38,11 @@ export class ModificaPasswordComponent implements OnInit{
       updateForm.value.password = Md5.init(updateForm.value.password);
       this.authService.cambiaPassword(updateForm.value).subscribe(
         (response: any) => {
-          alert("Password modificata con successo");
-          this.router.navigate(["default/pagina-avvisi"]);
+            alert("Password modificata con successo");
+            this.router.navigate(["default/pagina-avvisi"]);
+        },
+        (error: HttpErrorResponse) => {
+          this.router.navigate(['']);
         }
       )
     }
