@@ -62,19 +62,6 @@ export class VisualizzaCandidatoComponent implements OnInit{
           console.log(response);
           console.log(response.dataSource);
           this.response = response.dataSource;
-          /*this.datiCandidato = response[0];
-          this.dettagliCandidato = response[1];
-          this.profili = response[2];
-          this.lingue = response[3];
-          this.commentiCandidato = response[4];
-          this.colore = response[5];
-          this.esitoColloquio = response[6];
-          this.fileBase64 = response[7]
-          if (this.fileBase64 == null) {
-            this.opacity = "0.3";
-            var buttonCv = document.getElementById("cv") as HTMLButtonElement;
-            buttonCv.disabled = true;
-          }*/
         }
         else
           this.router.navigate(["candidato-con-trovato"]);

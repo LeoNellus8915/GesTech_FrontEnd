@@ -19,8 +19,8 @@ export class CandidatiService {
   }
 
   
-  public getCandidatoModifica(idCandidato: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/get-candidato-modifica/${idCandidato}`);
+  public getCandidatoModifica(idCandidato: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-candidato-modifica/${idCandidato}`);
   }
 
   public eliminaCandidato(idCandidato: number): Observable<any> {

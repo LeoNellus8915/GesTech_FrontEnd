@@ -217,13 +217,17 @@ export class NuovoCandidatoComponent implements OnInit{
   selectLingua(e: any) {
     var idLingua = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-lingua-", '')
+    if (this.arrayLingue[numeroRiga] == null) {
+      this.arrayLingue.push({"lingua": idLingua});
+    }
+    else
+      this.arrayLingue[numeroRiga].lingua = idLingua;
     if (numeroRiga == 0) {
       e.path[2].children.button.style.removeProperty("display");
     }
     else {
       e.path[2].children.buttons.style.removeProperty("display");
     }
-    this.arrayLingue.push({"lingua": idLingua});
   }
 
   addRowLingua() {
@@ -258,7 +262,7 @@ export class NuovoCandidatoComponent implements OnInit{
       this.addRowLingua();
     });
     rigaNuova.children[1].setAttribute('style', 'display: none');
-    rigaNuova.children[2].removeAttribute('style');
+    rigaNuova.children[2].setAttribute('style', 'display: none');
   }
 
   removeRowLingua() {

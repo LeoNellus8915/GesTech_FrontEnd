@@ -43,6 +43,8 @@ export class ModificaCandidatoComponent implements OnInit{
   public idRichiesta!: number;
   public listaSelects!: any;
 
+  public response!: any;
+
   constructor(private router: Router, private esitiColloquioService: EsitiColloquioService, private profiliService: ProfiliService,
     private linguaggiService: LinguaggiService, private lingueService: LingueService, private livelliService: LivelliService,
     private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent,
@@ -73,18 +75,28 @@ export class ModificaCandidatoComponent implements OnInit{
 
   public getDatiModifica(): void {
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
-      (response: any[]) => {
+      (response: any) => {
         if (response != null) {
-          this.datiCandidato = response[0];
-          this.dettagliCandidato = response[1];
-          this.arrayValori = response[2];
-          this.arrayValori.forEach(profilo => {
-            if (profilo.nomeProfilo == 'analista programmatore')
-              this.arrayProfilo.push({"programmatore": true});
+          this.response = response.dataSource;
+
+          for (var c = 0; c < this.response.infoProfili.length; c++) {
+            if (this.response.infoProfili[c].nomeProfilo == 'analista programmatore')
+              this.arrayProfilo.push({ "programmatore": true });
             else
-              this.arrayProfilo.push({"programmatore": false});
-          });
-          this.esitoColloquio = response[4];
+              this.arrayProfilo.push({ "programmatore": false });
+            this.arrayValori.push({
+              "profilo": this.response.infoProfili[c].idProfilo,
+              "linguaggio": this.response.infoProfili[c].idLinguaggio,
+              "livello": this.response.infoProfili[c].idLivello,
+              "note": this.response.infoProfili[c].descrizione
+            });
+          }
+          for (var c = 0; c < this.response.infoLingue.length; c++) {
+            this.arrayLingue.push({
+              "lingua": this.response.infoLingue[c].idLingua
+            });
+          }
+          this.esitoColloquio = this.response.infoDettaglioCandidato.esitoColloquio;
         }
         else
           this.router.navigate(["candidato-non-trovato"]);
@@ -123,11 +135,11 @@ export class ModificaCandidatoComponent implements OnInit{
   public updateCandidato(updateForm: NgForm): void {
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
       (response: number) => {
-        if (response == 0 && updateForm.value.email != this.datiCandidato.email)
+        if (response == 0 && updateForm.value.email != this.response.infoPersona.email)
           alert("Email già esistente");
         else {
           if (updateForm.value.esitoColloquio == "")
-            updateForm.value.esitoColloquio = this.dettagliCandidato.idEsitoColloquio.toString();
+            updateForm.value.esitoColloquio = this.response.infoDettaglioCandidato.idEsitoColloquio;
 
           if (updateForm.value.costoGiornaliero == "") {
             updateForm.value.costoGiornaliero = 0;
@@ -140,7 +152,7 @@ export class ModificaCandidatoComponent implements OnInit{
             updateForm.value.dataColloquio = formatDate(new Date(), 'yyyy-MM-dd', 'en');
 
           if (updateForm.value.annoColloquio == "")
-          updateForm.value.annoColloquio = new Date().getFullYear;
+            updateForm.value.annoColloquio = new Date().getFullYear;
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {
@@ -157,23 +169,22 @@ export class ModificaCandidatoComponent implements OnInit{
   }
 
   selectProfilo(e: any) {
-    console.log(e.path[2])
     var idProfilo = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     if (this.arrayProfilo[numeroRiga] == null) {
       if (idProfilo == '2') {
-        e.path[2].children.linguaggio.style.removeProperty("display");
-        e.path[2].children.livelloProgrammatore.style.removeProperty("display");
+        e.path[2].children.linguaggioDiv.style.removeProperty("display");
+        e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
         
       }
       if (idProfilo != '2') {
-        e.path[2].children.livello.style.removeProperty("display");
+        e.path[2].children.livelloDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
       }
-      e.path[2].children.note.style.removeProperty("display");
+      e.path[2].children.noteDiv.style.removeProperty("display");
 
       if (document.querySelectorAll("[id*='row-ruolo-']").length-1 == numeroRiga && numeroRiga != 0)
         e.path[2].children.buttons.style.removeProperty("display");
@@ -182,21 +193,21 @@ export class ModificaCandidatoComponent implements OnInit{
     }
     else {
       if (idProfilo == '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
-        e.path[2].children.livello.style.display = 'none';
-        e.path[2].children.linguaggio.style.removeProperty("display");
-        e.path[2].children.livelloProgrammatore.style.removeProperty("display");
+        e.path[2].children.livelloDiv.style.display = 'none';
+        e.path[2].children.linguaggioDiv.style.removeProperty("display");
+        e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = true;
         this.arrayValori[numeroRiga].profilo = idProfilo;
         this.arrayValori[numeroRiga].linguaggio = 55;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
-        e.path[2].children.livelloProgrammatore.children[1].selectedIndex = "";
-        e.path[2].children.linguaggio.children[1].selectedIndex = "";
+        e.path[2].children.livelloProgrammatoreDiv.children[1].selectedIndex = "";
+        e.path[2].children.linguaggioDiv.children[1].selectedIndex = "";
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
         note.value = "";
       }
       if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
-        e.path[2].children.livello.children[1].selectedIndex = "";
+        e.path[2].children.livelloDiv.children[1].selectedIndex = "";
         this.arrayValori[numeroRiga].profilo = idProfilo;
         this.arrayValori[numeroRiga].linguaggio = 55;
         this.arrayValori[numeroRiga].livello = 6;
@@ -205,15 +216,15 @@ export class ModificaCandidatoComponent implements OnInit{
         note.value = "";
       }
       if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == true) {
-        e.path[2].children.linguaggio.style.display = 'none';
-        e.path[2].children.livelloProgrammatore.style.display = 'none';
-        e.path[2].children.livello.style.removeProperty("display");
+        e.path[2].children.linguaggioDiv.style.display = 'none';
+        e.path[2].children.livelloProgrammatoreDiv.style.display = 'none';
+        e.path[2].children.livelloDiv.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = false;
         this.arrayValori[numeroRiga].profilo = idProfilo;
         this.arrayValori[numeroRiga].linguaggio = 55;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
-        e.path[2].children.livello.children[1].selectedIndex = "";
+        e.path[2].children.livelloDiv.children[1].selectedIndex = "";
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
         note.value = "";
       }
@@ -223,25 +234,35 @@ export class ModificaCandidatoComponent implements OnInit{
   selectLingua(e: any) {
     var idLingua = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-lingua-", '')
+    if (this.arrayLingue[numeroRiga] == null) {
+      this.arrayLingue.push({"lingua": idLingua});
+    }
+    else
+      this.arrayLingue[numeroRiga].lingua = idLingua;
     if (numeroRiga == 0) {
       e.path[2].children.button.style.removeProperty("display");
     }
     else {
       e.path[2].children.buttons.style.removeProperty("display");
     }
-    this.arrayLingue.push({"lingua": idLingua});
   }
 
   addRowLingua() {
-    var rigaBase = document.getElementById('lista-lingue')!.lastChild as HTMLDivElement;
+    var rigaBase = <NodeList>document.querySelectorAll("#lista-lingue div[id^='row-lingua']");
+    var numeroRiga = rigaBase.length;
+    var riga = document.getElementById("row-lingua-" + (numeroRiga-1)) as HTMLDivElement;
     var contenitore = document.getElementById('lista-lingue');
-    var pulsanteAdd = rigaBase.children[1].children[0].children[0].children[1] as HTMLButtonElement;
-    var pulsanteAdd2 = rigaBase.children[2].children[0].children[1].children[1] as HTMLButtonElement;
-    rigaBase.children[2].setAttribute('style', 'display: none');
-    rigaBase.children[1].removeAttribute('style');
-    contenitore!.appendChild(rigaBase!.cloneNode(true));
+    var pulsanteAdd = riga.children[1].children[0].children[0].children[1] as HTMLButtonElement;
+    var pulsanteAdd2 = riga.children[2].children[0].children[1].children[1] as HTMLButtonElement;
+    riga.children[2].setAttribute('style', 'display: none');
+    riga.children[1].removeAttribute('style');
+    var rigaClone = riga!.cloneNode(true) as HTMLDivElement
+    contenitore!.appendChild(rigaClone);
     pulsanteAdd.disabled = true;
     pulsanteAdd2.disabled = true;
+
+    var linguaSelect = rigaClone.children[0].children[1] as HTMLInputElement;
+    linguaSelect.value = "";
 
     var rigaNuova = document.getElementById('lista-lingue')!.lastChild as HTMLDivElement;
     var numeroRigaNuova = parseInt(rigaNuova!.id.toString().replace("row-lingua-", '')) + 1;
@@ -264,13 +285,15 @@ export class ModificaCandidatoComponent implements OnInit{
       this.addRowLingua();
     });
     rigaNuova.children[1].setAttribute('style', 'display: none');
-    rigaNuova.children[2].removeAttribute('style');
+    rigaNuova.children[2].setAttribute('style', 'display: none');
   }
 
   removeRowLingua() {
-    var riga = document.getElementById('lista-lingue')!.lastChild as HTMLDivElement;
+    var rigaBase = <NodeList>document.querySelectorAll("#lista-lingue div[id^='row-lingua']");
+    var numeroRiga = rigaBase.length;
+    var riga = document.getElementById("row-lingua-" + (numeroRiga-1)) as HTMLDivElement;
     riga.remove();
-    var riga = document.getElementById('lista-lingue')!.lastChild as HTMLDivElement;
+    var riga = document.getElementById("row-lingua-" + (numeroRiga-2)) as HTMLDivElement;
     var button1 = riga.children[1].children[0].children[0].children[1] as HTMLButtonElement;
     button1.disabled = false;
     var button2 = riga.children[2].children[0].children[1].children[1] as HTMLButtonElement;
@@ -285,7 +308,7 @@ export class ModificaCandidatoComponent implements OnInit{
   selectLinguaggio(e: any) {
     var idLinguaggio = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
-    this.arrayValori[numeroRiga].linguaggio = idLinguaggio;
+    this.arrayValori[numeroRiga].linguaggio = idLinguaggio as unknown as number;
   }
 
   selectLivello(e: any) {
@@ -302,25 +325,31 @@ export class ModificaCandidatoComponent implements OnInit{
 
   addRowProfilo() {
     var programmatore : boolean;
-    var rigaBase = document.getElementById('lista-ruoli')!.lastChild as HTMLDivElement;
-    var numeroRigaBase = parseInt(rigaBase!.id.toString().replace("row-ruolo-", ''));
-    var contenitore = document.getElementById('lista-ruoli');
-    var pulsanteAdd = rigaBase.children[5].children[0].children[0].children[1] as HTMLButtonElement;
-    var pulsanteAdd2 = rigaBase.children[6].children[0].children[1].children[1] as HTMLButtonElement;
-    rigaBase.children[6].setAttribute('style', 'display: none');
-    rigaBase.children[5].removeAttribute('style');
-    contenitore!.appendChild(rigaBase!.cloneNode(true));
+    var rigaBase = <NodeList>document.querySelectorAll("#lista-ruoli div[id^='row-ruolo']");
+    var numeroRiga = rigaBase.length;
+    var riga = document.getElementById("row-ruolo-" + (numeroRiga-1)) as HTMLDivElement;
+    var pulsanteAdd = riga.children[5].children[0].children[0].children[1] as HTMLButtonElement;
+    var pulsanteAdd2 = riga.children[6].children[0].children[1].children[1] as HTMLButtonElement;
+    var rigaNuova = riga.cloneNode(true) as HTMLDivElement
+    riga.children[6].setAttribute('style', 'display: none');
+    riga.children[5].removeAttribute('style');
     pulsanteAdd.disabled = true;
     pulsanteAdd2.disabled = true;
+    rigaNuova.id = "row-ruolo-" + numeroRiga;
+    var contenitore = document.getElementById('lista-ruoli');
+    contenitore!.appendChild(rigaNuova);
 
-    if (this.arrayValori[numeroRigaBase].profilo == '2')
+    let nodes = <NodeList>document.querySelectorAll("#row-ruolo-" + numeroRiga + " select, #row-ruolo-" + numeroRiga + " input");
+    for ( let i = 0; i < nodes.length; i++){
+      let node = nodes[i];
+      var c = (node as HTMLInputElement);
+      c.value = "";
+    }
+    if (this.arrayValori[numeroRiga-1].profilo == '2')
       programmatore = true;
     else
       programmatore = false;
 
-    var rigaNuova = document.getElementById('lista-ruoli')!.lastChild as HTMLDivElement;
-    var numeroRigaNuova = parseInt(rigaNuova!.id.toString().replace("row-ruolo-", '')) + 1;
-    rigaNuova!.id = "row-ruolo-" + numeroRigaNuova;
     var profilo = rigaNuova.children[0].children[1] as HTMLElement;
     profilo.addEventListener('change', (changeEvent: Event) => {
       this.selectProfilo(changeEvent);
@@ -360,23 +389,24 @@ export class ModificaCandidatoComponent implements OnInit{
       rigaNuova.children[3].setAttribute('style', 'display: none');
       rigaNuova.children[4].setAttribute('style', 'display: none');
       rigaNuova.children[5].setAttribute('style', 'display: none');
+      rigaNuova.children[6].setAttribute('style', 'display: none');
     }
     else {
-      var idProfilo = rigaNuova.children[0].children[1] as HTMLInputElement
+      var idProfilo = rigaNuova.children[0].children[1] as HTMLInputElement;
       idProfilo.value = '2';
       rigaNuova.children[5].setAttribute('style', 'display: none');
       rigaNuova.children[6].removeAttribute('style');
       this.arrayProfilo.push({"programmatore": true});
-      this.arrayValori.push({"profilo": '2'});
+      this.arrayValori.push({"profilo": 2});
     }
-    var resetNote = rigaNuova.children[4].children[1] as HTMLInputElement;
-    resetNote.value = "";
   }
 
   removeRowProfilo() {
-    var riga = document.getElementById('lista-ruoli')!.lastChild as HTMLDivElement;
+    var listaRuoli = <NodeList>document.querySelectorAll("#lista-ruoli div[id^='row-ruolo']");
+    var numeroRiga = listaRuoli.length;
+    var riga = document.getElementById("row-ruolo-" + (numeroRiga-1)) as HTMLDivElement;
     riga.remove();
-    var riga = document.getElementById('lista-ruoli')!.lastChild as HTMLDivElement;
+    var riga = document.getElementById("row-ruolo-" + (numeroRiga-2)) as HTMLDivElement;
     var button1 = riga.children[5].children[0].children[0].children[1] as HTMLButtonElement;
     button1.disabled = false;
     var button2 = riga.children[6].children[0].children[1].children[1] as HTMLButtonElement;

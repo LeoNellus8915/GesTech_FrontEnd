@@ -16,41 +16,41 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="nome" class="col-form-label s-12">NOME</label> 
-                <input ngModel name="nome" [(ngModel)]=datiCandidato.nome
+                <input ngModel name="nome" [(ngModel)]=response.infoPersona.nome
 									placeholder="Inserisci Nome"
 									class="form-control r-0 light s-12 " type="text">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="cognome" class="col-form-label s-12">COGNOME</label> 
-                <input ngModel name="cognome" [(ngModel)]=datiCandidato.cognome
+                <input ngModel name="cognome" [(ngModel)]=response.infoPersona.cognome
 									placeholder="Inserisci Cognome"
 									class="form-control r-0 light s-12 " type="text">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
-								<input ngModel name="cellulare" [(ngModel)]=datiCandidato.cellulare
+								<input ngModel name="cellulare" [(ngModel)]=response.infoPersona.cellulare
 									placeholder="Inserisci Cellulare"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="email" class="col-form-label s-12">EMAIL</label>
-								<input ngModel name="email" [(ngModel)]=datiCandidato.email
+								<input ngModel name="email" [(ngModel)]=response.infoPersona.email
                   placeholder="Inserisci Email" required
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="profiloLinkedin" class="col-form-label s-12">PROFILO LINKEDIN</label>
-								<input id="profiloLinkedin" name="profiloLinkedin" [(ngModel)]=dettagliCandidato.profiloLinkedin
+								<input id="profiloLinkedin" name="profiloLinkedin" [(ngModel)]=response.infoDettaglioCandidato.profiloLinkedin
                   placeholder="Linkedin URL"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="citta" class="col-form-label s-12">CITT&Agrave;</label> 
-                <input ngModel name="citta" [(ngModel)]=datiCandidato.cittaDiResidenza
+                <input ngModel name="citta" [(ngModel)]=response.infoPersona.cittaDiResidenza
                   placeholder="Inserisci Citt&agrave;"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
@@ -67,18 +67,18 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="dataColloquio" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA COLLOQUIO</label> 
-								<input ngModel name="dataColloquio" [(ngModel)]=dettagliCandidato.dataColloquio
+								<input ngModel name="dataColloquio" [(ngModel)]=response.infoDettaglioCandidato.dataColloquio
 									placeholder="Inserisci Data Colloquio"
 									class="form-control r-0 light s-12 datePicker" type="date">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="annoColloquio" class="col-form-label s-12">ANNO COLLOQUIO</label> 
-								<input ngModel name="annoColloquio" [(ngModel)]=dettagliCandidato.annoColloquio
+								<input ngModel name="annoColloquio" [(ngModel)]=response.infoDettaglioCandidato.annoColloquio
 									class="form-control r-0 light s-12 date-picker" type="number">
 							</div>
-							<div *ngIf="esitoColloquio" class="form-group col-4 m-0">
+							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="esitoColloquio" class="col-form-label s-12">ESITO COLLOQUIO</label> 
 								<select ngModel name="esitoColloquio" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="">{{esitoColloquio}}</option>
@@ -96,15 +96,15 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="fonteReperimento" class="col-form-label s-12">FONTE REPERIMENTO</label> 
-								<input ngModel name="fonteReperimento" [(ngModel)]=dettagliCandidato.fonteReperimento
+								<input ngModel name="fonteReperimento" [(ngModel)]=response.infoDettaglioCandidato.fonteReperimento
 									placeholder="Inserisci Fonte Reperimento"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="competenzaPrincipale" class="col-form-label s-12">COMPETENZA PRINCIPALE</label>
-								<input ngModel name="competenzaPrincipale" [(ngModel)]=dettagliCandidato.competenzaPrincipale
+								<input ngModel name="competenzaPrincipale" [(ngModel)]=response.infoDettaglioCandidato.competenzaPrincipale
 									placeholder="Insersci Competenza Principale"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
@@ -117,124 +117,117 @@
 			<div class="card-body">
 				<h5 class="card-title">Competenze</h5>
 				<div class="form-row">
-					<div id="lista-ruoli" class="col-md-12">
-						<div *ngFor="let profilo of arrayValori; let i = index">
-							<div id="row-ruolo-{{i}}" class="form-row">
 
-								<div *ngIf="i < (arrayValori.length)" class="form-group col-3 m-0">
-									<label for="profilo" class="col-form-label s-12">RUOLO</label>
-									<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
-										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeProfilo}}</option>
-										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
-										<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
-									</select>
-								</div>
-								<div *ngIf="i > (arrayValori.length)" class="form-group col-3 m-0">
-									<label for="profilo" class="col-form-label s-12">RUOLO</label>
-									<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
-										<option value="" selected disabled>Selezionare...</option> 
-										<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
-									</select>
-								</div>
-	
-								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo == 'analista programmatore'" id="linguaggio" class="form-group col-2 m-0">
-									<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label> 
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLinguaggio($event)">
-										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLinguaggio}}</option>
-										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
-										<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-									</select>
-								</div>
-								<div *ngIf="i > (arrayValori.length)" id="linguaggio" class="form-group col-2 m-0" style="display: none">
-									<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label> 
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLinguaggio($event)">
-										<option value="" selected disabled>Selezionare...</option>
-										<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
-									</select>
-								</div>
-
-								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo == 'analista programmatore'" id="livelloProgrammatore" class="form-group col-2 m-0">
-									<label for="livello" class="col-form-label s-12">SENIORITY</label>
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
-										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLivello}}</option>
-										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
-										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-									</select>
-								</div>
-								<div *ngIf="i > (arrayValori.length)" id="livelloProgrammatore" class="form-group col-2 m-0" style="display: none">
-									<label for="livello" class="col-form-label s-12">SENIORITY</label>
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
-										<option value="" selected disabled>Selezionare...</option>
-										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-									</select>
-								</div>
-	
-								<div *ngIf="i < (arrayValori.length) && profilo.nomeProfilo != 'analista programmatore'" id="livello" class="form-group col-4 m-0">
-									<label for="livello" class="col-form-label s-12">SENIORITY</label>
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
-										<option *ngIf="i < (arrayValori.length)">{{profilo.nomeLivello}}</option>
-										<option *ngIf="i > (arrayValori.length)" value="" selected disabled>Selezionare...</option> 
-										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-									</select>
-								</div>
-								<div *ngIf="i > (arrayValori.length)" id="livello" class="form-group col-4 m-0" style="display: none">
-									<label for="livello" class="col-form-label s-12">SENIORITY</label>
-									<select class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
-										<option value="" selected disabled>Selezionare...</option>
-										<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
-									</select>
-								</div>
-	
-								<div *ngIf="i < (arrayValori.length)" id="note" class="form-group col-4 m-0">
-									<label for="note" class="col-form-label s-12">NOTE</label> 
-									<input placeholder="Inserisci Note" (change)="selectNote($event)"
-										value={{profilo.descrizione}}
-										class="form-control r-0 light s-12 date-picker" type="text">
-								</div>
-								<div *ngIf="i > (arrayValori.length)" id="note" class="form-group col-4 m-0" style="display: none">
-									<label for="note" class="col-form-label s-12">NOTE</label> 
-									<input placeholder="Inserisci Note" (change)="selectNote($event)"
-										class="form-control r-0 light s-12 date-picker" type="text">
-								</div>
-
-								<div *ngIf="i < (arrayValori.length-1)" id="button" class="col 1">
-									<div class="row">
-										<div class="form-group col-12 m-0">
-											<label for="button" class="col-form-label s-12">ADD</label>
-											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()" disabled>+</button>
-										</div>
+					<div *ngIf="response" id="lista-ruoli" class="col-md-12">
+						<div *ngFor="let item of response.infoProfili; let i = index" id="row-ruolo-{{i}}" class="form-row">
+							<div class="form-group col-3 m-0">
+								<label for="profilo" class="col-form-label s-12">RUOLO</label>
+								<select id="profilo" (change)="selectProfilo($event)" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" disabled>Selezionare...</option>
+									<option *ngFor="let profilo of listaProfili" [selected]="item.nomeProfilo === profilo.nome"
+										value={{profilo.id}}>{{profilo.nome}}</option>
+								</select>
+							</div>
+					
+							<div id="linguaggioDiv" class="form-group col-2 m-0"
+								[ngStyle]="{'display':item.nomeProfilo === 'analista programmatore' ? 'block' : 'none'}">
+								<label for="linguaggio" class="col-form-label s-12">LINGUAGGIO</label>
+								<select id="linguaggio" class="form-control r-0 light s-12 date-picker freccia"
+									(change)="selectLinguaggio($event)">
+									<option value="" disabled>Selezionare...</option>
+									<option *ngFor="let linguaggio of listaLinguaggi" [selected]="item.nomeLinguaggio === linguaggio.nome"
+										value={{linguaggio.id}}>{{linguaggio.nome}}</option>
+								</select>
+							</div>
+					
+					
+							<div id="livelloProgrammatoreDiv" class="form-group col-2 m-0"
+								[ngStyle]="{'display':item.nomeProfilo === 'analista programmatore' ? 'block' : 'none'}">
+								<label for="livelloProgrammatore" class="col-form-label s-12">SENIORITY</label>
+								<select id="livelloProgrammatore" class="form-control r-0 light s-12 date-picker freccia"
+									(change)="selectLivello($event)">
+									<option value="" disabled>Selezionare...</option>
+									<option *ngFor="let livello of listaLivelli" [selected]="item.nomeLinguaggio === livello.nome"
+										value={{livello.id}}>{{livello.nome}}</option>
+								</select>
+							</div>
+					
+							<div id="livelloDiv" class="form-group col-4 m-0"
+								[ngStyle]="{'display':item.nomeProfilo !== 'analista programmatore' ? 'block' : 'none'}">
+								<label for="livello" class="col-form-label s-12">SENIORITY</label>
+								<select id="livello" class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
+									<option value="" selected disabled>Selezionare...</option>
+									<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+								</select>
+							</div>
+					
+							<div id="noteDiv" class="form-group col-4 m-0">
+								<label for="note" class="col-form-label s-12">NOTE</label>
+								<input id="note" placeholder="Inserisci Note" (change)="selectNote($event)"
+									class="form-control r-0 light s-12 date-picker" type="text">
+							</div>
+					
+							<div id="button" class="col 1" [ngStyle]="{'display':i < response.infoProfili.length-1 ? 'block' : 'none'}">
+								<div class="row">
+									<div class="form-group col-12 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor"
+											(click)="addRowProfilo()" disabled>+</button>
 									</div>
 								</div>
-								<div *ngIf="i > (arrayValori.length)" id="button" class="col 1" style="display: none">
-									<div class="row">
-										<div class="form-group col-12 m-0">
-											<label for="button" class="col-form-label s-12">ADD</label>
-											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
-										</div>
+							</div>
+							<div id="buttons" class="col 1" [ngStyle]="{'display':i == response.infoProfili.length-1 ? 'block' : 'none'}">
+								<div class="row">
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">REMOVE</label>
+										<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor"
+											(click)="removeRowProfilo()">-</span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor"
+											(click)="addRowProfilo()">+</button>
 									</div>
 								</div>
-								<div *ngIf="i == (arrayValori.length-1)" id="buttons" class="col 1">
-									<div class="row">
-										<div class="form-group col-6 m-0">
-											<label for="button" class="col-form-label s-12">REMOVE</label>
-											<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
-										</div>
-										<div class="form-group col-6 m-0">
-											<label for="button" class="col-form-label s-12">ADD</label>
-											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
-										</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+			<div class="card-body">
+				<h5 class="card-title">Lingue</h5>
+				<div class="form-row">
+					<div *ngIf="response" id="lista-lingue" class="col-md-12">
+						<div *ngFor="let item of response.infoLingue; let i = index" id="row-lingua-{{i}}" class="form-row">
+
+							<div class="form-group col-10 m-0">
+								<label for="lingua" class="col-form-label s-12">LINGUA</label>
+								<select id="lingua" (change)="selectLingua($event)" class="form-control r-0 light s-12 date-picker freccia">
+									<option value="" disabled>Selezionare...</option>
+    							<option *ngFor="let lingua of listaLingue" [selected]="item.nomeLingua === lingua.nome"
+										value={{lingua.id}}>{{lingua.nome}}</option>
+								</select>
+							</div>
+
+							<div id="button" class="col-2" [ngStyle]="{'display':i < response.infoLingue.length-1 ? 'block' : 'none'}">
+								<div class="row">
+									<div class="form-group col-12 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowLingua()" disabled>+</button>
 									</div>
 								</div>
-								<div *ngIf="i > (arrayValori.length)" id="buttons" class="col 1" style="display: none">
-									<div class="row">
-										<div class="form-group col-6 m-0">
-											<label for="button" class="col-form-label s-12">REMOVE</label>
-											<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowProfilo()">-</span>
-										</div>
-										<div class="form-group col-6 m-0">
-											<label for="button" class="col-form-label s-12">ADD</label>
-											<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowProfilo()">+</button>
-										</div>
+							</div>
+							<div id="buttons" class="col-2" [ngStyle]="{'display':i == response.infoLingue.length-1 ? 'block' : 'none'}">
+								<div class="row">
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">REMOVE</label>
+										<span id="remove" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="removeRowLingua()">-</span>
+									</div>
+									<div class="form-group col-6 m-0">
+										<label for="button" class="col-form-label s-12">ADD</label>
+										<button id="add" class="plus form-control r-0 light s-12 date-picker pulsante cursor" (click)="addRowLingua()">+</button>
 									</div>
 								</div>
 							</div>
@@ -249,16 +242,16 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="costoGiornaliero" class="col-form-label s-12">COSTO GIORNALIERO</label> 
-								<input ngmodel name="costoGiornaliero" [(ngModel)]=dettagliCandidato.costoGiornaliero
+								<input ngmodel name="costoGiornaliero" [(ngModel)]=response.infoDettaglioCandidato.costoGiornaliero
 									placeholder="Insersci Costo Giornaliero"
 									class="form-control r-0 light s-12 date-picker" type="number" step="0.01">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="possibilitaLavorativa" class="col-form-label s-12">POSSIBILIT&Agrave; LAVORATIVA</label>
-								<input ngModel name="possibilitaLavorativa" [(ngModel)]=dettagliCandidato.possibilitaLavorativa
-									placeholder="Insersci Possibilit&Agrave; Lavorativa"
+								<input ngModel name="possibilitaLavorativa" [(ngModel)]=response.infoDettaglioCandidato.possibilitaLavorativa
+									placeholder="Insersci Possibilit&agrave; Lavorativa"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -272,15 +265,15 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="datiCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="dettagliCandidato" class="col-form-label s-12">COMPETENZE TOTALI</label> 
-								<input ngModel name="competenzeTotali" [(ngModel)]=dettagliCandidato.competenzeTotali
+								<input ngModel name="competenzeTotali" [(ngModel)]=response.infoDettaglioCandidato.competenzeTotali
 									placeholder="Insersci Competenze Totali"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div *ngIf="dettagliCandidato" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="certificazioni" class="col-form-label s-12">CERTIFICAZIONI</label>
-								<input ngModel name="certificazioni" [(ngModel)]=dettagliCandidato.certificazioni
+								<input ngModel name="certificazioni" [(ngModel)]=response.infoDettaglioCandidato.certificazioni
 									placeholder="Insersci Certificazioni"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
