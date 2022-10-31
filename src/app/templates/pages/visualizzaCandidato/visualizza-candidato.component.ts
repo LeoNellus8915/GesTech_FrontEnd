@@ -37,7 +37,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
     if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
     || this.ruolo == 'Direttore Commerciale'){
@@ -45,7 +45,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
       setTimeout(() => {
         this.defaultService.titoloPagina=" Visualizza Candidato";
       }, 0)
-      this.idCandidato = this.route.snapshot.params['idCandidato'];
+      this.idCandidato = sessionStorage.getItem("idCandidato") as unknown as number;
       this.pagina = this.route.snapshot.params['pagina'];
       this.idRichiesta = this.route.snapshot.params['idRichiesta'];
       this.getCandidato();
@@ -58,26 +58,32 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public getCandidato(): void {
     this.candidatiService.getCandidatoVisualizza(this.idCandidato).subscribe(
       (response: any) => {
-        if (response.code != 0) {
-          console.log(response);
-          console.log(response.dataSource);
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           this.response = response.dataSource;
         }
-        else
-          this.router.navigate(["candidato-con-trovato"]);
       }
     )
   }
 
   public eliminaCandidato(): void{
-    if (confirm("Sicuro di voler eliminare " + this.datiCandidato.nome + " " + this.datiCandidato.nome + "?") == true)
+    if (confirm("Sicuro di voler eliminare " + this.response.infoPersona.nome + " " + this.response.infoPersona.nome + "?") == true)
       this.candidatiService.eliminaCandidato(this.idCandidato).subscribe(
         (response: any) => {
-          alert("Candidato eliminato con successo");
-          if (this.pagina == 0)
-            this.router.navigate(["default/pagina-candidati"]);
-          else
-            this.router.navigate(["default/pagina-scelta-candidati-richiesta"]);
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
+            alert("Candidato eliminato con successo");
+            if (this.pagina == 0)
+              this.router.navigate(["default/pagina-candidati"]);
+            else
+              this.router.navigate(["default/pagina-scelta-candidati-richiesta"]);
+          }
         }
       )
   }

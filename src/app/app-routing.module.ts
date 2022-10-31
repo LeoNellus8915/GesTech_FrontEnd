@@ -58,7 +58,7 @@ const routes: Routes = [
     {path: "pagina-richieste", component: PaginaRichiesteComponent},
     {path: "pagina-storico-richieste", component: PaginaStoricoRichiesteComponent},
     {path: "pagina-visualizza-bene/:idHardware", component: VisualizzaBeneComponent},
-    {path: "pagina-visualizza-candidato/:idCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
+    {path: "pagina-visualizza-candidato/:codiceCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
     {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
     {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent}
   ]},

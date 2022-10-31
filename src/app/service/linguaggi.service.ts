@@ -11,6 +11,6 @@ export class LinguaggiService {
   constructor(private http: HttpClient) {}
   
   public getLinguaggi(): Observable<Linguaggi[]> {
-    return this.http.get<Linguaggi[]>(`${this.apiServerUrl}/all-linguaggi`,{headers: header.header()});
+    return this.http.get<Linguaggi[]>(`${this.apiServerUrl}/all-linguaggi`, {headers: header.header()});
   }
 }

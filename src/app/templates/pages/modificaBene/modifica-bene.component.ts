@@ -35,34 +35,36 @@ export class ModificaBeneComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-    this.router.navigate([""]);
-  else
-    if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
-      this.titleService.setTitle("Gestech | Visualizza Bene");
-      setTimeout(() => {
-        this.defaultService.titoloPagina=" Visualizza Bene";
-      }, 0)
-      this.codiceHardware = this.route.snapshot.params['idHardware'];
-      this.getHardware();
-      this.allDispositivi();
-    }
-    else{
+      this.defaultService.logout();
+    else
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+        this.titleService.setTitle("Gestech | Visualizza Bene");
+        setTimeout(() => {
+          this.defaultService.titoloPagina=" Visualizza Bene";
+        })
+        this.codiceHardware = this.route.snapshot.params['idHardware'];
+        this.getHardware();
+        this.allDispositivi();
+      }
+      else {
       this.router.navigate(["default/pagina-avvisi"]);
-    }
+      }
   }
 
   public getHardware(): void {
     this.hardwareService.getHardwareModifica(this.codiceHardware).subscribe(
-      (response: any[]) => {
-        
-        this.hardware = response[0];
-        this.dipendente = response[1];
-        this.dispositivo = response[2];
-        this.listaDipendenti = response[3];
-        this.listaStorico = response[4];
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.hardware = response.dataSource[0];
+          this.dipendente = response.dataSource[1];
+          this.dispositivo = response.dataSource[2];
+          this.listaDipendenti = response.dataSource[3];
+          this.listaStorico = response.dataSource[4];
+        }
       }
     )
   }
@@ -77,26 +79,29 @@ export class ModificaBeneComponent implements OnInit{
     }
     this.hardwareService.modificaHardware(updateForm.value, this.codiceHardware).subscribe(
       (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           alert("Bene modificato con successo");
           this.router.navigate(["default/pagina-beni"]);
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }
 
   public allDispositivi():void{
     this.hardwareService.getAllDispositivi().subscribe(
-      (response: any[])=> {
-
-          this.listaDispositivi = response;
-        
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any)=> {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaDispositivi = response.dataSource;
+        }
       }
-     
     )
   }
 }

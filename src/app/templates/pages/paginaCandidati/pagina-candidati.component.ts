@@ -18,7 +18,7 @@ export class PaginaCandidatiComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' 
             || this.ruolo == 'Direttore Recruiter' 
@@ -36,48 +36,60 @@ export class PaginaCandidatiComponent implements OnInit{
 
   public allCandidati(): void {
     this.candidatiService.allCandidati().subscribe(
-      (response: any[]) => {
-        console.log(response)
-        this.listaCandidati = response[0];
-        const listaCodici = response[1];
-        for (let i = 0; i < response[0].length; i++)
-          this.listaCandidati[i].id = listaCodici[i].codice;
-        setTimeout(function () {
-          $(function () {
-            $('#tabellaCandidati').DataTable({
-              "language": {
-                "emptyTable":     "Nessun candidato trovato",
-                "info":           " ",
-                "infoEmpty":      " ",
-                "infoFiltered":   "Filtrati i _MAX_ candidati",
-                "lengthMenu":     "Mostra _MENU_ candidati",
-                "loadingRecords": "Caricamento...",
-                "search":         "Cerca:",
-                "zeroRecords":    "Nessun candidato trovato",
-                "paginate": {
-                    "first":      "Ultimo",
-                    "last":       "Primo",
-                    "next":       "Prossimo",
-                    "previous":   "Precedente"
-                }
-              },
-              "createdRow": function( row, data ) {
-                if(data.toString().indexOf("Inaffidabile") != -1)
-                    $(row).addClass( 'tabella' );
-              },
-            });
-            $('.dataTables_filter input[type="search"]').css(
-              {'width':'800px','display':'inline-block'}
-            );
-            $("input").on("click", function(){
-              $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
-              " (esempio Città Ruolo ecc...)");
-              $("#tooltip").css({"margin-left": "31%"})
-              $("br").remove();
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaCandidati = response.dataSource;
+          setTimeout(function () {
+            $(function () {
+              $('#tabellaCandidati').DataTable({
+                "language": {
+                  "emptyTable":     "Nessun candidato trovato",
+                  "info":           " ",
+                  "infoEmpty":      " ",
+                  "infoFiltered":   "Filtrati i _MAX_ candidati",
+                  "lengthMenu":     "Mostra _MENU_ candidati",
+                  "loadingRecords": "Caricamento...",
+                  "search":         "Cerca:",
+                  "zeroRecords":    "Nessun candidato trovato",
+                  "paginate": {
+                      "first":      "Ultimo",
+                      "last":       "Primo",
+                      "next":       "Prossimo",
+                      "previous":   "Precedente"
+                  }
+                },
+                "createdRow": function( row, data ) {
+                  if(data.toString().indexOf("Inaffidabile") != -1)
+                      $(row).addClass( 'tabella' );
+                },
+              });
+              $('.dataTables_filter input[type="search"]').css(
+                {'width':'800px','display':'inline-block'}
+              );
+              $("input").on("click", function(){
+                $("#tooltip").text("Per effettuare una ricerca scrivere le singole parole separate da uno spazio" +
+                " (esempio Città Ruolo ecc...)");
+                $("#tooltip").css({"margin-left": "31%"})
+                $("br").remove();
+              });
             });
           });
-        });
+        }
       }
     )
+  }
+
+  goVisualizzaCandidato(idCandidato: number, codiceCandidato: string) {
+    this.router.navigate(["default/pagina-visualizza-candidato", codiceCandidato, 0, 0]);
+    sessionStorage.setItem("idCandidato", idCandidato.toString());
+  }
+
+  goModificaCandidato(idCandidato: number, codiceCandidato: string) {
+    this.router.navigate(["default/pagina-modifica-candidato", codiceCandidato, 0, 0]);
+    sessionStorage.setItem("idCandidato", idCandidato.toString());
   }
 }

@@ -44,7 +44,7 @@ export class NuovoCandidatoComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' 
           || this.ruolo == 'Direttore Commerciale'
@@ -67,28 +67,58 @@ export class NuovoCandidatoComponent implements OnInit{
 
   public getSelects(): void {
     this.esitiColloquioService.getEsitiColloquio().subscribe(
-      (response: EsitiColloquio[]) => {
-        this.listaEsitiColloquio = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaEsitiColloquio = response.dataSource;
+        }
       }
     )
     this.profiliService.getProfili().subscribe(
-      (response: Profili[]) => {
-        this.listaProfili = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaProfili = response.dataSource;
+        }
       }
     )
     this.linguaggiService.getLinguaggi().subscribe(
-      (response: Linguaggi[]) => {
-        this.listaLinguaggi = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLinguaggi = response.dataSource;
+        }
       }
     )
     this.lingueService.getLingue().subscribe(
-      (response: Lingue[]) => {
-        this.listaLingue = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLingue = response.dataSource;
+        }
       }
     )
     this.livelliService.getLivelli().subscribe(
-      (response: Livelli[]) => {
-        this.listaLivelli = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLivelli = response.dataSource;
+        }
       }
     )
   }
@@ -122,7 +152,11 @@ export class NuovoCandidatoComponent implements OnInit{
     
     this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
-        if (response == 0)
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else if (response.dataSource == 0)
           alert("Email già esistente");
         else {
           alert("Candidato salvato con successo");

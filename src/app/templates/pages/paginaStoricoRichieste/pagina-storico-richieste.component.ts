@@ -20,8 +20,8 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
             private richiesteService: RichiesteService) { }
 
   ngOnInit(): void {
-    if (this.ruolo === null)
-      this.router.navigate(['']);
+    if (this.ruolo == null)
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' 
           || this.ruolo === 'Account' 
@@ -40,16 +40,14 @@ export class PaginaStoricoRichiesteComponent implements OnInit {
 
   public getRichieste(): void {
     this.richiesteService.getRichiesteChiuse(this.ruolo, this.nomeCognome, this.idDipendente).subscribe(
-      (response: any[]) => {
-          const candidati: string[][] = [];
-          this.listaRichieste = response[1];
-          const listaCodici = response[0];
-          for (let i = 0; i < response[0].length; i++) {
-            this.listaRichieste[i].id = listaCodici[i].codice;
-          }
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaRichieste = response.dataSource;
+        }
       }
     )
   }

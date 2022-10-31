@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let candidato of listaCandidati">
-          <td>{{candidato.dataInserimento}}</td>
+          <td>{{candidato.dataInserimento.toString().replace("T", " ")}}</td>
           <td>{{candidato.cognome + " " + candidato.nome}}</td>
           <td>{{candidato.citta}}</td>
           <td>{{candidato.competenzaPrincipale}}</td>
@@ -38,7 +38,7 @@
             <h5 class="modal-title">Riepilogo</h5>
           </div>
           <div class="modal-body">
-            <p *ngFor="let nome of checkArray">{{nome}}</p>
+            <p *ngFor="let nome of checkNomi">{{nome}}</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>

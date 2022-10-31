@@ -27,8 +27,8 @@ export class PaginaRichiesteComponent implements OnInit {
   public radioArray: any[] = new Array();
 
   ngOnInit(): void {
-    if (this.ruolo === null)
-      this.router.navigate(['']);
+    if (this.ruolo == null)
+      this.defaultService.logout();
     else if (this.ruolo == 'Admin' 
               || this.ruolo === 'Account' 
               || this.ruolo === 'Recruiter' 
@@ -58,19 +58,16 @@ export class PaginaRichiesteComponent implements OnInit {
   public getRichiesteAdmin(): void {
     this.richiesteService.getRichiesteAperteAdmin().subscribe(
       (response: any[]) => {
-        if (response == null) this.router.navigate(['']);
+        if (response == null) 
+          this.router.navigate(['']);
         else{
-          response[1].forEach((richiesta: { priorita: number; }) => {
+          response.forEach((richiesta: { priorita: number; }) => {
             if (richiesta.priorita == 0) {
               this.contatore++;
-              console.log(this.contatore)
             }
           });
-          if (response[1].length > 0) {
+          if (response.length > 0) {
             this.listaRichieste = response[1];
-            const listaCodici = response[0];
-            for (let i = 0; i < response[0].length; i++)
-              this.listaRichieste[i].id = listaCodici[i].codice;
           }
         }
       }
@@ -79,15 +76,14 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public getRichiesteRecruiter(): void {
     this.richiesteService.getRichiesteAperteRecruiter().subscribe(
-      (response: any[]) => {
-        if (response == null) this.router.navigate(['']);
-        else{
-          if (response[1].length > 0) {
-            this.listaRichieste = response[1];
-            const listaCodici = response[0];
-            for (let i = 0; i < response[0].length; i++){
-              this.listaRichieste[i].id = listaCodici[i].codice;
-            }
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          if (response.dataSource.length > 0) {
+            this.listaRichieste = response.dataSource;
           }
         }
       }
@@ -96,14 +92,14 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public getRichiesteCommerciale(): void {
     this.richiesteService.getRichiesteAperteCommerciale().subscribe(
-      (response: any[]) => {
-        if (response == null) this.router.navigate(['']);
-        else{
-          if (response[1].length > 0) {
-            this.listaRichieste = response[1];
-            const listaCodici = response[0];
-            for (let i = 0; i < response[0].length; i++)
-              this.listaRichieste[i].id = listaCodici[i].codice;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          if (response.dataSource.length > 0) {
+            this.listaRichieste = response.dataSource;
           }
         }
       }
@@ -112,14 +108,14 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public getRichiesteAccount(): void {
     this.richiesteService.getRichiesteAperteAccount(this.idDipendente).subscribe(
-      (response: any[]) => {
-        if (response == null) this.router.navigate(['']);
-        else{
-          if (response[1].length > 0) {
-            this.listaRichieste = response[1];
-            const listaCodici = response[0];
-            for (let i = 0; i < response[0].length; i++)
-              this.listaRichieste[i].id = listaCodici[i].codice;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          if (response.dataSource.length > 0) {
+            this.listaRichieste = response.dataSource;
           }
         }
       }
@@ -128,18 +124,16 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public getRichieste(): void {
     this.richiesteService.getRichiesteAperte(this.nome, this.cognome, this.idDipendente).subscribe(
-      (response: any[]) => {
-
-          if (response[1].length > 0) {
-            this.listaRichieste = response[1];
-            console.log(this.listaRichieste);
-            const listaCodici = response[0];
-            for (let i = 0; i < response[0].length; i++)
-              this.listaRichieste[i].id = listaCodici[i].codice;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          if (response.dataSource.length > 0) {
+            this.listaRichieste = response.dataSource;
           }
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }
@@ -148,8 +142,11 @@ export class PaginaRichiesteComponent implements OnInit {
     if (visualizzata == false)
       this.dipendentiRichiesteService.setVisualizzato(idRichiesta, this.idDipendente).subscribe (
         (response: any) => {
-          if (response == null) this.router.navigate(['']);
-          else{
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
             this.defaultService.numeroRichieste --;
             sessionStorage.setItem("numeroRichieste", this.defaultService.numeroRichieste.toString())
             this.router.navigate(["default/pagina-visualizza-richiesta", idRichiesta, 0]);
@@ -160,44 +157,40 @@ export class PaginaRichiesteComponent implements OnInit {
       this.router.navigate(["default/pagina-visualizza-richiesta", idRichiesta, 0]);
   }
 
-  public arrayPriorita(codiceRichiesta: string, priorita: number): void {
+  public arrayPriorita(idRichiesta: string, priorita: number): void {
     var x = new Array();
     if (this.radioArray.length > 0) {
-      var oggetto = {codiceRichiesta: codiceRichiesta, priorita: priorita};
+      var oggetto = {idRichiesta: idRichiesta, priorita: priorita};
       this.radioArray.push(oggetto);
       this.radioArray.forEach((value, index) => {
-        if(value.codiceRichiesta == codiceRichiesta) {
+        if(value.idRichiesta == idRichiesta) {
           x.push(index);
         }
       });
     } 
     else {
-      var oggetto = {codiceRichiesta: codiceRichiesta, priorita: priorita};
+      var oggetto = {idRichiesta: idRichiesta, priorita: priorita};
       this.radioArray.push(oggetto);
     }
     if (x.length == 2){
       this.radioArray[x[0]].priorita = priorita;
       this.radioArray.pop();
     }
-    this.contatore ++;  //??
+    this.contatore ++;
   }
 
-  public salvaPriorita(): void {
+  public salvaPriorita() {
     var array = JSON.parse(JSON.stringify(this.radioArray));
     this.richiesteService.salvaPriorita(array, this.ruolo).subscribe(
       (response: any) => {
-        if (response == null) this.router.navigate(['']);
-        else{
-          alert("Invio riuscito");
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
         }
-        this.richiesteService.getCodiciRichiesteAperteCommerciale().subscribe(
-          (response: any) => {
-            if (response == null) this.router.navigate([''])
-            else{
-              this.ngOnInit();
-            }
-          }
-        );
+        else {
+          alert("Invio riuscito");
+          this.ngOnInit();
+        }
       }
     )
   }

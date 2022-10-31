@@ -15,7 +15,7 @@ export class PaginaBustePagaComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-    this.router.navigate([""]);
+      this.defaultService.logout();
   else
     if (this.ruolo == 'Dipendente'){
       this.titleService.setTitle("Gestech | Busta Paga");

@@ -26,16 +26,14 @@ export class PaginaBeniComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Pagina Beni");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Pagina Beni";
-        }, 0)
+        })
         this.allHardware();
-        
-
       }
       else{
         this.router.navigate(["default/pagina-avvisi"]);
@@ -45,11 +43,13 @@ export class PaginaBeniComponent implements OnInit{
 
   public allHardware(): void {
     this.hardwareService.allHardware().subscribe(
-      (response: any[]) => {
-          this.listaHardware = response[0];
-          const listaCodici = response[1];
-          for (let i = 0; i < response[0].length; i++)
-            this.listaHardware[i].id = listaCodici[i].codice;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaHardware = response.dataSource;
           setTimeout(function () {
             $(function () {
               $('#tabellaBeni').DataTable({
@@ -80,9 +80,7 @@ export class PaginaBeniComponent implements OnInit{
             });
             });
           });
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }

@@ -21,7 +21,7 @@ export class ModificaPasswordComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else {
       this.titleService.setTitle("Gestech | Modifica Password");
       setTimeout(() => {
@@ -38,11 +38,14 @@ export class ModificaPasswordComponent implements OnInit{
       updateForm.value.password = Md5.init(updateForm.value.password);
       this.authService.cambiaPassword(updateForm.value).subscribe(
         (response: any) => {
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
             alert("Password modificata con successo");
             this.router.navigate(["default/pagina-avvisi"]);
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+          }
         }
       )
     }

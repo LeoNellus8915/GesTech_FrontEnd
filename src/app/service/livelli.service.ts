@@ -11,6 +11,6 @@ export class LivelliService {
   constructor(private http: HttpClient) {}
   
   public getLivelli(): Observable<Livelli[]> {
-    return this.http.get<Livelli[]>(`${this.apiServerUrl}/all-livelli`,{headers: header.header()});
+    return this.http.get<Livelli[]>(`${this.apiServerUrl}/all-livelli`, {headers: header.header()});
   }
 }

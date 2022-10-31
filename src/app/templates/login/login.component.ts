@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms'
 import { AuthService } from 'src/app/service/auth.service';
 import { Router } from '@angular/router';
 import { Md5 } from "md5-typescript";
+import { delay } from 'rxjs';
 
 @Component({
   templateUrl: './login.component.html',
@@ -12,21 +13,15 @@ export class LoginComponent implements OnInit{
   public msgCredenziali: string = "Inserisci le credenziali per accedere al sistema";
 
   constructor(private authService: AuthService, private router: Router) { }
-  ngOnInit(): void {
-    sessionStorage.removeItem("idRisorsa");
-    sessionStorage.removeItem("nomeCognome");
-    sessionStorage.removeItem("numeroRichieste");
-    sessionStorage.removeItem("ruolo");
-    sessionStorage.removeItem("azienda");
-    sessionStorage.removeItem("codiciCandidati");
-    sessionStorage.removeItem("codiciRichiesteAperteAdmin");
-    sessionStorage.removeItem("codiciRichiesteAperteAccount");
-    sessionStorage.removeItem("codiciRichiesteAperteCommerciale");
-    sessionStorage.removeItem("codiciRichiesteAperteRecruiter");
-    sessionStorage.removeItem("codiciRichiesteAperte");
-    sessionStorage.removeItem("codiciRichiesteChiuse");
-    sessionStorage.removeItem("codiciHardware");
-    sessionStorage.removeItem("token");
+
+  ngOnInit() {
+    window.addEventListener('load', function () {
+      var sessioneMessage = sessionStorage.getItem("sessionMessage");
+      if (sessioneMessage != null) {
+        alert(sessioneMessage);
+      }
+      sessionStorage.clear();
+    })
   }
 
   public login(loginForm: NgForm): void {

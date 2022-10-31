@@ -10,6 +10,6 @@ export class DipendentiRichiesteService {
   constructor(private http: HttpClient) {}
 
   public setVisualizzato(idRichiesta: number, idRisorsa: number): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/set-visualizzato/${idRichiesta}/${idRisorsa}`,{headers: header.header()});
+    return this.http.get<any>(`${this.apiServerUrl}/set-visualizzato/${idRichiesta}/${idRisorsa}`, {headers: header.header()});
   }
 }

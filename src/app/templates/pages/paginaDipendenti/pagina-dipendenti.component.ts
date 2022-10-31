@@ -19,7 +19,7 @@ export class PaginaDipendentiComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.allDipendenti();
@@ -35,8 +35,13 @@ export class PaginaDipendentiComponent implements OnInit{
 
   public allDipendenti(): void {
     this.dipendentiService.allDipendenti().subscribe(
-      (response: any[]) => {
-          this.listaDipendenti = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaDipendenti = response.dataSource;
           setTimeout(function () {
             $(function () {
               $('#tabellaDipendenti').DataTable({
@@ -68,9 +73,7 @@ export class PaginaDipendentiComponent implements OnInit{
             });
             });
           });
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }

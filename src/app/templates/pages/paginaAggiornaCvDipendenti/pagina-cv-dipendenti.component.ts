@@ -24,7 +24,7 @@ export class PaginaCVDipendentiComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Dipendente'){
         this.titleService.setTitle("Gestech | CV Dipendenti");
@@ -40,21 +40,25 @@ export class PaginaCVDipendentiComponent implements OnInit{
 
   public getSelects(): void {
     this.linguaggiService.getLinguaggi().subscribe(
-      (response: Linguaggi[]) => {
-
-          this.listaLinguaggi = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLinguaggi = response.dataSource;
+        }
       }
     )
     this.lingueService.getLingue().subscribe(
-      (response: Lingue[]) => {
-
-          this.listaLingue = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLingue = response.dataSource;
+        }
       }
     )
   }

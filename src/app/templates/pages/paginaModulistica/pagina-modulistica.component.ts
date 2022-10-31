@@ -15,9 +15,8 @@ export class PaginaModulisticaComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-    this.router.navigate([""]);
-  else
-    if (this.ruolo == 'Dipendente'){
+      this.defaultService.logout();
+    else if (this.ruolo == 'Dipendente'){
       this.titleService.setTitle("Gestech | Modulistica");
       setTimeout(() => {
         this.defaultService.titoloPagina=" Modulistica";

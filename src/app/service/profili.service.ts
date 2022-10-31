@@ -11,6 +11,6 @@ export class ProfiliService {
   constructor(private http: HttpClient) {}
   
   public getProfili(): Observable<Profili[]> {
-    return this.http.get<Profili[]>(`${this.apiServerUrl}/all-profili`,{headers: header.header()});
+    return this.http.get<Profili[]>(`${this.apiServerUrl}/all-profili`, {headers: header.header()});
   }
 }

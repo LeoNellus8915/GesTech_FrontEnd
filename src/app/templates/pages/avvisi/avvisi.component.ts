@@ -15,9 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AvvisiComponent implements OnInit {
   public ruolo = sessionStorage.getItem('ruolo') as string;
-  public idDipendente = sessionStorage.getItem(
-    'idDipendente'
-  ) as unknown as number;
+  public idDipendente = sessionStorage.getItem('idDipendente') as unknown as number;
   public listaAvvisi!: Avvisi[];
   public listaRuoli!: Ruoli[];
   public checkArray: any[] = new Array();
@@ -31,12 +29,13 @@ export class AvvisiComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.ruolo === null) this.router.navigate(['']);
+    if (this.ruolo === null) 
+      this.defaultService.logout();
     else {
       this.titleService.setTitle('Gestech | Avvisi');
       setTimeout(() => {
         this.defaultService.titoloPagina = ' Avvisi';
-      }, 0);
+      });
       this.getAvvisi();
       this.getRuoli();
       this.checkArray = new Array();
@@ -44,38 +43,44 @@ export class AvvisiComponent implements OnInit {
   }
 
   public getRuoli(): void {
-    this.ruoliService.getRuoli().subscribe((response: Ruoli[]) => {
-      
-        this.listaRuoli = response; 
-    },
-    (error: HttpErrorResponse) => {
-      this.router.navigate(['']);
-    }
+    this.ruoliService.getRuoli().subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaRuoli = response.dataSource;
+        }
+      }
     );
   }
 
   public getAvvisi(): void {
-    this.avvisiService.allAvvisi(this.ruolo).subscribe((response: Avvisi[]) => {
-        
-        this.listaAvvisi = response;
-    },
-    (error: HttpErrorResponse) => {
-      this.router.navigate(['']);
-    }
+    this.avvisiService.allAvvisi(this.ruolo).subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaAvvisi = response.dataSource;
+        }
+      }
     );
   }
 
   public deleteAvviso(idAvviso: number): void {
-    if (confirm('Vuoi eliminare questo avviso?') == true)
+    if (confirm('Vuoi eliminare questo avviso?') == true) {
       this.avvisiService.deleteAvviso(idAvviso).subscribe(
         (response: any) => {
-          alert('Avviso eliminato con successo');
-          this.ngOnInit();
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+          if (response.code == "1") {
+            alert('Avviso eliminato con successo');
+            this.ngOnInit();
+          }
         }
       );
+    }
   }
 
   public array(e: any): void {
@@ -89,22 +94,25 @@ export class AvvisiComponent implements OnInit {
   }
 
   public salvaAvviso(addForm: NgForm): void {
-    if (this.checkArray.length == 0) alert('Inserire tutti o almeno un ruolo');
+    if (this.checkArray.length == 0) {
+      alert('Inserire tutti o almeno un ruolo');
+    }
     else {
       addForm.value.ruoli = this.checkArray;
       addForm.value.idDipendente = this.idDipendente;
-      this.avvisiService
-        .salvaAvviso(addForm.value)
-        .subscribe((response: any) => {
-
+      this.avvisiService.salvaAvviso(addForm.value).subscribe(
+        (response: any) => {
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          if (response.code == "1") {
             alert('Avviso salvato con successo');
             this.ngOnInit();
             addForm.reset();
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+          }
         }
-        );
+      );
     }
   }
 }

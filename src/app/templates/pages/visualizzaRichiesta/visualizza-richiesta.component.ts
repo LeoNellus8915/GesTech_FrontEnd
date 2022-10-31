@@ -37,8 +37,8 @@ export class VisualizzaRichiestaComponent implements OnInit{
               private route: ActivatedRoute, private richiesteService: RichiesteService) {}
 
   ngOnInit(): void {
-    if (this.ruolo === null)
-      this.router.navigate(['']);
+    if (this.ruolo == null)
+      this.defaultService.logout();
     else
     if (this.ruolo == 'Admin' 
           || this.ruolo === 'Account' 
@@ -73,31 +73,34 @@ export class VisualizzaRichiestaComponent implements OnInit{
 
   public getRichiesta(): void {
     this.richiesteService.getRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
-      (response: any[]) => {
-
-          this.richiesta = response[0];
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.richiesta = response.dataSource[0];
           this.priorita = this.richiesta.priorita as string;
-          this.statoRichiesta = response[1];
-          this.idStatoRichiesta = response[2];
-          this.listaStatiRichiesta = response[3];
-          this.candidatiSelezionati = response[4];
-          this.commentiRichiesta = response[5];
-        
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+          this.statoRichiesta = response.dataSource[1];
+          this.idStatoRichiesta = response.dataSource[2];
+          this.listaStatiRichiesta = response.dataSource[3];
+          this.candidatiSelezionati = response.dataSource[4];
+          this.commentiRichiesta = response.dataSource[5];
+        }
       }
     )
   }
 
   public getRecruiters(): void {
     this.richiesteService.getRecruiters().subscribe(
-      (response: string[]) => {
-  
-          this.listaRecruiters = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaRecruiters = response.dataSource;
+        }
       }
     )
   }
@@ -106,14 +109,17 @@ export class VisualizzaRichiestaComponent implements OnInit{
     if (confirm("Sicuro di voler eliminare questa richista?") == true)
       this.richiesteService.eliminaRichiesta(this.idRichiesta, this.statoPagina, this.ruolo).subscribe(
         (response: any) => {
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
             alert("Richiesta eliminata con successo");
             if (this.statoPagina == 0)
               this.router.navigate(['default/pagina-richieste']);
             else
               this.router.navigate(['default/pagina-storico-richieste']);
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+          }
         }
       )
   }
@@ -128,16 +134,20 @@ export class VisualizzaRichiestaComponent implements OnInit{
     if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')
       updateForm.value.statoRichiesta = "2";
     updateForm.value.priorita = this.priorita.toString();
+    console.log(this.idRichiesta)
     this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina, this.ruolo).subscribe(
       (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           alert("Richiesta aggiornata con successo");
           if (this.statoPagina == 0)
             this.router.navigate(['default/pagina-richieste']);
           else
             this.router.navigate(['default/pagina-storico-richieste']);
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }

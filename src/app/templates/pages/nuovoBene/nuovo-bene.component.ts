@@ -26,7 +26,7 @@ export class NuovoBeneComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Nuovo Beni");
@@ -43,26 +43,29 @@ export class NuovoBeneComponent implements OnInit{
 
   public allDipendenti(): void {
     this.dipendentiService.allDipendenti().subscribe(
-      (response: any[]) => {
-
-        this.listaDipendenti = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaDipendenti = response.dataSource;
+        }
       }
     )
   }
 
   public allDispositivi():void{
     this.hardwareService.getAllDispositivi().subscribe(
-      (response: any[])=> {
-
-        this.listaDispositivi = response; 
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaDispositivi = response.dataSource;
+        }
       }
-     
     )
   }
 
@@ -80,11 +83,14 @@ export class NuovoBeneComponent implements OnInit{
 
     this.hardwareService.salvaHardware(addForm.value).subscribe(
       (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           alert("Bene salvato con successo");
           this.router.navigate(["default/pagina-beni"]);
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }

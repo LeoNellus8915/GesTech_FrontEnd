@@ -11,14 +11,14 @@ export class RuoliService {
   constructor(private http: HttpClient) {}
   
   public getRuoli(): Observable<Ruoli[]> {
-    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli`,{headers: header.header()});
+    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli`, {headers: header.header()});
   }
 
   public getRuoliDipendenteAdmin(): Observable<Ruoli[]> {
-    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-admin`,{headers: header.header()});
+    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-admin`, {headers: header.header()});
   }
 
   public getRuoliDipendentePersonale(): Observable<Ruoli[]> {
-    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-personale`,{headers: header.header()});
+    return this.http.get<Ruoli[]>(`${this.apiServerUrl}/all-ruoli-dipendente-personale`, {headers: header.header()});
   }
 }

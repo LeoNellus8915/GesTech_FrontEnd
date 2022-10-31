@@ -52,7 +52,7 @@ export class ModificaCandidatoComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' 
           || this.ruolo == 'Recruiter' 
@@ -61,8 +61,9 @@ export class ModificaCandidatoComponent implements OnInit{
         this.titleService.setTitle("Gestech | Modifica Candidati");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Modifica Candidati";
-        }, 0)
-        this.idCandidato = this.route.snapshot.params['idCandidato'];
+        })
+        this.idCandidato = sessionStorage.getItem("idCandidato") as unknown as number;
+        sessionStorage.removeItem("idCandidato");
         this.pagina = this.route.snapshot.params['pagina'];
         this.idRichiesta = this.route.snapshot.params['idRichiesta'];
         this.getDatiModifica();
@@ -76,7 +77,11 @@ export class ModificaCandidatoComponent implements OnInit{
   public getDatiModifica(): void {
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any) => {
-        if (response != null) {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           this.response = response.dataSource;
 
           for (var c = 0; c < this.response.infoProfili.length; c++) {
@@ -98,44 +103,76 @@ export class ModificaCandidatoComponent implements OnInit{
           }
           this.esitoColloquio = this.response.infoDettaglioCandidato.esitoColloquio;
         }
-        else
-          this.router.navigate(["candidato-non-trovato"]);
       }
     )
   }
 
   public getSelects(): void {
     this.esitiColloquioService.getEsitiColloquio().subscribe(
-      (response: EsitiColloquio[]) => {
-        this.listaEsitiColloquio = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaEsitiColloquio = response.dataSource;
+        }
       }
     )
     this.profiliService.getProfili().subscribe(
-      (response: Profili[]) => {
-        this.listaProfili = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaProfili = response.dataSource;
+        }
       }
     )
     this.linguaggiService.getLinguaggi().subscribe(
-      (response: Linguaggi[]) => {
-        this.listaLinguaggi = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLinguaggi = response.dataSource;
+        }
       }
     )
     this.lingueService.getLingue().subscribe(
-      (response: Lingue[]) => {
-        this.listaLingue = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLingue = response.dataSource;
+        }
       }
     )
     this.livelliService.getLivelli().subscribe(
-      (response: Livelli[]) => {
-        this.listaLivelli = response;
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLivelli = response.dataSource;
+        }
       }
     )
   }
 
   public updateCandidato(updateForm: NgForm): void {
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
-      (response: number) => {
-        if (response == 0 && updateForm.value.email != this.response.infoPersona.email)
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else if (response.dataSource == 0 && updateForm.value.email != this.response.infoPersona.email)
           alert("Email già esistente");
         else {
           if (updateForm.value.esitoColloquio == "")

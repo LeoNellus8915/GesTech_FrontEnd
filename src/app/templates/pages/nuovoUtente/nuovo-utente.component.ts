@@ -27,7 +27,7 @@ export class NuovoUtenteComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Nuovo Utente");
@@ -45,31 +45,40 @@ export class NuovoUtenteComponent implements OnInit{
   public getRuoli(): void {
     if (this.ruolo == 'Admin')
       this.ruoliService.getRuoliDipendenteAdmin().subscribe(
-        (response: Ruoli[]) => {
-          this.listaRuoli = response;
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+        (response: any) => {
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
+            this.listaRuoli = response.dataSource;
+          }
         }
       )
     else
       this.ruoliService.getRuoliDipendentePersonale().subscribe(
-        (response: Ruoli[]) => {
-          this.listaRuoli = response;
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
+        (response: any) => {
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else {
+            this.listaRuoli = response.dataSource;
+          }
         }
       )
   }
 
   public getAziende(): void {
     this.aziendeService.getAziende().subscribe(
-      (response: Aziende[]) => {
-        this.listaAziende = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaAziende = response.dataSource;
+        }
       }
     )
   }
@@ -81,16 +90,16 @@ export class NuovoUtenteComponent implements OnInit{
       addForm.value.password = Md5.init(addForm.value.password);
       this.authService.addUtente(addForm.value).subscribe(
         (response: any) => {
-
-            if (response == 0)
+          if (response.codeSession == "0") {
+            sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+            this.defaultService.logout();
+          }
+          else if (response.dataSource == 0)
             alert("Email già esistente");
           else {
             alert("Utente registrato con successo");
             this.router.navigate(['default/pagina-avvisi']);
           }
-        },
-        (error: HttpErrorResponse) => {
-          this.router.navigate(['']);
         }
       )
     }

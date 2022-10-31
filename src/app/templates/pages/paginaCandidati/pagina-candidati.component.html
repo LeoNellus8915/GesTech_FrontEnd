@@ -22,8 +22,8 @@
         <td>{{candidato.citta}}</td>
         <td>{{candidato.competenzaPrincipale}}</td>
         <td>{{candidato.esitoNome}}</td>
-        <td><a [routerLink]="['../pagina-visualizza-candidato', candidato.id, 0, 0]"><i class="icon-eye mr-3"></i></a>
-        <a [routerLink]="['../pagina-modifica-candidato', candidato.id, 0, 0]"><i class="icon-pencil"></i></a></td>
+        <td><a (click)="goVisualizzaCandidato(candidato.id, candidato.codice)"><i class="icon-eye mr-3 cursor"></i></a>
+          <a (click)="goModificaCandidato(candidato.id, candidato.codice)"><i class="icon-pencil cursor"></i></a></td>
       </tr>
     </tbody>
   </table>

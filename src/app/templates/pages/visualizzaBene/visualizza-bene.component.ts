@@ -25,7 +25,7 @@ export class VisualizzaBeneComponent implements OnInit{
 
   ngOnInit(): void {
     if (this.ruolo == null)
-      this.router.navigate([""]);
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
         this.titleService.setTitle("Gestech | Visualizza Bene");
@@ -43,11 +43,14 @@ export class VisualizzaBeneComponent implements OnInit{
 
   public getHardware(): void {
     this.hardwareService.getHardwareVisualizza(this.idHardware).subscribe(
-      (response: any[]) => {
-        if (response == null) this.router.navigate(['']);
-        else{
-          this.hardware = response[0];
-          this.listaStorico = response[1];
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.hardware = response.dataSource[0];
+          this.listaStorico = response.dataSource[1];
         }
       }
     )

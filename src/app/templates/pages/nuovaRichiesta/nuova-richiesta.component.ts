@@ -33,8 +33,8 @@ export class NuovaRichiestaComponent implements OnInit{
               private clientiService: ClientiService) {}
 
   ngOnInit(): void {
-    if (this.ruolo === null)
-      this.router.navigate(['']);
+    if (this.ruolo == null)
+      this.defaultService.logout();
     else
       if (this.ruolo == 'Admin' || this.ruolo == 'Account'){
         this.titleService.setTitle("Gestech | Nuova Richiesta");
@@ -50,38 +50,47 @@ export class NuovaRichiestaComponent implements OnInit{
 
   public getSelects(): void {
     this.profiliService.getProfili().subscribe(
-      (response: Profili[]) => {
-        this.listaProfili = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaProfili = response.dataSource
+        }
       }
     )
     this.linguaggiService.getLinguaggi().subscribe(
-      (response: Linguaggi[]) => {
-
-        this.listaLinguaggi = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLinguaggi = response.dataSource
+        }
       }
     )
     this.livelliService.getLivelli().subscribe(
-      (response: Livelli[]) => {
-
-        this.listaLivelli = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLivelli = response.dataSource
+        }
       }
     )
     this.clientiService.getClienti().subscribe(
-      (response: Clienti[]) => {
-
-        this.listaClienti = response;
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaClienti = response.dataSource
+        }
       }
     )
   }
@@ -106,12 +115,14 @@ export class NuovaRichiestaComponent implements OnInit{
     addForm.value.idDipendente = this.idDipendente;
     this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
       (response: any) => {
-        
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
           alert("Richiesta salvata con successo");
           this.router.navigate(['default/pagina-richieste'])
-      },
-      (error: HttpErrorResponse) => {
-        this.router.navigate(['']);
+        }
       }
     )
   }
