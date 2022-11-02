@@ -190,6 +190,9 @@ export class ModificaCandidatoComponent implements OnInit{
 
           if (updateForm.value.annoColloquio == "")
             updateForm.value.annoColloquio = new Date().getFullYear;
+          
+          updateForm.value.listaProfili = this.arrayValori;
+          updateForm.value.listaLingue = this.arrayLingue;
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {
@@ -201,6 +204,8 @@ export class ModificaCandidatoComponent implements OnInit{
             }
           )
         }
+        
+        console.log(updateForm.value);
       }
     )
   }

@@ -147,7 +147,7 @@
 								<select id="livelloProgrammatore" class="form-control r-0 light s-12 date-picker freccia"
 									(change)="selectLivello($event)">
 									<option value="" disabled>Selezionare...</option>
-									<option *ngFor="let livello of listaLivelli" [selected]="item.nomeLinguaggio === livello.nome"
+									<option *ngFor="let livello of listaLivelli" [selected]="item.nomeLivello === livello.nome"
 										value={{livello.id}}>{{livello.nome}}</option>
 								</select>
 							</div>
@@ -157,14 +157,15 @@
 								<label for="livello" class="col-form-label s-12">SENIORITY</label>
 								<select id="livello" class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivello($event)">
 									<option value="" selected disabled>Selezionare...</option>
-									<option *ngFor="let livello of listaLivelli" value={{livello.id}}>{{livello.nome}}</option>
+									<option *ngFor="let livello of listaLivelli" [selected]="item.nomeLivello === livello.nome"
+									value={{livello.id}}>{{livello.nome}}</option>
 								</select>
 							</div>
 					
 							<div id="noteDiv" class="form-group col-4 m-0">
 								<label for="note" class="col-form-label s-12">NOTE</label>
 								<input id="note" placeholder="Inserisci Note" (change)="selectNote($event)"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" type="text" value="{{item.descrizione}}">
 							</div>
 					
 							<div id="button" class="col 1" [ngStyle]="{'display':i < response.infoProfili.length-1 ? 'block' : 'none'}">
