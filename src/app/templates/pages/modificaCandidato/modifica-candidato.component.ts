@@ -63,7 +63,6 @@ export class ModificaCandidatoComponent implements OnInit{
           this.defaultService.titoloPagina=" Modifica Candidati";
         })
         this.idCandidato = sessionStorage.getItem("idCandidato") as unknown as number;
-        sessionStorage.removeItem("idCandidato");
         this.pagina = this.route.snapshot.params['pagina'];
         this.idRichiesta = this.route.snapshot.params['idRichiesta'];
         this.getDatiModifica();
