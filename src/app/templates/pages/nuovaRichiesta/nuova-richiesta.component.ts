@@ -126,4 +126,15 @@ export class NuovaRichiestaComponent implements OnInit{
       }
     )
   }
+
+  public programmatore(e: any) {
+    var x = e.path[2].children[1].children[1] as HTMLSelectElement;
+    if (e.target.value == '2') {
+      x.disabled = false;
+    }
+    else {
+      x.disabled = true;
+      e.path[2].children[1].children[1].selectedIndex = "";
+    }
+  }
 }

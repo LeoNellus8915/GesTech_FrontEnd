@@ -11,14 +11,14 @@
 						<div class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="profilo" class="col-form-label s-12">Ruolo</label> 
-								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia" required>
+								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia" (change)="programmatore($event)" required>
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
 								</select>
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="linguaggio" class="col-form-label s-12">Linguaggio</label>
-								<select ngModel name="linguaggio" class="form-control r-0 light s-12 date-picker freccia" required>
+								<select ngModel name="linguaggio" class="form-control r-0 light s-12 date-picker freccia" disabled>
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let linguaggio of listaLinguaggi" value={{linguaggio.id}}>{{linguaggio.nome}}</option>
 								</select>
