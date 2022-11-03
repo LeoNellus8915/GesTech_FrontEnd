@@ -96,10 +96,14 @@ export class NuovaRichiestaComponent implements OnInit{
   }
 
   public aggiungiRichiesta(addForm: NgForm): void {
+    console.log(addForm.value)
+    if (addForm.value.linguaggio == "" || addForm.value.linguaggio == null)
+      addForm.value.linguaggio = "55";
+
     if (addForm.value.profilo == "")
       addForm.value.profilo = "17";
 
-    if (addForm.value.linguaggio == "")
+    if (addForm.value.profilo != "2")
       addForm.value.linguaggio = "55";
 
     if (addForm.value.livello == "")
@@ -113,6 +117,7 @@ export class NuovaRichiestaComponent implements OnInit{
       addForm.value.costo = addForm.value.costo.toString();
 
     addForm.value.idDipendente = this.idDipendente;
+    console.log(addForm.value)
     this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
