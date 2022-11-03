@@ -73,7 +73,7 @@
 					</div>
 					
 
-					<div *ngIf="richiesta && (ruolo=='Admin' || ruolo=='Direttore Commerciale')" class="row">
+					<div *ngIf="richiesta && (ruolo=='Admin' || ruolo=='Direttore Commerciale') && statoRichiesta != 'Chiusa'" class="row">
 						<div class="col-2 p-4 offset-1"><h5 class="text-black">Priorit&agrave;:</h5></div>
 						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '1'" (click)="setPriorita('1')">Alta</div>
 						<div class="col-2 radio"><input type="radio" name="priorita" [checked]="richiesta.priorita === '2'" (click)="setPriorita('2')">Media</div>
