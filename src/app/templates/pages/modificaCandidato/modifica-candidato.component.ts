@@ -175,7 +175,7 @@ export class ModificaCandidatoComponent implements OnInit{
           alert("Email già esistente");
         else {
           if (updateForm.value.esitoColloquio == "")
-            updateForm.value.esitoColloquio = this.response.infoDettaglioCandidato.idEsitoColloquio;
+            updateForm.value.esitoColloquio = this.response.infoDettaglioCandidato.idEsitoColloquio.toString();
 
           if (updateForm.value.costoGiornaliero == "") {
             updateForm.value.costoGiornaliero = 0;
