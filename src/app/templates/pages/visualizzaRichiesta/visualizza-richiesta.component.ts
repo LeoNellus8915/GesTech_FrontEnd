@@ -79,6 +79,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
           this.defaultService.logout();
         }
         else {
+          console.log(response )
           this.richiesta = response.dataSource[0];
           this.priorita = this.richiesta.priorita as string;
           this.statoRichiesta = response.dataSource[1];

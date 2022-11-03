@@ -88,6 +88,16 @@ export class PaginaSceltaCandidatiRichiestaComponent implements OnInit{
     )
   }
 
+  goVisualizzaCandidato(idCandidato: number, codiceCandidato: string) {
+    this.router.navigate(["default/pagina-visualizza-candidato", codiceCandidato, 1, 0]);
+    sessionStorage.setItem("idCandidato", idCandidato.toString());
+  }
+
+  goModificaCandidato(idCandidato: number, codiceCandidato: string) {
+    this.router.navigate(["default/pagina-modifica-candidato", codiceCandidato, 1, 0]);
+    sessionStorage.setItem("idCandidato", idCandidato.toString());
+  }
+
   public array(e: any): void {
     if (e.target.checked){
       this.checkArray.push(e.target.value.toString());
