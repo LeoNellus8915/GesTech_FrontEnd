@@ -22,7 +22,6 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public colore!: number;
   public profili!: getProfili[];
   public lingue!: string[];
-  opacity = "1";
   public pagina!: number;
   public idRichiesta!: number;
   public esitoColloquio!: string;

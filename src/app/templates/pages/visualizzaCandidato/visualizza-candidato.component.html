@@ -19,9 +19,9 @@
             <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 3" class="size" src="../../../../assets/img/faccina-3.png">
             <img *ngIf="response.infoDettaglioCandidato.coloreEsitoColloquio == 4" class="size" src="../../../../assets/img/faccina-4.png">
           </div>
-          <div class="text-center p-5 mt-5">
-            <div *ngIf="response"><h4 class="p-t-10">{{response.infoPersona.nome + " " + response.infoPersona.cognome}}</h4></div>
-            <button id="cv" (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{opacity}">Scarica CV</button>
+          <div *ngIf="response" class="text-center p-5 mt-5">
+            <div><h4 class="p-t-10">{{response.infoPersona.nome + " " + response.infoPersona.cognome}}</h4></div>
+            <button id="cv" (click)="scaricaCV()" class="btn btn-success  mt-3 martopsu button" [ngStyle]="{'opacity':response.cvBase64 == null ? '0.3' : '1'}" [disabled]="response.cvBase64 == null">Scarica CV</button>
             <button [routerLink]="['../../../../pagina-modifica-candidato', idCandidato, pagina, idRichiesta]" class="btn btn-success giallo mt-3 button">Modifica</button> 
             <button *ngIf="ruolo=='Admin'" (click)="eliminaCandidato()" class="btn btn-success rosso mt-3 button">Elimina</button>
             <button class="btn btn-success blue mt-3" (click)="copy()">Copia Link Scheda</button>
