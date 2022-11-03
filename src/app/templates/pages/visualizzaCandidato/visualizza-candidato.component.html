@@ -8,6 +8,12 @@
 		<a [routerLink]="['../../../../../default/pagina-scelta-candidati-richiesta', idRichiesta]">Scelta Candidati Richiesta</a> / 
 		Modifica Candidati</span>
 </div>
+<div class="card-body spazio" *ngIf="pagina == 2">
+  <span class="briciole"><a routerLink="../../../../../default/pagina-avvisi">Home</a> / 
+    <a routerLink="../../../../../default/pagina-richieste">Pagina Richieste</a> /
+		<a [routerLink]="['../../../../../default/pagina-visualizza-richiesta', idRichiesta, 0]">Visualizza Richiesta</a> / 
+		Visualizza Candidati</span>
+</div>
 <div class="page">
   <div class="container-fluid relative animatedParent animateOnce p-lg-3">
     <div class="card no-b shadow no-r">

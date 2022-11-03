@@ -92,6 +92,11 @@ export class VisualizzaRichiestaComponent implements OnInit{
     )
   }
 
+  goVisualizzaCandidato(idCandidato: number, codiceCandidato: string) {
+    this.router.navigate(["default/pagina-visualizza-candidato", codiceCandidato, 2, this.idRichiesta]);
+    sessionStorage.setItem("idCandidato", idCandidato.toString());
+  }
+
   public getRecruiters(): void {
     this.richiesteService.getRecruiters().subscribe(
       (response: any) => {
