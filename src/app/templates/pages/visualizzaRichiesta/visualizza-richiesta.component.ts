@@ -51,7 +51,6 @@ export class VisualizzaRichiestaComponent implements OnInit{
       }, 0)
       this.idRichiesta = this.route.snapshot.params['idRichiesta'];
       this.statoPagina = this.route.snapshot.params['statoPagina'];
-      console.log(this.idRichiesta + " " + this.statoPagina + " " + this.ruolo)
       this.getRichiesta();
       if (this.ruolo == 'Direttore Recruiter')
         this.getRecruiters();
@@ -79,14 +78,18 @@ export class VisualizzaRichiestaComponent implements OnInit{
           this.defaultService.logout();
         }
         else {
-          console.log(response )
           this.richiesta = response.dataSource[0];
           this.priorita = this.richiesta.priorita as string;
           this.statoRichiesta = response.dataSource[1];
           this.idStatoRichiesta = response.dataSource[2];
           this.listaStatiRichiesta = response.dataSource[3];
           this.candidatiSelezionati = response.dataSource[4];
+          this.candidatiSelezionati.forEach(element => {
+            console.log(element);
+            console.log("Sium");
+          });
           this.commentiRichiesta = response.dataSource[5];
+          console.log("Ao");
         }
       }
     )
@@ -140,7 +143,6 @@ export class VisualizzaRichiestaComponent implements OnInit{
     if (this.ruolo == 'Direttore Recruiter' && this.statoRichiesta == 'Nuova')
       updateForm.value.statoRichiesta = "2";
     updateForm.value.priorita = this.priorita.toString();
-    console.log(this.idRichiesta)
     this.richiesteService.updateRichiesta(updateForm.value, this.idRichiesta, this.idDipendente, this.statoPagina, this.ruolo).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
