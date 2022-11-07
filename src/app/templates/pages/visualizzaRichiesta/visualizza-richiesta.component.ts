@@ -84,12 +84,7 @@ export class VisualizzaRichiestaComponent implements OnInit{
           this.idStatoRichiesta = response.dataSource[2];
           this.listaStatiRichiesta = response.dataSource[3];
           this.candidatiSelezionati = response.dataSource[4];
-          this.candidatiSelezionati.forEach(element => {
-            console.log(element);
-            console.log("Sium");
-          });
           this.commentiRichiesta = response.dataSource[5];
-          console.log("Ao");
         }
       }
     )
