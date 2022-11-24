@@ -1,5 +1,5 @@
 {
-  "name": "ges-tech-front-end",
+  "name": "gestech",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -26,6 +26,7 @@
     "md5-typescript": "^1.0.5",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

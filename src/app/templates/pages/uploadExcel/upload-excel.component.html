@@ -1,0 +1,15 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Upload Excel</span>
+</div>
+
+<form id="file-upload-form" class="uploader">
+  <input id="file-upload" type="file" name="fileUpload" (change)="uploadData($event)">
+
+  <label for="file-upload" id="file-drag">
+    <div id="start">
+      <i class="fa fa-download" aria-hidden="true"></i>
+      <div>Seleziona il file excel</div>
+      <span id="file-upload-btn" class="btn btn-primary">Seleziona</span>
+    </div>
+  </label>
+</form>

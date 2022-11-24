@@ -30,6 +30,7 @@ import { VisualizzaRichiestaComponent } from './templates/pages/visualizzaRichie
 import { PaginaSceltaRuoloComponent } from './templates/paginaSceltaRuolo/pagina-scelta-ruolo.component';
 import { PaginaModulisticaComponent } from './templates/pages/paginaModulistica/pagina-modulistica.component';
 import { PaginaSceltaCandidatiRichiestaComponent } from './templates/pages/sceltaCandidatiRichiesta/scelta-candidati-richiesta.component';
+import { UploadExcelComponent } from './templates/pages/uploadExcel/upload-excel.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -60,7 +61,8 @@ const routes: Routes = [
     {path: "pagina-visualizza-bene/:idHardware", component: VisualizzaBeneComponent},
     {path: "pagina-visualizza-candidato/:codiceCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
     {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
-    {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent}
+    {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent},
+    {path: "pagina-upload-excel", component: UploadExcelComponent}
   ]},
   {path:"**", component: ErrorPageComponent}
 ];
@@ -75,4 +77,4 @@ export const RoutingComponents = [LoginComponent, DefaultComponent, ErrorPageCom
   NuovaRichiestaComponent, NuovoBeneComponent, NuovoCandidatoComponent, NuovoCCNLComponent, NuovoUtenteComponent, PaginaBeniComponent,  
   PaginaBustePagaComponent, PaginaCandidatiComponent, PaginaCCNLComponent, PaginaCertificazioniUnicheComponent, PaginaCVDipendentiComponent,
   PaginaDipendentiComponent, PaginaRapportinoComponent, PaginaRichiesteComponent, PaginaStoricoRichiesteComponent, VisualizzaBeneComponent,
-  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent]
+  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent, UploadExcelComponent]

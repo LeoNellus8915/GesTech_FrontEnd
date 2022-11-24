@@ -190,7 +190,7 @@
           <h5 class="text-black">Commenti</h5>
         </div>
         <div *ngIf="response" class="row">
-          <div class="col-md-10 offset-1" *ngFor="let commento of response.commentiCandidato">
+          <div class="col-md-10 offset-1" *ngFor="let commento of response.allCommentiCandidato">
             <span class="titolo_data">{{commento.data}}</span>
             <span class="titolo_data"> {{commento.nome + " " + commento.cognome}}</span>
             <p class="testo_richieste">{{commento.note}}</p>
