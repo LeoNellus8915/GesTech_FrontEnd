@@ -185,7 +185,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.preavviso = "0";
     }
 
-    
+    console.log(addForm.value)
     this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
@@ -377,12 +377,6 @@ export class NuovoCandidatoComponent implements OnInit{
         }
         else {
           this.listaLivelloInquadramento = response.dataSource;
-          if(e.target.value != 4){
-            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = false;
-          }
-          else{
-            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = true;
-          }
         }
       }
     )
