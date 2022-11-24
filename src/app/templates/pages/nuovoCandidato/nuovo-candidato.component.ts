@@ -15,8 +15,9 @@ import { formatDate } from '@angular/common';
 import { CandidatiService } from 'src/app/service/candidati.service';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
-import { event } from 'jquery';
-import { Observable, ReplaySubject, Subscriber } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
+import { CCNLService } from 'src/app/service/ccnl.service';
+import { LivelliInquadramentoService } from 'src/app/service/livelli-inquadramento.service';
 
 @Component({
   templateUrl: './nuovo-candidato.component.html',
@@ -31,6 +32,8 @@ export class NuovoCandidatoComponent implements OnInit{
   public listaLinguaggi!: Linguaggi[];
   public listaLingue!: Lingue[];
   public listaLivelli!: Livelli[];
+  public listaCcnl!: any[];
+  public listaLivelloInquadramento!: any[];
   public titoloPagina: any;
   public fileSelected?: Blob;
   public arrayProfilo = new Array();
@@ -40,6 +43,7 @@ export class NuovoCandidatoComponent implements OnInit{
 
   constructor(private router: Router, private esitiColloquioService: EsitiColloquioService, private profiliService: ProfiliService,
               private linguaggiService: LinguaggiService, private lingueService: LingueService, private livelliService: LivelliService,
+              private ccnlService: CCNLService, private livelliInquandramentoService: LivelliInquadramentoService,
               private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent) {}
 
   ngOnInit(): void {
@@ -121,6 +125,17 @@ export class NuovoCandidatoComponent implements OnInit{
         }
       }
     )
+    this.ccnlService.getCcnl().subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaCcnl = response.dataSource;
+        }
+      }
+    )
   }
 
   public aggiungiCandidato(addForm: NgForm): void {
@@ -149,6 +164,27 @@ export class NuovoCandidatoComponent implements OnInit{
     addForm.value.idDipendente = this.idDipendente;
 
     addForm.value.cv = this.base64;
+
+    if(addForm.value.ccnl == 4){
+      addForm.value.ccnl = "0";
+    }
+
+    if(addForm.value.ral == ""){
+      addForm.value.ral = "0"
+    }
+    if(addForm.value.ticket == ""){
+      addForm.value.ticket = "0";
+    }
+    if(addForm.value.preavviso == ""){
+      addForm.value.livelloInquadramento = "0";
+    }
+    if(addForm.value.rimborsi == ""){
+      addForm.value.rimborsi = "0";
+    }
+    if(addForm.value.preavviso == ""){
+      addForm.value.preavviso = "0";
+    }
+
     
     this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
@@ -330,6 +366,26 @@ export class NuovoCandidatoComponent implements OnInit{
     var note = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     this.arrayValori[numeroRiga].note = note;
+  }
+
+  selectLivelloInquadramento(e: any){
+    this.livelliInquandramentoService.getLivelliInquadramento(e.target.value).subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLivelloInquadramento = response.dataSource;
+          if(e.target.value != 4){
+            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = false;
+          }
+          else{
+            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = true;
+          }
+        }
+      }
+    )
   }
 
   addRowProfilo() {

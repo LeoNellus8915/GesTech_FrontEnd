@@ -18,6 +18,8 @@ import { EsitiColloquioService } from 'src/app/service/esiti-colloquio.service';
 import { LingueService } from 'src/app/service/lingua.service';
 import { ProfiliService } from 'src/app/service/profili.service';
 import { LivelliService } from 'src/app/service/livelli.service';
+import { CCNLService } from 'src/app/service/ccnl.service';
+import { LivelliInquadramentoService } from 'src/app/service/livelli-inquadramento.service';
 
 @Component({
   templateUrl: './modifica-candidato.component.html',
@@ -32,6 +34,8 @@ export class ModificaCandidatoComponent implements OnInit{
   public listaLinguaggi!: Linguaggi[];
   public listaLingue!: Lingue[];
   public listaLivelli!: Livelli[];
+  public listaCcnl!: any[];
+  public listaLivelloInquadramento!: any[];
   public idCandidato!: number;
   public datiCandidato!: Candidati;
   public dettagliCandidato!: DettagliCandidati;
@@ -47,6 +51,7 @@ export class ModificaCandidatoComponent implements OnInit{
 
   constructor(private router: Router, private esitiColloquioService: EsitiColloquioService, private profiliService: ProfiliService,
     private linguaggiService: LinguaggiService, private lingueService: LingueService, private livelliService: LivelliService,
+    private ccnlService: CCNLService, private livelliInquandramentoService: LivelliInquadramentoService,
     private candidatiService: CandidatiService, private titleService: Title, private defaultService: DefaultComponent,
     private route: ActivatedRoute) {}
 
@@ -286,6 +291,26 @@ export class ModificaCandidatoComponent implements OnInit{
     else {
       e.path[2].children.buttons.style.removeProperty("display");
     }
+  }
+
+  selectLivelloInquadramento(e: any){
+    this.livelliInquandramentoService.getLivelliInquadramento(e.target.value).subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaLivelloInquadramento = response.dataSource;
+          if(e.target.value != 4){
+            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = false;
+          }
+          else{
+            (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = true;
+          }
+        }
+      }
+    )
   }
 
   addRowLingua() {

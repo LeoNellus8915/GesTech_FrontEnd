@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { CandidatiService } from 'src/app/service/candidati.service';
-import { Candidati } from 'src/app/model/candidati';
 import { DOCUMENT } from '@angular/common';
 import { allCommentiCandidato } from 'src/app/model/mapper/allCommentiCandidato';
 import { Persone } from 'src/app/model/persone';

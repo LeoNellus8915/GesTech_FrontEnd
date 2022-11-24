@@ -153,22 +153,18 @@
           </div>
         </div>   
       </div>
+
       <div class="p5 b-b">
         <div class="row">
-          <div class="col-md-6">
-            <div *ngIf="response" class="p-4">
-              <h5 class="text-black">Costo Giornaliero:</h5>
-              <h5 class="p-t-10">{{response.infoDettaglioCandidato.costoGiornaliero}}</h5>
-            </div>
-          </div>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div *ngIf="response" class="p-4">
               <h5 class="text-black">Possibilit&agrave; Lavorativa:</h5>
               <h5 class="p-t-10">{{response.infoDettaglioCandidato.possibilitaLavorativa}}</h5>
             </div>
           </div> 
         </div>   
-      </div>            
+      </div>
+
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-6">
@@ -185,6 +181,66 @@
             </div>
         </div>
       </div>
+
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Ral:</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.ral}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Ccnl: </h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.ccnl}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Livello Inquadramento </h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.livelloInquadramento}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Ticket</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.ticket}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Rimborsi: </h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.rimborsi}}</h5>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Preavviso: </h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.preavviso}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p5 b-b">
+        <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Costo Giornaliero (€):</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.costoGiornaliero}}</h5>
+            </div>
+          </div> 
+        </div>   
+      </div>
+
+
+
       <div class="p5 b-b"> 
         <div class="pl-4 mt-4">
           <h5 class="text-black">Commenti</h5>

@@ -239,17 +239,11 @@
 				<hr>
       </div>
       <div class="card-body">
-				<h5 class="card-title">Costo Impiego</h5>
+				<h5 class="card-title">Mansione</h5>
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="response" class="form-group col-6 m-0">
-								<label for="costoGiornaliero" class="col-form-label s-12">COSTO GIORNALIERO</label> 
-								<input ngmodel name="costoGiornaliero" [(ngModel)]=response.infoDettaglioCandidato.costoGiornaliero
-									placeholder="Insersci Costo Giornaliero"
-									class="form-control r-0 light s-12 date-picker" type="number" step="0.01">
-							</div>
-							<div *ngIf="response" class="form-group col-6 m-0">
+							<div *ngIf="response" class="form-group col-12 m-0">
 								<label for="possibilitaLavorativa" class="col-form-label s-12">POSSIBILIT&Agrave; LAVORATIVA</label>
 								<input ngModel name="possibilitaLavorativa" [(ngModel)]=response.infoDettaglioCandidato.possibilitaLavorativa
 									placeholder="Insersci Possibilit&agrave; Lavorativa"
@@ -284,6 +278,79 @@
 				<!-- Fine Row -->
 				<hr>
       </div>
+
+			<div class="card-body bodyColore">
+				<h5 class="card-title">Attuali Condizioni Contrattuali</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-4 m-0">
+								<label for="ral" class="col-form-label s-12">RAL</label> 
+                <input ngModel name="ral" placeholder="Insersci RAL"
+									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.ral>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="ccnl" class="col-form-label s-12">CCNL</label>
+								<select ngModel id="ccnl" name="ccnl" class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivelloInquadramento($event)">
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let ccnl of listaCcnl" value={{ccnl.id}}>{{ccnl.nome}}</option>
+								</select>
+								<!-- <input ngModel name="ccnl" placeholder="Insersci CCNL"
+									class="form-control r-0 light s-12 date-picker" type="text"> -->
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="livelloInquadramento" class="col-form-label s-12">LIVELLO INQUADRAMENTO</label>
+								<select ngModel id="livelloInquadramento" name="livelloInquadramento" class="form-control r-0 light s-12 date-picker freccia" disabled>
+									<option value="" selected disabled>Selezionare...</option>
+    							<option *ngFor="let livelloInquadramento of listaLivelloInquadramento" value={{livelloInquadramento.id}}>{{livelloInquadramento.nome}}</option>
+								</select>
+								<!-- <input ngModel name="livelloInquadramento" placeholder="Insersci Livello Inquadramento"
+									class="form-control r-0 light s-12 date-picker" type="text"> -->
+							</div>
+						</div>
+						<div class="form-row" style="margin-top: 20px">
+							<div class="form-group col-4 m-0">
+								<label for="ticket" class="col-form-label s-12">TICKET</label>
+								<input ngModel name="ticket" placeholder="Insersci Ticket"
+									class="form-control r-0 light s-12 date-picker" type="text" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.ticket>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="rimborsi" class="col-form-label s-12">RIMBORSI</label>
+								<input ngModel name="rimborsi" placeholder="Insersci Rimborsi"
+									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.rimborsi>
+							</div>
+							<div class="form-group col-4 m-0">
+								<label for="preavviso" class="col-form-label s-12">PREAVVISO</label>
+								<input ngModel name="preavviso" placeholder="Insersci Preavviso"
+									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.preavviso>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Fine Row -->
+				<hr>
+      </div>
+			<div class="card-body bodyColore">
+				<h5 class="card-title">Condizioni Economiche Desiderate</h5>
+				<div class="form-row">
+					<div class="col-md-12">
+						<div class="form-row">
+							<div class="form-group col-3 m-0">
+								<label for="costoGiornaliero" class="col-form-label s-12">COSTO GIORNALIERO (€)</label> 
+                <input ngModel name="costoGiornaliero" placeholder="Insersci Costo Giornaliero"
+									class="form-control r-0 light s-12 date-picker" type="number" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.costoGiornaliero>
+							</div>
+							<div class="form-group col-9 m-0">
+								<label for="campoLibero" class="col-form-label s-12">CAMPO LIBERO</label>
+								<input ngModel name="campoLibero" placeholder="Insersci Campo Libero"
+									class="form-control r-0 light s-12 date-picker" type="text" [(ngModel)]=response.infoDettaglioCandidato.campoLibero>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
       <div class="card-body">
 				<h5 class="card-title">Impressioni</h5>
 				<div class="form-row">
