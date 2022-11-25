@@ -167,6 +167,17 @@ export class ModificaCandidatoComponent implements OnInit{
         }
       }
     )
+    this.ccnlService.getCcnl().subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaCcnl = response.dataSource;
+        }
+      }
+    )
   }
 
   public updateCandidato(updateForm: NgForm): void {
@@ -307,6 +318,9 @@ export class ModificaCandidatoComponent implements OnInit{
           }
           else{
             (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = true;
+          }
+          if(e.target.value != response.infoDettaglioCandidato.livelloInquadramento){
+            response.infoDettaglioCandidato.livelloInquadramento = 0;
           }
         }
       }

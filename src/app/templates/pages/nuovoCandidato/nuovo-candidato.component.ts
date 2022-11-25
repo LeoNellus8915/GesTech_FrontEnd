@@ -170,7 +170,7 @@ export class NuovoCandidatoComponent implements OnInit{
     }
 
     if(addForm.value.ral == ""){
-      addForm.value.ral = "0"
+      addForm.value.ral = 0
     }
     if(addForm.value.ticket == ""){
       addForm.value.ticket = "0";
@@ -179,10 +179,10 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.livelloInquadramento = "0";
     }
     if(addForm.value.rimborsi == ""){
-      addForm.value.rimborsi = "0";
+      addForm.value.rimborsi = 0;
     }
     if(addForm.value.preavviso == ""){
-      addForm.value.preavviso = "0";
+      addForm.value.preavviso = 0;
     }
 
     console.log(addForm.value)

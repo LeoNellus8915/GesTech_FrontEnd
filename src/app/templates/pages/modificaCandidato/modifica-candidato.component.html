@@ -292,7 +292,8 @@
 							<div class="form-group col-4 m-0">
 								<label for="ccnl" class="col-form-label s-12">CCNL</label>
 								<select ngModel id="ccnl" name="ccnl" class="form-control r-0 light s-12 date-picker freccia" (change)="selectLivelloInquadramento($event)">
-									<option value="" selected disabled>Selezionare...</option>
+																							<!-- dipende come lo settiamo -->
+									<option value="">{{response.infoDettaglioCandidato.ccnl}}</option>
     							<option *ngFor="let ccnl of listaCcnl" value={{ccnl.id}}>{{ccnl.nome}}</option>
 								</select>
 								<!-- <input ngModel name="ccnl" placeholder="Insersci CCNL"
@@ -301,7 +302,10 @@
 							<div class="form-group col-4 m-0">
 								<label for="livelloInquadramento" class="col-form-label s-12">LIVELLO INQUADRAMENTO</label>
 								<select ngModel id="livelloInquadramento" name="livelloInquadramento" class="form-control r-0 light s-12 date-picker freccia" disabled>
-									<option value="" selected disabled>Selezionare...</option>
+									<option *ngIf="response.infoDettaglioCandidato.livelloInquadramento != 0" value="" selected disabled>
+										{{response.infoDettaglioCandidato.livelloInquadramento}}</option>
+									<option *ngIf="response.infoDettaglioCandidato.livelloInquadramento == 0" value="" selected disabled>
+										Selezionare...</option>
     							<option *ngFor="let livelloInquadramento of listaLivelloInquadramento" value={{livelloInquadramento.id}}>{{livelloInquadramento.nome}}</option>
 								</select>
 								<!-- <input ngModel name="livelloInquadramento" placeholder="Insersci Livello Inquadramento"

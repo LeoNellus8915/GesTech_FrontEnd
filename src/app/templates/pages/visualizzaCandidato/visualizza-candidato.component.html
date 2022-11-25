@@ -230,14 +230,21 @@
 
       <div class="p5 b-b">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-3">
             <div *ngIf="response" class="p-4">
               <h5 class="text-black">Costo Giornaliero (€):</h5>
               <h5 class="p-t-10">{{response.infoDettaglioCandidato.costoGiornaliero}}</h5>
             </div>
           </div> 
+          <div class="col-md-9">
+            <div *ngIf="response" class="p-4">
+              <h5 class="text-black">Campo Libero:</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.campoLibero}}</h5>
+            </div>
+          </div> 
         </div>   
       </div>
+      
 
 
 
