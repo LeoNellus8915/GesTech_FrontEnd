@@ -20,6 +20,7 @@ import { ProfiliService } from 'src/app/service/profili.service';
 import { LivelliService } from 'src/app/service/livelli.service';
 import { CCNLService } from 'src/app/service/ccnl.service';
 import { LivelliInquadramentoService } from 'src/app/service/livelli-inquadramento.service';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   templateUrl: './modifica-candidato.component.html',
@@ -46,6 +47,7 @@ export class ModificaCandidatoComponent implements OnInit{
   public arrayLingue = new Array();
   public idRichiesta!: number;
   public listaSelects!: any;
+  public base64!: string | ArrayBuffer | null;
 
   public response!: any;
 
@@ -180,8 +182,29 @@ export class ModificaCandidatoComponent implements OnInit{
       }
     )
   }
+  
+  selectFile(event: any) {
+    const file = event.target.files[0];
+    const observable = new Observable((subscriber: Subscriber<any>) => {
+      this.readFile(file, subscriber);
+    })
+    observable.subscribe((base64) => {
+      this.base64 = base64
+    })
+  }
+
+  readFile(file: File, subscriber: Subscriber<any>) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      subscriber.next(reader.result);
+      subscriber.complete();
+    }
+  }
 
   public updateCandidato(updateForm: NgForm): void {
+    updateForm.value.cv = this.base64;
+    console.log(updateForm.value.cv)
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
