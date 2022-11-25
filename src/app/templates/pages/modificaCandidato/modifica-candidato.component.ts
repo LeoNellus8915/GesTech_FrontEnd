@@ -81,6 +81,7 @@ export class ModificaCandidatoComponent implements OnInit{
   public getDatiModifica(): void {
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any) => {
+        console.log(response)
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
           this.defaultService.logout();
@@ -205,6 +206,12 @@ export class ModificaCandidatoComponent implements OnInit{
 
           if (updateForm.value.annoColloquio == "")
             updateForm.value.annoColloquio = new Date().getFullYear;
+
+          if (updateForm.value.livelloInquadramento == "")
+            updateForm.value.livelloInquadramento = this.response.infoDettaglioCandidato.livelloInquadramentoId.toString();
+
+          if (updateForm.value.ccnl == "")
+            updateForm.value.ccnl = this.response.infoDettaglioCandidato.ccnlid.toString();
           
           updateForm.value.listaProfili = this.arrayValori;
           updateForm.value.listaLingue = this.arrayLingue;
@@ -219,8 +226,6 @@ export class ModificaCandidatoComponent implements OnInit{
             }
           )
         }
-        
-        console.log(updateForm.value);
       }
     )
   }
@@ -315,12 +320,10 @@ export class ModificaCandidatoComponent implements OnInit{
           this.listaLivelloInquadramento = response.dataSource;
           if(e.target.value != 4){
             (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = false;
+            (<HTMLOptionElement>document.getElementById("livelloInquadramentoOption")).remove();
           }
           else{
             (<HTMLSelectElement>document.getElementById("livelloInquadramento")).disabled = true;
-          }
-          if(e.target.value != response.infoDettaglioCandidato.livelloInquadramento){
-            response.infoDettaglioCandidato.livelloInquadramento = 0;
           }
         }
       }

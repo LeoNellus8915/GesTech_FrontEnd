@@ -185,7 +185,6 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.preavviso = 0;
     }
 
-    console.log(addForm.value)
     this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {

@@ -6,5 +6,6 @@ export interface allCandidati {
   cognome: string;
   citta: string;
   competenzaPrincipale: string;
+  skillPrincipale: string;
   esitoNome: string;
 }

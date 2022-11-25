@@ -56,6 +56,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
   public getCandidato(): void {
     this.candidatiService.getCandidatoVisualizza(this.idCandidato).subscribe(
       (response: any) => {
+        console.log(response)
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
           this.defaultService.logout();
