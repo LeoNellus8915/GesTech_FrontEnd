@@ -33,7 +33,6 @@ export class VisualizzaBeneComponent implements OnInit{
           this.defaultService.titoloPagina=" Visualizza Bene";
         }, 0)
         this.idHardware = this.route.snapshot.params['idHardware'];
-        console.log(this.idHardware);
         this.getHardware();
       }
       else{

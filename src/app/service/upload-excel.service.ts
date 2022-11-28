@@ -9,7 +9,11 @@ export class UploadExcelService {
 
   constructor(private http: HttpClient) {}
   
-  public getRuoliDipendentePersonale(array: any): Observable<any> {
+  public importExcelCandidati(array: any): Observable<any> {
     return this.http.post<any>(`${this.apiServerUrl}/import-file-excel`, array, {headers: header.header()});
+  }
+
+  public importExcelBeni(array: any): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/import-file-beni`, array, {headers: header.header()});
   }
 }

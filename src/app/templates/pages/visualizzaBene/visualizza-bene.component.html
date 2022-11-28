@@ -34,14 +34,12 @@
           </div>
           <div class="p5 b-b">
             <div class="row">
-              <!--
               <div class="col-md-6">
                 <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Password</h5>
                   <h5 class="p-t-10">{{hardware.password}}</h5>
                 </div>
               </div>
-              -->
               <div class="col-md-6">
                 <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Note</h5>
@@ -55,7 +53,7 @@
               <div class="col-md-6">
                 <div *ngIf="hardware" class="p-4">
                   <h5 class="text-black">Dipendente</h5>
-                  <h5 class="p-t-10">{{hardware.nomePersona + " " + hardware.cognomePersona}}</h5>
+                  <h5 class="p-t-10">{{hardware.dipendente}}</h5>
                 </div>
               </div>
               <!--
@@ -97,7 +95,7 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let storico of listaStorico">
-							<td>{{storico.cognome + " " + storico.nome}}</td>
+							<td>{{storico.dipendente}}</td>
 							<td>{{storico.dataConsegna}}</td>
 							<td>{{storico.dataRestituzione}}</td>
 						</tr>

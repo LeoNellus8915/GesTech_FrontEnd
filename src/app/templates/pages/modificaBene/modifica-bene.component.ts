@@ -20,7 +20,7 @@ import { DefaultComponent } from '../../default/default.component';
 })
 export class ModificaBeneComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
-  public codiceHardware!: string;
+  public idHardware!: string;
   public hardware!: hardware;
   public listaDipendenti!: findAllDipendentiException[];
   public listaDispositivi!: dispositivi[];
@@ -42,7 +42,7 @@ export class ModificaBeneComponent implements OnInit{
         setTimeout(() => {
           this.defaultService.titoloPagina=" Visualizza Bene";
         })
-        this.codiceHardware = this.route.snapshot.params['idHardware'];
+        this.idHardware = this.route.snapshot.params['idHardware'];
         this.getHardware();
         this.allDispositivi();
       }
@@ -52,18 +52,18 @@ export class ModificaBeneComponent implements OnInit{
   }
 
   public getHardware(): void {
-    this.hardwareService.getHardwareModifica(this.codiceHardware).subscribe(
+    this.hardwareService.getHardwareModifica(this.idHardware).subscribe(
       (response: any) => {
+        console.log(response)
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
           this.defaultService.logout();
         }
         else {
           this.hardware = response.dataSource[0];
-          this.dipendente = response.dataSource[1];
-          this.dispositivo = response.dataSource[2];
-          this.listaDipendenti = response.dataSource[3];
-          this.listaStorico = response.dataSource[4];
+          this.dispositivo = response.dataSource[1];
+          this.listaDipendenti = response.dataSource[2];
+          this.listaStorico = response.dataSource[3];
         }
       }
     )
@@ -74,10 +74,12 @@ export class ModificaBeneComponent implements OnInit{
     if(updateForm.value.idDispositivo == ""){
       updateForm.value.idDispositivo = this.dispositivo.id.toString();
     }
+
     if(updateForm.value.idPersona == ""){
       updateForm.value.idPersona = this.dipendente.id.toString();
     }
-    this.hardwareService.modificaHardware(updateForm.value, this.codiceHardware).subscribe(
+
+    this.hardwareService.modificaHardware(updateForm.value, this.idHardware).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");

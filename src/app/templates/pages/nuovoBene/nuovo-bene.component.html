@@ -33,11 +33,11 @@
 								<input ngModel name="seriale" placeholder="Linkedin Numero Seriale"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
-							<!-- <div class="form-group col-6 m-0">
+							<div class="form-group col-6 m-0">
 								<label for="password" class="col-form-label s-12">PASSWORD</label> 
                 <input ngModel name="password" placeholder="Inserisci Password"
 									class="form-control r-0 light s-12 datePicker" type="text">
-							</div> -->
+							</div> 
 							<!-- <div class="form-group col-6 m-0">
 								<label for="societa" class="col-form-label s-12">SOCIET&Agrave; PROPRIETARIA</label>
 								<input ngModel name="societa" placeholder="Insersci Societ&agrave;"
@@ -57,10 +57,8 @@
 						<div class="form-row">
 							<div class="form-group col-4 m-0">
 								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
-								<select ngModel name="dipendente" class="form-control r-0 light s-12 date-picker freccia">
-									<option value="" selected disabled>Selezionare...</option>
-    							<option *ngFor="let dipendente of listaDipendenti" value={{dipendente.id}}>{{dipendente.nome + " " + dipendente.cognome}}</option>
-    						</select>
+								<input ngModel name="dipendente" placeholder="Insersci Dipendente"
+									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
               <div class="form-group col-8 m-0">
 								<label for="note" class="col-form-label s-12">NOTE</label> 

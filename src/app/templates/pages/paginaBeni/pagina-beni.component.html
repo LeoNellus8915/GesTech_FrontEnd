@@ -19,8 +19,8 @@
         <td>{{hardware.nomeDispositivo}}</td>
         <td>{{hardware.marca}}</td>
         <td>{{hardware.modello}}</td>
-        <td *ngIf="(hardware.nomePersona + hardware.cognomePersona) != null">{{hardware.nomePersona +" "+hardware.cognomePersona}}</td>
-        <td *ngIf="(hardware.nomePersona + hardware.cognomePersona) == null">Non Assegnato</td>
+        <td *ngIf="hardware.dipendente != null">{{hardware.dipendente}}</td>
+        <td *ngIf="hardware.dipendente == null">Non Assegnato</td>
         <td><a [routerLink]="['../pagina-visualizza-bene', hardware.id]"><i class="icon-eye mr-3"></i></a>
         <a [routerLink]="['../pagina-modifica-bene', hardware.id]"><i class="icon-pencil"></i></a></td>
       </tr>

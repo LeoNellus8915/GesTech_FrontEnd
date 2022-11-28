@@ -31,6 +31,7 @@ import { PaginaSceltaRuoloComponent } from './templates/paginaSceltaRuolo/pagina
 import { PaginaModulisticaComponent } from './templates/pages/paginaModulistica/pagina-modulistica.component';
 import { PaginaSceltaCandidatiRichiestaComponent } from './templates/pages/sceltaCandidatiRichiesta/scelta-candidati-richiesta.component';
 import { UploadExcelComponent } from './templates/pages/uploadExcel/upload-excel.component';
+import { TicketComponent } from './templates/pages/ticket/ticket.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -62,7 +63,9 @@ const routes: Routes = [
     {path: "pagina-visualizza-candidato/:codiceCandidato/:pagina/:idRichiesta", component: VisualizzaCandidatoComponent},
     {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
     {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent},
-    {path: "pagina-upload-excel", component: UploadExcelComponent}
+    {path: "pagina-upload-excel", component: UploadExcelComponent},
+    {path: "pagina-ticket", component: TicketComponent}
+
   ]},
   {path:"**", component: ErrorPageComponent}
 ];
@@ -77,4 +80,5 @@ export const RoutingComponents = [LoginComponent, DefaultComponent, ErrorPageCom
   NuovaRichiestaComponent, NuovoBeneComponent, NuovoCandidatoComponent, NuovoCCNLComponent, NuovoUtenteComponent, PaginaBeniComponent,  
   PaginaBustePagaComponent, PaginaCandidatiComponent, PaginaCCNLComponent, PaginaCertificazioniUnicheComponent, PaginaCVDipendentiComponent,
   PaginaDipendentiComponent, PaginaRapportinoComponent, PaginaRichiesteComponent, PaginaStoricoRichiesteComponent, VisualizzaBeneComponent,
-  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent, UploadExcelComponent]
+  VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent, 
+  UploadExcelComponent, TicketComponent]

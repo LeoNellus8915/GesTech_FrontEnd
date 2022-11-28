@@ -41,15 +41,14 @@
 									placeholder="Linkedin Numero Seriale" class="form-control r-0 light s-12 datePicker"
 									type="text">
 							</div>
-							<!--
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="password" class="col-form-label s-12">PASSWORD</label> 
-                <input ngModel name="password" [(ngModel)]=hardware.password
+                <input ngModel name="password" [(ngModel)] = hardware.password
                   placeholder="Inserisci Password"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							
-							<div *ngIf="hardware" class="form-group col-6 m-0">
+							<!--<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="societa" class="col-form-label s-12">SOCIET&Agrave; PROPRIETARIA</label>
 								<input ngModel name="societa" [(ngModel)]=hardware.societa
                   placeholder="Insersci Societ&agrave;"
@@ -68,19 +67,12 @@
 				<div class="form-row">
 					<div class="col-md-12">
 						<div class="form-row">
-							<div *ngIf="dipendente" class="form-group col-4 m-0">
-								<label for="idPersona" class="col-form-label s-12">DIPENDENTE</label>
-								<select ngModel name="idPersona"
-									class="form-control r-0 light s-12 date-picker freccia">
-									<option *ngIf="hardware.idPersona != null" value="" selected disabled>
-										{{dipendente.nome + " " + dipendente.cognome}}</option>
-									<option *ngIf="hardware.idPersona == null" value="" selected disabled>Selezionare...
-									</option>
-									<option *ngFor="let dipendente of listaDipendenti" value={{dipendente.id}}>
-										{{dipendente.nome + " " + dipendente.cognome}}</option>
-								</select>
+							<div *ngIf="hardware" class="form-group col-6 m-0">
+								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
+								<input ngModel name="dipendente" [(ngModel)]=hardware.dipendente placeholder="Insersci Dipendente"
+									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
-							<div *ngIf="hardware" class="form-group col-8 m-0">
+							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="note" class="col-form-label s-12">NOTE</label>
 								<input ngModel name="note" [(ngModel)]=hardware.note placeholder="Insersci Note"
 									class="form-control r-0 light s-12 date-picker" type="text">
@@ -116,7 +108,7 @@
 					</thead>
 					<tbody>
 						<tr *ngFor="let storico of listaStorico">
-							<td>{{storico.cognome + " " + storico.nome}}</td>
+							<td>{{storico.dipendente}}</td>
 							<td>{{storico.dataConsegna}}</td>
 							<td>{{storico.dataRestituzione}}</td>
 						</tr>

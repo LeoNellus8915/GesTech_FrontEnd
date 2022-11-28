@@ -204,7 +204,6 @@ export class ModificaCandidatoComponent implements OnInit{
 
   public updateCandidato(updateForm: NgForm): void {
     updateForm.value.cv = this.base64;
-    console.log(updateForm.value.cv)
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
@@ -230,14 +229,18 @@ export class ModificaCandidatoComponent implements OnInit{
           if (updateForm.value.annoColloquio == "")
             updateForm.value.annoColloquio = new Date().getFullYear;
 
-          if (updateForm.value.livelloInquadramento == "")
-            updateForm.value.livelloInquadramento = this.response.infoDettaglioCandidato.livelloInquadramentoId.toString();
+          if (updateForm.value.idLivelloInquadramento == "" || updateForm.value.idLivelloInquadramento == null )
+            updateForm.value.idLivelloInquadramento = this.response.infoDettaglioCandidato.idLivelloInquadramento.toString();
+
+          console.log(updateForm.value.idLivelloInquadramento)
 
           if (updateForm.value.ccnl == "")
-            updateForm.value.ccnl = this.response.infoDettaglioCandidato.ccnlid.toString();
+            updateForm.value.ccnl = this.response.infoDettaglioCandidato.idCCNL.toString();
           
           updateForm.value.listaProfili = this.arrayValori;
           updateForm.value.listaLingue = this.arrayLingue;
+
+          console.log(updateForm.value.listaProfili)
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {

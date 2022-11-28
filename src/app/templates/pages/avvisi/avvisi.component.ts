@@ -108,6 +108,7 @@ export class AvvisiComponent implements OnInit {
           }
           if (response.code == "1") {
             alert('Avviso salvato con successo');
+            (<HTMLInputElement>document.getElementById("tutti")).checked = false;
             this.ngOnInit();
             addForm.reset();
           }

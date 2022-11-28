@@ -8,7 +8,7 @@
       <textarea ngModel class="form-control" name="note" id="avviso" placeholder="Inserire l'avviso"></textarea>
       <div class="row">
         <div class="col-10">
-          <input type="checkbox" value="Tutti" (change)="array($event)"> 
+          <input id="tutti" type="checkbox" value="Tutti" (change)="array($event)"> 
           <label>Tutti</label>
           <span *ngFor="let ruolo of listaRuoli">
             <input type="checkbox" value={{ruolo.nome}} (change)="array($event)"> 

@@ -34,7 +34,7 @@ export class UploadExcelComponent implements OnInit{
       }
   }
 
-  uploadData(event: any) {
+  uploadDataCandidati(event: any) {
     const target: DataTransfer = <DataTransfer>(event.target);
     const reader: FileReader = new FileReader();
     reader.readAsBinaryString(target.files[0]);
@@ -54,17 +54,62 @@ export class UploadExcelComponent implements OnInit{
     let array = new Array();
     array = data;
 
-    var x = 0;
-
     array.forEach(element => {
-      x = x + 1;
       element.dataColloquio = new Date(Math.round((element.dataColloquio - 25569)*86400*1000))
       element.dataColloquio = this.datePipe.transform(element.dataColloquio, 'yyyy-MM-dd');
       if (element.cittaDiAllocazione == "0" || element.cittaDiAllocazione == null)
         element.cittaDiAllocazione = "";
     });
 
-    this.uploadExcelService.getRuoliDipendentePersonale(array).subscribe(
+    this.uploadExcelService.importExcelCandidati(array).subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.router.navigate(["default/pagina-upload-excel"]);
+        }
+      }
+    )
+  }
+
+  uploadDataBeni(event: any) {
+    const target: DataTransfer = <DataTransfer>(event.target);
+    const reader: FileReader = new FileReader();
+    reader.readAsBinaryString(target.files[0]);
+    reader.onload = (e: any) => {
+      const binarystr: string = e.target.result;
+      const wb: XLSX.WorkBook = XLSX.read(binarystr, { type: 'binary' });
+
+      const wsname: string = wb.SheetNames[0];
+      const ws: XLSX.WorkSheet = wb.Sheets[wsname];
+
+      let data = XLSX.utils.sheet_to_json(ws);
+      this.formattaJsonBeni(data);
+    };
+  }
+
+  formattaJsonBeni(data: any) {
+    let array = new Array();
+    array = data;
+
+    array.forEach(element => {
+      if(isNaN(element.dataConsegna))
+        element.dataConsegna = null;
+      else {
+        element.dataConsegna = new Date(Math.round((element.dataConsegna - 25569)*86400*1000))
+        element.dataConsegna = this.datePipe.transform(element.dataConsegna, 'yyyy-MM-dd');
+      }
+      if(isNaN(element.dataRestituzione))
+        element.dataRestituzione = null;
+      else {
+        element.dataRestituzione = new Date(Math.round((element.dataRestituzione - 25569)*86400*1000))
+        element.dataRestituzione = this.datePipe.transform(element.dataRestituzione, 'yyyy-MM-dd');
+      }
+    });
+
+    this.uploadExcelService.importExcelBeni(array).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");

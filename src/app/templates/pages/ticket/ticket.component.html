@@ -1,0 +1,36 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Pagina Ticket</span>
+</div>
+<div class="page ticket">
+  <div class="page card-body">
+    <form ngNativeValidate #addForm="ngForm" (ngSubmit)="salvaTicket(addForm)">
+      <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" type="text" required>
+      <textarea ngModel class="form-control" name="testo" id="avviso" placeholder="Inserire il messaggio" required></textarea>
+      <div class="row">
+        <div class="col-12">
+          <div class="btright"><input type="submit"></div>
+        </div>
+      </div>
+    </form>
+  </div>	
+  <p class="titolo_avvisi">Ticket Aperti</p>
+  <div *ngIf="ruolo == 'Admin'" class="row card-body">
+    <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsAperti">
+      <span class="data_ora_avvisi">{{ticket.dataInserimento.toString().replace("T", " ")}}</span>
+      <a (click)="chiudiTicket(ticket.id)"><i class="icon icon-check green-text s-18 cursor" style="margin-left: 300px"></i></a> 
+      <p class="titolo_avvisi">{{ticket.titolo}}
+      <p class="testo_avvisi">{{ticket.testo}}
+      <footer class="blockquote-footer_avvisi pt-4 mt-4 border-top_avvisi">{{ticket.nome + " " + ticket.cognome}}</footer>
+    </div>
+  </div>	
+  <p class="titolo_avvisi">Ticket Chiusi</p>
+  <div *ngIf="ruolo == 'Admin'" class="row card-body">
+    <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsChiusi" style="opacity: 0.5;">
+      <p>Apertura: <span class="data_ora_avvisi">{{ticket.dataInserimento.toString().replace("T", " ")}}</span></p>
+      Chiusura: <span class="data_ora_avvisi">{{ticket.dataChiusura.toString().replace("T", " ")}}</span>
+      <p class="titolo_avvisi">{{ticket.titolo}}
+      <p class="testo_avvisi">{{ticket.testo}}
+      <footer class="blockquote-footer_avvisi pt-4 mt-4 border-top_avvisi">{{ticket.nome + " " + ticket.cognome}}</footer>
+    </div>
+  </div>		
+</div>

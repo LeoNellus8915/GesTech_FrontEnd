@@ -12,6 +12,6 @@ export class LivelliInquadramentoService {
   constructor(private http: HttpClient) {}
   
   public getLivelliInquadramento(idCcnl: number): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/all-livello-inquadramenti/${idCcnl}`, {headers: header.header()});
+    return this.http.get<any>(`${this.apiServerUrl}/all-livelli-inquadramenti/${idCcnl}`, {headers: header.header()});
   }
 }

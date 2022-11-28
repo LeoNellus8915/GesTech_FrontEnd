@@ -3,13 +3,17 @@
 </div>
 
 <form id="file-upload-form" class="uploader">
-  <input id="file-upload" type="file" name="fileUpload" (change)="uploadData($event)">
+  <input id="file-upload" type="file" name="fileUpload" (change)="uploadDataCandidati($event)">
 
   <label for="file-upload" id="file-drag">
     <div id="start">
       <i class="fa fa-download" aria-hidden="true"></i>
-      <div>Seleziona il file excel</div>
+      <div>Seleziona il file excel Candidati</div>
       <span id="file-upload-btn" class="btn btn-primary">Seleziona</span>
     </div>
   </label>
+</form>
+
+<form>
+  <input type="file" (change)="uploadDataBeni($event)">
 </form>
