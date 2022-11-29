@@ -176,7 +176,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.ticket = "0";
     }
     if(addForm.value.preavviso == ""){
-      addForm.value.livelloInquadramento = "0";
+      addForm.value.idLivelloInquadramento = "0";
     }
     if(addForm.value.rimborsi == ""){
       addForm.value.rimborsi = 0;

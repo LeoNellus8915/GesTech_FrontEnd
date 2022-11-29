@@ -83,7 +83,6 @@ export class ModificaCandidatoComponent implements OnInit{
   public getDatiModifica(): void {
     this.candidatiService.getCandidatoModifica(this.idCandidato).subscribe(
       (response: any) => {
-        console.log(response)
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
           this.defaultService.logout();
@@ -232,15 +231,11 @@ export class ModificaCandidatoComponent implements OnInit{
           if (updateForm.value.idLivelloInquadramento == "" || updateForm.value.idLivelloInquadramento == null )
             updateForm.value.idLivelloInquadramento = this.response.infoDettaglioCandidato.idLivelloInquadramento.toString();
 
-          console.log(updateForm.value.idLivelloInquadramento)
-
           if (updateForm.value.ccnl == "")
             updateForm.value.ccnl = this.response.infoDettaglioCandidato.idCCNL.toString();
           
           updateForm.value.listaProfili = this.arrayValori;
           updateForm.value.listaLingue = this.arrayLingue;
-
-          console.log(updateForm.value.listaProfili)
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {

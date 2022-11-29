@@ -63,7 +63,6 @@ export class VisualizzaCandidatoComponent implements OnInit{
         }
         else {
           this.response = response.dataSource;
-          console.log(response.dataSource)
         }
       }
     )

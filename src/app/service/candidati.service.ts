@@ -24,7 +24,6 @@ export class CandidatiService {
   }
 
   public eliminaCandidato(idCandidato: number): Observable<any> {
-    console.log(idCandidato)
     return this.http.delete<any>(`${this.apiServerUrl}/elimina-candidato/${idCandidato}`, {headers: header.header()});
   }
 

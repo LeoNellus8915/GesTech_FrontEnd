@@ -96,7 +96,6 @@ export class NuovaRichiestaComponent implements OnInit{
   }
 
   public aggiungiRichiesta(addForm: NgForm): void {
-    console.log(addForm.value)
     if (addForm.value.linguaggio == "" || addForm.value.linguaggio == null)
       addForm.value.linguaggio = "55";
 
@@ -117,7 +116,6 @@ export class NuovaRichiestaComponent implements OnInit{
       addForm.value.costo = addForm.value.costo.toString();
 
     addForm.value.idDipendente = this.idDipendente;
-    console.log(addForm.value)
     this.richiesteService.addRichiesta(addForm.value, this.ruolo).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
@@ -132,14 +130,14 @@ export class NuovaRichiestaComponent implements OnInit{
     )
   }
 
-  public programmatore(e: any) {
-    var x = e.path[2].children[1].children[1] as HTMLSelectElement;
-    if (e.target.value == '2') {
-      x.disabled = false;
-    }
-    else {
-      x.disabled = true;
-      e.path[2].children[1].children[1].selectedIndex = "";
-    }
-  }
+  // public programmatore(e: any) {
+  //   var x = e.path[2].children[1].children[1] as HTMLSelectElement;
+  //   if (e.target.value == '2') {
+  //     x.disabled = false;
+  //   }
+  //   else {
+  //     x.disabled = true;
+  //     e.path[2].children[1].children[1].selectedIndex = "";
+  //   }
+  // }
 }

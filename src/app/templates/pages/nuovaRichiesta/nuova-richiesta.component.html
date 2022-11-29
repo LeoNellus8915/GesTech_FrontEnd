@@ -11,7 +11,7 @@
 						<div class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="profilo" class="col-form-label s-12">Ruolo</label> 
-								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia" (change)="programmatore($event)" required>
+								<select ngModel name="profilo" class="form-control r-0 light s-12 date-picker freccia" required> <!--(change)="programmatore($event)"-->
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let profilo of listaProfili" value={{profilo.id}}>{{profilo.nome}}</option>
 								</select>

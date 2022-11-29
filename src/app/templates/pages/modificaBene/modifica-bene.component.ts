@@ -54,7 +54,6 @@ export class ModificaBeneComponent implements OnInit{
   public getHardware(): void {
     this.hardwareService.getHardwareModifica(this.idHardware).subscribe(
       (response: any) => {
-        console.log(response)
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
           this.defaultService.logout();
