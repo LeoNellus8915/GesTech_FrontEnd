@@ -189,7 +189,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.ticket = "0";
     }
     if(addForm.value.idLivelloInquadramento == ""){
-      addForm.value.idLivelloInquadramento = "0";
+      addForm.value.idLivelloInquadramento = "26";
     }
 
     if (addForm.value.rimborsi == "") {

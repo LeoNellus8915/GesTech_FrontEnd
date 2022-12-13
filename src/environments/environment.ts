@@ -6,7 +6,7 @@ import { HttpHeaders } from "@angular/common/http";
 
 export const environment = {
   production: false,
-  apiBaseUrl: "http://192.168.20.99:8080/gestech"
+  apiBaseUrl: "http://localhost:8080"
 };
 
 export class header {
