@@ -39,7 +39,6 @@ export class TicketComponent implements OnInit {
         this.defaultService.titoloPagina = ' Ticket';
       });
       if (this.ruolo == "Admin") {
-        console.log(this.ruolo)
         this.getTicketsAperti();
         this.getTicketsChiusi();
       }

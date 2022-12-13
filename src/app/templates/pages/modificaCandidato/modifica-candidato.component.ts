@@ -232,10 +232,17 @@ export class ModificaCandidatoComponent implements OnInit{
             updateForm.value.idLivelloInquadramento = this.response.infoDettaglioCandidato.idLivelloInquadramento.toString();
 
           if (updateForm.value.ccnl == "")
-            updateForm.value.ccnl = this.response.infoDettaglioCandidato.idCCNL.toString();
+            updateForm.value.ccnl = this.response.infoDettaglioCandidato.ccnl.toString();
           
-          updateForm.value.listaProfili = this.arrayValori;
-          updateForm.value.listaLingue = this.arrayLingue;
+          if (this.arrayValori.length == 0)
+            this.arrayValori.push({"profilo": 18, "linguaggio": 55, "livello": 6, "note": ""});
+            updateForm.value.profilo = this.arrayValori;
+          
+          if (this.arrayLingue.length == 0)
+            this.arrayLingue.push({"lingua": 25});
+          updateForm.value.lingue = this.arrayLingue;
+
+          updateForm.value.idDipendente = this.idDipendente;
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
             (response: any) => {

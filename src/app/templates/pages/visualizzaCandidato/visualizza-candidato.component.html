@@ -118,7 +118,7 @@
       <div class="p5 b-b">
         <div class="row">
           <div class="col-md-12">
-            <div *ngIf="response" class="p-4">
+            <div *ngIf="response != null" class="p-4">
               <h5 class="text-black">Competenze: </h5><br>
               <div class="row">
                 <div class="col-3"><h5 class="p-t-10">PROFILO</h5></div>
@@ -127,7 +127,7 @@
                 <div class="col-5"><h5 class="p-t-10">DESCRIZIONE</h5></div>
               </div>
               <div *ngFor="let profilo of response.infoProfili">
-                <div *ngIf="profilo == 'analista programmatore'" class="row">
+                <div *ngIf="profilo.nomeProfilo == 'analista programmatore'" class="row">
                   <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
                   <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLinguaggio}}</h5></div>
                   <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLivello}}</h5></div>
@@ -199,7 +199,7 @@
           <div class="col-md-4">
             <div *ngIf="response" class="p-4">
               <h5 class="text-black">Livello Inquadramento </h5>
-              <h5 class="p-t-10">{{response.infoDettaglioCandidato.livelloInquadramento}}</h5>
+              <h5 class="p-t-10">{{response.infoDettaglioCandidato.livelloInquadramentoNome}}</h5>
             </div>
           </div>
         </div>

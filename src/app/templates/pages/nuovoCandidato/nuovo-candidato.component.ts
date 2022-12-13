@@ -142,11 +142,13 @@ export class NuovoCandidatoComponent implements OnInit{
     if (addForm.value.esitoColloquio == "")
       addForm.value.esitoColloquio = "11";
 
-    if (this.arrayValori != null)
-      addForm.value.profilo = this.arrayValori;
+    if (this.arrayValori.length == 0)
+      this.arrayValori.push({"profilo": 18, "linguaggio": 55, "livello": 6, "note": ""});
+    addForm.value.profilo = this.arrayValori;
     
-    if (this.arrayLingue != null)
-      addForm.value.lingue = this.arrayLingue;
+    if (this.arrayLingue.length == 0)
+      this.arrayLingue.push({"lingua": 25});
+    addForm.value.lingue = this.arrayLingue;
 
     if (addForm.value.costoGiornaliero == "") {
       addForm.value.costoGiornaliero = 0;
@@ -185,7 +187,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.preavviso = 0;
     }
 
-    this.candidatiService.salvaCandidato(addForm.value, this.idDipendente).subscribe(
+    this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
