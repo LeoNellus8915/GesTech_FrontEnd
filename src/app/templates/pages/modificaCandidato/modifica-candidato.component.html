@@ -20,18 +20,18 @@
 								<label for="nome" class="col-form-label s-12">NOME</label> 
                 <input ngModel name="nome" [(ngModel)]=response.infoPersona.nome
 									placeholder="Inserisci Nome"
-									class="form-control r-0 light s-12 " type="text">
+									class="form-control r-0 light s-12" maxlength="100" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="cognome" class="col-form-label s-12">COGNOME</label> 
                 <input ngModel name="cognome" [(ngModel)]=response.infoPersona.cognome
 									placeholder="Inserisci Cognome"
-									class="form-control r-0 light s-12 " type="text">
+									class="form-control r-0 light s-12" maxlength="100" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
 								<input ngModel name="cellulare" [(ngModel)]=response.infoPersona.cellulare
-									placeholder="Inserisci Cellulare"
+									placeholder="Inserisci Cellulare" maxlength="10"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -39,19 +39,19 @@
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="email" class="col-form-label s-12">EMAIL</label>
 								<input ngModel name="email" [(ngModel)]=response.infoPersona.email
-                  placeholder="Inserisci Email" required
+                  placeholder="Inserisci Email" required maxlength="100"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="profiloLinkedin" class="col-form-label s-12">PROFILO LINKEDIN</label>
 								<input id="profiloLinkedin" name="profiloLinkedin" [(ngModel)]=response.infoDettaglioCandidato.profiloLinkedin
                   placeholder="Linkedin URL"
-									class="form-control r-0 light s-12 datePicker" type="text">
+									class="form-control r-0 light s-12 datePicker" maxlength="1000" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="citta" class="col-form-label s-12">CITT&Agrave;</label> 
                 <input ngModel name="citta" [(ngModel)]=response.infoPersona.cittaDiResidenza
-                  placeholder="Inserisci Citt&agrave;"
+                  placeholder="Inserisci Citt&agrave;" maxlength="100"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-6 m-0">
@@ -104,13 +104,13 @@
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="fonteReperimento" class="col-form-label s-12">FONTE REPERIMENTO</label> 
 								<input ngModel name="fonteReperimento" [(ngModel)]=response.infoDettaglioCandidato.fonteReperimento
-									placeholder="Inserisci Fonte Reperimento"
+									placeholder="Inserisci Fonte Reperimento" maxlength="1000"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="competenzaPrincipale" class="col-form-label s-12">COMPETENZA PRINCIPALE</label>
 								<input ngModel name="competenzaPrincipale" [(ngModel)]=response.infoDettaglioCandidato.competenzaPrincipale
-									placeholder="Insersci Competenza Principale"
+									placeholder="Insersci Competenza Principale" maxlength="1000"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -251,7 +251,7 @@
 							<div *ngIf="response" class="form-group col-12 m-0">
 								<label for="possibilitaLavorativa" class="col-form-label s-12">POSSIBILIT&Agrave; LAVORATIVA</label>
 								<input ngModel name="possibilitaLavorativa" [(ngModel)]=response.infoDettaglioCandidato.possibilitaLavorativa
-									placeholder="Insersci Possibilit&agrave; Lavorativa"
+									placeholder="Insersci Possibilit&agrave; Lavorativa" maxlength="1000"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -268,13 +268,13 @@
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="dettagliCandidato" class="col-form-label s-12">COMPETENZE TOTALI</label> 
 								<input ngModel name="competenzeTotali" [(ngModel)]=response.infoDettaglioCandidato.competenzeTotali
-									placeholder="Insersci Competenze Totali"
+									placeholder="Insersci Competenze Totali" maxlength="1000"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 							<div *ngIf="response" class="form-group col-6 m-0">
 								<label for="certificazioni" class="col-form-label s-12">CERTIFICAZIONI</label>
 								<input ngModel name="certificazioni" [(ngModel)]=response.infoDettaglioCandidato.certificazioni
-									placeholder="Insersci Certificazioni"
+									placeholder="Insersci Certificazioni" maxlength="1000"
 									class="form-control r-0 light s-12 date-picker" type="text">
 							</div>
 						</div>
@@ -319,8 +319,8 @@
 						<div *ngIf="response" class="form-row" style="margin-top: 20px">
 							<div class="form-group col-4 m-0">
 								<label for="ticket" class="col-form-label s-12">TICKET</label>
-								<input ngModel name="ticket" placeholder="Insersci Ticket"
-									class="form-control r-0 light s-12 date-picker" type="text" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.ticket>
+								<input ngModel name="ticket" placeholder="Insersci Ticket" maxlength="1000"
+									class="form-control r-0 light s-12 date-picker" type="text" [(ngModel)]=response.infoDettaglioCandidato.ticket>
 							</div>
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="rimborsi" class="col-form-label s-12">RIMBORSI</label>
@@ -350,7 +350,7 @@
 							</div>
 							<div class="form-group col-9 m-0">
 								<label for="campoLibero" class="col-form-label s-12">CAMPO LIBERO</label>
-								<input ngModel name="campoLibero" placeholder="Insersci Campo Libero"
+								<input ngModel name="campoLibero" placeholder="Insersci Campo Libero" maxlength="65000"
 									class="form-control r-0 light s-12 date-picker" type="text" [(ngModel)]=response.infoDettaglioCandidato.campoLibero>
 							</div>
 						</div>

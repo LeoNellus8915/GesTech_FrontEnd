@@ -27,8 +27,8 @@ export class CandidatiService {
     return this.http.delete<any>(`${this.apiServerUrl}/elimina-candidato/${idCandidato}`, {headers: header.header()});
   }
 
-  public salvaCandidato(addForm: JSON): Observable<any> {
-    return this.http.post<any>(`${this.apiServerUrl}/salva-candidato`, addForm, {headers: header.header()});
+  public salvaCandidato(addForm: JSON, idDipendente: number): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/salva-candidato/${idDipendente}`, addForm, {headers: header.header()});
   }
 
   public emailEsistente(email: string): Observable<any> {

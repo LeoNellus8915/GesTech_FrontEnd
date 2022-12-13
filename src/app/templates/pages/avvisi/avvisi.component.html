@@ -4,8 +4,8 @@
 <div class="page avviso">
   <div class="page">
     <form *ngIf="ruolo == 'Admin'" #addForm="ngForm" (ngSubmit)="salvaAvviso(addForm)">
-      <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" type="text">
-      <textarea ngModel class="form-control" name="note" id="avviso" placeholder="Inserire l'avviso"></textarea>
+      <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" maxlength="100" type="text">
+      <textarea ngModel class="form-control" name="note" id="avviso" maxlength="65000" placeholder="Inserire l'avviso"></textarea>
       <div class="row">
         <div class="col-10">
           <input id="tutti" type="checkbox" value="Tutti" (change)="array($event)"> 

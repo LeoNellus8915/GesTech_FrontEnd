@@ -185,7 +185,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.preavviso = 0;
     }
 
-    this.candidatiService.salvaCandidato(addForm.value).subscribe(
+    this.candidatiService.salvaCandidato(addForm.value, this.idDipendente).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");

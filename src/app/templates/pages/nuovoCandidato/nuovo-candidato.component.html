@@ -12,33 +12,33 @@
 							<div class="form-group col-4 m-0">
 								<label for="nomeCognome" class="col-form-label s-12">NOME</label> 
                 <input ngModel name="nome" placeholder="Inserisci Nome"
-									class="form-control r-0 light s-12 " type="text">
+									class="form-control r-0 light s-12" maxlength="100" type="text">
 							</div>
 							<div class="form-group col-4 m-0">
 								<label for="nomeCognome" class="col-form-label s-12">COGNOME</label> 
                 <input ngModel name="cognome" placeholder="Inserisci Cognome"
-									class="form-control r-0 light s-12 " type="text">
+									class="form-control r-0 light s-12" maxlength="100" type="text">
 							</div>
 							<div class="form-group col-4 m-0">
 								<label for="cellulare" class="col-form-label s-12">CELLULARE</label>
 								<input ngModel name="cellulare" placeholder="Inserisci Cellulare"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="10" type="text">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="email" class="col-form-label s-12">EMAIL</label>
-								<input ngModel name="email" placeholder="Inserisci Email"
+								<input ngModel name="email" placeholder="Inserisci Email" maxlength="100"
  									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="profiloLinkedin" class="col-form-label s-12">PROFILO LINKEDIN</label>
-								<input ngModel name="profiloLinkedin" placeholder="Linkedin URL"
+								<input ngModel name="profiloLinkedin" placeholder="Linkedin URL" maxlength="1000"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="citta" class="col-form-label s-12">CITT&Agrave;</label> 
-                <input ngModel name="citta" placeholder="Inserisci Citt&agrave;"
+                <input ngModel name="citta" placeholder="Inserisci Citt&agrave;" maxlength="100"
 									class="form-control r-0 light s-12 datePicker" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
@@ -90,12 +90,12 @@
 							<div class="form-group col-6 m-0">
 								<label for="fonteReperimento" class="col-form-label s-12">FONTE REPERIMENTO</label> 
                 <input ngModel name="fonteReperimento" placeholder="Inserisci Fonte Reperimento"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="1000" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="competenzaPrincipale" class="col-form-label s-12">COMPETENZA PRINCIPALE</label>
 								<input ngModel name="competenzaPrincipale" placeholder="Insersci Competenza Principale"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="1000" type="text">
 							</div>
 						</div>
 					</div>
@@ -219,7 +219,7 @@
 							<div class="form-group col-12 m-0">
 								<label for="possibilitaLavorativa" class="col-form-label s-12">POSSIBILIT&Agrave; LAVORATIVA</label>
 								<input ngModel name="possibilitaLavorativa" placeholder="Insersci Possibilit&agrave; Lavorativa"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="1000" type="text">
 							</div>
 						</div>
 					</div>
@@ -235,12 +235,12 @@
 							<div class="form-group col-6 m-0">
 								<label for="competenzeTotali" class="col-form-label s-12">COMPETENZE TOTALI</label> 
                 <input ngModel name="competenzeTotali" placeholder="Insersci Competenze Totali"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="1000" type="text">
 							</div>
 							<div class="form-group col-6 m-0">
 								<label for="certificazioni" class="col-form-label s-12">CERTIFICAZIONI</label>
 								<input ngModel name="certificazioni" placeholder="Insersci Certificazioni"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="1000" type="text">
 							</div>
 						</div>
 					</div>
@@ -269,7 +269,7 @@
 							</div>
 							<div class="form-group col-4 m-0">
 								<label for="livelloInquadramento" class="col-form-label s-12">LIVELLO INQUADRAMENTO</label>
-								<select ngModel id="livelloInquadramento" name="livelloInquadramento" class="form-control r-0 light s-12 date-picker freccia">
+								<select ngModel id="livelloInquadramento" name="idLivelloInquadramento" class="form-control r-0 light s-12 date-picker freccia">
 									<option value="" selected disabled>Selezionare...</option>
     							<option *ngFor="let livelloInquadramento of listaLivelloInquadramento" value={{livelloInquadramento.id}}>{{livelloInquadramento.nome}}</option>
 								</select>
@@ -281,7 +281,7 @@
 							<div class="form-group col-4 m-0">
 								<label for="ticket" class="col-form-label s-12">TICKET</label>
 								<input ngModel name="ticket" placeholder="Insersci Ticket"
-									class="form-control r-0 light s-12 date-picker" type="text" step="0.01">
+									class="form-control r-0 light s-12 date-picker" type="text" maxlength="1000">
 							</div>
 							<div class="form-group col-4 m-0">
 								<label for="rimborsi" class="col-form-label s-12">RIMBORSI</label>

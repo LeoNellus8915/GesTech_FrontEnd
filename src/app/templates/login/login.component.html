@@ -17,7 +17,7 @@
                 <i class="icon-envelope-o"></i> <input ngModel type="text"
                   class="form-control form-control-lg no-b" name="email"
                   placeholder="error@mail.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                  title="Esempio error@mail.com" required>
+                  title="Esempio error@mail.com" maxlength="100" required>
 
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div class="form-group has-icon">
                 <i class="icon-user-secret"></i> <input ngModel type="password"
                   name="password" class="form-control form-control-lg no-b"
-                  placeholder="**********" required>
+                  placeholder="**********" maxlength="64" required>
               </div>
             </div>
 
@@ -33,12 +33,6 @@
               <input type="submit" class="btn btn-success btn-lg btn-block marbot"
                 value="Accedi">
             </div>
-
-            <div>
-              <p class="s-18 p-t-b-20 font-weight-lighter">Hai dimenticato il nome
-                utente o la password?</p>
-            </div>
-
           </div>
         </form>
       </div>

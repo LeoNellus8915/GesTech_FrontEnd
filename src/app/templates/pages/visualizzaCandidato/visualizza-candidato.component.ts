@@ -37,7 +37,7 @@ export class VisualizzaCandidatoComponent implements OnInit{
     if (this.ruolo == null)
       this.defaultService.logout();
     else
-    if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' 
+    if (this.ruolo == 'Admin' || this.ruolo == 'Recruiter' || this.ruolo == 'Direttore Recruiter' || this.ruolo == 'Account'
     || this.ruolo == 'Direttore Commerciale'){
       this.titleService.setTitle("Gestech | Visualizza Candidato");
       setTimeout(() => {

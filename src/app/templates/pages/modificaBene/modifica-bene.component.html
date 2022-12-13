@@ -25,36 +25,28 @@
 							<div *ngIf="hardware" class="form-group col-8 m-0">
 								<label for="marca" class="col-form-label s-12">MARCA</label>
 								<input ngModel name="marca" [(ngModel)]=hardware.marca placeholder="Inserisci Marca"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="50" type="text">
 							</div>
 						</div>
 						<div *ngIf="hardware" class="form-row">
 							<div class="form-group col-6 m-0">
 								<label for="modello" class="col-form-label s-12">MODELLO</label>
 								<input ngModel name="modello" [(ngModel)]=hardware.modello
-									placeholder="Inserisci Modello" class="form-control r-0 light s-12 datePicker"
+									placeholder="Inserisci Modello" maxlength="100" class="form-control r-0 light s-12 datePicker"
 									type="text">
 							</div>
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="seriale" class="col-form-label s-12">NUMERO SERIALE</label>
 								<input ngModel name="seriale" [(ngModel)]=hardware.seriale
-									placeholder="Linkedin Numero Seriale" class="form-control r-0 light s-12 datePicker"
+									placeholder="Linkedin Numero Seriale" maxlength="50" class="form-control r-0 light s-12 datePicker"
 									type="text">
 							</div>
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="password" class="col-form-label s-12">PASSWORD</label> 
                 <input ngModel name="password" [(ngModel)] = hardware.password
                   placeholder="Inserisci Password"
-									class="form-control r-0 light s-12 datePicker" type="text">
+									class="form-control r-0 light s-12 datePicker" maxlength="50" type="text">
 							</div>
-							
-							<!--<div *ngIf="hardware" class="form-group col-6 m-0">
-								<label for="societa" class="col-form-label s-12">SOCIET&Agrave; PROPRIETARIA</label>
-								<input ngModel name="societa" [(ngModel)]=hardware.societa
-                  placeholder="Insersci Societ&agrave;"
-									class="form-control r-0 light s-12 date-picker" type="text">
-							</div>
-							-->
 						</div>
 					</div>
 				</div>
@@ -70,12 +62,12 @@
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="dipendente" class="col-form-label s-12">DIPENDENTE</label>
 								<input ngModel name="dipendente" [(ngModel)]=hardware.dipendente placeholder="Insersci Dipendente"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="100" type="text">
 							</div>
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="note" class="col-form-label s-12">NOTE</label>
 								<input ngModel name="note" [(ngModel)]=hardware.note placeholder="Insersci Note"
-									class="form-control r-0 light s-12 date-picker" type="text">
+									class="form-control r-0 light s-12 date-picker" maxlength="65000" type="text">
 							</div>
 							<div *ngIf="hardware" class="form-group col-6 m-0">
 								<label for="dataConsegna" class="col-form-label s-12"><i
