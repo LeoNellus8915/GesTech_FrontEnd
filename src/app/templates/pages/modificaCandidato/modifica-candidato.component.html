@@ -292,7 +292,7 @@
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="ral" class="col-form-label s-12">RAL</label> 
                 <input ngModel name="ral" placeholder="Insersci RAL"
-									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.ral>
+									class="form-control r-0 light s-12 date-picker" type="number" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.ral>
 							</div>
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="ccnl" class="col-form-label s-12">CCNL</label>
@@ -325,12 +325,12 @@
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="rimborsi" class="col-form-label s-12">RIMBORSI</label>
 								<input ngModel name="rimborsi" placeholder="Insersci Rimborsi"
-									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.rimborsi>
+									class="form-control r-0 light s-12 date-picker" type="number" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.rimborsi>
 							</div>
 							<div *ngIf="response" class="form-group col-4 m-0">
 								<label for="preavviso" class="col-form-label s-12">PREAVVISO</label>
 								<input ngModel name="preavviso" placeholder="Insersci Preavviso"
-									class="form-control r-0 light s-12 date-picker" type="number" [(ngModel)]=response.infoDettaglioCandidato.preavviso>
+									class="form-control r-0 light s-12 date-picker" type="number" step="0.01" [(ngModel)]=response.infoDettaglioCandidato.preavviso>
 							</div>
 						</div>
 					</div>

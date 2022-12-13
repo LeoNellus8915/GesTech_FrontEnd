@@ -171,21 +171,40 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.ccnl = "0";
     }
 
-    if(addForm.value.ral == ""){
-      addForm.value.ral = 0
+    if (addForm.value.ral == "") {
+      addForm.value.ral = 0;
+      addForm.value.ral = Number.parseFloat(addForm.value.ral).toFixed(2).toString();
     }
+    else
+      addForm.value.ral = addForm.value.ral.toString();
+
+    if (addForm.value.ral == "") {
+      addForm.value.ral = 0;
+      addForm.value.ral = Number.parseFloat(addForm.value.ral).toFixed(2).toString();
+    }
+    else
+      addForm.value.ral = addForm.value.ral.toString();
+
     if(addForm.value.ticket == ""){
       addForm.value.ticket = "0";
     }
-    if(addForm.value.preavviso == ""){
+    if(addForm.value.idLivelloInquadramento == ""){
       addForm.value.idLivelloInquadramento = "0";
     }
-    if(addForm.value.rimborsi == ""){
+
+    if (addForm.value.rimborsi == "") {
       addForm.value.rimborsi = 0;
+      addForm.value.rimborsi = Number.parseFloat(addForm.value.rimborsi).toFixed(2).toString();
     }
-    if(addForm.value.preavviso == ""){
+    else
+      addForm.value.rimborsi = addForm.value.rimborsi.toString();
+    
+    if (addForm.value.preavviso == "") {
       addForm.value.preavviso = 0;
+      addForm.value.preavviso = Number.parseFloat(addForm.value.preavviso).toFixed(2).toString();
     }
+    else
+      addForm.value.preavviso = addForm.value.preavviso.toString();
 
     this.candidatiService.salvaCandidato(addForm.value).subscribe(
       (response: any) => {
