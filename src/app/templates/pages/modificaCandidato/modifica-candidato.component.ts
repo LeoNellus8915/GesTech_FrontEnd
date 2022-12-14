@@ -242,6 +242,31 @@ export class ModificaCandidatoComponent implements OnInit{
             this.arrayLingue.push({"lingua": 25});
           updateForm.value.lingue = this.arrayLingue;
 
+          if (updateForm.value.ral == "") {
+            updateForm.value.ral = 0;
+            updateForm.value.ral = Number.parseFloat(updateForm.value.ral).toFixed(2).toString();
+          }
+          else
+          updateForm.value.ral = updateForm.value.ral.toString();
+      
+          if(updateForm.value.ticket == ""){
+            updateForm.value.ticket = "0";
+          }
+      
+          if (updateForm.value.rimborsi == "") {
+            updateForm.value.rimborsi = 0;
+            updateForm.value.rimborsi = Number.parseFloat(updateForm.value.rimborsi).toFixed(2).toString();
+          }
+          else
+          updateForm.value.rimborsi = updateForm.value.rimborsi.toString();
+          
+          if (updateForm.value.preavviso == "") {
+            updateForm.value.preavviso = 0;
+            updateForm.value.preavviso = Number.parseFloat(updateForm.value.preavviso).toFixed(2).toString();
+          }
+          else
+          updateForm.value.preavviso = updateForm.value.preavviso.toString();
+
           updateForm.value.idDipendente = this.idDipendente;
 
           this.candidatiService.updateCandidato(updateForm.value, this.idCandidato, this.idDipendente).subscribe(
