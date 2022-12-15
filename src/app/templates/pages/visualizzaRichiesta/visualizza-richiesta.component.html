@@ -22,7 +22,7 @@
 						
 						<div class="col-md-4 p-4">
 							<h5 class="text-black">Stato Richiesta</h5>
-							<select ngModel *ngIf="ruolo == 'Account'" name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
+							<select ngModel *ngIf="ruolo == 'Account' || ruolo == 'Admin'" name="statoRichiesta" class="form-control r-0 light s-12 date-picker freccia">
 								<option value="" selected disabled>{{statoRichiesta}}</option>
 								<option *ngFor="let statoRichiesta of listaStatiRichiesta" value={{statoRichiesta.id}}>{{statoRichiesta.nome}}</option>
 							</select>
@@ -101,7 +101,7 @@
 					</div>
 
 					<div class="card-body">
-						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Commerciale'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
+						<input type="submit" value="SALVA"><span *ngIf="ruolo == 'Admin' || ruolo == 'Account'" class="button_elimina" (click)="eliminaRichiesta()">Elimina</span>
 					</div>
 				</form>
 				<label>Lista Candidati Selezionati</label>

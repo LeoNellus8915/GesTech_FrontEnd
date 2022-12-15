@@ -202,6 +202,7 @@ export class ModificaCandidatoComponent implements OnInit{
   }
 
   public updateCandidato(updateForm: NgForm): void {
+    console.log(updateForm.value)
     updateForm.value.cv = this.base64;
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
       (response: any) => {
@@ -242,25 +243,26 @@ export class ModificaCandidatoComponent implements OnInit{
             this.arrayLingue.push({"lingua": 25});
           updateForm.value.lingue = this.arrayLingue;
 
-          if (updateForm.value.ral == "") {
+          if (updateForm.value.ral == "" || updateForm.value.ral == null) {
             updateForm.value.ral = 0;
             updateForm.value.ral = Number.parseFloat(updateForm.value.ral).toFixed(2).toString();
           }
-          else
-          updateForm.value.ral = updateForm.value.ral.toString();
+          else {
+            updateForm.value.ral = updateForm.value.ral.toString();
+          }
       
           if(updateForm.value.ticket == ""){
             updateForm.value.ticket = "0";
           }
       
-          if (updateForm.value.rimborsi == "") {
+          if (updateForm.value.rimborsi == "" || updateForm.value.rimborsi == null) {
             updateForm.value.rimborsi = 0;
             updateForm.value.rimborsi = Number.parseFloat(updateForm.value.rimborsi).toFixed(2).toString();
           }
           else
           updateForm.value.rimborsi = updateForm.value.rimborsi.toString();
           
-          if (updateForm.value.preavviso == "") {
+          if (updateForm.value.preavviso == "" || updateForm.value.preavviso == null) {
             updateForm.value.preavviso = 0;
             updateForm.value.preavviso = Number.parseFloat(updateForm.value.preavviso).toFixed(2).toString();
           }

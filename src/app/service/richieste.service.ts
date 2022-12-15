@@ -11,7 +11,7 @@ export class RichiesteService {
   constructor(private http: HttpClient) {}
 
   public getRichiesteAperteAdmin(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-admin`,{ headers: header.header()});
+    return this.http.get<any[]>(`${this.apiServerUrl}/all-richieste-aperte-admin`, { headers: header.header()});
   }
   
   public getRichiesteAperteAccount(idDipendente: number): Observable<any[]> {

@@ -57,17 +57,17 @@ export class PaginaRichiesteComponent implements OnInit {
 
   public getRichiesteAdmin(): void {
     this.richiesteService.getRichiesteAperteAdmin().subscribe(
-      (response: any[]) => {
+      (response: any) => {
         if (response == null) 
           this.router.navigate(['']);
         else{
-          response.forEach((richiesta: { priorita: number; }) => {
+          response.dataSource.forEach((richiesta: { priorita: number; }) => {
             if (richiesta.priorita == 0) {
               this.contatore++;
             }
           });
-          if (response.length > 0) {
-            this.listaRichieste = response[1];
+          if (response.dataSource.length > 0) {
+            this.listaRichieste = response.dataSource;
           }
         }
       }
