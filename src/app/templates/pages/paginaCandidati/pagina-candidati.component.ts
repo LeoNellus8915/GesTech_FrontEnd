@@ -67,7 +67,9 @@ export class PaginaCandidatiComponent implements OnInit{
                 },
                 "createdRow": function( row, data ) {
                   if(data.toString().indexOf("Inaffidabile") != -1)
-                      $(row).addClass( 'tabella' );
+                    $(row).addClass( 'tabellaRed' );
+                  if(data.toString().indexOf("Assunto") != -1)
+                    $(row).addClass( 'tabellaGreen' );
                 },
               });
               $('.dataTables_filter input[type="search"]').css(

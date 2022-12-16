@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
 import { HardwareService } from 'src/app/service/hardware.service';
 import { DipendentiService } from 'src/app/service/dipendenti.service';
 import { DefaultComponent } from '../../default/default.component';
-import{allDipendenti} from 'src/app/model/mapper/allDipendenti';
+import { allDipendenti } from 'src/app/model/mapper/allDipendenti';
 import { dispositivi } from 'src/app/model/mapper/dispositivi';
 import { formatDate } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './nuovo-bene.component.html',
@@ -28,7 +27,7 @@ export class NuovoBeneComponent implements OnInit{
     if (this.ruolo == null)
       this.defaultService.logout();
     else
-      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale' || this.ruolo == 'Gestore Beni'){
         this.titleService.setTitle("Gestech | Nuovo Beni");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Nuovo Beni";

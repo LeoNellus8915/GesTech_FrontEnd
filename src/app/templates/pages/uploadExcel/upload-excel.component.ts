@@ -108,7 +108,6 @@ export class UploadExcelComponent implements OnInit{
         element.dataRestituzione = this.datePipe.transform(element.dataRestituzione, 'yyyy-MM-dd');
       }
     });
-
     this.uploadExcelService.importExcelBeni(array).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {

@@ -27,7 +27,7 @@ export class VisualizzaBeneComponent implements OnInit{
     if (this.ruolo == null)
       this.defaultService.logout();
     else
-      if (this.ruolo == 'Admin' || this.ruolo == 'Personale'){
+      if (this.ruolo == 'Admin' || this.ruolo == 'Personale' || this.ruolo == 'Gestore Beni'){
         this.titleService.setTitle("Gestech | Visualizza Bene");
         setTimeout(() => {
           this.defaultService.titoloPagina=" Visualizza Bene";

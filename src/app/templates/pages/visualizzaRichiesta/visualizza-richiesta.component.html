@@ -91,7 +91,7 @@
 					</div>
 
 					<!-- da sistemare -->
-					<div *ngIf="richiesta && richiesta.recruiter == null && ruolo == 'Direttore Recruiter'">
+					<div *ngIf="richiesta && ruolo == 'Direttore Recruiter'">
 						<input name="ruolo" type="checkbox" value="Tutti" (change)="array($event)"> 
 						<label>Tutti</label>
 						<span *ngFor="let recruiter of listaRecruiters">

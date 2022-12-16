@@ -202,7 +202,6 @@ export class ModificaCandidatoComponent implements OnInit{
   }
 
   public updateCandidato(updateForm: NgForm): void {
-    console.log(updateForm.value)
     updateForm.value.cv = this.base64;
     this.candidatiService.emailEsistente(updateForm.value.email).subscribe(
       (response: any) => {
