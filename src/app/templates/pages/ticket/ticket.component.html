@@ -4,7 +4,18 @@
 <div class="page ticket">
   <div class="page card-body">
     <form ngNativeValidate #addForm="ngForm" (ngSubmit)="salvaTicket(addForm)">
-      <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" maxlength="1000" type="text" required>
+      <div class="row">
+        <div class="col-9">
+          <input ngModel name="titolo" id="titolo" placeholder="Inserisci Titolo" maxlength="1000" type="text" required>
+        </div>
+        <div class="col-3">
+          <select ngModel name="tipo" id="tipo" required>
+            <option value="" disabled>Selezionare Tipologia Ticket</option>
+            <option value="Suggerimento">Suggerimento</option>
+            <option value="Malfunzionamento">Malfunzionamento</option>
+          </select>
+        </div>
+      </div>
       <textarea ngModel class="form-control" name="testo" id="avviso" placeholder="Inserire il messaggio" maxlength="65000" required></textarea>
       <div class="row">
         <div class="col-12">
@@ -13,17 +24,27 @@
       </div>
     </form>
   </div>	
-  <div *ngIf="ruolo == 'Admin'" class="row card-body">
-    <span class="titolo_avvisi">Ticket Aperti</span>
-    <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsAperti">
+  <div class="row card-body">
+    <span class="titolo_avvisi">Ticket Aperti (Suggerimenti)</span>
+    <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsAperti" [ngStyle]="{'display': ticket.tipo == 'Suggerimento' ? 'none' : 'block'}">
       <span class="data_ora_avvisi">{{ticket.dataInserimento.toString().replace("T", " ")}}</span>
-      <a (click)="chiudiTicket(ticket.id)"><i class="icon icon-check green-text s-18 cursor" style="margin-left: 300px"></i></a> 
+      <a *ngIf="ruolo == 'Admin'" (click)="chiudiTicket(ticket.id)"><i class="icon icon-check green-text s-18 cursor" style="margin-left: 300px"></i></a> 
       <p class="titolo_avvisi">{{ticket.titolo}}
       <p class="testo_avvisi">{{ticket.testo}}
       <footer class="blockquote-footer_avvisi pt-4 mt-4 border-top_avvisi">{{ticket.nome + " " + ticket.cognome}}</footer>
     </div>
   </div>	
-  <div *ngIf="ruolo == 'Admin'" class="row card-body">
+  <div class="row card-body">
+    <span class="titolo_avvisi">Ticket Aperti (Malfunzionamenti)</span>
+    <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsAperti" [ngStyle]="{'display': ticket.tipo == 'Malfunzionamento' ? 'none' : 'block'}">
+      <span class="data_ora_avvisi">{{ticket.dataInserimento.toString().replace("T", " ")}}</span>
+      <a *ngIf="ruolo == 'Admin'" (click)="chiudiTicket(ticket.id)"><i class="icon icon-check green-text s-18 cursor" style="margin-left: 300px"></i></a> 
+      <p class="titolo_avvisi">{{ticket.titolo}}
+      <p class="testo_avvisi">{{ticket.testo}}
+      <footer class="blockquote-footer_avvisi pt-4 mt-4 border-top_avvisi">{{ticket.nome + " " + ticket.cognome}}</footer>
+    </div>
+  </div>	
+  <div class="row card-body">
     <span class="titolo_avvisi">Ticket Chiusi</span>
     <div class="col-4 card_avvisi" *ngFor="let ticket of listaTicketsChiusi" style="opacity: 0.5;">
       <p>Apertura: <span class="data_ora_avvisi">{{ticket.dataInserimento.toString().replace("T", " ")}}</span></p>

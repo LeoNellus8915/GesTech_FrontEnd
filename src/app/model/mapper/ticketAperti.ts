@@ -4,5 +4,6 @@ export interface TicketAperti {
   cognome: string;
   titolo: string;
   testo: string;
+  tipo: string;
   dataInserimento: Date;
 }

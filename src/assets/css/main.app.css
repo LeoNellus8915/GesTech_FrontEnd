@@ -74,3 +74,10 @@ ul li i.icon{
 .cursor{
     cursor:pointer;
   }
+
+select#tipo {
+    border-radius: 5px;
+    width: 100%;
+    border: solid 1px #333333;
+    height: 80%;
+}

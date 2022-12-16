@@ -13,12 +13,20 @@ export class TicketService {
     return this.http.post<any>(`${this.apiServerUrl}/salva-ticket`, ticket, {headers: header.header()});
   }
 
-  public getTicketsAperti(): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-aperti`, {headers: header.header()});
+  public getTicketsApertiAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-aperti-admin`, {headers: header.header()});
   }
 
-  public getTicketsChiusi(): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-chiusi`, {headers: header.header()});
+  public getTicketsChiusiAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-chiusi-admin`, {headers: header.header()});
+  }
+
+  public getTicketsAperti(idDipendente: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-aperti/${idDipendente}`, {headers: header.header()});
+  }
+
+  public getTicketsChiusi(idDipendente: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-tickets-chiusi/${idDipendente}`, {headers: header.header()});
   }
 
   public chiudiTicket(idTicket: number): Observable<any> {

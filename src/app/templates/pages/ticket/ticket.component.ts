@@ -39,14 +39,46 @@ export class TicketComponent implements OnInit {
         this.defaultService.titoloPagina = ' Ticket';
       });
       if (this.ruolo == "Admin") {
+        this.getTicketsApertiAdmin();
+        this.getTicketsChiusiAdmin();
+      }
+      else {
         this.getTicketsAperti();
         this.getTicketsChiusi();
       }
     }
   }
 
+  getTicketsApertiAdmin() {
+    this.ticketService.getTicketsApertiAdmin().subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaTicketsAperti = response.dataSource;
+        }
+      }
+    )
+  }
+
+  getTicketsChiusiAdmin() {
+    this.ticketService.getTicketsChiusiAdmin().subscribe(
+      (response: any) => {
+        if (response.codeSession == "0") {
+          sessionStorage.setItem("sessionMessage", "Sessione scaduta");
+          this.defaultService.logout();
+        }
+        else {
+          this.listaTicketsChiusi = response.dataSource;
+        }
+      }
+    )
+  }
+
   getTicketsAperti() {
-    this.ticketService.getTicketsAperti().subscribe(
+    this.ticketService.getTicketsAperti(this.idDipendente).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
@@ -60,7 +92,7 @@ export class TicketComponent implements OnInit {
   }
 
   getTicketsChiusi() {
-    this.ticketService.getTicketsChiusi().subscribe(
+    this.ticketService.getTicketsChiusi(this.idDipendente).subscribe(
       (response: any) => {
         if (response.codeSession == "0") {
           sessionStorage.setItem("sessionMessage", "Sessione scaduta");
