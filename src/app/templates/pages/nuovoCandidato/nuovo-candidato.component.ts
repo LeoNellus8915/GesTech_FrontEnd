@@ -140,10 +140,10 @@ export class NuovoCandidatoComponent implements OnInit{
 
   public aggiungiCandidato(addForm: NgForm): void {
     if (addForm.value.esitoColloquio == "")
-      addForm.value.esitoColloquio = "11";
+      addForm.value.esitoColloquio = "12";
 
     if (this.arrayValori.length == 0)
-      this.arrayValori.push({"profilo": 18, "linguaggio": 55, "livello": 6, "note": ""});
+      this.arrayValori.push({"profilo": 20, "linguaggio": 55, "livello": 6, "note": ""});
     addForm.value.profilo = this.arrayValori;
     
     if (this.arrayLingue.length == 0)
@@ -245,14 +245,14 @@ export class NuovoCandidatoComponent implements OnInit{
     var idProfilo = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     if (this.arrayProfilo[numeroRiga] == null) {
-      if (idProfilo == '2') {
+      if (idProfilo == '2' || idProfilo == '19') {
         e.path[2].children.linguaggio.style.removeProperty("display");
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
         
       }
-      if (idProfilo != '2') {
+      if (idProfilo != '2' && idProfilo != '19') {
         e.path[2].children.livello.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
@@ -265,7 +265,7 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.button.style.removeProperty("display");
     }
     else {
-      if (idProfilo == '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
+      if ((idProfilo == '2' || idProfilo == '19') && this.arrayProfilo[numeroRiga].programmatore == false) {
         e.path[2].children.livello.style.display = 'none';
         e.path[2].children.linguaggio.style.removeProperty("display");
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
@@ -279,7 +279,7 @@ export class NuovoCandidatoComponent implements OnInit{
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
         note.value = "";
       }
-      if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
+      if ((idProfilo != '2' && idProfilo != '19') && this.arrayProfilo[numeroRiga].programmatore == false) {
         e.path[2].children.livello.children[1].selectedIndex = "";
         this.arrayValori[numeroRiga].profilo = idProfilo;
         this.arrayValori[numeroRiga].linguaggio = 55;
@@ -288,7 +288,7 @@ export class NuovoCandidatoComponent implements OnInit{
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
         note.value = "";
       }
-      if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == true) {
+      if ((idProfilo != '2' && idProfilo != '19') && this.arrayProfilo[numeroRiga].programmatore == true) {
         e.path[2].children.linguaggio.style.display = 'none';
         e.path[2].children.livelloProgrammatore.style.display = 'none';
         e.path[2].children.livello.style.removeProperty("display");
@@ -415,7 +415,7 @@ export class NuovoCandidatoComponent implements OnInit{
     pulsanteAdd.disabled = true;
     pulsanteAdd2.disabled = true;
 
-    if (this.arrayValori[numeroRigaBase].profilo == '2')
+    if (this.arrayValori[numeroRigaBase].profilo == '2' || this.arrayValori[numeroRigaBase].profilo == '19')
       programmatore = true;
     else
       programmatore = false;
@@ -456,21 +456,12 @@ export class NuovoCandidatoComponent implements OnInit{
       this.addRowProfilo();
     });
 
-    if (programmatore == false) {
-      rigaNuova.children[1].setAttribute('style', 'display: none');
-      rigaNuova.children[2].setAttribute('style', 'display: none');
-      rigaNuova.children[3].setAttribute('style', 'display: none');
-      rigaNuova.children[4].setAttribute('style', 'display: none');
-      rigaNuova.children[5].setAttribute('style', 'display: none');
-    }
-    else {
-      var idProfilo = rigaNuova.children[0].children[1] as HTMLInputElement
-      idProfilo.value = '2';
-      rigaNuova.children[5].setAttribute('style', 'display: none');
-      rigaNuova.children[6].removeAttribute('style');
-      this.arrayProfilo.push({"programmatore": true});
-      this.arrayValori.push({"profilo": '2'});
-    }
+    rigaNuova.children[1].setAttribute('style', 'display: none');
+    rigaNuova.children[2].setAttribute('style', 'display: none');
+    rigaNuova.children[3].setAttribute('style', 'display: none');
+    rigaNuova.children[4].setAttribute('style', 'display: none');
+    rigaNuova.children[5].setAttribute('style', 'display: none');
+
     var resetNote = rigaNuova.children[4].children[1] as HTMLInputElement;
     resetNote.value = "";
   }

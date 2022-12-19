@@ -91,7 +91,7 @@ export class ModificaCandidatoComponent implements OnInit{
           this.response = response.dataSource;
 
           for (var c = 0; c < this.response.infoProfili.length; c++) {
-            if (this.response.infoProfili[c].nomeProfilo == 'analista programmatore')
+            if (this.response.infoProfili[c].nomeProfilo == 'analista programmatore' || this.response.infoProfili[c].nomeProfilo == 'sviluppatore')
               this.arrayProfilo.push({ "programmatore": true });
             else
               this.arrayProfilo.push({ "programmatore": false });
@@ -235,7 +235,7 @@ export class ModificaCandidatoComponent implements OnInit{
             updateForm.value.ccnl = this.response.infoDettaglioCandidato.ccnl.toString();
           
           if (this.arrayValori.length == 0)
-            this.arrayValori.push({"profilo": 18, "linguaggio": 55, "livello": 6, "note": ""});
+            this.arrayValori.push({"profilo": 20, "linguaggio": 55, "livello": 6, "note": ""});
             updateForm.value.profilo = this.arrayValori;
           
           if (this.arrayLingue.length == 0)
@@ -288,14 +288,14 @@ export class ModificaCandidatoComponent implements OnInit{
     var idProfilo = e.target.value;
     var numeroRiga = e.path[2].id.toString().replace("row-ruolo-", '')
     if (this.arrayProfilo[numeroRiga] == null) {
-      if (idProfilo == '2') {
+      if (idProfilo == '2' || idProfilo == '19') {
         e.path[2].children.linguaggioDiv.style.removeProperty("display");
         e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
         
       }
-      if (idProfilo != '2') {
+      if (idProfilo != '2' || idProfilo != '19') {
         e.path[2].children.livelloDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
         this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
@@ -308,7 +308,7 @@ export class ModificaCandidatoComponent implements OnInit{
         e.path[2].children.button.style.removeProperty("display");
     }
     else {
-      if (idProfilo == '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
+      if ((idProfilo == '2' || idProfilo == '19') && this.arrayProfilo[numeroRiga].programmatore == false) {
         e.path[2].children.livelloDiv.style.display = 'none';
         e.path[2].children.linguaggioDiv.style.removeProperty("display");
         e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
@@ -331,7 +331,7 @@ export class ModificaCandidatoComponent implements OnInit{
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
         note.value = "";
       }
-      if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == true) {
+      if ((idProfilo != '2' && idProfilo != '19') && this.arrayProfilo[numeroRiga].programmatore == true) {
         e.path[2].children.linguaggioDiv.style.display = 'none';
         e.path[2].children.livelloProgrammatoreDiv.style.display = 'none';
         e.path[2].children.livelloDiv.style.removeProperty("display");
@@ -482,7 +482,7 @@ export class ModificaCandidatoComponent implements OnInit{
       var c = (node as HTMLInputElement);
       c.value = "";
     }
-    if (this.arrayValori[numeroRiga-1].profilo == '2')
+    if (this.arrayValori[numeroRiga-1].profilo == '2' || this.arrayValori[numeroRiga-1].profilo == '19')
       programmatore = true;
     else
       programmatore = false;

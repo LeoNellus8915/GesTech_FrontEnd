@@ -14,6 +14,7 @@
         <th class="titolotabella">SKILL PRINCIPALE</th>
         <th class="titolotabella">ESITO COLLOQUIO</th>
         <th class="titolotabella">AZIONI</th>
+        <th class="titolotabella">EMAIL</th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
         <td>{{candidato.esitoNome}}</td>
         <td><a (click)="goVisualizzaCandidato(candidato.id, candidato.codice)"><i class="icon-eye mr-3 cursor"></i></a>
           <a (click)="goModificaCandidato(candidato.id, candidato.codice)"><i class="icon-pencil cursor"></i></a></td>
+        <td>{{candidato.email}}</td>
       </tr>
     </tbody>
   </table>

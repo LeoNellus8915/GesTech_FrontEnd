@@ -127,13 +127,13 @@
                 <div class="col-5"><h5 class="p-t-10">DESCRIZIONE</h5></div>
               </div>
               <div *ngFor="let profilo of response.infoProfili">
-                <div *ngIf="profilo.nomeProfilo == 'analista programmatore'" class="row">
+                <div *ngIf="profilo.nomeProfilo == 'analista programmatore' || profilo.nomeProfilo == 'sviluppatore'" class="row">
                   <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
                   <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLinguaggio}}</h5></div>
                   <div class="col-2"><h5 class="p-t-10">{{profilo.nomeLivello}}</h5></div>
                   <div class="col-5"><h5 class="p-t-10">{{profilo.descrizione}}</h5></div>
                 </div>
-                <div *ngIf="profilo.nomeProfilo != 'analista programmatore'" class="row">
+                <div *ngIf="profilo.nomeProfilo != 'analista programmatore' && profilo.nomeProfilo != 'sviluppatore'" class="row">
                   <div class="col-3"><h5 class="p-t-10">{{profilo.nomeProfilo}}</h5></div>
                   <div class="col-2 offset-2"><h5 class="p-t-10">{{profilo.nomeLivello}}</h5></div>
                   <div class="col-5"><h5 class="p-t-10">{{profilo.descrizione}}</h5></div>

@@ -42,13 +42,18 @@ export class PaginaCandidatiComponent implements OnInit{
           this.defaultService.logout();
         }
         else {
-          console.log(response.dataSource)
           this.listaCandidati = response.dataSource;
           setTimeout(function () {
             $(function () {
               $('#tabellaCandidati').DataTable({
                 "order": [[0, 'desc']],
                 "pageLength": 100,
+                "columnDefs": [
+                  {
+                      targets: [7],
+                      visible: false
+                  }
+              ],
                 "language": {
                   "emptyTable":     "Nessun candidato trovato",
                   "info":           " ",
