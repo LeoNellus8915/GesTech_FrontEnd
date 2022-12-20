@@ -56,4 +56,8 @@ export class RisorseService {
   public getCandidatiByRecruiter(idRecruiter: number): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/get-candidati-by-recruiter/${idRecruiter}`, {headers: header.header()});
   }
+
+  public getCandidatiByRecruiterDate(idRecruiter: number, changeForm: JSON): Observable<any> {
+    return this.http.post<any>(`${this.apiServerUrl}/get-candidati-by-recruiter-date/${idRecruiter}`, changeForm, {headers: header.header()});
+  }
 }

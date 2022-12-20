@@ -4,6 +4,28 @@
 	</span>
 </div>
 <div class="card-body">
+  <form #changeValue="ngForm" (ngSubmit)="ricercaCandidati(changeValue)">
+    <div class="form-row row">
+      <div class="form-group col-2 m-0">
+        <label for="dataColloquio" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA INIZIO</label> 
+        <input ngModel name="inizio"
+          class="form-control r-0 light s-12 datePicker" type="date">
+      </div>
+      <div class="form-group col-2 m-0">
+        <label for="dataColloquio" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATA FINE</label> 
+        <input ngModel name="fine"
+          class="form-control r-0 light s-12 datePicker" type="date">
+      </div>
+      <div class="form-row row">
+        <div class="card-body col-2 m-0">
+          <input type="submit" value="RICERCA">
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="card-body">
   <table id="tabellaCandidati" class="table table-striped table-bordered">
     <thead>
       <tr class="no-b">
