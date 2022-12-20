@@ -48,4 +48,12 @@ export class RisorseService {
   public getCodiciCandidati(): Observable<any> {
     return this.http.get<any>(`${this.apiServerUrl}/get-codici-candidati`, {headers: header.header()});
   }
+
+  public getRecruiters(): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-recruiters`, {headers: header.header()});
+  }
+
+  public getCandidatiByRecruiter(idRecruiter: number): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/get-candidati-by-recruiter/${idRecruiter}`, {headers: header.header()});
+  }
 }

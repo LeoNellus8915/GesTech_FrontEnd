@@ -1,0 +1,16 @@
+<div class="card-body spazio">
+  <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Registro Attivita Recruiter</span>
+</div>
+<span id="tooltip"></span>
+<br>
+<div>
+	<div class="page avviso">
+		<div class="page">
+			<div class="row">
+        <div class="col-4 card_avvisi" *ngFor="let recruiter of listaRecruiters">
+          <a [routerLink]="['../pagina-dettaglio-recruiter', recruiter.id]" class="cursor"><span class="titolo_richieste">{{recruiter.nome + " " + recruiter.cognome}}</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

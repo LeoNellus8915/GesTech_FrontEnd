@@ -1,6 +1,7 @@
 export interface DettagliCandidati {
   id: number;
   idCandidato: number;
+  idPersonaRecruiter: number;
   fileBase64: string;
   dataInserimento: Date;
   profiloLinkedin: string;
@@ -14,4 +15,5 @@ export interface DettagliCandidati {
   possibilitaLavorativa: string;
   competenzeTotali: string;
   certificazioni: string;
+
 }

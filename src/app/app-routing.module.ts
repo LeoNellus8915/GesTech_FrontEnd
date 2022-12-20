@@ -32,6 +32,8 @@ import { PaginaModulisticaComponent } from './templates/pages/paginaModulistica/
 import { PaginaSceltaCandidatiRichiestaComponent } from './templates/pages/sceltaCandidatiRichiesta/scelta-candidati-richiesta.component';
 import { UploadExcelComponent } from './templates/pages/uploadExcel/upload-excel.component';
 import { TicketComponent } from './templates/pages/ticket/ticket.component';
+import { PaginaRegistroAttivita } from './templates/pages/registroAttivita/registro-attivita.component';
+import { PaginaDettaglioRecruiter } from './templates/pages/dettaglioRecruiter/dettaglio-recruiter.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -64,7 +66,9 @@ const routes: Routes = [
     {path: "pagina-visualizza-richiesta/:idRichiesta/:statoPagina", component: VisualizzaRichiestaComponent},
     {path: "pagina-scelta-candidati-richiesta/:idRichiesta", component: PaginaSceltaCandidatiRichiestaComponent},
     {path: "pagina-upload-excel", component: UploadExcelComponent},
-    {path: "pagina-ticket", component: TicketComponent}
+    {path: "pagina-ticket", component: TicketComponent},
+    {path: "pagina-registro-attivita", component: PaginaRegistroAttivita},
+    {path: "pagina-dettaglio-recruiter/:idRecruiter", component: PaginaDettaglioRecruiter}
 
   ]},
   {path:"**", component: ErrorPageComponent}
@@ -81,4 +85,4 @@ export const RoutingComponents = [LoginComponent, DefaultComponent, ErrorPageCom
   PaginaBustePagaComponent, PaginaCandidatiComponent, PaginaCCNLComponent, PaginaCertificazioniUnicheComponent, PaginaCVDipendentiComponent,
   PaginaDipendentiComponent, PaginaRapportinoComponent, PaginaRichiesteComponent, PaginaStoricoRichiesteComponent, VisualizzaBeneComponent,
   VisualizzaCandidatoComponent, VisualizzaRichiestaComponent, PaginaModulisticaComponent, PaginaSceltaCandidatiRichiestaComponent, 
-  UploadExcelComponent, TicketComponent]
+  UploadExcelComponent, TicketComponent, PaginaRegistroAttivita, PaginaDettaglioRecruiter]

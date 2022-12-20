@@ -4,9 +4,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { DefaultComponent } from '../../default/default.component';
 import { DipendentiRichiesteService } from 'src/app/service/dipendenti-richieste.service';
-import { allRichieste } from 'src/app/model/mapper/allRichieste';
 import { allRichiesteAperte } from 'src/app/model/mapper/allRichiesteAperte';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   templateUrl: './pagina-richieste.component.html',
