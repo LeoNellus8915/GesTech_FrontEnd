@@ -9,4 +9,5 @@ export interface allCandidati {
   skillPrincipale: string;
   esitoNome: string;
   email: string;
+  competenzeTotali: string;
 }

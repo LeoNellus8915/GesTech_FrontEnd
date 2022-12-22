@@ -235,7 +235,7 @@ export class ModificaCandidatoComponent implements OnInit{
             updateForm.value.ccnl = this.response.infoDettaglioCandidato.ccnl.toString();
           
           if (this.arrayValori.length == 0)
-            this.arrayValori.push({"profilo": 20, "linguaggio": 55, "livello": 6, "note": ""});
+            this.arrayValori.push({"profilo": 20, "linguaggio": 56, "livello": 6, "note": ""});
             updateForm.value.profilo = this.arrayValori;
           
           if (this.arrayLingue.length == 0)
@@ -292,13 +292,13 @@ export class ModificaCandidatoComponent implements OnInit{
         e.path[2].children.linguaggioDiv.style.removeProperty("display");
         e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
-        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
+        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 56, "livello": 6, "note": ""});
         
       }
       if (idProfilo != '2' || idProfilo != '19') {
         e.path[2].children.livelloDiv.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
-        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
+        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 56, "livello": 6, "note": ""});
       }
       e.path[2].children.noteDiv.style.removeProperty("display");
 
@@ -314,7 +314,7 @@ export class ModificaCandidatoComponent implements OnInit{
         e.path[2].children.livelloProgrammatoreDiv.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = true;
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         e.path[2].children.livelloProgrammatoreDiv.children[1].selectedIndex = "";
@@ -325,7 +325,7 @@ export class ModificaCandidatoComponent implements OnInit{
       if (idProfilo != '2' && this.arrayProfilo[numeroRiga].programmatore == false) {
         e.path[2].children.livelloDiv.children[1].selectedIndex = "";
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
@@ -337,7 +337,7 @@ export class ModificaCandidatoComponent implements OnInit{
         e.path[2].children.livelloDiv.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = false;
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         e.path[2].children.livelloDiv.children[1].selectedIndex = "";

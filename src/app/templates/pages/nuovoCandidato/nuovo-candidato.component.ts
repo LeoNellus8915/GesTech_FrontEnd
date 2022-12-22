@@ -143,7 +143,7 @@ export class NuovoCandidatoComponent implements OnInit{
       addForm.value.esitoColloquio = "12";
 
     if (this.arrayValori.length == 0)
-      this.arrayValori.push({"profilo": 20, "linguaggio": 55, "livello": 6, "note": ""});
+      this.arrayValori.push({"profilo": 20, "linguaggio": 56, "livello": 6, "note": ""});
     addForm.value.profilo = this.arrayValori;
     
     if (this.arrayLingue.length == 0)
@@ -249,13 +249,13 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.linguaggio.style.removeProperty("display");
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": true});
-        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
+        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 56, "livello": 6, "note": ""});
         
       }
       if (idProfilo != '2' && idProfilo != '19') {
         e.path[2].children.livello.style.removeProperty("display");
         this.arrayProfilo.push({"programmatore": false});
-        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 55, "livello": 6, "note": ""});
+        this.arrayValori.push({"profilo": idProfilo, "linguaggio": 56, "livello": 6, "note": ""});
       }
       e.path[2].children.note.style.removeProperty("display");
 
@@ -271,7 +271,7 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livelloProgrammatore.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = true;
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         e.path[2].children.livelloProgrammatore.children[1].selectedIndex = "";
@@ -282,7 +282,7 @@ export class NuovoCandidatoComponent implements OnInit{
       if ((idProfilo != '2' && idProfilo != '19') && this.arrayProfilo[numeroRiga].programmatore == false) {
         e.path[2].children.livello.children[1].selectedIndex = "";
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         var note = e.path[2].children[4].children[1] as HTMLInputElement;
@@ -294,7 +294,7 @@ export class NuovoCandidatoComponent implements OnInit{
         e.path[2].children.livello.style.removeProperty("display");
         this.arrayProfilo[numeroRiga].programmatore = false;
         this.arrayValori[numeroRiga].profilo = idProfilo;
-        this.arrayValori[numeroRiga].linguaggio = 55;
+        this.arrayValori[numeroRiga].linguaggio = 56;
         this.arrayValori[numeroRiga].livello = 6;
         this.arrayValori[numeroRiga].note = "";
         e.path[2].children.livello.children[1].selectedIndex = "";

@@ -11,10 +11,10 @@
         <th class="titolotabella">NOME E COGNOME</th>
         <th class="titolotabella">CITT&Agrave;</th>
         <th class="titolotabella">COMPETENZA PRINCIPALE</th>
-        <th class="titolotabella">SKILL PRINCIPALE</th>
         <th class="titolotabella">ESITO COLLOQUIO</th>
         <th class="titolotabella">AZIONI</th>
         <th class="titolotabella">EMAIL</th>
+        <th class="titolotabella">COMPETENZE TOTALI</th>
       </tr>
     </thead>
     <tbody>
@@ -23,11 +23,11 @@
         <td>{{candidato.nome + " " + candidato.cognome}}</td>
         <td>{{candidato.citta}}</td>
         <td>{{candidato.competenzaPrincipale}}</td>
-        <td>{{candidato.skillPrincipale}}</td>
         <td>{{candidato.esitoNome}}</td>
         <td><a (click)="goVisualizzaCandidato(candidato.id, candidato.codice)"><i class="icon-eye mr-3 cursor"></i></a>
           <a (click)="goModificaCandidato(candidato.id, candidato.codice)"><i class="icon-pencil cursor"></i></a></td>
         <td>{{candidato.email}}</td>
+        <td>{{candidato.competenzeTotali}}</td>
       </tr>
     </tbody>
   </table>

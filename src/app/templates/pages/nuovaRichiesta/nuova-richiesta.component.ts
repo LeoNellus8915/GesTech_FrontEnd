@@ -97,13 +97,13 @@ export class NuovaRichiestaComponent implements OnInit{
 
   public aggiungiRichiesta(addForm: NgForm): void {
     if (addForm.value.linguaggio == "" || addForm.value.linguaggio == null)
-      addForm.value.linguaggio = "55";
+      addForm.value.linguaggio = "56";
 
     if (addForm.value.profilo == "")
       addForm.value.profilo = "17";
 
-    if (addForm.value.profilo != "2")
-      addForm.value.linguaggio = "55";
+    if (addForm.value.profilo != "2" || addForm.value.profilo != "19")
+      addForm.value.linguaggio = "56";
 
     if (addForm.value.livello == "")
       addForm.value.livello = "6";

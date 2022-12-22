@@ -11,6 +11,7 @@ import { allCandidati } from 'src/app/model/mapper/allCandidati';
 })
 export class PaginaCandidatiComponent implements OnInit{
   public ruolo = sessionStorage.getItem("ruolo") as string;
+  public salvaRicerca = sessionStorage.getItem("salvaRicerca") as string;
   public listaCandidati!: allCandidati[];
   public titoloPagina: any;
 
@@ -50,8 +51,12 @@ export class PaginaCandidatiComponent implements OnInit{
                 "pageLength": 100,
                 "columnDefs": [
                   {
-                      targets: [7],
+                      targets: [6],
                       visible: false
+                  },
+                  {
+                    targets: [7],
+                    visible: false
                   }
               ],
                 "language": {

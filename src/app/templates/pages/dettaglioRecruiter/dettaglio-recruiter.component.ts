@@ -111,8 +111,12 @@ export class PaginaDettaglioRecruiter implements OnInit{
               "pageLength": 100,
               "columnDefs": [
                 {
-                    targets: [7],
+                    targets: [6],
                     visible: false
+                },
+                {
+                  targets: [7],
+                  visible: false
                 }
             ],
               "language": {

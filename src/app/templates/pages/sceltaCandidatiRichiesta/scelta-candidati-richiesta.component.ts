@@ -52,6 +52,18 @@ export class PaginaSceltaCandidatiRichiestaComponent implements OnInit{
           setTimeout(function () {
             $(function () {
               $('#tabellaCandidati').DataTable({
+                "order": [[0, 'desc']],
+                "pageLength": 100,
+                "columnDefs": [
+                  {
+                      targets: [7],
+                      visible: false
+                  },
+                  {
+                    targets: [8],
+                    visible: false
+                  }
+              ],
                 "language": {
                   "emptyTable":     "Nessun candidato trovato",
                   "info":           " ",
