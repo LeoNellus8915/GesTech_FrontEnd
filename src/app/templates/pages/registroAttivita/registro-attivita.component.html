@@ -1,4 +1,4 @@
-<div class="card-body spazio">
+<div class="card-body spazio" onload="FUNCTION()">
   <span class="briciole"><a routerLink="../../default/pagina-avvisi">Home</a> / Registro Attivita Recruiter</span>
 </div>
 <span id="tooltip"></span>
@@ -10,6 +10,50 @@
         <div class="col-4 card_avvisi" *ngFor="let recruiter of listaRecruiters">
           <a [routerLink]="['../pagina-dettaglio-recruiter', recruiter.id]" class="cursor"><span class="titolo_richieste">{{recruiter.nome + " " + recruiter.cognome}}</span></a>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card-body">
+  <div class="row my-5">
+    <div class="col-lg-6">
+        <div class="counter-box p-40 white shadow2 r-5">
+            <div class="float-right">
+                <span class="icon icon-person s-48"></span>
+            </div>
+            <div class="sc-counter s-36">{{numeroCandidatiTotali}}</div>
+            <h6 class="counter-title">Candidati Totali</h6>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="counter-box p-40 white shadow2 r-5">
+            <div class="float-right">
+                <span class="icon icon-person_outline s-48"></span>
+            </div>
+            <div class="sc-counter s-36">{{numeroCandidatiGiornalieri}}</div>
+            <h6 class="counter-title">Candidati Giornalieri</h6>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="card-body">
+  <div class="row">
+    <div class="card col-lg-6">
+      <div class="card-header white">
+        <strong> Ruoli </strong>
+    </div>
+    <div class="card-body pt-0">
+      <div *ngFor="let percentuale of listaPercentuali" class="my-3" [ngStyle]="{'display':percentuale.percentuale != '0' ? 'block' : 'none'}">
+          <small>{{percentuale.nomeProfilo + " " + percentuale.percentuale + "%"}}</small>
+          <div class="progress" style="height: 3px;">
+              <div class="progress-bar bg-success" role="progressbar" style="width: {{percentuale.percentuale}}%;"></div>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="chart-container">
+        <canvas id="MyChart">{{chart}}</canvas>
       </div>
     </div>
   </div>
